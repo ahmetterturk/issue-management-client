@@ -1,11 +1,13 @@
 import React, { useEffect, useReducer } from 'react';
 import { getIssues } from './apiServices/IssueApi';
-import LoginPage from './pages/Login';
+import LoginPage from './components/Login/index';
 import IssuePage from './components/IssuePage/IssuePage';
 import Profile from './components/Profile/Profile';
 import { AppContext } from './contextReducer/Context';
 import { initialState } from './contextReducer/InitialState';
 import reducer from './contextReducer/Reducer';
+import { BrowserRouter, Route, Link, Routes } from 'react-router-dom';
+import Navbar from './components/Navbar/Navbar';
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -18,11 +20,19 @@ const App = () => {
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>
-
-      
-      <LoginPage />
-      {/* <IssuePage /> */}
-      <Profile />
+      <BrowserRouter>
+        {/* <Navbar /> */}
+        <nav>
+          <Link to="/login">Login</Link>
+          <Link to="/issuepage">Issue Page</Link>
+          <Link to="/profile">Profile</Link>
+        </nav>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/issuepage" element={<IssuePage />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </BrowserRouter>
     </AppContext.Provider>
   );
 };

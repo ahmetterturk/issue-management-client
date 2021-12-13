@@ -15,32 +15,29 @@ import Toolbar from '@mui/material/Toolbar';
 import AppBar from '@mui/material/AppBar';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-const Bar = () => {
-  return (
-    
-    <>
-      <AppBar position="relative">
-        <Toolbar><LockRoundedIcon />
-        </Toolbar>
-      </AppBar>
-    </>
-  )
-}
-
-
-
+// const Bar = () => {
+//   return (
+//     <>
+//       <AppBar position="relative">
+//         <Toolbar>
+//           <LockRoundedIcon />
+//         </Toolbar>
+//       </AppBar>
+//     </>
+//   );
+// };
 
 function Copyright(props) {
   return (
- 
     <>
-
-
-
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {' © Lock Security '}
-    </Typography>
-
+      <Typography
+        variant="body2"
+        color="text.secondary"
+        align="center"
+        {...props}
+      >
+        {' © Lock Security '}
+      </Typography>
     </>
   );
 }
@@ -57,7 +54,6 @@ const theme = createTheme({
   },
 });
 
-
 export default function SignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -70,10 +66,8 @@ export default function SignIn() {
   };
 
   return (
-
-    
     <ThemeProvider theme={theme}>
-      <Bar />
+      {/* <Bar /> */}
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -84,11 +78,15 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
-          
           <Typography component="h1" variant="h5">
             Lock Security
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
             <TextField
               margin="normal"
               required
@@ -113,7 +111,7 @@ export default function SignIn() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            
+
             <Button
               type="submit"
               // fullWidth
@@ -121,7 +119,6 @@ export default function SignIn() {
               sx={{ mt: 3, mb: 2 }}
             >
               Sign In
-              
             </Button>
             <Grid container>
               <Grid item xs>
