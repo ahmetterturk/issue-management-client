@@ -5,4 +5,5 @@ export const inputFieldNames = {
   phone: '',
   mobile: '',
   dateOfBirth: '',
+  userId: '',
 };
