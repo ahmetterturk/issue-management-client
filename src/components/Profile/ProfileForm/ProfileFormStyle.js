@@ -9,9 +9,6 @@ export const useStyles = makeStyles(() => ({
     maxWidth: '600px',
     margin: '10px auto',
   },
-  input: {
-    color: '#6787E3',
-  },
   icon: {
     color: '#6787E3',
   },
