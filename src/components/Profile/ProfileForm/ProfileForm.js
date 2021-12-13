@@ -18,6 +18,7 @@ import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import { inputFieldNames } from './InputNames';
 
 import { useStyles } from './ProfileFormStyle';
+import { createProfile } from '../../../apiServices/ProfileApi';
 
 const ProfileForm = () => {
   // check if state is on updateMode
@@ -31,7 +32,6 @@ const ProfileForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // logic goes here
-    console.log(profileInput);
   };
   // handle all changes as user type
   const handleChange = (e) => {

@@ -6,6 +6,12 @@ const reducer = (state, action) => {
         issues: action.data,
       };
     }
+    case 'GET_PROFILES': {
+      return {
+        ...state,
+        issues: action.data,
+      };
+    }
     default:
       return state;
   }
