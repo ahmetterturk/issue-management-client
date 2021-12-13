@@ -17,7 +17,7 @@ const issueData = {
         'Hi Ronald, Can you get to the loading dock and speak from there?',
     },
   ],
-  people: [
+  names: [
     'Harry Potter',
     'Hermoine Granger',
     'Ronny Weasly',

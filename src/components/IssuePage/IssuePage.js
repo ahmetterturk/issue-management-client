@@ -3,6 +3,7 @@ import React from 'react';
 import Messages from './Messages/Messages';
 import issueData from './issueData';
 import IssueInfo from './IssueInfo/IssueInfo';
+import PersonSelect from './PersonSelect/PersonSelect';
 import useStyles from './styles';
 
 const IssuePage = () => {
@@ -20,6 +21,8 @@ const IssuePage = () => {
           <Typography variant="h6">Subject: {issueData.title}</Typography>
           <Typography>{issueData.subject}</Typography>
         </div>
+
+        <PersonSelect />
 
         <Messages messages={issueData.messages} />
       </Container>
