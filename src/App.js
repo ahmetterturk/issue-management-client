@@ -12,6 +12,7 @@ const App = () => {
       .then((data) => dispatch({ type: 'GET_ISSUES', data: data }))
       .catch((err) => console.log(err));
   }, []);
+
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       This is App component
