@@ -4,7 +4,7 @@ const issueData = {
   date: '27/03/2021',
   status: 'Public',
   subject:
-    'Subject: No phone coverage. Hi Leslie, Please note that there is no coverage from Telstra in this area. Please call landline to communicate with me if needed. Thank you. Ron',
+    'No phone coverage. Hi Leslie, Please note that there is no coverage from Telstra in this area. Please call landline to communicate with me if needed. Thank you. Ron',
   messages: [
     {
       author: 'Jane Cooper',
@@ -16,6 +16,13 @@ const issueData = {
       message:
         'Hi Ronald, Can you get to the loading dock and speak from there?',
     },
+  ],
+  people: [
+    'Harry Potter',
+    'Hermoine Granger',
+    'Ronny Weasly',
+    'Lord Dumbledore',
+    'Professor Voldemort',
   ],
 };
 

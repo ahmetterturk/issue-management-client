@@ -13,23 +13,25 @@ const useStyles = makeStyles((theme) => ({
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
-  padding: theme.spacing(1),
   textAlign: 'center',
-  color: theme.palette.text.secondary,
+  backgroundColor: '#F6F6F6',
+  borderRadius: '15px',
+  margin: '10px 0',
+  padding: '15px',
 }));
 
 const IssueInfo = ({ issueData }) => {
   const classes = useStyles();
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={10} md={4}>
-        <Item>{issueData.author}</Item>
+    <Grid justifyContent="space-between" container spacing={2}>
+      <Grid item xs={6} md={3}>
+        <Item className={classes.infoContainer}>{issueData.author}</Item>
       </Grid>
-      <Grid item xs={10} md={4}>
+      <Grid item xs={6} md={3}>
         <Item>{issueData.date}</Item>
       </Grid>
-      <Grid item xs={10} md={4}>
+      <Grid item xs={6} md={3}>
         <Item>{issueData.status}</Item>
       </Grid>
     </Grid>

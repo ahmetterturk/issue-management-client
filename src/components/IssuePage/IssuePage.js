@@ -1,19 +1,25 @@
-import { Box, Container, Paper, Typography } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import React from 'react';
 import Messages from './Messages/Messages';
 import issueData from './issueData';
 import IssueInfo from './IssueInfo/IssueInfo';
+import useStyles from './styles';
 
 const IssuePage = () => {
+  const classes = useStyles();
   return (
     <>
-      <Container>
-        <Typography variant="h4">Ticket</Typography>
+      <Container className={classes.container}>
+        <Typography className={classes.header} variant="h4">
+          Ticket
+        </Typography>
 
         <IssueInfo issueData={issueData} />
 
-        <Typography>{issueData.title}</Typography>
-        <Typography>Subject: {issueData.subject}</Typography>
+        <div className={classes.descriptionContainer}>
+          <Typography variant="h6">Subject: {issueData.title}</Typography>
+          <Typography>{issueData.subject}</Typography>
+        </div>
 
         <Messages messages={issueData.messages} />
       </Container>
