@@ -6,13 +6,6 @@ const reducer = (state, action) => {
         issues: action.data,
       };
     }
-    case '': {
-      return {
-        ...state,
-        issues: action.data,
-      };
-    }
-
     default:
       return state;
   }
