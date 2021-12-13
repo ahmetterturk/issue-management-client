@@ -1,5 +1,6 @@
 import React, { useEffect, useReducer } from 'react';
 import { getIssues } from './apiServices/IssueApi';
+import IssuePage from './components/IssuePage/IssuePage';
 import Profile from './components/Profile/Profile';
 import { AppContext } from './contextReducer/Context';
 import { initialState } from './contextReducer/InitialState';
@@ -16,6 +17,7 @@ const App = () => {
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>
+      {/* <IssuePage /> */}
       <Profile />
     </AppContext.Provider>
   );
