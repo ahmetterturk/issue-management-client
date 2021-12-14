@@ -3,7 +3,7 @@ import React from 'react';
 import useStyles from './styles';
 
 const Message = ({ message }) => {
-  console.log(message);
+  // console.log(message);
 
   const classes = useStyles();
 

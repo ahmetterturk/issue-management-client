@@ -1,13 +1,19 @@
 import { Container, Typography } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import Messages from './Messages/Messages';
 import issueData from './issueData';
 import IssueInfo from './IssueInfo/IssueInfo';
 import PersonSelect from './PersonSelect/PersonSelect';
 import useStyles from './styles';
+import { useParams } from 'react-router-dom';
 
 const IssuePage = () => {
   const classes = useStyles();
+  const { id } = useParams();
+
+  const [issue, setIssue] = useState([]);
+
+  console.log(id);
   return (
     <>
       <Container className={classes.container}>
