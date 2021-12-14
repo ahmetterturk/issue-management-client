@@ -17,6 +17,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { loginUser } from '../../apiServices/UserApi';
 import { useGlobalContext } from '../../contextReducer/Context';
 import { useNavigate } from 'react-router';
+import { bgcolor } from '@mui/system';
 
 // const Bar = () => {
 //   return (
@@ -88,27 +89,30 @@ export default function SignIn() {
   };
 
   return (
+    
     <ThemeProvider theme={theme}>
+
+<Typography component='h1' variant='h4' color="#6887E3" textAlign={'center'} padding={ 4 }>
+            Lock Security
+          </Typography>
       {/* <Bar /> */}
-      <Container component='main' maxWidth='xs'>
+      <Container component='main' maxWidth='xs'  Box sx={{ border: 0.5, borderRadius: 3, borderColor:'6887E3', bgcolor:"#E8E8E8" }} >
         <CssBaseline />
 
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 2,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
           }}
         >
-          <Typography component='h1' variant='h5'>
-            Lock Security
-          </Typography>
+         
           <Box
             component='form'
             onSubmit={handleSubmit}
             noValidate
-            sx={{ mt: 1 }}
+            sx={{ mt: 1  }}
           >
             <TextField
               margin='normal'
@@ -118,6 +122,7 @@ export default function SignIn() {
               label='Email Address'
               name='email'
               autoComplete='email'
+              background="white"
               onChange={handleChange}
               value={userInput.email}
               autoFocus
@@ -149,15 +154,17 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href='#' variant='body2'>
-                  Forgot password?
-                </Link>
+                
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
+        <Copyright sx={{ mt: 5, mb: 3 }} />
+        <Link href='#' variant='body2' textAlign={'center'} >
+                  Forgot password?
+                </Link>
       </Container>
+      
     </ThemeProvider>
   );
 }
