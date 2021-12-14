@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles';
 const useStyles = makeStyles((theme) => ({
   tableContainer: {
     borderRadius: 15,
-    margin: '10px 10px',
+    margin: '10px auto',
     maxWidth: 950,
   },
   tableHeaderCell: {
@@ -18,6 +18,10 @@ const useStyles = makeStyles((theme) => ({
     content: '',
     width: '100%',
     display: 'inline-block',
+  },
+  heading: {
+    paddingBottom: '15px',
+    color: '#6787E3',
   },
 }));
 

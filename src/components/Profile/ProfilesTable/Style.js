@@ -1,6 +1,6 @@
 import { makeStyles } from '@mui/styles';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   employees: {
     color: '#6787E3',
     textAlign: 'center',
@@ -22,9 +22,11 @@ const useStyles = makeStyles((theme) => ({
   },
   deleteIcon: {
     color: 'red',
+    cursor: 'pointer',
   },
   editIcon: {
     color: '#555',
+    cursor: 'pointer',
   },
   tablePagination: {
     content: '',

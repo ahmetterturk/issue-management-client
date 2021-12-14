@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { getIssues } from './apiServices/IssueApi';
 import LoginPage from './components/Login/index';
 import IssuePage from './components/IssuePage/IssuePage';
@@ -6,7 +6,7 @@ import Profile from './components/Profile/Profile';
 import { AppContext } from './contextReducer/Context';
 import { initialState } from './contextReducer/InitialState';
 import reducer from './contextReducer/Reducer';
-import { BrowserRouter, Route, Link, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import Issues from './components/Issues/Issues';
 import ProfilesTable from './components/Profile/ProfilesTable/ProfilesTable';

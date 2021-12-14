@@ -1,19 +1,22 @@
 import React, { useEffect } from 'react';
 import { getProfiles } from '../../../apiServices/ProfileApi';
 import { useGlobalContext } from '../../../contextReducer/Context';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import useStyles from './Style';
 import { Link } from 'react-router-dom';
-import { Chip, TableFooter, Typography } from '@mui/material';
-import TablePagination from '@mui/material/TablePagination';
-import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
+import {
+  Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TablePagination,
+  Avatar,
+  Stack,
+  Paper,
+} from '@mui/material';
+
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 

@@ -18,19 +18,19 @@ const IssuePage = () => {
     getIssue(id)
       .then((response) => setIssue(response))
       .catch((error) => console.log(error));
-  }, []);
+  }, [id]);
 
   return (
     <>
       <Container className={classes.container}>
-        <Typography className={classes.header} variant="h4">
+        <Typography className={classes.header} variant='h4'>
           Ticket
         </Typography>
 
         <IssueInfo issue={issue} issueData={issueData} />
 
         <div className={classes.descriptionContainer}>
-          <Typography variant="h6">Subject: {issue.title}</Typography>
+          <Typography variant='h6'>Subject: {issue.title}</Typography>
           <Typography>{issue.desc}</Typography>
         </div>
 

@@ -1,7 +1,6 @@
-import { Grid, Typography } from '@mui/material';
+import { Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React from 'react';
-import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 
@@ -24,7 +23,7 @@ const IssueInfo = ({ issueData, issue }) => {
   const classes = useStyles();
 
   return (
-    <Grid justifyContent="space-between" container spacing={2}>
+    <Grid justifyContent='space-between' container spacing={2}>
       <Grid item xs={6} md={3}>
         <Item className={classes.infoContainer}>{issueData.author}</Item>
       </Grid>
