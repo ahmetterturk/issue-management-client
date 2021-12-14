@@ -33,6 +33,7 @@ const ProfileForm = () => {
     dateOfBirth: '',
     userId: (user && user.uid) || '',
   });
+  console.log(profileInput, user.uid);
   // custom classes
   const classes = useStyles();
 
