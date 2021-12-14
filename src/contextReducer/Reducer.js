@@ -12,6 +12,12 @@ const reducer = (state, action) => {
         issues: action.data,
       };
     }
+    case 'GET_USER_INFO': {
+      return {
+        ...state,
+        user: action.data,
+      };
+    }
     default:
       return state;
   }
