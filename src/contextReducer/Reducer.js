@@ -12,6 +12,19 @@ const reducer = (state, action) => {
         issues: action.data,
       };
     }
+    case 'LOGIN_INFO': {
+      return {
+        ...state,
+        user: action.data,
+      };
+    }
+    case 'LOGOUT': {
+      localStorage.removeItem('user');
+      return {
+        ...state,
+        user: null,
+      };
+    }
     default:
       return state;
   }
