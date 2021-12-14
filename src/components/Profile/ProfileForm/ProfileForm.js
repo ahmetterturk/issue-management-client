@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Box,
   Button,
@@ -14,17 +14,25 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
-import { inputFieldNames } from './InputNames';
-
 import { useStyles } from './ProfileFormStyle';
-import { createProfile } from '../../../apiServices/ProfileApi';
+import { createProfile, getProfiles } from '../../../apiServices/ProfileApi';
+import { useGlobalContext } from '../../../contextReducer/Context';
 
 const ProfileForm = () => {
+  const { state, dispatch } = useGlobalContext();
+  const { user } = state;
+
   // check if state is on updateMode
   const [updateMode, setUpdateMode] = useState(false);
   // state for all the input names
-  const [profileInput, setProfileInput] = useState(inputFieldNames);
+  const [profileInput, setProfileInput] = useState({
+    fullName: '',
+    address: '',
+    emergencyContact: '',
+    mobilePhone: '',
+    dateOfBirth: '',
+    userId: (user && user.uid) || '',
+  });
   // custom classes
   const classes = useStyles();
 
@@ -32,8 +40,21 @@ const ProfileForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // logic goes here
+    createProfile(profileInput)
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+
+    setProfileInput({
+      fullName: '',
+      address: '',
+      emergencyContact: '',
+      mobilePhone: '',
+      dateOfBirth: '',
+      userId: '',
+    });
   };
-  // handle all changes as user type
+
+  // handle input changes
   const handleChange = (e) => {
     setProfileInput({
       ...profileInput,
@@ -55,7 +76,7 @@ const ProfileForm = () => {
                   <TextField
                     fullWidth
                     label='Name'
-                    name='name'
+                    name='fullName'
                     required
                     variant='filled'
                     onChange={handleChange}
@@ -107,7 +128,7 @@ const ProfileForm = () => {
                   <TextField
                     fullWidth
                     label='Phone Number'
-                    name='phone'
+                    name='mobilePhone'
                     variant='filled'
                     onChange={handleChange}
                     type='text'
@@ -120,25 +141,8 @@ const ProfileForm = () => {
                     }}
                   />
                 </Grid>
+
                 <Grid item md={6} xs={12}>
-                  <TextField
-                    fullWidth
-                    label='Mobile Number'
-                    name='mobile'
-                    variant='filled'
-                    onChange={handleChange}
-                    type='text'
-                    required
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position='start'>
-                          <PhoneAndroidIcon className={classes.icon} />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                </Grid>
-                <Grid item md={4} xs={12}>
                   <TextField
                     fullWidth
                     name='dateOfBirth'
@@ -148,7 +152,7 @@ const ProfileForm = () => {
                     onChange={handleChange}
                   />
                 </Grid>
-                <Grid item md={8} xs={12}>
+                <Grid item md={12} xs={12}>
                   <Box
                     sx={{
                       display: 'flex',
