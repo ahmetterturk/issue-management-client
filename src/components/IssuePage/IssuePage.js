@@ -1,11 +1,12 @@
 import { Container, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Messages from './Messages/Messages';
 import issueData from './issueData';
 import IssueInfo from './IssueInfo/IssueInfo';
 import PersonSelect from './PersonSelect/PersonSelect';
 import useStyles from './styles';
 import { useParams } from 'react-router-dom';
+import { getIssue } from '../../apiServices/IssueApi';
 
 const IssuePage = () => {
   const classes = useStyles();
@@ -13,7 +14,12 @@ const IssuePage = () => {
 
   const [issue, setIssue] = useState([]);
 
-  console.log(id);
+  useEffect(() => {
+    getIssue(id)
+      .then((response) => setIssue(response))
+      .catch((error) => console.log(error));
+  }, []);
+
   return (
     <>
       <Container className={classes.container}>
@@ -21,11 +27,11 @@ const IssuePage = () => {
           Ticket
         </Typography>
 
-        <IssueInfo issueData={issueData} />
+        <IssueInfo issue={issue} issueData={issueData} />
 
         <div className={classes.descriptionContainer}>
-          <Typography variant="h6">Subject: {issueData.title}</Typography>
-          <Typography>{issueData.subject}</Typography>
+          <Typography variant="h6">Subject: {issue.title}</Typography>
+          <Typography>{issue.desc}</Typography>
         </div>
 
         <PersonSelect />
