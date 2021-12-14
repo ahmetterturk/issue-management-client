@@ -20,7 +20,7 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: '15px',
 }));
 
-const IssueInfo = ({ issueData }) => {
+const IssueInfo = ({ issueData, issue }) => {
   const classes = useStyles();
 
   return (
