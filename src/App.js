@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { getIssues } from './apiServices/IssueApi';
 import LoginPage from './components/Login/index';
 import IssuePage from './components/IssuePage/IssuePage';
@@ -24,16 +24,9 @@ const App = () => {
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       <BrowserRouter>
-        {/* <Navbar /> */}
-        <nav>
-          <Link to="/login">Login</Link>
-          {/* <Link to="/issuepage">Issue Page</Link> */}
-          <Link to="/issues">Issues</Link>
-          <Link to="/profile">Profile</Link>
-        </nav>
+        <Navbar />
         <Routes>
           <Route path="/login" element={<LoginPage />} />
-          {/* <Route path="/issuepage" element={<IssuePage />} /> */}
           <Route path="/issues/:id" element={<IssuePage />} />
           <Route path="/issues" element={<Issues />} />
           <Route path="/profile" element={<Profile />} />
