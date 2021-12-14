@@ -16,6 +16,7 @@ import AppBar from '@mui/material/AppBar';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { loginUser } from '../../apiServices/UserApi';
 import { useGlobalContext } from '../../contextReducer/Context';
+import { useNavigate } from 'react-router';
 
 // const Bar = () => {
 //   return (
@@ -58,6 +59,7 @@ const theme = createTheme({
 
 export default function SignIn() {
   const { state, dispatch } = useGlobalContext();
+  const navigate = useNavigate();
 
   const [userInput, setUserInput] = useState({
     email: '',
@@ -68,10 +70,13 @@ export default function SignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     loginUser(userInput)
-      .then((data) => dispatch({ type: 'GET_USER_INFO', data: data }))
+      .then((data) => {
+        dispatch({ type: 'LOGIN_INFO', data: data });
+        localStorage.setItem('user', JSON.stringify(data));
+      })
       .catch((error) => console.log(error));
-    localStorage.setItem('user', state.user.uid);
     setUserInput({ email: '', password: '' });
+    navigate('/profile');
   };
 
   // handle input changes
@@ -87,6 +92,7 @@ export default function SignIn() {
       {/* <Bar /> */}
       <Container component='main' maxWidth='xs'>
         <CssBaseline />
+
         <Box
           sx={{
             marginTop: 8,
