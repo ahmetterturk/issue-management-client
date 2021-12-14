@@ -1,4 +1,4 @@
-import { Divider, Grid, Typography } from '@mui/material';
+import { Divider, Typography } from '@mui/material';
 import React from 'react';
 import useStyles from './styles';
 

@@ -6,7 +6,7 @@ const reducer = (state, action) => {
         issues: action.data,
       };
     }
-    case 'SET_PROFILE': {
+    case 'GET_PROFILES': {
       return {
         ...state,
         profiles: action.data,

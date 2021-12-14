@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -8,11 +7,8 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockRoundedIcon from '@mui/icons-material/LockRounded';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Toolbar from '@mui/material/Toolbar';
-import AppBar from '@mui/material/AppBar';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { loginUser } from '../../apiServices/UserApi';
 import { useGlobalContext } from '../../contextReducer/Context';
@@ -59,7 +55,7 @@ const theme = createTheme({
 });
 
 export default function SignIn() {
-  const { state, dispatch } = useGlobalContext();
+  const { dispatch } = useGlobalContext();
   const navigate = useNavigate();
 
   const [userInput, setUserInput] = useState({
@@ -77,7 +73,7 @@ export default function SignIn() {
       })
       .catch((error) => console.log(error));
     setUserInput({ email: '', password: '' });
-    navigate('/profile')
+    navigate('/profile');
   };
 
   // handle input changes

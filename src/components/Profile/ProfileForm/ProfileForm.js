@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   Box,
   Button,
@@ -15,11 +15,11 @@ import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import { useStyles } from './ProfileFormStyle';
-import { createProfile, getProfiles } from '../../../apiServices/ProfileApi';
+import { createProfile } from '../../../apiServices/ProfileApi';
 import { useGlobalContext } from '../../../contextReducer/Context';
 
 const ProfileForm = () => {
-  const { state, dispatch } = useGlobalContext();
+  const { state } = useGlobalContext();
   const { user } = state;
 
   // check if state is on updateMode
@@ -33,6 +33,7 @@ const ProfileForm = () => {
     dateOfBirth: '',
     userId: (user && user.uid) || '',
   });
+  console.log(profileInput, user.uid);
   // custom classes
   const classes = useStyles();
 

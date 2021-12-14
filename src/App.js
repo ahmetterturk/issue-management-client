@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { getIssues } from './apiServices/IssueApi';
 import LoginPage from './components/Login/index';
 import IssuePage from './components/IssuePage/IssuePage';
@@ -6,9 +6,11 @@ import Profile from './components/Profile/Profile';
 import { AppContext } from './contextReducer/Context';
 import { initialState } from './contextReducer/InitialState';
 import reducer from './contextReducer/Reducer';
-import { BrowserRouter, Route, Link, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import Issues from './components/Issues/Issues';
+import ProfilesTable from './components/Profile/ProfilesTable/ProfilesTable';
+import Employee from './components/Profile/Employee/Employee';
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -26,10 +28,12 @@ const App = () => {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/issues/:id" element={<IssuePage />} />
-          <Route path="/issues" element={<Issues />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/issues/:id' element={<IssuePage />} />
+          <Route path='/issues' element={<Issues />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/profiles' element={<ProfilesTable />} />
+          <Route path='/profiles/:id' element={<Employee />} />
         </Routes>
       </BrowserRouter>
     </AppContext.Provider>

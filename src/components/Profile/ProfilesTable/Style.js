@@ -1,6 +1,10 @@
 import { makeStyles } from '@mui/styles';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
+  employees: {
+    color: '#6787E3',
+    textAlign: 'center',
+  },
   tableContainer: {
     borderRadius: 15,
     margin: '10px auto',
@@ -11,17 +15,23 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#E8E8E8',
     color: '#25282B',
   },
-  issueTitle: {
+  profileTitle: {
     textDecoration: 'none',
+    color: '#555',
+    cursor: 'pointer',
+  },
+  deleteIcon: {
+    color: 'red',
+    cursor: 'pointer',
+  },
+  editIcon: {
+    color: '#555',
+    cursor: 'pointer',
   },
   tablePagination: {
     content: '',
     width: '100%',
     display: 'inline-block',
-  },
-  heading: {
-    paddingBottom: '15px',
-    color: '#6787E3',
   },
 }));
 
