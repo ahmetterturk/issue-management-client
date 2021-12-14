@@ -76,7 +76,7 @@ export default function SignIn() {
       })
       .catch((error) => console.log(error));
     setUserInput({ email: '', password: '' });
-    navigate('/profile');
+    navigate('/profile')
   };
 
   // handle input changes

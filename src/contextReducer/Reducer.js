@@ -6,10 +6,10 @@ const reducer = (state, action) => {
         issues: action.data,
       };
     }
-    case 'GET_PROFILES': {
+    case 'SET_PROFILE': {
       return {
         ...state,
-        issues: action.data,
+        profiles: action.data,
       };
     }
     case 'LOGIN_INFO': {
