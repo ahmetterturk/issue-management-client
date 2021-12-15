@@ -15,7 +15,7 @@ const PriorityDropdown = () => {
   return (
     <Box sx={{ minWidth: 200 }}>
       <FormControl sx={{ minWidth: 150 }}>
-        <InputLabel id="demo-simple-select-label">Status</InputLabel>
+        <InputLabel id="demo-simple-select-label">Priority</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"

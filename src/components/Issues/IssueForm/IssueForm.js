@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -25,6 +25,31 @@ const IssueForm = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const initialState = {
+    title: '',
+    description: '',
+    type: '',
+    priority: '',
+    status: '',
+    names: [],
+  };
+
+  const [inputData, setInputData] = useState(initialState);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(inputData);
+  };
+
+  const handleChange = (event) => {
+    setInputData({
+      ...inputData,
+      [event.target.name]: event.target.value,
+    });
+
+    console.log(inputData);
+  };
+
   return (
     <div>
       <Button onClick={handleOpen}>New Issue</Button>
@@ -35,12 +60,42 @@ const IssueForm = () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <TextField id="outlined-basic" label="Title" variant="outlined" />
-          <TextField multiline rows={2} maxRows={4} label="Description" />
-          <TypeDropdown />
-          <PriorityDropdown />
-          <StatusDropdown />
-          <MembersDropdown />
+          <form onSubmit={handleSubmit}>
+            <TextField
+              value={inputData.title}
+              onChange={handleChange}
+              name="title"
+              id="outlined-basic"
+              label="Title"
+              variant="outlined"
+            />
+            <TextField
+              value={inputData.description}
+              onChange={handleChange}
+              name="description"
+              multiline
+              rows={2}
+              maxRows={4}
+              label="Description"
+            />
+            <TypeDropdown
+              type={inputData.type}
+              handleChange={handleChange}
+              name={'type'}
+            />
+            <PriorityDropdown
+              priority={inputData.priority}
+              handleChange={handleChange}
+              name={'priority'}
+            />
+            <StatusDropdown
+              status={inputData.status}
+              handleChange={handleChange}
+              name={'status'}
+            />
+            {/* <MembersDropdown name="members" /> */}
+            <input type="submit" value="Submit" />
+          </form>
         </Box>
       </Modal>
     </div>

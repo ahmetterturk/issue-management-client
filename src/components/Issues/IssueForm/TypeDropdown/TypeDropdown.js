@@ -5,12 +5,12 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-const TypeDropdown = () => {
-  const [type, setType] = useState('Public');
+const TypeDropdown = ({ handleChange, type, name }) => {
+  // const [type, setType] = useState('Public');
 
-  const handleChange = (event) => {
-    setType(event.target.value);
-  };
+  // const handleChange = (event) => {
+  //   setType(event.target.value);
+  // };
 
   return (
     <Box sx={{ minWidth: 200 }}>
@@ -22,6 +22,7 @@ const TypeDropdown = () => {
           value={type}
           label="Type"
           onChange={handleChange}
+          name={name}
         >
           <MenuItem value="Public">Public</MenuItem>
           <MenuItem value="Private">Private</MenuItem>
