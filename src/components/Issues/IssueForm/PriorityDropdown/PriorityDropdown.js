@@ -5,13 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-const PriorityDropdown = () => {
-  const [priority, setPriority] = useState('Low');
-
-  const handleChange = (event) => {
-    setPriority(event.target.value);
-  };
-
+const PriorityDropdown = ({ handleChange, priority, name }) => {
   return (
     <Box sx={{ minWidth: 200 }}>
       <FormControl sx={{ minWidth: 150 }}>
@@ -22,6 +16,7 @@ const PriorityDropdown = () => {
           value={priority}
           label="Status"
           onChange={handleChange}
+          name={name}
         >
           <MenuItem value="Low">Low</MenuItem>
           <MenuItem value="High">High</MenuItem>

@@ -6,12 +6,6 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 const TypeDropdown = ({ handleChange, type, name }) => {
-  // const [type, setType] = useState('Public');
-
-  // const handleChange = (event) => {
-  //   setType(event.target.value);
-  // };
-
   return (
     <Box sx={{ minWidth: 200 }}>
       <FormControl sx={{ minWidth: 150 }}>
