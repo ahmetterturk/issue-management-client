@@ -4,10 +4,10 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
-import TypeDropdown from '../TypeDropdown/TypeDropdown';
-import PriorityDropdown from '../PriorityDropdown/PriorityDropdown';
-import StatusDropdown from '../StatusDropdown/StatusDropdown';
-import MembersDropdown from '../MembersDropdown/MembersDropdown';
+import TypeDropdown from './TypeDropdown/TypeDropdown';
+import PriorityDropdown from './PriorityDropdown/PriorityDropdown';
+import StatusDropdown from './StatusDropdown/StatusDropdown';
+import MembersDropdown from './MembersDropdown/MembersDropdown';
 
 const style = {
   position: 'absolute',
@@ -16,7 +16,6 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 500,
   bgcolor: 'background.paper',
-  //   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
 };
