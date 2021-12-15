@@ -27,7 +27,7 @@ const IssueForm = () => {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button onClick={handleOpen}>New Issue</Button>
       <Modal
         open={open}
         onClose={handleClose}
