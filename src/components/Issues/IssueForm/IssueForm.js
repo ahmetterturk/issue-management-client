@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import TypeDropdown from './TypeDropdown/TypeDropdown';
 import PriorityDropdown from './PriorityDropdown/PriorityDropdown';
 import StatusDropdown from './StatusDropdown/StatusDropdown';
 import MembersDropdown from './MembersDropdown/MembersDropdown';
+import { useGlobalContext } from '../../../contextReducer/Context';
+import { createIssue } from '../../../apiServices/IssueApi';
 
 const style = {
   position: 'absolute',
@@ -21,9 +22,15 @@ const style = {
 };
 
 const IssueForm = () => {
+  const { state } = useGlobalContext();
+  const { user } = state;
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  // const currentDate = new Date().toISOString().split('T')[0];
+  // console.log(currentDate);
 
   const initialState = {
     title: '',
@@ -32,6 +39,7 @@ const IssueForm = () => {
     priority: '',
     status: '',
     names: [],
+    userId: state.user.uid,
   };
 
   const [inputData, setInputData] = useState(initialState);
@@ -39,6 +47,12 @@ const IssueForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(inputData);
+
+    createIssue(inputData)
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
+
+    window.location.reload();
   };
 
   const handleChange = (event) => {
