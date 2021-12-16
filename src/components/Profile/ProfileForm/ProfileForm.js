@@ -17,9 +17,16 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import { useStyles } from './ProfileFormStyle';
 import { createProfile } from '../../../apiServices/ProfileApi';
 import { useGlobalContext } from '../../../contextReducer/Context';
+import { useNavigate } from 'react-router-dom';
 
 const ProfileForm = () => {
+  const navigate = useNavigate();
   const { state } = useGlobalContext();
+  if (state.user.error && state.user.error.code) {
+    navigate('/login');
+  } else if (state.userProfile) {
+    navigate('/issues');
+  }
   const { user } = state;
 
   // check if state is on updateMode
@@ -53,6 +60,7 @@ const ProfileForm = () => {
       dateOfBirth: '',
       userId: '',
     });
+    navigate('/issues');
   };
 
   // handle input changes
@@ -66,24 +74,24 @@ const ProfileForm = () => {
   return (
     <>
       <Box>
-        <Typography variant="h3" align="center" className={classes.heading}>
+        <Typography variant='h3' align='center' className={classes.heading}>
           Profile
         </Typography>
-        <form autoComplete="off" noValidate onSubmit={handleSubmit}>
+        <form autoComplete='off' noValidate onSubmit={handleSubmit}>
           <Card className={classes.card}>
             <CardContent>
               <Grid container spacing={3}>
                 <Grid item md={12} xs={12}>
                   <TextField
                     fullWidth
-                    label="Name"
-                    name="fullName"
+                    label='Name'
+                    name='fullName'
                     required
-                    variant="filled"
+                    variant='filled'
                     onChange={handleChange}
                     InputProps={{
                       startAdornment: (
-                        <InputAdornment position="start">
+                        <InputAdornment position='start'>
                           <PersonOutlineIcon className={classes.icon} />
                         </InputAdornment>
                       ),
@@ -93,14 +101,14 @@ const ProfileForm = () => {
                 <Grid item md={12} xs={12}>
                   <TextField
                     fullWidth
-                    label="Address"
-                    name="address"
+                    label='Address'
+                    name='address'
                     required
-                    variant="filled"
+                    variant='filled'
                     onChange={handleChange}
                     InputProps={{
                       startAdornment: (
-                        <InputAdornment position="start">
+                        <InputAdornment position='start'>
                           <ImportContactsIcon className={classes.icon} />
                         </InputAdornment>
                       ),
@@ -110,15 +118,15 @@ const ProfileForm = () => {
                 <Grid item md={12} xs={12}>
                   <TextField
                     fullWidth
-                    label="Emergency Contact"
-                    name="emergencyContact"
+                    label='Emergency Contact'
+                    name='emergencyContact'
                     required
-                    variant="filled"
+                    variant='filled'
                     onChange={handleChange}
-                    type="text"
+                    type='text'
                     InputProps={{
                       startAdornment: (
-                        <InputAdornment position="start">
+                        <InputAdornment position='start'>
                           <PermContactCalendarIcon className={classes.icon} />
                         </InputAdornment>
                       ),
@@ -128,14 +136,14 @@ const ProfileForm = () => {
                 <Grid item md={6} xs={12}>
                   <TextField
                     fullWidth
-                    label="Phone Number"
-                    name="mobilePhone"
-                    variant="filled"
+                    label='Phone Number'
+                    name='mobilePhone'
+                    variant='filled'
                     onChange={handleChange}
-                    type="text"
+                    type='text'
                     InputProps={{
                       startAdornment: (
-                        <InputAdornment position="start">
+                        <InputAdornment position='start'>
                           <LocalPhoneIcon className={classes.icon} />
                         </InputAdornment>
                       ),
@@ -146,10 +154,10 @@ const ProfileForm = () => {
                 <Grid item md={6} xs={12}>
                   <TextField
                     fullWidth
-                    name="dateOfBirth"
+                    name='dateOfBirth'
                     required
-                    type="date"
-                    variant="filled"
+                    type='date'
+                    variant='filled'
                     onChange={handleChange}
                   />
                 </Grid>
@@ -162,18 +170,18 @@ const ProfileForm = () => {
                     }}
                   >
                     <Button
-                      color="primary"
-                      variant="contained"
+                      color='primary'
+                      variant='contained'
                       className={classes.button}
                       style={{ marginLeft: '5px', backgroundColor: '#6787E3' }}
                     >
                       Upload file
                     </Button>
                     <Button
-                      color="primary"
-                      variant="contained"
+                      color='primary'
+                      variant='contained'
                       style={{ marginLeft: '5px', backgroundColor: '#6787E3' }}
-                      type="submit"
+                      type='submit'
                     >
                       {updateMode ? 'Update' : 'Create'}
                     </Button>

@@ -22,12 +22,23 @@ const reducer = (state, action) => {
       return {
         ...state,
         user: action.data,
+        userLoggedIn: true,
       };
     }
+    case 'LOGIN_FAILURE': {
+      return {
+        ...state,
+        user: false,
+        userLoggedIn: false,
+        error: true,
+      };
+    }
+
     case 'LOGOUT': {
       return {
         ...state,
         user: null,
+        userLoggedIn: false,
       };
     }
 

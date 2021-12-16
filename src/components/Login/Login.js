@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -13,19 +13,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { loginUser } from '../../apiServices/UserApi';
 import { useGlobalContext } from '../../contextReducer/Context';
 import { useNavigate } from 'react-router';
+import { Navigate } from 'react-router-dom';
 import { bgcolor } from '@mui/system';
-
-// const Bar = () => {
-//   return (
-//     <>
-//       <AppBar position="relative">
-//         <Toolbar>
-//           <LockRoundedIcon />
-//         </Toolbar>
-//       </AppBar>
-//     </>
-//   );
-// };
 
 function Copyright(props) {
   return (
@@ -54,9 +43,10 @@ const theme = createTheme({
   },
 });
 
-export default function SignIn() {
+const Login = () => {
   const { state, dispatch } = useGlobalContext();
   const navigate = useNavigate();
+  const [hasError, setHasError] = useState('');
 
   const [userInput, setUserInput] = useState({
     email: '',
@@ -71,11 +61,14 @@ export default function SignIn() {
       .then((data) => {
         dispatch({ type: 'LOGIN_INFO', data: data });
         localStorage.setItem('user', JSON.stringify(data));
+        navigate('/profile');
       })
-      .catch((error) => console.log(error));
+      .catch((err) => {
+        dispatch({ type: 'LOGIN_FAILURE' });
+        setHasError(`Wrong credentails!`);
+        console.log(err);
+      });
     setUserInput({ email: '', password: '' });
-
-    navigate('/profile');
   };
 
   // handle input changes
@@ -119,6 +112,7 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
+          <div>{state.error && <p style={{ color: 'red' }}>{hasError}</p>}</div>
           <Box
             component='form'
             onSubmit={handleSubmit}
@@ -175,4 +169,6 @@ export default function SignIn() {
       </Container>
     </ThemeProvider>
   );
-}
+};
+
+export default Login;

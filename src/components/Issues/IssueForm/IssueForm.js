@@ -39,7 +39,7 @@ const IssueForm = () => {
     priority: '',
     status: '',
     names: [],
-    userId: state.user.uid,
+    userId: user && state.user.uid,
   };
 
   const [inputData, setInputData] = useState(initialState);
@@ -65,54 +65,58 @@ const IssueForm = () => {
   };
 
   return (
-    <div>
-      <Button onClick={handleOpen}>New Issue</Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <form onSubmit={handleSubmit}>
-            <TextField
-              value={inputData.title}
-              onChange={handleChange}
-              name="title"
-              id="outlined-basic"
-              label="Title"
-              variant="outlined"
-            />
-            <TextField
-              value={inputData.description}
-              onChange={handleChange}
-              name="description"
-              multiline
-              rows={2}
-              maxRows={4}
-              label="Description"
-            />
-            <TypeDropdown
-              type={inputData.type}
-              handleChange={handleChange}
-              name={'type'}
-            />
-            <PriorityDropdown
-              priority={inputData.priority}
-              handleChange={handleChange}
-              name={'priority'}
-            />
-            <StatusDropdown
-              status={inputData.status}
-              handleChange={handleChange}
-              name={'status'}
-            />
-            {/* <MembersDropdown name="members" /> */}
-            <input type="submit" value="Submit" />
-          </form>
-        </Box>
-      </Modal>
-    </div>
+    <>
+      {state.userProfile && (
+        <div>
+          <Button onClick={handleOpen}>New Issue</Button>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby='modal-modal-title'
+            aria-describedby='modal-modal-description'
+          >
+            <Box sx={style}>
+              <form onSubmit={handleSubmit}>
+                <TextField
+                  value={inputData.title}
+                  onChange={handleChange}
+                  name='title'
+                  id='outlined-basic'
+                  label='Title'
+                  variant='outlined'
+                />
+                <TextField
+                  value={inputData.description}
+                  onChange={handleChange}
+                  name='description'
+                  multiline
+                  rows={2}
+                  maxRows={4}
+                  label='Description'
+                />
+                <TypeDropdown
+                  type={inputData.type}
+                  handleChange={handleChange}
+                  name={'type'}
+                />
+                <PriorityDropdown
+                  priority={inputData.priority}
+                  handleChange={handleChange}
+                  name={'priority'}
+                />
+                <StatusDropdown
+                  status={inputData.status}
+                  handleChange={handleChange}
+                  name={'status'}
+                />
+                {/* <MembersDropdown name="members" /> */}
+                <input type='submit' value='Submit' />
+              </form>
+            </Box>
+          </Modal>
+        </div>
+      )}
+    </>
   );
 };
 
