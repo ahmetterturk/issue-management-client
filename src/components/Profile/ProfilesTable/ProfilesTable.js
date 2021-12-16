@@ -68,6 +68,7 @@ const ProfilesTable = ({ profilesList }) => {
             </TableRow>
           </TableHead>
           <TableBody>
+
             {state.profiles
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((profile) => (

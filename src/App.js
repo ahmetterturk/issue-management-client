@@ -14,7 +14,9 @@ import Employee from './components/Profile/Employee/Employee';
 import { getProfiles } from './apiServices/ProfileApi';
 
 const App = () => {
+
   const [userProfile, setUserProfile] = useState(null);
+
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -23,6 +25,7 @@ const App = () => {
     getIssues()
       .then((data) => dispatch({ type: 'GET_ISSUES', data: data }))
       .catch((err) => console.log(err));
+    setErrorMsg('You not belong here');
   }, []);
 
   // get all profiles
@@ -49,12 +52,14 @@ const App = () => {
       <BrowserRouter>
         <Navbar />
         <Routes>
+
           <Route path="/login" element={<LoginPage />} />
           <Route path="/issues/:id" element={<IssuePage />} />
           <Route path="/issues" element={<Issues />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/profiles" element={<ProfilesTable />} />
           <Route path="/profiles/:id" element={<Employee />} />
+
         </Routes>
       </BrowserRouter>
     </AppContext.Provider>
