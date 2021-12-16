@@ -11,6 +11,7 @@ import Navbar from './components/Navbar/Navbar';
 import Issues from './components/Issues/Issues';
 import ProfilesTable from './components/Profile/ProfilesTable/ProfilesTable';
 import Employee from './components/Profile/Employee/Employee';
+import SideNavbar from './components/Sidebar/sidebar';
 import { getProfiles } from './apiServices/ProfileApi';
 
 const App = () => {
@@ -47,7 +48,8 @@ const App = () => {
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       <BrowserRouter>
-        <Navbar />
+        <SideNavbar />
+        <div style={{"marginLeft": 100}}>
         <Routes>
           <Route path='/login' element={<Login />} />
           <Route path='/issues/:id' element={<IssuePage />} />
@@ -56,6 +58,7 @@ const App = () => {
           <Route path='/profiles' element={<ProfilesTable />} />
           <Route path='/profiles/:id' element={<Employee />} />
         </Routes>
+        </div>
       </BrowserRouter>
     </AppContext.Provider>
   );
