@@ -31,9 +31,9 @@ function Copyright(props) {
   return (
     <>
       <Typography
-        variant="body2"
-        color="text.secondary"
-        align="center"
+        variant='body2'
+        color='text.secondary'
+        align='center'
         {...props}
       >
         {' © Lock Security '}
@@ -89,9 +89,9 @@ export default function SignIn() {
   return (
     <ThemeProvider theme={theme}>
       <Typography
-        component="h1"
-        variant="h4"
-        color="#6887E3"
+        component='h1'
+        variant='h4'
+        color='#6887E3'
         textAlign={'center'}
         padding={4}
       >
@@ -99,8 +99,8 @@ export default function SignIn() {
       </Typography>
       {/* <Bar /> */}
       <Container
-        component="main"
-        maxWidth="xs"
+        component='main'
+        maxWidth='xs'
         Box
         sx={{
           border: 0.5,
@@ -120,45 +120,45 @@ export default function SignIn() {
           }}
         >
           <Box
-            component="form"
+            component='form'
             onSubmit={handleSubmit}
             noValidate
             sx={{ mt: 1 }}
           >
             <TextField
-              margin="normal"
+              margin='normal'
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              background="white"
+              id='email'
+              label='Email Address'
+              name='email'
+              autoComplete='email'
+              background='white'
               onChange={handleChange}
               value={userInput.email}
               autoFocus
             />
             <TextField
-              margin="normal"
+              margin='normal'
               required
               fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
+              name='password'
+              label='Password'
+              type='password'
+              id='password'
               onChange={handleChange}
               value={userInput.password}
-              autoComplete="current-password"
+              autoComplete='current-password'
             />
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              control={<Checkbox value='remember' color='primary' />}
+              label='Remember me'
             />
 
             <Button
-              type="submit"
+              type='submit'
               // fullWidth
-              variant="contained"
+              variant='contained'
               sx={{ mt: 3, mb: 2 }}
             >
               Sign In
@@ -169,7 +169,7 @@ export default function SignIn() {
           </Box>
         </Box>
         <Copyright sx={{ mt: 5, mb: 3 }} />
-        <Link href="#" variant="body2" textAlign={'center'}>
+        <Link href='#' variant='body2' textAlign={'center'}>
           Forgot password?
         </Link>
       </Container>
