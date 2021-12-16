@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { getIssues } from './apiServices/IssueApi';
 import LoginPage from './components/Login/index';
 import IssuePage from './components/IssuePage/IssuePage';
@@ -14,7 +14,10 @@ import Employee from './components/Profile/Employee/Employee';
 import { getProfiles } from './apiServices/ProfileApi';
 
 const App = () => {
+  const [userProfile, setUserProfile] = useState(null);
+
   const [state, dispatch] = useReducer(reducer, initialState);
+
   // get all issues
   useEffect(() => {
     getIssues()
@@ -22,18 +25,24 @@ const App = () => {
       .catch((err) => console.log(err));
   }, []);
 
+  // get all profiles
   useEffect(() => {
     getProfiles()
       .then((data) => dispatch({ type: 'GET_PROFILES', data: data }))
       .catch((error) => console.log(error));
   }, []);
 
-  if (state.user) {
-    const match = state.profiles.filter(
-      (profile) => profile.userId === state.user.uid
-    );
-    console.log(match);
-  }
+  useEffect(() => {
+    if (state.user) {
+      const match = state.profiles.filter(
+        (profile) => profile.userId === state.user.uid
+      );
+      dispatch({ type: 'CURRENT_PROFILE', data: match[0] });
+      localStorage.setItem('profile', JSON.stringify(match[0]));
+    }
+  }, [state.user]);
+
+  console.log(state.userProfile);
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>

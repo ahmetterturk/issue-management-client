@@ -12,6 +12,12 @@ const reducer = (state, action) => {
         profiles: action.data,
       };
     }
+    case 'CURRENT_PROFILE': {
+      return {
+        ...state,
+        userProfile: action.data,
+      };
+    }
     case 'LOGIN_INFO': {
       return {
         ...state,
@@ -24,6 +30,7 @@ const reducer = (state, action) => {
         user: null,
       };
     }
+
     default:
       return state;
   }

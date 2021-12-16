@@ -31,9 +31,9 @@ function Copyright(props) {
   return (
     <>
       <Typography
-        variant='body2'
-        color='text.secondary'
-        align='center'
+        variant="body2"
+        color="text.secondary"
+        align="center"
         {...props}
       >
         {' © Lock Security '}
@@ -55,7 +55,7 @@ const theme = createTheme({
 });
 
 export default function SignIn() {
-  const { dispatch } = useGlobalContext();
+  const { state, dispatch } = useGlobalContext();
   const navigate = useNavigate();
 
   const [userInput, setUserInput] = useState({
@@ -66,6 +66,7 @@ export default function SignIn() {
   // handle form after submit
   const handleSubmit = (event) => {
     event.preventDefault();
+
     loginUser(userInput)
       .then((data) => {
         dispatch({ type: 'LOGIN_INFO', data: data });
@@ -73,6 +74,7 @@ export default function SignIn() {
       })
       .catch((error) => console.log(error));
     setUserInput({ email: '', password: '' });
+
     navigate('/profile');
   };
 
@@ -85,14 +87,28 @@ export default function SignIn() {
   };
 
   return (
-    
     <ThemeProvider theme={theme}>
-
-<Typography component='h1' variant='h4' color="#6887E3" textAlign={'center'} padding={ 4 }>
-            Lock Security
-          </Typography>
+      <Typography
+        component="h1"
+        variant="h4"
+        color="#6887E3"
+        textAlign={'center'}
+        padding={4}
+      >
+        Lock Security
+      </Typography>
       {/* <Bar /> */}
-      <Container component='main' maxWidth='xs'  Box sx={{ border: 0.5, borderRadius: 3, borderColor:'6887E3', bgcolor:"#E8E8E8" }} >
+      <Container
+        component="main"
+        maxWidth="xs"
+        Box
+        sx={{
+          border: 0.5,
+          borderRadius: 3,
+          borderColor: '6887E3',
+          bgcolor: '#E8E8E8',
+        }}
+      >
         <CssBaseline />
 
         <Box
@@ -103,64 +119,60 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
-         
           <Box
-            component='form'
+            component="form"
             onSubmit={handleSubmit}
             noValidate
-            sx={{ mt: 1  }}
+            sx={{ mt: 1 }}
           >
             <TextField
-              margin='normal'
+              margin="normal"
               required
               fullWidth
-              id='email'
-              label='Email Address'
-              name='email'
-              autoComplete='email'
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
               background="white"
               onChange={handleChange}
               value={userInput.email}
               autoFocus
             />
             <TextField
-              margin='normal'
+              margin="normal"
               required
               fullWidth
-              name='password'
-              label='Password'
-              type='password'
-              id='password'
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
               onChange={handleChange}
               value={userInput.password}
-              autoComplete='current-password'
+              autoComplete="current-password"
             />
             <FormControlLabel
-              control={<Checkbox value='remember' color='primary' />}
-              label='Remember me'
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
             />
 
             <Button
-              type='submit'
+              type="submit"
               // fullWidth
-              variant='contained'
+              variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
               Sign In
             </Button>
             <Grid container>
-              <Grid item xs>
-                
-              </Grid>
+              <Grid item xs></Grid>
             </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 5, mb: 3 }} />
-        <Link href='#' variant='body2' textAlign={'center'} >
-                  Forgot password?
-                </Link>
+        <Link href="#" variant="body2" textAlign={'center'}>
+          Forgot password?
+        </Link>
       </Container>
-      
     </ThemeProvider>
   );
 }
