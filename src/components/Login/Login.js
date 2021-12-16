@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -13,19 +13,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { loginUser } from '../../apiServices/UserApi';
 import { useGlobalContext } from '../../contextReducer/Context';
 import { useNavigate } from 'react-router';
+import { Navigate } from 'react-router-dom';
 import { bgcolor } from '@mui/system';
-
-// const Bar = () => {
-//   return (
-//     <>
-//       <AppBar position="relative">
-//         <Toolbar>
-//           <LockRoundedIcon />
-//         </Toolbar>
-//       </AppBar>
-//     </>
-//   );
-// };
 
 function Copyright(props) {
   return (
@@ -54,9 +43,10 @@ const theme = createTheme({
   },
 });
 
-export default function SignIn() {
-  const { dispatch } = useGlobalContext();
+const Login = () => {
+  const { state, dispatch } = useGlobalContext();
   const navigate = useNavigate();
+  const [hasError, setHasError] = useState('');
 
   const [userInput, setUserInput] = useState({
     email: '',
@@ -66,14 +56,19 @@ export default function SignIn() {
   // handle form after submit
   const handleSubmit = (event) => {
     event.preventDefault();
+
     loginUser(userInput)
       .then((data) => {
         dispatch({ type: 'LOGIN_INFO', data: data });
         localStorage.setItem('user', JSON.stringify(data));
+        navigate('/profile');
       })
-      .catch((error) => console.log(error));
+      .catch((err) => {
+        dispatch({ type: 'LOGIN_FAILURE' });
+        setHasError(`Wrong credentails!`);
+        console.log(err);
+      });
     setUserInput({ email: '', password: '' });
-    navigate('/profile');
   };
 
   // handle input changes
@@ -85,14 +80,28 @@ export default function SignIn() {
   };
 
   return (
-    
     <ThemeProvider theme={theme}>
-
-<Typography component='h1' variant='h4' color="#6887E3" textAlign={'center'} padding={ 4 }>
-            Lock Security
-          </Typography>
+      <Typography
+        component='h1'
+        variant='h4'
+        color='#6887E3'
+        textAlign={'center'}
+        padding={4}
+      >
+        Lock Security
+      </Typography>
       {/* <Bar /> */}
-      <Container component='main' maxWidth='xs'  Box sx={{ border: 0.5, borderRadius: 3, borderColor:'6887E3', bgcolor:"#E8E8E8" }} >
+      <Container
+        component='main'
+        maxWidth='xs'
+        Box
+        sx={{
+          border: 0.5,
+          borderRadius: 3,
+          borderColor: '6887E3',
+          bgcolor: '#E8E8E8',
+        }}
+      >
         <CssBaseline />
 
         <Box
@@ -103,12 +112,12 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
-         
+          <div>{state.error && <p style={{ color: 'red' }}>{hasError}</p>}</div>
           <Box
             component='form'
             onSubmit={handleSubmit}
             noValidate
-            sx={{ mt: 1  }}
+            sx={{ mt: 1 }}
           >
             <TextField
               margin='normal'
@@ -118,7 +127,7 @@ export default function SignIn() {
               label='Email Address'
               name='email'
               autoComplete='email'
-              background="white"
+              background='white'
               onChange={handleChange}
               value={userInput.email}
               autoFocus
@@ -149,18 +158,17 @@ export default function SignIn() {
               Sign In
             </Button>
             <Grid container>
-              <Grid item xs>
-                
-              </Grid>
+              <Grid item xs></Grid>
             </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 5, mb: 3 }} />
-        <Link href='#' variant='body2' textAlign={'center'} >
-                  Forgot password?
-                </Link>
+        <Link href='#' variant='body2' textAlign={'center'}>
+          Forgot password?
+        </Link>
       </Container>
-      
     </ThemeProvider>
   );
-}
+};
+
+export default Login;

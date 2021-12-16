@@ -12,7 +12,7 @@ import { Chip, Typography } from '@mui/material';
 import TablePagination from '@mui/material/TablePagination';
 
 const IssuesTable = ({ issuesList }) => {
-  console.log(issuesList);
+  // console.log(issuesList);
 
   const classes = useStyles();
 
@@ -30,11 +30,11 @@ const IssuesTable = ({ issuesList }) => {
 
   return (
     <>
-      <Typography variant='h3' align='center' className={classes.heading}>
+      <Typography variant="h3" align="center" className={classes.heading}>
         Tickets
       </Typography>
       <TableContainer component={Paper} className={classes.tableContainer}>
-        <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell className={classes.tableHeaderCell}>Issue</TableCell>
@@ -72,7 +72,9 @@ const IssuesTable = ({ issuesList }) => {
                     <Typography>{issue.type}</Typography>
                   </TableCell>
                   <TableCell>
-                    <Typography>Date</Typography>
+                    <Typography>
+                      {issue.createdAt && issue.createdAt.slice(0, 10)}
+                    </Typography>
                   </TableCell>
                   <TableCell>
                     <Typography>{issue.userId}</Typography>
@@ -82,7 +84,7 @@ const IssuesTable = ({ issuesList }) => {
             <TablePagination
               className={classes.tablePagination}
               rowsPerPageOptions={[5, 10, 25]}
-              component='div'
+              component="div"
               count={issuesList.length}
               rowsPerPage={rowsPerPage}
               page={page}

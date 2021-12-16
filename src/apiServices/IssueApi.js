@@ -1,21 +1,32 @@
 import axios from 'axios';
 
-const url = 'http://localhost:5000';
+const url = 'https://issue-management-backend.herokuapp.com';
 
 // fetching all Issues
 export const getIssues = async () => {
   try {
-    const res = await axios.get(url + '/issues');
-    return res.data;
+    const response = await axios.get(url + '/issues');
+    return response.data;
   } catch (error) {
     console.log(error);
   }
 };
 
+// create an issue
+export const createIssue = async (issueData) => {
+  try {
+    const response = await axios.post(url + '/issues', issueData);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// fetch single issue
 export const getIssue = async (id) => {
   try {
-    const res = await axios.get(url + '/issues/' + id);
-    return res.data;
+    const response = await axios.get(url + '/issues/' + id);
+    return response.data;
   } catch (error) {
     console.log(error);
   }

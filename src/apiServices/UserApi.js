@@ -1,5 +1,5 @@
 import axios from 'axios';
-const url = 'http://localhost:5000';
+const url = 'https://issue-management-backend.herokuapp.com';
 // login request
 export const loginUser = async (userObject) => {
   try {

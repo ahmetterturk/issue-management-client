@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { getProfiles } from '../../../apiServices/ProfileApi';
+import React from 'react';
+// import { getProfiles } from '../../../apiServices/ProfileApi';
 import { useGlobalContext } from '../../../contextReducer/Context';
 import useStyles from './Style';
 import { Link } from 'react-router-dom';
@@ -21,17 +21,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 const ProfilesTable = ({ profilesList }) => {
-  console.log(profilesList);
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const { state, dispatch } = useGlobalContext();
-  useEffect(() => {
-    getProfiles()
-      .then((data) => dispatch({ type: 'GET_PROFILES', data: data }))
-      .catch((error) => console.log(error));
-  }, []);
-  console.log(state.profiles);
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -85,7 +79,9 @@ const ProfilesTable = ({ profilesList }) => {
                     </Stack>
                   </TableCell>
                   <TableCell>
-                    <Typography>Should add timestamps</Typography>
+                    <Typography>
+                      {profile.createdAt && profile.createdAt.slice(0, 10)}
+                    </Typography>
                   </TableCell>
                   <TableCell>
                     <Typography>{profile.mobilePhone}</Typography>
@@ -94,10 +90,12 @@ const ProfilesTable = ({ profilesList }) => {
                     <Typography>{profile.emergencyContact}</Typography>
                   </TableCell>
                   <TableCell>
-                    <Stack direction='row' spacing={2}>
-                      <DeleteIcon className={classes.deleteIcon} />
-                      <EditIcon className={classes.editIcon} />
-                    </Stack>
+                    {state.userProfile && (
+                      <Stack direction='row' spacing={2}>
+                        <DeleteIcon className={classes.deleteIcon} />
+                        <EditIcon className={classes.editIcon} />
+                      </Stack>
+                    )}
                   </TableCell>
                 </TableRow>
               ))}

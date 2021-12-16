@@ -17,9 +17,16 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import { useStyles } from './ProfileFormStyle';
 import { createProfile } from '../../../apiServices/ProfileApi';
 import { useGlobalContext } from '../../../contextReducer/Context';
+import { useNavigate } from 'react-router-dom';
 
 const ProfileForm = () => {
+  const navigate = useNavigate();
   const { state } = useGlobalContext();
+  if (state.user.error && state.user.error.code) {
+    navigate('/login');
+  } else if (state.userProfile) {
+    navigate('/issues');
+  }
   const { user } = state;
 
   // check if state is on updateMode
@@ -33,7 +40,7 @@ const ProfileForm = () => {
     dateOfBirth: '',
     userId: (user && user.uid) || '',
   });
-  console.log(profileInput, user.uid);
+  // console.log(profileInput, user.uid);
   // custom classes
   const classes = useStyles();
 
@@ -53,6 +60,7 @@ const ProfileForm = () => {
       dateOfBirth: '',
       userId: '',
     });
+    navigate('/issues');
   };
 
   // handle input changes
