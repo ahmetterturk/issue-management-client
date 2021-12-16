@@ -23,7 +23,7 @@ const Navbar = () => {
         </Toolbar>
       </AppBar>
       {/* <Navbar /> */}
-      <nav>
+      <nav >
         {!user ? (
           <Link to='/login' className={classes.link}>
             Login
