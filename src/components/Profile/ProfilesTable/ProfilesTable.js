@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { getProfiles } from '../../../apiServices/ProfileApi';
+// import { getProfiles } from '../../../apiServices/ProfileApi';
 import { useGlobalContext } from '../../../contextReducer/Context';
 import useStyles from './Style';
 import { Link } from 'react-router-dom';
@@ -21,17 +21,19 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 const ProfilesTable = ({ profilesList }) => {
-  console.log(profilesList);
+  // console.log(profilesList);
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const { state, dispatch } = useGlobalContext();
-  useEffect(() => {
-    getProfiles()
-      .then((data) => dispatch({ type: 'GET_PROFILES', data: data }))
-      .catch((error) => console.log(error));
-  }, []);
-  console.log(state.profiles);
+
+  // useEffect(() => {
+  //   getProfiles()
+  //     .then((data) => dispatch({ type: 'GET_PROFILES', data: data }))
+  //     .catch((error) => console.log(error));
+  // }, []);
+  // console.log(state.profiles);
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -43,11 +45,11 @@ const ProfilesTable = ({ profilesList }) => {
 
   return (
     <>
-      <Typography variant='h3' className={classes.employees} my={5}>
+      <Typography variant="h3" className={classes.employees} my={5}>
         Employees
       </Typography>
       <TableContainer component={Paper} className={classes.tableContainer}>
-        <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell className={classes.tableHeaderCell}>
@@ -66,47 +68,47 @@ const ProfilesTable = ({ profilesList }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {state.profiles &&
-              state.profiles
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((profile) => (
-                  <TableRow key={profile._id}>
-                    <TableCell>
-                      <Stack direction='row' spacing={2}>
-                        <Avatar
-                          alt='Remy Sharp'
-                          src='https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
-                        />
-                        <Link
-                          className={classes.profileTitle}
-                          to={`/profiles/${profile._id}`}
-                        >
-                          <Typography>{profile.fullName}</Typography>
-                        </Link>
-                      </Stack>
-                    </TableCell>
-                    <TableCell>
-                      <Typography>Should add timestamps</Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography>{profile.mobilePhone}</Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography>{profile.emergencyContact}</Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Stack direction='row' spacing={2}>
-                        <DeleteIcon className={classes.deleteIcon} />
-                        <EditIcon className={classes.editIcon} />
-                      </Stack>
-                    </TableCell>
-                  </TableRow>
-                ))}
+
+            {state.profiles
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((profile) => (
+                <TableRow key={profile._id}>
+                  <TableCell>
+                    <Stack direction="row" spacing={2}>
+                      <Avatar
+                        alt="Remy Sharp"
+                        src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                      />
+                      <Link
+                        className={classes.profileTitle}
+                        to={`/profiles/${profile._id}`}
+                      >
+                        <Typography>{profile.fullName}</Typography>
+                      </Link>
+                    </Stack>
+                  </TableCell>
+                  <TableCell>
+                    <Typography>Should add timestamps</Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography>{profile.mobilePhone}</Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography>{profile.emergencyContact}</Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Stack direction="row" spacing={2}>
+                      <DeleteIcon className={classes.deleteIcon} />
+                      <EditIcon className={classes.editIcon} />
+                    </Stack>
+                  </TableCell>
+                </TableRow>
+              ))}
 
             <TablePagination
               className={classes.tablePagination}
               rowsPerPageOptions={[5, 10, 25]}
-              component='div'
+              component="div"
               count={state.profiles.length}
               rowsPerPage={rowsPerPage}
               page={page}
