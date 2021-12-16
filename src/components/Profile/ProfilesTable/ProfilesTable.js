@@ -66,41 +66,42 @@ const ProfilesTable = ({ profilesList }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {state.profiles
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((profile) => (
-                <TableRow key={profile._id}>
-                  <TableCell>
-                    <Stack direction='row' spacing={2}>
-                      <Avatar
-                        alt='Remy Sharp'
-                        src='https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
-                      />
-                      <Link
-                        className={classes.profileTitle}
-                        to={`/profiles/${profile._id}`}
-                      >
-                        <Typography>{profile.fullName}</Typography>
-                      </Link>
-                    </Stack>
-                  </TableCell>
-                  <TableCell>
-                    <Typography>Should add timestamps</Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography>{profile.mobilePhone}</Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography>{profile.emergencyContact}</Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Stack direction='row' spacing={2}>
-                      <DeleteIcon className={classes.deleteIcon} />
-                      <EditIcon className={classes.editIcon} />
-                    </Stack>
-                  </TableCell>
-                </TableRow>
-              ))}
+            {state.profiles &&
+              state.profiles
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((profile) => (
+                  <TableRow key={profile._id}>
+                    <TableCell>
+                      <Stack direction='row' spacing={2}>
+                        <Avatar
+                          alt='Remy Sharp'
+                          src='https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+                        />
+                        <Link
+                          className={classes.profileTitle}
+                          to={`/profiles/${profile._id}`}
+                        >
+                          <Typography>{profile.fullName}</Typography>
+                        </Link>
+                      </Stack>
+                    </TableCell>
+                    <TableCell>
+                      <Typography>Should add timestamps</Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography>{profile.mobilePhone}</Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography>{profile.emergencyContact}</Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Stack direction='row' spacing={2}>
+                        <DeleteIcon className={classes.deleteIcon} />
+                        <EditIcon className={classes.editIcon} />
+                      </Stack>
+                    </TableCell>
+                  </TableRow>
+                ))}
 
             <TablePagination
               className={classes.tablePagination}

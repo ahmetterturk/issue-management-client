@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { getIssues } from './apiServices/IssueApi';
 import LoginPage from './components/Login/index';
 import IssuePage from './components/IssuePage/IssuePage';
@@ -13,12 +13,21 @@ import ProfilesTable from './components/Profile/ProfilesTable/ProfilesTable';
 import Employee from './components/Profile/Employee/Employee';
 
 const App = () => {
+  const [errorMsg, setErrorMsg] = useState('');
+  const [error, setError] = useState(true);
+
+  // if (profile.userId === state.user._id) {
+  // } else {
+  //   setErrorMsg('you need to login to do that');
+  // }
+
   const [state, dispatch] = useReducer(reducer, initialState);
   // get all issues
   useEffect(() => {
     getIssues()
       .then((data) => dispatch({ type: 'GET_ISSUES', data: data }))
       .catch((err) => console.log(err));
+    setErrorMsg('You not belong here');
   }, []);
 
   // console.log(state);
@@ -32,7 +41,12 @@ const App = () => {
           <Route path='/issues/:id' element={<IssuePage />} />
           <Route path='/issues' element={<Issues />} />
           <Route path='/profile' element={<Profile />} />
-          <Route path='/profiles' element={<ProfilesTable />} />
+          {error ? (
+            <Route path='/profiles' element={<ProfilesTable />} />
+          ) : (
+            <p>{errorMsg}</p>
+          )}
+
           <Route path='/profiles/:id' element={<Employee />} />
         </Routes>
       </BrowserRouter>
