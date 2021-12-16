@@ -7,17 +7,19 @@ import { useGlobalContext } from '../../contextReducer/Context';
 import { useStyles } from './NavbarStyle';
 
 const Navbar = () => {
-  const { state } = useGlobalContext();
+  const { state, dispatch } = useGlobalContext();
   const { user } = state;
   const classes = useStyles();
 
   // logout function
   const handleLogout = () => {
     localStorage.removeItem('user');
+    dispatch({ type: 'LOGOUT' });
   };
+
   return (
     <>
-      <AppBar position='relative'>
+      <AppBar position="relative">
         <Toolbar>
           <LockRoundedIcon />
         </Toolbar>
@@ -25,22 +27,22 @@ const Navbar = () => {
       {/* <Navbar /> */}
       <nav>
         {!user ? (
-          <Link to='/login' className={classes.link}>
+          <Link to="/login" className={classes.link}>
             Login
           </Link>
         ) : (
-          <Link to='/login' onClick={handleLogout} className={classes.link}>
+          <Link to="/login" onClick={handleLogout} className={classes.link}>
             Logout
           </Link>
         )}
 
-        <Link to='/issues' className={classes.link}>
+        <Link to="/issues" className={classes.link}>
           Issues
         </Link>
-        <Link to='/profile' className={classes.link}>
+        <Link to="/profile" className={classes.link}>
           Create Profile
         </Link>
-        <Link to='/profiles' className={classes.link}>
+        <Link to="/profiles" className={classes.link}>
           Profiles
         </Link>
       </nav>

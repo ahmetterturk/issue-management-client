@@ -11,6 +11,7 @@ import Navbar from './components/Navbar/Navbar';
 import Issues from './components/Issues/Issues';
 import ProfilesTable from './components/Profile/ProfilesTable/ProfilesTable';
 import Employee from './components/Profile/Employee/Employee';
+import { getProfiles } from './apiServices/ProfileApi';
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -21,19 +22,30 @@ const App = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  // console.log(state);
+  useEffect(() => {
+    getProfiles()
+      .then((data) => dispatch({ type: 'GET_PROFILES', data: data }))
+      .catch((error) => console.log(error));
+  }, []);
+
+  if (state.user) {
+    const match = state.profiles.filter(
+      (profile) => profile.userId === state.user.uid
+    );
+    console.log(match);
+  }
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path='/login' element={<LoginPage />} />
-          <Route path='/issues/:id' element={<IssuePage />} />
-          <Route path='/issues' element={<Issues />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/profiles' element={<ProfilesTable />} />
-          <Route path='/profiles/:id' element={<Employee />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/issues/:id" element={<IssuePage />} />
+          <Route path="/issues" element={<Issues />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/profiles" element={<ProfilesTable />} />
+          <Route path="/profiles/:id" element={<Employee />} />
         </Routes>
       </BrowserRouter>
     </AppContext.Provider>
