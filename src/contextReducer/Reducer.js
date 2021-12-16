@@ -12,6 +12,12 @@ const reducer = (state, action) => {
         profiles: action.data,
       };
     }
+    case 'CURRENT_PROFILE': {
+      return {
+        ...state,
+        userProfile: action.data,
+      };
+    }
     case 'LOGIN_INFO': {
       return {
         ...state,
@@ -19,12 +25,12 @@ const reducer = (state, action) => {
       };
     }
     case 'LOGOUT': {
-      localStorage.removeItem('user');
       return {
         ...state,
         user: null,
       };
     }
+
     default:
       return state;
   }
