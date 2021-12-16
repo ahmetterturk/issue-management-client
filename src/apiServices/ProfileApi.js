@@ -1,6 +1,6 @@
 // import Api from './api';
 import axios from 'axios';
-const url = 'http://localhost:5000';
+const url = 'https://issue-management-backend.herokuapp.com';
 
 // GET request to get all profiles
 export const getProfiles = async () => {

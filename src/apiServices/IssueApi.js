@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://localhost:5000';
+const url = 'https://issue-management-backend.herokuapp.com';
 
 // fetching all Issues
 export const getIssues = async () => {
