@@ -20,11 +20,11 @@ const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   // get all issues
-  // useEffect(() => {
-  //   getIssues()
-  //     .then((data) => dispatch({ type: 'GET_ISSUES', data: data }))
-  //     .catch((err) => console.log(err));
-  // }, []);
+  useEffect(() => {
+    getIssues()
+      .then((data) => dispatch({ type: 'GET_ISSUES', data: data }))
+      .catch((err) => console.log(err));
+  }, []);
 
   // get all profiles
   useEffect(() => {
