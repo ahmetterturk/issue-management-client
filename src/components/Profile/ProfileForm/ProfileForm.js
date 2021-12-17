@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Box,
   Button,
@@ -18,58 +18,48 @@ import { useStyles } from './ProfileFormStyle';
 import { createProfile } from '../../../apiServices/ProfileApi';
 import { useGlobalContext } from '../../../contextReducer/Context';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 const ProfileForm = () => {
   const navigate = useNavigate();
-  const { state } = useGlobalContext();
+  const [createdProfile, setCreatedProfile] = useState({});
+  const { state, dispatch } = useGlobalContext();
+  const classes = useStyles();
   if (state.user.error && state.user.error.code) {
     navigate('/login');
   } else if (state.userProfile) {
     navigate('/issues');
   }
   const { user } = state;
-
   // check if state is on updateMode
   const [updateMode, setUpdateMode] = useState(false);
-  // state for all the input names
-  const [profileInput, setProfileInput] = useState({
-    fullName: '',
-    address: '',
-    emergencyContact: '',
-    mobilePhone: '',
-    dateOfBirth: '',
-    userId: (user && user.uid) || '',
-  });
-  // console.log(profileInput, user.uid);
-  // custom classes
-  const classes = useStyles();
 
-  // handle the submit when user create account
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // logic goes here
-    createProfile(profileInput)
-      .then((data) => console.log(data))
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    data.userId = (user && user.uid) || '';
+    createProfile(data)
+      .then((formData) => setCreatedProfile(formData))
       .catch((err) => console.log(err));
-
-    setProfileInput({
-      fullName: '',
-      address: '',
-      emergencyContact: '',
-      mobilePhone: '',
-      dateOfBirth: '',
-      userId: '',
-    });
+    if (state.userProfile === undefined) {
+      localStorage.setItem('profile', JSON.stringify(data));
+    }
     navigate('/issues');
   };
 
-  // handle input changes
-  const handleChange = (e) => {
-    setProfileInput({
-      ...profileInput,
-      [e.target.name]: e.target.value,
-    });
-  };
+  useEffect(() => {
+    if (state.user) {
+      const match = state.profiles.filter(
+        (profile) => profile.userId === state.user.uid
+      );
+      dispatch({ type: 'CURRENT_PROFILE', data: match[0] });
+      localStorage.setItem('profile', JSON.stringify(match[0]));
+    }
+  }, [state.user, state.userProfile]);
 
   return (
     <>
@@ -77,7 +67,7 @@ const ProfileForm = () => {
         <Typography variant='h3' align='center' className={classes.heading}>
           Profile
         </Typography>
-        <form autoComplete='off' noValidate onSubmit={handleSubmit}>
+        <form autoComplete='off' noValidate onSubmit={handleSubmit(onSubmit)}>
           <Card className={classes.card}>
             <CardContent>
               <Grid container spacing={3}>
@@ -85,10 +75,8 @@ const ProfileForm = () => {
                   <TextField
                     fullWidth
                     label='Name'
-                    name='fullName'
-                    required
+                    {...register('fullName', { required: true, minLength: 3 })}
                     variant='filled'
-                    onChange={handleChange}
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position='start'>
@@ -97,15 +85,18 @@ const ProfileForm = () => {
                       ),
                     }}
                   />
+                  {errors.fullName && (
+                    <Typography variant='span' style={{ color: 'red' }}>
+                      Name can't be blank, minimum of 3 characters
+                    </Typography>
+                  )}
                 </Grid>
                 <Grid item md={12} xs={12}>
                   <TextField
                     fullWidth
                     label='Address'
-                    name='address'
-                    required
+                    {...register('address', { required: true, minLength: 3 })}
                     variant='filled'
-                    onChange={handleChange}
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position='start'>
@@ -114,15 +105,21 @@ const ProfileForm = () => {
                       ),
                     }}
                   />
+                  {errors.address && (
+                    <Typography variant='span' style={{ color: 'red' }}>
+                      Address can't be blank, minimum of 3 characters
+                    </Typography>
+                  )}
                 </Grid>
                 <Grid item md={12} xs={12}>
                   <TextField
                     fullWidth
                     label='Emergency Contact'
-                    name='emergencyContact'
-                    required
+                    {...register('emergencyContact', {
+                      required: true,
+                      minLength: 3,
+                    })}
                     variant='filled'
-                    onChange={handleChange}
                     type='text'
                     InputProps={{
                       startAdornment: (
@@ -132,15 +129,23 @@ const ProfileForm = () => {
                       ),
                     }}
                   />
+                  {errors.emergencyContact && (
+                    <Typography variant='span' style={{ color: 'red' }}>
+                      Emeregency contact can't be blank
+                    </Typography>
+                  )}
                 </Grid>
                 <Grid item md={6} xs={12}>
                   <TextField
                     fullWidth
                     label='Phone Number'
-                    name='mobilePhone'
+                    {...register('mobilePhone', {
+                      required: true,
+                    })}
                     variant='filled'
-                    onChange={handleChange}
-                    type='text'
+                    type='tel'
+                    placeholder='0470555555'
+                    pattern='[0-9]{10}'
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position='start'>
@@ -149,17 +154,26 @@ const ProfileForm = () => {
                       ),
                     }}
                   />
+                  {errors.mobilePhone && (
+                    <Typography variant='span' style={{ color: 'red' }}>
+                      Phone number can't be blank and must contain only numbers
+                    </Typography>
+                  )}
                 </Grid>
 
                 <Grid item md={6} xs={12}>
                   <TextField
                     fullWidth
-                    name='dateOfBirth'
+                    {...register('dateOfBirth', { required: true })}
                     required
                     type='date'
                     variant='filled'
-                    onChange={handleChange}
                   />
+                  {errors.dateOfBirth && (
+                    <Typography variant='span' style={{ color: 'red' }}>
+                      D.O.B can't be blank
+                    </Typography>
+                  )}
                 </Grid>
                 <Grid item md={12} xs={12}>
                   <Box

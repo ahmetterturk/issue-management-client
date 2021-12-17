@@ -13,23 +13,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { loginUser } from '../../apiServices/UserApi';
 import { useGlobalContext } from '../../contextReducer/Context';
 import { useNavigate } from 'react-router';
-import { Navigate } from 'react-router-dom';
-import { bgcolor } from '@mui/system';
-
-function Copyright(props) {
-  return (
-    <>
-      <Typography
-        variant='body2'
-        color='text.secondary'
-        align='center'
-        {...props}
-      >
-        {' © Lock Security '}
-      </Typography>
-    </>
-  );
-}
+import { useForm } from 'react-hook-form';
 
 const theme = createTheme({
   palette: {
@@ -47,17 +31,14 @@ const Login = () => {
   const { state, dispatch } = useGlobalContext();
   const navigate = useNavigate();
   const [hasError, setHasError] = useState('');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const [userInput, setUserInput] = useState({
-    email: '',
-    password: '',
-  });
-
-  // handle form after submit
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    loginUser(userInput)
+  const onSubmit = (data) => {
+    loginUser(data)
       .then((data) => {
         dispatch({ type: 'LOGIN_INFO', data: data });
         localStorage.setItem('user', JSON.stringify(data));
@@ -65,18 +46,9 @@ const Login = () => {
       })
       .catch((err) => {
         dispatch({ type: 'LOGIN_FAILURE' });
-        setHasError(`Wrong credentails!`);
+        setHasError(`Wrong Password!`);
         console.log(err);
       });
-    setUserInput({ email: '', password: '' });
-  };
-
-  // handle input changes
-  const handleChange = (event) => {
-    setUserInput({
-      ...userInput,
-      [event.target.name]: event.target.value,
-    });
   };
 
   return (
@@ -112,10 +84,12 @@ const Login = () => {
             alignItems: 'center',
           }}
         >
-          <div>{state.error && <p style={{ color: 'red' }}>{hasError}</p>}</div>
+          <div>
+            {state.user.error && <p style={{ color: 'red' }}>{hasError}</p>}
+          </div>
           <Box
             component='form'
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit(onSubmit)}
             noValidate
             sx={{ mt: 1 }}
           >
@@ -125,25 +99,31 @@ const Login = () => {
               fullWidth
               id='email'
               label='Email Address'
-              name='email'
               autoComplete='email'
               background='white'
-              onChange={handleChange}
-              value={userInput.email}
+              {...register('email', { required: true })}
               autoFocus
             />
+            {errors.email && (
+              <Typography variant='span' style={{ color: 'red' }}>
+                Email cannot be blank!
+              </Typography>
+            )}
             <TextField
               margin='normal'
               required
               fullWidth
-              name='password'
+              {...register('password', { required: true })}
               label='Password'
               type='password'
               id='password'
-              onChange={handleChange}
-              value={userInput.password}
               autoComplete='current-password'
             />
+            {errors.password && (
+              <Typography variant='span' style={{ color: 'red' }}>
+                Password is required with min of 6 characters
+              </Typography>
+            )}
             <FormControlLabel
               control={<Checkbox value='remember' color='primary' />}
               label='Remember me'
@@ -170,5 +150,20 @@ const Login = () => {
     </ThemeProvider>
   );
 };
+
+function Copyright(props) {
+  return (
+    <>
+      <Typography
+        variant='body2'
+        color='text.secondary'
+        align='center'
+        {...props}
+      >
+        {' © Lock Security '}
+      </Typography>
+    </>
+  );
+}
 
 export default Login;

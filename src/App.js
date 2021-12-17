@@ -29,35 +29,26 @@ const App = () => {
   // get all profiles
   useEffect(() => {
     getProfiles()
-      .then((data) => dispatch({ type: 'GET_PROFILES', data: data }))
+      .then((data) => {
+        dispatch({ type: 'GET_PROFILES', data: data });
+        console.log(data);
+      })
       .catch((error) => console.log(error));
   }, []);
-
-  useEffect(() => {
-    if (state.user) {
-      const match = state.profiles.filter(
-        (profile) => profile.userId === state.user.uid
-      );
-      dispatch({ type: 'CURRENT_PROFILE', data: match[0] });
-      localStorage.setItem('profile', JSON.stringify(match[0]));
-    }
-  }, [state.user, state.userProfile]);
-
-  // console.log(state);
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       <BrowserRouter>
         <SideNavbar />
-        <div style={{"marginLeft": 100}}>
-        <Routes>
-          <Route path='/login' element={<Login />} />
-          <Route path='/issues/:id' element={<IssuePage />} />
-          <Route path='/issues' element={<Issues />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/profiles' element={<ProfilesTable />} />
-          <Route path='/profiles/:id' element={<Employee />} />
-        </Routes>
+        <div style={{ marginLeft: 100 }}>
+          <Routes>
+            <Route path='/login' element={<Login />} />
+            <Route path='/issues/:id' element={<IssuePage />} />
+            <Route path='/issues' element={<Issues />} />
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/profiles' element={<ProfilesTable />} />
+            <Route path='/profiles/:id' element={<Employee />} />
+          </Routes>
         </div>
       </BrowserRouter>
     </AppContext.Provider>

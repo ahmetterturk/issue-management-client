@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
@@ -51,8 +51,7 @@ const IssueForm = () => {
     createIssue(inputData)
       .then((data) => console.log(data))
       .catch((error) => console.log(error));
-
-    window.location.reload();
+    setOpen(false);
   };
 
   const handleChange = (event) => {
