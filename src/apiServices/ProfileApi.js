@@ -1,6 +1,26 @@
 // import Api from './api';
 import axios from 'axios';
 const url = 'https://issue-management-backend.herokuapp.com';
+const urlNew = 'http://localhost:5000';
+
+// make a post request to upload an image
+// the url for the upload image has to be changed
+export const uploadProfileImage = async ({ image }) => {
+  const formData = new FormData();
+  formData.append('image', image);
+  try {
+    const response = await axios.post(
+      urlNew + '/users/profiles/upload',
+      formData,
+      {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // GET request to get all profiles
 export const getProfiles = async () => {
