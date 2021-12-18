@@ -84,9 +84,9 @@ const Login = () => {
             alignItems: 'center',
           }}
         >
-          <div>
+          {/* <div>
             {state.user.error && <p style={{ color: 'red' }}>{hasError}</p>}
-          </div>
+          </div> */}
           <Box
             component='form'
             onSubmit={handleSubmit(onSubmit)}

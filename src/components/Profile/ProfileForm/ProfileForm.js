@@ -19,6 +19,7 @@ import { createProfile } from '../../../apiServices/ProfileApi';
 import { useGlobalContext } from '../../../contextReducer/Context';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { uploadProfileImage } from '../../../apiServices/ProfileApi';
 
 const ProfileForm = () => {
   const navigate = useNavigate();
@@ -33,6 +34,8 @@ const ProfileForm = () => {
   const { user } = state;
   // check if state is on updateMode
   const [updateMode, setUpdateMode] = useState(false);
+  const [profileImageInput, setProfileImageInput] = useState('');
+  const [profileImage, setProfileImage] = useState(null);
 
   const {
     register,
@@ -42,13 +45,22 @@ const ProfileForm = () => {
 
   const onSubmit = (data) => {
     data.userId = (user && user.uid) || '';
-    createProfile(data)
-      .then((formData) => setCreatedProfile(formData))
+    // first we send a post requset to get the image from could
+    uploadProfileImage({ image: profileImageInput })
+      .then((data) => setProfileImage(data.image))
       .catch((err) => console.log(err));
-    if (state.userProfile === undefined) {
-      localStorage.setItem('profile', JSON.stringify(data));
+    // if the response from post request is set to our state in this case setProfileImage then we can create our profile and pass the profile data
+    if (profileImage) {
+      data.image = profileImage && profileImage.src;
+      createProfile(data)
+        .then((formData) => setCreatedProfile(formData))
+        .catch((err) => console.log(err));
+      if (state.userProfile === undefined) {
+        localStorage.setItem('profile', JSON.stringify(data));
+      }
+      navigate('/issues');
+      console.log(createdProfile);
     }
-    navigate('/issues');
   };
 
   useEffect(() => {
@@ -189,7 +201,13 @@ const ProfileForm = () => {
                       className={classes.button}
                       style={{ marginLeft: '5px', backgroundColor: '#6787E3' }}
                     >
-                      Upload file
+                      <input
+                        type='file'
+                        accept='image/*'
+                        onChange={(e) =>
+                          setProfileImageInput(e.target.files[0])
+                        }
+                      />
                     </Button>
                     <Button
                       color='primary'

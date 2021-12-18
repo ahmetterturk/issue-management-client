@@ -66,10 +66,7 @@ const ProfilesTable = ({ profilesList }) => {
                 <TableRow key={profile._id}>
                   <TableCell>
                     <Stack direction='row' spacing={2}>
-                      <Avatar
-                        alt='Remy Sharp'
-                        src='https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
-                      />
+                      <Avatar alt='Remy Sharp' src={profile.image} />
                       <Link
                         className={classes.profileTitle}
                         to={`/profiles/${profile._id}`}
