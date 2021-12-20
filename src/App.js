@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import Box from '@mui/material/Box';
 import { getIssues } from './apiServices/IssueApi';
 import Login from './components/Login/Login';
@@ -17,8 +17,6 @@ import { getProfiles } from './apiServices/ProfileApi';
 import useStyles from './styles';
 
 const App = () => {
-  const [userProfile, setUserProfile] = useState(null);
-
   const classes = useStyles();
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -49,7 +47,7 @@ const App = () => {
           <Box className={classes.rightContent}>
             <Navbar />
             <Routes>
-              <Route path="/login" element={<Login />} />
+              <Route path="*" element={<Login />} />
               <Route path="/issues/:id" element={<IssuePage />} />
               <Route path="/issues" element={<Issues />} />
               <Route path="/profile" element={<Profile />} />
