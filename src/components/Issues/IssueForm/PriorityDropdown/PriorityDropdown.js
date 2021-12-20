@@ -5,7 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-const PriorityDropdown = ({ handleChange, priority, name }) => {
+const PriorityDropdown = ({ register }) => {
   return (
     <Box sx={{ minWidth: 200 }}>
       <FormControl sx={{ minWidth: 150 }}>
@@ -13,10 +13,8 @@ const PriorityDropdown = ({ handleChange, priority, name }) => {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={priority}
           label="Status"
-          onChange={handleChange}
-          name={name}
+          {...register('priority', { required: true })}
         >
           <MenuItem value="Low">Low</MenuItem>
           <MenuItem value="High">High</MenuItem>

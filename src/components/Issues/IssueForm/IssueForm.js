@@ -9,6 +9,7 @@ import StatusDropdown from './StatusDropdown/StatusDropdown';
 import MembersDropdown from './MembersDropdown/MembersDropdown';
 import { useGlobalContext } from '../../../contextReducer/Context';
 import { createIssue } from '../../../apiServices/IssueApi';
+import { useForm } from 'react-hook-form/dist/index.cjs';
 
 const style = {
   position: 'absolute',
@@ -24,43 +25,25 @@ const style = {
 const IssueForm = () => {
   const { state } = useGlobalContext();
   const { user } = state;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  // const currentDate = new Date().toISOString().split('T')[0];
-  // console.log(currentDate);
+  const onSubmit = (data) => {
+    console.log(data);
+    data.userId = user && state.user.uid;
 
-  const initialState = {
-    title: '',
-    description: '',
-    type: '',
-    priority: '',
-    status: '',
-    names: [],
-    userId: user && state.user.uid,
-  };
-
-  const [inputData, setInputData] = useState(initialState);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(inputData);
-
-    createIssue(inputData)
+    createIssue(data)
       .then((data) => console.log(data))
       .catch((error) => console.log(error));
+
     setOpen(false);
-  };
-
-  const handleChange = (event) => {
-    setInputData({
-      ...inputData,
-      [event.target.name]: event.target.value,
-    });
-
-    console.log(inputData);
   };
 
   return (
@@ -71,45 +54,44 @@ const IssueForm = () => {
           <Modal
             open={open}
             onClose={handleClose}
-            aria-labelledby='modal-modal-title'
-            aria-describedby='modal-modal-description'
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit(onSubmit)}>
                 <TextField
-                  value={inputData.title}
-                  onChange={handleChange}
-                  name='title'
-                  id='outlined-basic'
-                  label='Title'
-                  variant='outlined'
+                  {...register('title', { required: true })}
+                  id="outlined-basic"
+                  label="Title"
+                  variant="outlined"
                 />
+                {errors.title && (
+                  <p style={{ color: 'red' }}>Title can't be blank!</p>
+                )}
                 <TextField
-                  value={inputData.description}
-                  onChange={handleChange}
-                  name='description'
+                  {...register('description', { required: true })}
                   multiline
                   rows={2}
                   maxRows={4}
-                  label='Description'
+                  label="Description"
                 />
-                <TypeDropdown
-                  type={inputData.type}
-                  handleChange={handleChange}
-                  name={'type'}
-                />
-                <PriorityDropdown
-                  priority={inputData.priority}
-                  handleChange={handleChange}
-                  name={'priority'}
-                />
-                <StatusDropdown
-                  status={inputData.status}
-                  handleChange={handleChange}
-                  name={'status'}
-                />
+                {errors.description && (
+                  <p style={{ color: 'red' }}>Description can't be blank!</p>
+                )}
+                <TypeDropdown register={register} />
+                {errors.type && (
+                  <p style={{ color: 'red' }}>Type can't be blank!</p>
+                )}
+                <PriorityDropdown register={register} />
+                {errors.priority && (
+                  <p style={{ color: 'red' }}>Priority can't be blank!</p>
+                )}
+                <StatusDropdown register={register} />
+                {errors.status && (
+                  <p style={{ color: 'red' }}>Status can't be blank!</p>
+                )}
                 {/* <MembersDropdown name="members" /> */}
-                <input type='submit' value='Submit' />
+                <input type="submit" value="Submit" />
               </form>
             </Box>
           </Modal>

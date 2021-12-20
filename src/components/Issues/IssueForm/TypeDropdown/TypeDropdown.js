@@ -5,7 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-const TypeDropdown = ({ handleChange, type, name }) => {
+const TypeDropdown = ({ register }) => {
   return (
     <Box sx={{ minWidth: 200 }}>
       <FormControl sx={{ minWidth: 150 }}>
@@ -13,10 +13,8 @@ const TypeDropdown = ({ handleChange, type, name }) => {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={type}
           label="Type"
-          onChange={handleChange}
-          name={name}
+          {...register('type', { required: true })}
         >
           <MenuItem value="Public">Public</MenuItem>
           <MenuItem value="Private">Private</MenuItem>

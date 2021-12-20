@@ -5,7 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-const StatusDropdown = ({ handleChange, status, name }) => {
+const StatusDropdown = ({ register }) => {
   return (
     <Box sx={{ minWidth: 200 }}>
       <FormControl sx={{ minWidth: 150 }}>
@@ -13,10 +13,8 @@ const StatusDropdown = ({ handleChange, status, name }) => {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={status}
           label="Status"
-          onChange={handleChange}
-          name={name}
+          {...register('status', { required: true })}
         >
           <MenuItem value="New">New</MenuItem>
           <MenuItem value="Pending">Pending</MenuItem>

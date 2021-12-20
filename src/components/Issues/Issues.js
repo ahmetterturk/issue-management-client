@@ -10,7 +10,7 @@ const Issues = () => {
   return (
     <>
       <IssueForm />
-      <IssuesTable issuesList={issuesList} />;
+      <IssuesTable issuesList={issuesList} />
     </>
   );
 };
