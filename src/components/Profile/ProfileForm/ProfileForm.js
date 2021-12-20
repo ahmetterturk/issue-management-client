@@ -20,6 +20,7 @@ import { useGlobalContext } from '../../../contextReducer/Context';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { uploadProfileImage } from '../../../apiServices/ProfileApi';
+import { Logout } from '@mui/icons-material';
 
 const ProfileForm = () => {
   const navigate = useNavigate();
@@ -33,10 +34,11 @@ const ProfileForm = () => {
   }
   const { user } = state;
   // check if state is on updateMode
+  const [isFetching, setIsFetching] = useState(false);
   const [updateMode, setUpdateMode] = useState(false);
   const [profileImageInput, setProfileImageInput] = useState('');
-  const [profileImage, setProfileImage] = useState(null);
-
+  const [profileImage, setProfileImage] = useState({});
+  let dataFetch;
   const {
     register,
     handleSubmit,
@@ -44,23 +46,22 @@ const ProfileForm = () => {
   } = useForm();
 
   const onSubmit = (data) => {
+    setIsFetching(true);
     data.userId = (user && user.uid) || '';
-    // first we send a post requset to get the image from could
     uploadProfileImage({ image: profileImageInput })
-      .then((data) => setProfileImage(data.image))
+      .then((imageData) => {
+        data.image = imageData && imageData.image.src;
+        createProfile(data)
+          .then((formData) => setCreatedProfile(formData))
+          .catch((err) => console.log(err));
+        if (state.userProfile === undefined) {
+          localStorage.setItem('profile', JSON.stringify(data));
+        }
+        navigate('/issues');
+        console.log(createdProfile);
+        setIsFetching(false);
+      })
       .catch((err) => console.log(err));
-    // if the response from post request is set to our state in this case setProfileImage then we can create our profile and pass the profile data
-    if (profileImage) {
-      data.image = profileImage && profileImage.src;
-      createProfile(data)
-        .then((formData) => setCreatedProfile(formData))
-        .catch((err) => console.log(err));
-      if (state.userProfile === undefined) {
-        localStorage.setItem('profile', JSON.stringify(data));
-      }
-      navigate('/issues');
-      console.log(createdProfile);
-    }
   };
 
   useEffect(() => {
@@ -215,7 +216,7 @@ const ProfileForm = () => {
                       style={{ marginLeft: '5px', backgroundColor: '#6787E3' }}
                       type='submit'
                     >
-                      {updateMode ? 'Update' : 'Create'}
+                      {isFetching ? 'Wait...' : 'Create'}
                     </Button>
                   </Box>
                 </Grid>
