@@ -13,13 +13,14 @@ import useStyles from './styles';
 import { useGlobalContext } from '../../contextReducer/Context';
 
 import logo from './logo2.png';
+import { Link } from 'react-router-dom';
 
 const SidebarLink = (props) => {
   const classes = useStyles();
 
   const Icon = props.icon;
   return (
-    <a className={classes.sidebarButtonLink} href={props.href}>
+    <Link className={classes.sidebarButtonLink} to={props.href}>
       <ListItemButton
         onClick={props.onClick}
         sx={{
@@ -50,7 +51,7 @@ const SidebarLink = (props) => {
           }}
         />
       </ListItemButton>
-    </a>
+    </Link>
   );
 };
 
