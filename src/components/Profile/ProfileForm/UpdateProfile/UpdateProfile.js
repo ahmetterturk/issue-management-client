@@ -8,70 +8,52 @@ import {
   Grid,
   Typography,
 } from '@mui/material';
+import {
+  updateProfile,
+  uploadProfileImage,
+} from '../../../../apiServices/ProfileApi';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-import { useStyles } from './ProfileFormStyle';
-import { createProfile } from '../../../apiServices/ProfileApi';
-import { useGlobalContext } from '../../../contextReducer/Context';
+import { useGlobalContext } from '../../../../contextReducer/Context';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { uploadProfileImage } from '../../../apiServices/ProfileApi';
-import ProfileInput from './ProfileInput';
-
-const ProfileForm = () => {
-  const navigate = useNavigate();
-  const [createdProfile, setCreatedProfile] = useState({});
-  const { state, dispatch } = useGlobalContext();
-
+import ProfileInput from '../ProfileInput';
+import { useStyles } from '../ProfileFormStyle';
+const UpdateProfile = () => {
+  const { state } = useGlobalContext();
+  const {
+    fullName,
+    address,
+    emergencyContact,
+    mobilePhone,
+    dateOfBirth,
+    image,
+  } = state.userProfile;
+  const date = dateOfBirth.slice(0, 10);
+  console.log(date);
   const classes = useStyles();
-  const { user } = state;
-  if (state.user.error && state.user.error.code) {
-    navigate('/login');
-  } else if (state.userProfile) {
-    navigate('/issues');
-  }
-  // check if state is on updateMode
-  const [isFetching, setIsFetching] = useState(false);
-  const [updateMode, setUpdateMode] = useState(false);
-  const [profileImageInput, setProfileImageInput] = useState('');
+  const [profileValues, setProfileValues] = useState({
+    fullName,
+    address,
+    emergencyContact,
+    mobilePhone,
+    dateOfBirth: date,
+    image,
+  });
+  console.log(profileValues);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
-
+  } = useForm({
+    defaultValues: profileValues,
+  });
   const onSubmit = (data) => {
-    setIsFetching(true);
-    data.userId = (user && user.uid) || '';
-    uploadProfileImage({ image: profileImageInput })
-      .then((imageData) => {
-        data.image = imageData && imageData.image.src;
-        createProfile(data)
-          .then((formData) => setCreatedProfile(formData))
-          .catch((err) => console.log(err));
-        if (state.userProfile === undefined) {
-          localStorage.setItem('profile', JSON.stringify(data));
-        }
-        navigate('/issues');
-        console.log(createdProfile);
-        setIsFetching(false);
-      })
-      .catch((err) => console.log(err));
+    console.log(data);
   };
-
-  useEffect(() => {
-    if (state.user) {
-      const match = state.profiles.filter(
-        (profile) => profile.userId === state.user.uid
-      );
-      dispatch({ type: 'CURRENT_PROFILE', data: match[0] });
-      localStorage.setItem('profile', JSON.stringify(match[0]));
-    }
-  }, [state.user, state.userProfile]);
-
   return (
     <>
       <Box>
@@ -163,9 +145,7 @@ const ProfileForm = () => {
                       <input
                         type='file'
                         accept='image/*'
-                        onChange={(e) =>
-                          setProfileImageInput(e.target.files[0])
-                        }
+                        // we need on change for profile image
                       />
                     </Button>
                     <Button
@@ -174,7 +154,7 @@ const ProfileForm = () => {
                       style={{ marginLeft: '5px', backgroundColor: '#6787E3' }}
                       type='submit'
                     >
-                      {isFetching ? 'Wait...' : 'Create'}
+                      Update
                     </Button>
                   </Box>
                 </Grid>
@@ -188,4 +168,4 @@ const ProfileForm = () => {
   );
 };
 
-export default ProfileForm;
+export default UpdateProfile;
