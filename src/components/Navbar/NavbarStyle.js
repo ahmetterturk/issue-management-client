@@ -1,10 +1,11 @@
 import { makeStyles } from '@mui/styles';
 
 export const useStyles = makeStyles(() => ({
-  link: {
-    textDecoration: 'none',
-    margin: '10px',
-    color: '#555',
-    cursor: 'pointer',
+  navbar: {
+    backgroundColor: 'white',
+    justifyContent: 'flex-end',
+  },
+  userGreeting: {
+    marginRight: '10px',
   },
 }));
