@@ -49,12 +49,13 @@ const App = () => {
           <Box className={classes.rightContent}>
             <Navbar />
             <Routes>
-              <Route path="/login" element={<Login />} />
-              <Route path="/issues/:id" element={<IssuePage />} />
-              <Route path="/issues" element={<Issues />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/profiles" element={<ProfilesTable />} />
-              <Route path="/profiles/:id" element={<Employee />} />
+              <Route path='/' element={<Login />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/issues/:id' element={<IssuePage />} />
+              <Route path='/issues' element={<Issues />} />
+              <Route path='/profile' element={<Profile />} />
+              <Route path='/profiles' element={<ProfilesTable />} />
+              <Route path='/profiles/:id' element={<Employee />} />
             </Routes>
           </Box>
         </Box>

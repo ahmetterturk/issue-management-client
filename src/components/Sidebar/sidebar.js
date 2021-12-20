@@ -1,6 +1,5 @@
 import Box from '@mui/material/Box';
 import GridViewIcon from '@mui/icons-material/GridView';
-
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -55,7 +54,7 @@ const SidebarLink = (props) => {
 };
 
 const Sidebar = () => {
-  const { dispatch } = useGlobalContext();
+  const { state, dispatch } = useGlobalContext();
   const classes = useStyles();
 
   // logout function
@@ -70,40 +69,40 @@ const Sidebar = () => {
     <Box className={classes.sidebar}>
       <Box class={classes.sidebarButtons}>
         <img
-          alt="Product logo - Shield with check icon"
+          alt='Product logo - Shield with check icon'
           className={classes.logo}
           src={logo}
         />
-        <hr class="rounded" />
-        <SidebarLink text="Dashboard" href="/dashboard" icon={GridViewIcon} />
+        <hr class='rounded' />
+        <SidebarLink text='Dashboard' href='/dashboard' icon={GridViewIcon} />
         <SidebarLink
-          text="Issues"
-          href="/issues"
+          text='Issues'
+          href='/issues'
           icon={ReceiptLongRoundedIcon}
         />
         <SidebarLink
-          text="Graphs"
-          href="/graphs"
+          text='Graphs'
+          href='/graphs'
           icon={AssessmentOutlinedIcon}
         />
         <SidebarLink
-          text="Employees"
-          href="/profiles"
+          text='Employees'
+          href='/profiles'
           icon={PeopleOutlineIcon}
         />
         <SidebarLink
-          text="Profile"
-          href="/profile"
+          text='Profile'
+          href='/profile'
           icon={ManageAccountsOutlinedIcon}
         />
         <SidebarLink
-          text="Logout"
-          href="/login"
+          text='Log out'
+          href='/login'
           onClick={handleLogout}
           icon={MeetingRoomOutlinedIcon}
         />
       </Box>
-      <Box class="footer">
+      <Box class='footer'>
         <span>© Lock Security</span>
       </Box>
     </Box>
