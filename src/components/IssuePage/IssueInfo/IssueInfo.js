@@ -1,6 +1,6 @@
 import { Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 
@@ -19,19 +19,19 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: '15px',
 }));
 
-const IssueInfo = ({ issueData, issue }) => {
+const IssueInfo = ({ issue }) => {
   const classes = useStyles();
 
   return (
-    <Grid justifyContent='space-between' container spacing={2}>
+    <Grid justifyContent="space-between" container spacing={2}>
       <Grid item xs={6} md={3}>
-        <Item className={classes.infoContainer}>{issueData.author}</Item>
+        <Item className={classes.infoContainer}>{issue.userId}</Item>
       </Grid>
       <Grid item xs={6} md={3}>
-        <Item>{issueData.date}</Item>
+        <Item>{issue.createdAt}</Item>
       </Grid>
       <Grid item xs={6} md={3}>
-        <Item>{issueData.status}</Item>
+        <Item>{issue.type}</Item>
       </Grid>
     </Grid>
   );
