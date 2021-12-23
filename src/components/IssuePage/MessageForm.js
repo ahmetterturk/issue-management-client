@@ -7,7 +7,7 @@ const MessageForm = () => {
   const classes = useStyles();
 
   return (
-    <Grid className={classes.formContainer} container justifyContent="center">
+    <Grid className={classes.container} container justifyContent="center">
       <TextField
         fullWidth={true}
         placeholder="Enter Comment"

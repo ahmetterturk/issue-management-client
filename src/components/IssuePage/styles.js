@@ -4,7 +4,7 @@ const useStyles = makeStyles((theme) => ({
   container: {
     marginTop: '50px',
   },
-  descriptionContainer: {
+  mutualContainer: {
     backgroundColor: '#F6F6F6',
     borderRadius: '25px',
     margin: '50px 0',

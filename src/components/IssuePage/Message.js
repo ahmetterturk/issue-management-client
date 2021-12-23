@@ -3,12 +3,10 @@ import React from 'react';
 import useStyles from './styles';
 
 const Message = ({ message }) => {
-  // console.log(message);
-
   const classes = useStyles();
 
   return (
-    <div className={classes.container}>
+    <div className={classes.mutualContainer}>
       <Typography>{message.author}</Typography>
       <Divider />
       <Typography>{message.message}</Typography>

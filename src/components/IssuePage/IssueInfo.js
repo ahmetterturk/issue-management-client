@@ -1,6 +1,5 @@
 import { Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import React, { useState, useEffect } from 'react';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 
@@ -25,7 +24,7 @@ const IssueInfo = ({ issue }) => {
   return (
     <Grid justifyContent="space-between" container spacing={2}>
       <Grid item xs={6} md={3}>
-        <Item className={classes.infoContainer}>{issue.userId}</Item>
+        <Item className={classes.mutualContainer}>{issue.userId}</Item>
       </Grid>
       <Grid item xs={6} md={3}>
         <Item>{issue.createdAt}</Item>
