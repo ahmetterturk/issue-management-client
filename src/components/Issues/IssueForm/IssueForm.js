@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
-import TypeDropdown from './TypeDropdown/TypeDropdown';
-import PriorityDropdown from './PriorityDropdown/PriorityDropdown';
-import StatusDropdown from './StatusDropdown/StatusDropdown';
-import MembersDropdown from './MembersDropdown/MembersDropdown';
+import TypeDropdown from './TypeDropdown';
+import PriorityDropdown from './PriorityDropdown';
+import StatusDropdown from './StatusDropdown';
+import MembersDropdown from './MembersDropdown';
 import { useGlobalContext } from '../../../contextReducer/Context';
 import { createIssue } from '../../../apiServices/IssueApi';
 import { useForm } from 'react-hook-form/dist/index.cjs';
@@ -31,7 +31,7 @@ const IssueForm = () => {
     formState: { errors },
   } = useForm();
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 

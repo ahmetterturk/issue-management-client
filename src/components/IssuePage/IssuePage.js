@@ -1,9 +1,9 @@
 import { Container, Typography } from '@mui/material';
 import React, { useState, useEffect } from 'react';
-import Messages from './Messages/Messages';
+import Messages from './Messages';
 import issueData from './issueData';
-import IssueInfo from './IssueInfo/IssueInfo';
-import PersonSelect from './PersonSelect/PersonSelect';
+import IssueInfo from './IssueInfo';
+import PersonSelect from './PersonSelect';
 import useStyles from './styles';
 import { useParams } from 'react-router-dom';
 import { getIssue } from '../../apiServices/IssueApi';
@@ -31,7 +31,7 @@ const IssuePage = () => {
 
         <IssueInfo issue={issue} issueData={issueData} />
 
-        <div className={classes.descriptionContainer}>
+        <div className={classes.mutualContainer}>
           <Typography variant="h6">{issue.title}</Typography>
           <Typography>{issue.description}</Typography>
         </div>

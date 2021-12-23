@@ -1,6 +1,6 @@
 import React from 'react';
-import Message from '../Message/Message';
-import MessageForm from '../MessageForm/MessageForm';
+import Message from './Message';
+import MessageForm from './MessageForm';
 
 const Messages = ({ messages }) => {
   return (

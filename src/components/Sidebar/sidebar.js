@@ -68,42 +68,42 @@ const Sidebar = () => {
 
   return (
     <Box className={classes.sidebar}>
-      <Box class={classes.sidebarButtons}>
+      <Box className={classes.sidebarButtons}>
         <img
-          alt='Product logo - Shield with check icon'
+          alt="Product logo - Shield with check icon"
           className={classes.logo}
           src={logo}
         />
-        <hr class='rounded' />
-        <SidebarLink text='Dashboard' href='/dashboard' icon={GridViewIcon} />
+        <hr className="rounded" />
+        <SidebarLink text="Dashboard" href="/dashboard" icon={GridViewIcon} />
         <SidebarLink
-          text='Issues'
-          href='/issues'
+          text="Issues"
+          href="/issues"
           icon={ReceiptLongRoundedIcon}
         />
         <SidebarLink
-          text='Graphs'
-          href='/graphs'
+          text="Graphs"
+          href="/graphs"
           icon={AssessmentOutlinedIcon}
         />
         <SidebarLink
-          text='Employees'
-          href='/profiles'
+          text="Employees"
+          href="/profiles"
           icon={PeopleOutlineIcon}
         />
         <SidebarLink
-          text='Profile'
-          href='/profile'
+          text="Profile"
+          href="/profile"
           icon={ManageAccountsOutlinedIcon}
         />
         <SidebarLink
-          text='Log out'
-          href='/login'
+          text="Log out"
+          href="/login"
           onClick={handleLogout}
           icon={MeetingRoomOutlinedIcon}
         />
       </Box>
-      <Box class='footer'>
+      <Box className="footer">
         <span>© Lock Security</span>
       </Box>
     </Box>

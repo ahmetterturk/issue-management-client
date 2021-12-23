@@ -5,7 +5,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import issueData from '../../../IssuePage/issueData';
+import issueData from './issueData';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -45,9 +45,10 @@ export default function MultipleSelect() {
 
   return (
     <div>
-      <FormControl sx={{ mb: 5, width: '50%' }}>
+      <FormControl sx={{ mb: 5, width: '100%' }}>
         <InputLabel id="demo-multiple-name-label">Name</InputLabel>
         <Select
+          sx={{ borderRadius: 16 }}
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
           multiple
