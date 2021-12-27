@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import Box from '@mui/material/Box';
 import { getIssues } from './apiServices/IssueApi';
 import Login from './components/Login/Login';
@@ -16,27 +16,26 @@ import UserProfileForm from './components/UserProfile/UserProfileForm';
 const App = () => {
   const classes = useStyles();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [counter, setCounter] = useState(0);
 
   // get all issues
   useEffect(() => {
     getIssues()
       .then((data) => dispatch({ type: 'GET_ISSUES', data: data }))
       .catch((err) => console.log(err));
-  }, [counter, state.currentUser]);
+  }, [state.counter, state.currentUser]);
 
   return (
-    <AppContext.Provider value={{ state, dispatch, counter, setCounter }}>
+    <AppContext.Provider value={{ state, dispatch }}>
       <BrowserRouter>
         <Box className={classes.appWrapper}>
           {state.currentUser && <SideNavbar />}
           <Box className={classes.rightContent}>
             {state.currentUser && <Navbar />}
             <Routes>
-              <Route path='*' element={<Login />} />
-              <Route path='/issues/:id' element={<IssuePage />} />
-              <Route path='/issues' element={<Issues />} />
-              <Route path='/userProfile/:id' element={<UserProfileForm />} />
+              <Route path="*" element={<Login />} />
+              <Route path="/issues/:id" element={<IssuePage />} />
+              <Route path="/issues" element={<Issues />} />
+              <Route path="/userProfile/:id" element={<UserProfileForm />} />
             </Routes>
           </Box>
         </Box>
