@@ -1,8 +1,6 @@
 export const initialState = {
   issues: [],
-  profiles: [],
-  user: JSON.parse(localStorage.getItem('user')) || null,
-  userLoggedIn: localStorage.getItem('user') !== null,
-  userProfile: JSON.parse(localStorage.getItem('profile')) || null,
+  users: [],
+  currentUser: JSON.parse(localStorage.getItem('user')) || null,
   error: false,
 };

@@ -24,7 +24,7 @@ const IssueInfo = ({ issue }) => {
   return (
     <Grid justifyContent="space-between" container spacing={2}>
       <Grid item xs={6} md={3}>
-        <Item className={classes.mutualContainer}>{issue.userId}</Item>
+        <Item className={classes.mutualContainer}>{issue.userName}</Item>
       </Grid>
       <Grid item xs={6} md={3}>
         <Item>{issue.createdAt}</Item>

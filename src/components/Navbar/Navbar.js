@@ -9,19 +9,23 @@ import { useGlobalContext } from '../../contextReducer/Context';
 const Navbar = () => {
   const classes = useStyles();
   const { state } = useGlobalContext();
+  const { userDetails } = state.currentUser;
 
-  if (!state.userLoggedIn || !state.userProfile) {
-    return null;
-  }
-
+  // if (!state.userLoggedIn || !state.userProfile) {
+  //   return null;
+  // }
+  console.log(userDetails.name);
   return (
     <>
       <Toolbar className={classes.navbar}>
         <span className={classes.userGreeting}>
-          Hi {state.userProfile.fullName}
+          Hi {state.currentUser && userDetails.name}
         </span>
         <Box sx={{ flexGrow: 0 }}>
-          <Avatar alt="Remy Sharp" src={state.userProfile.image} />
+          <Avatar
+            alt="Remy Sharp"
+            src="https://www.hollywoodreporter.com/wp-content/uploads/2019/03/avatar-publicity_still-h_2019.jpg?w=1024"
+          />
           {/* <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"

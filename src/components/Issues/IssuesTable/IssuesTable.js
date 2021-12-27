@@ -38,11 +38,11 @@ const IssuesTable = ({ issuesList }) => {
 
   return (
     <>
-      <Typography variant='h3' align='center' className={classes.heading}>
+      <Typography variant="h3" align="center" className={classes.heading}>
         Tickets
       </Typography>
       <TableContainer component={Paper} className={classes.tableContainer}>
-        <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell className={classes.tableHeaderCell}>Issue</TableCell>
@@ -55,45 +55,46 @@ const IssuesTable = ({ issuesList }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {issuesList
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((issue) => (
-                <TableRow key={issue._id}>
-                  <TableCell>
-                    <Link className={classes.issueTitle} to={issue._id}>
-                      <Typography>{issue.title}</Typography>
-                    </Link>
-                  </TableCell>
-                  <TableCell>
-                    <Chip
-                      label={issue.status}
-                      style={{
-                        backgroundColor:
-                          (issue.status === 'Pending' && '#007BF5') ||
-                          (issue.status === 'New' && '#ED5500') ||
-                          (issue.status === 'Resolved' && '#00CC8F'),
-                        color: 'white',
-                      }}
-                    ></Chip>
-                  </TableCell>
-                  <TableCell>
-                    <Typography>{issue.type}</Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography>
-                      {issue.createdAt && issue.createdAt.slice(0, 10)}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography>{issue.userId}</Typography>
-                  </TableCell>
-                </TableRow>
-              ))}
+            {issuesList &&
+              issuesList
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((issue) => (
+                  <TableRow key={issue._id}>
+                    <TableCell>
+                      <Link className={classes.issueTitle} to={issue._id}>
+                        <Typography>{issue.title}</Typography>
+                      </Link>
+                    </TableCell>
+                    <TableCell>
+                      <Chip
+                        label={issue.status}
+                        style={{
+                          backgroundColor:
+                            (issue.status === 'Pending' && '#007BF5') ||
+                            (issue.status === 'New' && '#ED5500') ||
+                            (issue.status === 'Resolved' && '#00CC8F'),
+                          color: 'white',
+                        }}
+                      ></Chip>
+                    </TableCell>
+                    <TableCell>
+                      <Typography>{issue.type}</Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography>
+                        {issue.createdAt && issue.createdAt.slice(0, 10)}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography>{issue.userName}</Typography>
+                    </TableCell>
+                  </TableRow>
+                ))}
             <TablePagination
               className={classes.tablePagination}
               rowsPerPageOptions={[5, 10, 25]}
-              component='div'
-              count={issuesList.length}
+              component="div"
+              count={issuesList && issuesList.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onPageChange={handleChangePage}
