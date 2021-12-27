@@ -10,6 +10,7 @@ import MembersDropdown from './MembersDropdown';
 import { useGlobalContext } from '../../../contextReducer/Context';
 import { createIssue } from '../../../apiServices/IssueApi';
 import { useForm } from 'react-hook-form/dist/index.cjs';
+import jwtdecode from 'jwt-decode';
 
 const style = {
   position: 'absolute',
@@ -24,7 +25,15 @@ const style = {
 
 const IssueForm = () => {
   const { state } = useGlobalContext();
-  const { user } = state;
+  const { currentUser } = state;
+
+  const { token } = currentUser;
+
+  const decodedToken = jwtdecode(token);
+
+  console.log(decodedToken);
+  // console.log(token);
+
   const {
     register,
     handleSubmit,
@@ -37,8 +46,10 @@ const IssueForm = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    data.userId = user && state.user.uid;
+    data.userId = currentUser && decodedToken.id;
+    data.userName = currentUser && decodedToken.name;
 
+    console.log(data);
     createIssue(data)
       .then((data) => console.log(data))
       .catch((error) => console.log(error));
@@ -48,55 +59,53 @@ const IssueForm = () => {
 
   return (
     <>
-      {state.userProfile && (
-        <div>
-          <Button onClick={handleOpen}>New Issue</Button>
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <TextField
-                  {...register('title', { required: true })}
-                  id="outlined-basic"
-                  label="Title"
-                  variant="outlined"
-                />
-                {errors.title && (
-                  <p style={{ color: 'red' }}>Title can't be blank!</p>
-                )}
-                <TextField
-                  {...register('description', { required: true })}
-                  multiline
-                  rows={2}
-                  maxRows={4}
-                  label="Description"
-                />
-                {errors.description && (
-                  <p style={{ color: 'red' }}>Description can't be blank!</p>
-                )}
-                <TypeDropdown register={register} />
-                {errors.type && (
-                  <p style={{ color: 'red' }}>Type can't be blank!</p>
-                )}
-                <PriorityDropdown register={register} />
-                {errors.priority && (
-                  <p style={{ color: 'red' }}>Priority can't be blank!</p>
-                )}
-                <StatusDropdown register={register} />
-                {errors.status && (
-                  <p style={{ color: 'red' }}>Status can't be blank!</p>
-                )}
-                {/* <MembersDropdown name="members" /> */}
-                <input type="submit" value="Submit" />
-              </form>
-            </Box>
-          </Modal>
-        </div>
-      )}
+      <div>
+        <Button onClick={handleOpen}>New Issue</Button>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <TextField
+                {...register('title', { required: true })}
+                id="outlined-basic"
+                label="Title"
+                variant="outlined"
+              />
+              {errors.title && (
+                <p style={{ color: 'red' }}>Title can't be blank!</p>
+              )}
+              <TextField
+                {...register('description', { required: true })}
+                multiline
+                rows={2}
+                maxRows={4}
+                label="Description"
+              />
+              {errors.description && (
+                <p style={{ color: 'red' }}>Description can't be blank!</p>
+              )}
+              <TypeDropdown register={register} />
+              {errors.type && (
+                <p style={{ color: 'red' }}>Type can't be blank!</p>
+              )}
+              <PriorityDropdown register={register} />
+              {errors.priority && (
+                <p style={{ color: 'red' }}>Priority can't be blank!</p>
+              )}
+              <StatusDropdown register={register} />
+              {errors.status && (
+                <p style={{ color: 'red' }}>Status can't be blank!</p>
+              )}
+              {/* <MembersDropdown name="members" /> */}
+              <input type="submit" value="Submit" />
+            </form>
+          </Box>
+        </Modal>
+      </div>
     </>
   );
 };

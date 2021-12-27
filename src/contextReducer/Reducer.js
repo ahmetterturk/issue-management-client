@@ -6,42 +6,25 @@ const reducer = (state, action) => {
         issues: action.data,
       };
     }
-    case 'GET_PROFILES': {
-      return {
-        ...state,
-        profiles: action.data,
-      };
-    }
-    case 'CURRENT_PROFILE': {
-      return {
-        ...state,
-        userProfile: action.data,
-      };
-    }
     case 'LOGIN_INFO': {
       return {
         ...state,
-        user: action.data,
-        userLoggedIn: true,
+        currentUser: action.data,
       };
     }
     case 'LOGIN_FAILURE': {
       return {
         ...state,
-        user: false,
-        userLoggedIn: false,
+        currentUser: false,
         error: true,
       };
     }
-
     case 'LOGOUT': {
       return {
         ...state,
-        user: null,
-        userLoggedIn: false,
+        currentUser: null,
       };
     }
-
     default:
       return state;
   }

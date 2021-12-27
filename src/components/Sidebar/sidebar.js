@@ -61,9 +61,7 @@ const Sidebar = () => {
   // logout function
   const handleLogout = () => {
     localStorage.removeItem('user');
-    localStorage.removeItem('profile');
     dispatch({ type: 'LOGOUT' });
-    dispatch({ type: 'CURRENT_PROFILE', data: null });
   };
 
   return (
@@ -86,16 +84,16 @@ const Sidebar = () => {
           href="/graphs"
           icon={AssessmentOutlinedIcon}
         />
-        <SidebarLink
+        {/* <SidebarLink
           text="Employees"
           href="/profiles"
           icon={PeopleOutlineIcon}
-        />
-        <SidebarLink
+        /> */}
+        {/* <SidebarLink
           text="Profile"
           href="/profile"
           icon={ManageAccountsOutlinedIcon}
-        />
+        /> */}
         <SidebarLink
           text="Log out"
           href="/login"

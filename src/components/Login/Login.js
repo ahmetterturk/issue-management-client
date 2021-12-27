@@ -42,7 +42,7 @@ const Login = () => {
       .then((data) => {
         dispatch({ type: 'LOGIN_INFO', data: data });
         localStorage.setItem('user', JSON.stringify(data));
-        navigate('/profile');
+        navigate('/issues');
       })
       .catch((err) => {
         dispatch({ type: 'LOGIN_FAILURE' });
@@ -54,9 +54,9 @@ const Login = () => {
   return (
     <ThemeProvider theme={theme}>
       <Typography
-        component='h1'
-        variant='h4'
-        color='#6887E3'
+        component="h1"
+        variant="h4"
+        color="#6887E3"
         textAlign={'center'}
         padding={4}
       >
@@ -64,8 +64,8 @@ const Login = () => {
       </Typography>
       {/* <Bar /> */}
       <Container
-        component='main'
-        maxWidth='xs'
+        component="main"
+        maxWidth="xs"
         Box
         sx={{
           border: 0.5,
@@ -88,51 +88,51 @@ const Login = () => {
             {state.user.error && <p style={{ color: 'red' }}>{hasError}</p>}
           </div> */}
           <Box
-            component='form'
+            component="form"
             onSubmit={handleSubmit(onSubmit)}
             noValidate
             sx={{ mt: 1 }}
           >
             <TextField
-              margin='normal'
+              margin="normal"
               required
               fullWidth
-              id='email'
-              label='Email Address'
-              autoComplete='email'
-              background='white'
+              id="email"
+              label="Email Address"
+              autoComplete="email"
+              background="white"
               {...register('email', { required: true })}
               autoFocus
             />
             {errors.email && (
-              <Typography variant='span' style={{ color: 'red' }}>
+              <Typography variant="span" style={{ color: 'red' }}>
                 Email cannot be blank!
               </Typography>
             )}
             <TextField
-              margin='normal'
+              margin="normal"
               required
               fullWidth
               {...register('password', { required: true })}
-              label='Password'
-              type='password'
-              id='password'
-              autoComplete='current-password'
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
             />
             {errors.password && (
-              <Typography variant='span' style={{ color: 'red' }}>
+              <Typography variant="span" style={{ color: 'red' }}>
                 Password is required with min of 6 characters
               </Typography>
             )}
             <FormControlLabel
-              control={<Checkbox value='remember' color='primary' />}
-              label='Remember me'
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
             />
 
             <Button
-              type='submit'
+              type="submit"
               // fullWidth
-              variant='contained'
+              variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
               Sign In
@@ -143,7 +143,7 @@ const Login = () => {
           </Box>
         </Box>
         <Copyright sx={{ mt: 5, mb: 3 }} />
-        <Link href='#' variant='body2' textAlign={'center'}>
+        <Link href="#" variant="body2" textAlign={'center'}>
           Forgot password?
         </Link>
       </Container>
@@ -155,9 +155,9 @@ function Copyright(props) {
   return (
     <>
       <Typography
-        variant='body2'
-        color='text.secondary'
-        align='center'
+        variant="body2"
+        color="text.secondary"
+        align="center"
         {...props}
       >
         {' © Lock Security '}
