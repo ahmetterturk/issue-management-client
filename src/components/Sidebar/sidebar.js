@@ -13,6 +13,7 @@ import { useGlobalContext } from '../../contextReducer/Context';
 
 import logo from './logo2.png';
 import { Link } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
 
 const SidebarLink = (props) => {
   const classes = useStyles();
@@ -57,6 +58,8 @@ const SidebarLink = (props) => {
 const Sidebar = () => {
   const { state, dispatch } = useGlobalContext();
   const classes = useStyles();
+  const { token } = state.currentUser && state.currentUser;
+  const decodedToken = jwtDecode(token);
 
   // logout function
   const handleLogout = () => {
@@ -68,20 +71,20 @@ const Sidebar = () => {
     <Box className={classes.sidebar}>
       <Box className={classes.sidebarButtons}>
         <img
-          alt="Product logo - Shield with check icon"
+          alt='Product logo - Shield with check icon'
           className={classes.logo}
           src={logo}
         />
-        <hr className="rounded" />
-        <SidebarLink text="Dashboard" href="/dashboard" icon={GridViewIcon} />
+        <hr className='rounded' />
+        <SidebarLink text='Dashboard' href='/dashboard' icon={GridViewIcon} />
         <SidebarLink
-          text="Issues"
-          href="/issues"
+          text='Issues'
+          href='/issues'
           icon={ReceiptLongRoundedIcon}
         />
         <SidebarLink
-          text="Graphs"
-          href="/graphs"
+          text='Graphs'
+          href='/graphs'
           icon={AssessmentOutlinedIcon}
         />
         {/* <SidebarLink
@@ -89,19 +92,21 @@ const Sidebar = () => {
           href="/profiles"
           icon={PeopleOutlineIcon}
         /> */}
-        {/* <SidebarLink
-          text="Profile"
-          href="/profile"
-          icon={ManageAccountsOutlinedIcon}
-        /> */}
+        {state.currentUser && (
+          <SidebarLink
+            text='Profile'
+            href={`/userProfile/${decodedToken.id}`}
+            icon={ManageAccountsOutlinedIcon}
+          />
+        )}
         <SidebarLink
-          text="Log out"
-          href="/login"
+          text='Log out'
+          href='/login'
           onClick={handleLogout}
           icon={MeetingRoomOutlinedIcon}
         />
       </Box>
-      <Box className="footer">
+      <Box className='footer'>
         <span>© Lock Security</span>
       </Box>
     </Box>

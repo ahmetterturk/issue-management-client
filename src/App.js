@@ -11,6 +11,7 @@ import Navbar from './components/Navbar/Navbar';
 import Issues from './components/Issues/Issues';
 import SideNavbar from './components/Sidebar/sidebar';
 import useStyles from './styles';
+import UserProfileForm from './components/UserProfile/UserProfileForm';
 
 const App = () => {
   const classes = useStyles();
@@ -32,9 +33,10 @@ const App = () => {
           <Box className={classes.rightContent}>
             {state.currentUser && <Navbar />}
             <Routes>
-              <Route path="*" element={<Login />} />
-              <Route path="/issues/:id" element={<IssuePage />} />
-              <Route path="/issues" element={<Issues />} />
+              <Route path='*' element={<Login />} />
+              <Route path='/issues/:id' element={<IssuePage />} />
+              <Route path='/issues' element={<Issues />} />
+              <Route path='/userProfile/:id' element={<UserProfileForm />} />
             </Routes>
           </Box>
         </Box>

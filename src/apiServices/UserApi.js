@@ -10,3 +10,28 @@ export const loginUser = async (userObject) => {
     console.log(error);
   }
 };
+
+// update user
+
+export const updateUser = async (userObject, id) => {
+  try {
+    const res = await API.patch(`/user/${id}`, userObject);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// image upload
+export const uploadProfileImage = async ({ image }) => {
+  const formData = new FormData();
+  formData.append('image', image);
+  try {
+    const response = await API.post('/user/upload', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

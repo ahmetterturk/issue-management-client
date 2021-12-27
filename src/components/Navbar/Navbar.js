@@ -10,6 +10,7 @@ const Navbar = () => {
   const classes = useStyles();
   const { state } = useGlobalContext();
   const { userDetails } = state.currentUser;
+  console.log(userDetails);
 
   return (
     <>
@@ -19,8 +20,8 @@ const Navbar = () => {
         </span>
         <Box sx={{ flexGrow: 0 }}>
           <Avatar
-            alt="Remy Sharp"
-            src="https://www.hollywoodreporter.com/wp-content/uploads/2019/03/avatar-publicity_still-h_2019.jpg?w=1024"
+            alt='Remy Sharp'
+            src={state.currentUser && userDetails.image}
           />
           {/* <Menu
               sx={{ mt: '45px' }}
