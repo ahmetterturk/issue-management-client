@@ -43,12 +43,14 @@ const UserProfileForm = () => {
       .then((imageData) => {
         data.imageUrl = imageData && imageData.image.src;
         updateUser(data, id)
-          .then((userData) => console.log(userData))
+          .then((userData) => {
+            localStorage.setItem('user', JSON.stringify(userData));
+          })
           .catch((err) => console.log(err));
         navigate('/issues');
+        setIsFetching(false);
       })
       .catch((err) => console.log(err));
-    setIsFetching(false);
   };
 
   return (
