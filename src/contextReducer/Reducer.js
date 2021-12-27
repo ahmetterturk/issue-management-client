@@ -25,6 +25,12 @@ const reducer = (state, action) => {
         currentUser: null,
       };
     }
+    case 'INCREASE_COUNTER': {
+      return {
+        ...state,
+        counter: state.counter + 1,
+      };
+    }
     default:
       return state;
   }

@@ -24,7 +24,7 @@ const style = {
 };
 
 const IssueForm = () => {
-  const { state, counter, setCounter } = useGlobalContext();
+  const { state, dispatch } = useGlobalContext();
   const { currentUser } = state;
 
   const { token } = currentUser;
@@ -47,7 +47,7 @@ const IssueForm = () => {
 
     createIssue(data)
       .then(() => {
-        setCounter(counter + 1);
+        dispatch({ type: 'INCREASE_COUNTER' });
       })
       .catch((error) => console.log(error));
     setOpen(false);
