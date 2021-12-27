@@ -15,7 +15,7 @@ import { getIssues } from '../../../apiServices/IssueApi';
 
 const IssuesTable = ({ issuesList }) => {
   const classes = useStyles();
-  const { dispatch } = useGlobalContext();
+  const { dispatch, state } = useGlobalContext();
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -28,13 +28,6 @@ const IssuesTable = ({ issuesList }) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
-  // for rerendering the issues
-  useEffect(() => {
-    getIssues()
-      .then((data) => dispatch({ type: 'GET_ISSUES', data: data }))
-      .catch((err) => console.log(err));
-  }, []);
 
   return (
     <>

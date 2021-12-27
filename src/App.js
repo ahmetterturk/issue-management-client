@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import Box from '@mui/material/Box';
 import { getIssues } from './apiServices/IssueApi';
 import Login from './components/Login/Login';
@@ -15,18 +15,17 @@ import useStyles from './styles';
 const App = () => {
   const classes = useStyles();
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  const userLoggedIn = state.userLoggedIn;
+  const [counter, setCounter] = useState(0);
 
   // get all issues
   useEffect(() => {
     getIssues()
       .then((data) => dispatch({ type: 'GET_ISSUES', data: data }))
       .catch((err) => console.log(err));
-  }, []);
+  }, [counter, state.currentUser]);
 
   return (
-    <AppContext.Provider value={{ state, dispatch }}>
+    <AppContext.Provider value={{ state, dispatch, counter, setCounter }}>
       <BrowserRouter>
         <Box className={classes.appWrapper}>
           {state.currentUser && <SideNavbar />}

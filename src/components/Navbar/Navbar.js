@@ -11,10 +11,6 @@ const Navbar = () => {
   const { state } = useGlobalContext();
   const { userDetails } = state.currentUser;
 
-  // if (!state.userLoggedIn || !state.userProfile) {
-  //   return null;
-  // }
-  console.log(userDetails.name);
   return (
     <>
       <Toolbar className={classes.navbar}>
