@@ -24,15 +24,12 @@ const style = {
 };
 
 const IssueForm = () => {
-  const { state } = useGlobalContext();
+  const { state, counter, setCounter } = useGlobalContext();
   const { currentUser } = state;
 
   const { token } = currentUser;
 
   const decodedToken = jwtdecode(token);
-
-  console.log(decodedToken);
-  // console.log(token);
 
   const {
     register,
@@ -45,15 +42,14 @@ const IssueForm = () => {
   const handleClose = () => setOpen(false);
 
   const onSubmit = (data) => {
-    console.log(data);
     data.userId = currentUser && decodedToken.id;
     data.userName = currentUser && decodedToken.name;
 
-    console.log(data);
     createIssue(data)
-      .then((data) => console.log(data))
+      .then(() => {
+        setCounter(counter + 1);
+      })
       .catch((error) => console.log(error));
-
     setOpen(false);
   };
 
