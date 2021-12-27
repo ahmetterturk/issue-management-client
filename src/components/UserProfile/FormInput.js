@@ -1,4 +1,5 @@
 import React from 'react';
+import FormError from './FormError';
 import { InputAdornment, Grid, TextField } from '@mui/material';
 
 const FormInput = ({
@@ -12,6 +13,8 @@ const FormInput = ({
   type,
   placeholder,
   size,
+  errors,
+  errorMessage,
 }) => {
   return (
     <>
@@ -30,6 +33,11 @@ const FormInput = ({
               </InputAdornment>
             ),
           }}
+        />
+        <FormError
+          errors={errors}
+          errorMessage={errorMessage}
+          classes={classes}
         />
       </Grid>
     </>

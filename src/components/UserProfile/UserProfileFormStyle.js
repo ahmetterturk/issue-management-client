@@ -15,4 +15,9 @@ export const useStyles = makeStyles(() => ({
   button: {
     background: '#6787E3',
   },
+  error: {
+    padding: '0 5px',
+    fontSize: '10px',
+    color: 'red',
+  },
 }));
