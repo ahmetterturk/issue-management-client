@@ -51,6 +51,7 @@ const UserProfileForm = () => {
         setIsFetching(false);
       })
       .catch((err) => console.log(err));
+    console.log(data);
   };
 
   return (
@@ -72,6 +73,9 @@ const UserProfileForm = () => {
                   md={6}
                   size={3}
                   classes={classes.icon}
+                  errors={errors.firstName}
+                  errorMessage="Firstname can't be blank, minimum of 3 characters"
+                  classes={classes.error}
                 />
 
                 <FormInput
@@ -82,6 +86,9 @@ const UserProfileForm = () => {
                   xs={12}
                   md={6}
                   size={3}
+                  errors={errors.lastName}
+                  errorMessage="Lastname can't be blank, minimum of 3 characters"
+                  classes={classes.error}
                 />
 
                 <FormInput
@@ -93,6 +100,9 @@ const UserProfileForm = () => {
                   xs={12}
                   md={12}
                   size={3}
+                  errors={errors.email}
+                  errorMessage="Email can't be blank"
+                  classes={classes.error}
                 />
 
                 <FormInput
@@ -103,6 +113,10 @@ const UserProfileForm = () => {
                   type='password'
                   xs={12}
                   md={12}
+                  size={6}
+                  errors={errors.password}
+                  errorMessage="Password can't be blank, minimum of 6 charactes"
+                  classes={classes.error}
                 />
                 <Grid item md={12} xs={12}>
                   <Box
