@@ -11,6 +11,26 @@ export const loginUser = async (userObject) => {
   }
 };
 
+// get all users
+
+export const allUsers = async () => {
+  try {
+    const res = await API.get('/user');
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// get single user
+export const singleUser = async (id) => {
+  try {
+    const res = await API.get(`/user/${id}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 // update user
 
 export const updateUser = async (userObject, id) => {

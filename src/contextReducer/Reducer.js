@@ -6,6 +6,13 @@ const reducer = (state, action) => {
         issues: action.data,
       };
     }
+    case 'GET_USERS': {
+      return {
+        ...state,
+        users: action.data,
+      };
+    }
+
     case 'LOGIN_INFO': {
       return {
         ...state,
