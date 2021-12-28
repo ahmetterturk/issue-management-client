@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useGlobalContext } from '../../contextReducer/Context';
 import {
   Table,
@@ -11,10 +11,13 @@ import {
   Chip,
   Typography,
   TablePagination,
+  Avatar,
 } from '@mui/material';
+import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
+import ModeEditOutlineSharpIcon from '@mui/icons-material/ModeEditOutlineSharp';
 import { useStyles } from './EmployeStyle';
-import { Link } from 'react-router-dom';
-
+import { Link, useParams } from 'react-router-dom';
+import moment from 'moment';
 const EmployeeTable = () => {
   const { state, dispatch } = useGlobalContext();
   const classes = useStyles();
@@ -22,7 +25,7 @@ const EmployeeTable = () => {
     users: { allUsers },
   } = state;
   console.log(allUsers);
-
+  const { id } = useParams();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -45,12 +48,10 @@ const EmployeeTable = () => {
           <TableHead>
             <TableRow>
               <TableCell className={classes.tableHeaderCell}>Name</TableCell>
-              <TableCell className={classes.tableHeaderCell}>Status</TableCell>
-              <TableCell className={classes.tableHeaderCell}>Type</TableCell>
-              <TableCell className={classes.tableHeaderCell}>Date</TableCell>
               <TableCell className={classes.tableHeaderCell}>
-                Created By
+                Hire Date
               </TableCell>
+              <TableCell className={classes.tableHeaderCell}></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -61,19 +62,29 @@ const EmployeeTable = () => {
                   <TableRow key={user._id}>
                     <TableCell>
                       <Link className={classes.userTitle} to={user._id}>
+                        <Avatar
+                          src={user.imageUrl}
+                          className={classes.avatarIcon}
+                        />
                         <Typography>{user.name}</Typography>
                       </Link>
                     </TableCell>
                     <TableCell>
-                      <Typography>{user.type}</Typography>
-                    </TableCell>
-                    <TableCell>
                       <Typography>
-                        {user.createdAt && user.createdAt.slice(0, 10)}
+                        {allUsers && moment(user.createdAt).format('LL')}
                       </Typography>
                     </TableCell>
                     <TableCell>
-                      <Typography>{user.userName}</Typography>
+                      <Link to={user._id}>
+                        <ModeEditOutlineSharpIcon
+                          className={classes.editIcon}
+                        />
+                      </Link>
+                      <Link to={user._id}>
+                        <DeleteForeverSharpIcon
+                          className={classes.deleteIcon}
+                        />
+                      </Link>
                     </TableCell>
                   </TableRow>
                 ))}

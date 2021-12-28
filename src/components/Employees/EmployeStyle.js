@@ -13,6 +13,21 @@ export const useStyles = makeStyles(() => ({
   },
   userTitle: {
     textDecoration: 'none',
+    color: '#555',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+  },
+  avatarIcon: {
+    marginRight: '5px',
+  },
+  editIcon: {
+    color: '#666',
+    cursor: 'pointer',
+  },
+  deleteIcon: {
+    color: 'red',
+    cursor: 'pointer',
   },
   tablePagination: {
     content: '',

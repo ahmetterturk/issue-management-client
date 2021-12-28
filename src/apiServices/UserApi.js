@@ -42,6 +42,16 @@ export const updateUser = async (userObject, id) => {
   }
 };
 
+// delete user
+export const deleteUser = async (id) => {
+  try {
+    const res = await API.delete(`/user/${id}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // image upload
 export const uploadProfileImage = async ({ image }) => {
   const formData = new FormData();
