@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useStyles } from './UserProfileFormStyle';
 import {
   Box,
@@ -22,8 +22,7 @@ const UserProfileForm = () => {
   const classes = useStyles();
   const [isFetching, setIsFetching] = useState(false);
   const [profileImageInput, setProfileImageInput] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
-  const { state, dispatch } = useGlobalContext();
+  const { state } = useGlobalContext();
   const { userDetails } = state.currentUser;
   const navigate = useNavigate();
   const { id } = useParams();
@@ -72,10 +71,10 @@ const UserProfileForm = () => {
                   xs={12}
                   md={6}
                   size={3}
-                  classes={classes.icon}
+                  className={classes.icon}
                   errors={errors.firstName}
                   errorMessage="Firstname can't be blank, minimum of 3 characters"
-                  classes={classes.error}
+                  className={classes.error}
                 />
 
                 <FormInput
@@ -88,7 +87,7 @@ const UserProfileForm = () => {
                   size={3}
                   errors={errors.lastName}
                   errorMessage="Lastname can't be blank, minimum of 3 characters"
-                  classes={classes.error}
+                  className={classes.error}
                 />
 
                 <FormInput
@@ -102,7 +101,7 @@ const UserProfileForm = () => {
                   size={3}
                   errors={errors.email}
                   errorMessage="Email can't be blank"
-                  classes={classes.error}
+                  className={classes.error}
                 />
 
                 <FormInput
@@ -116,7 +115,7 @@ const UserProfileForm = () => {
                   size={6}
                   errors={errors.password}
                   errorMessage="Password can't be blank, minimum of 6 charactes"
-                  classes={classes.error}
+                  className={classes.error}
                 />
                 <Grid item md={12} xs={12}>
                   <Box

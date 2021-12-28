@@ -3,7 +3,7 @@ import FormError from './FormError';
 import { InputAdornment, Grid, TextField } from '@mui/material';
 
 const FormInput = ({
-  classes,
+  className,
   register,
   label,
   icons,
@@ -28,7 +28,7 @@ const FormInput = ({
           variant='filled'
           InputProps={{
             startAdornment: (
-              <InputAdornment position='start' className={classes}>
+              <InputAdornment position='start' className={className}>
                 {icons}
               </InputAdornment>
             ),
@@ -37,7 +37,7 @@ const FormInput = ({
         <FormError
           errors={errors}
           errorMessage={errorMessage}
-          classes={classes}
+          classes={className}
         />
       </Grid>
     </>

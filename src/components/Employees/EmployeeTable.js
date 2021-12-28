@@ -8,26 +8,28 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Chip,
   Typography,
   TablePagination,
   Avatar,
 } from '@mui/material';
 import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
-import ModeEditOutlineSharpIcon from '@mui/icons-material/ModeEditOutlineSharp';
 import { useStyles } from './EmployeStyle';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
+import jwtdecode from 'jwt-decode';
 const EmployeeTable = () => {
-  const { state, dispatch } = useGlobalContext();
+  const { state } = useGlobalContext();
   const classes = useStyles();
+  const {
+    currentUser: { token },
+  } = state;
+  const decodeToken = jwtdecode(token);
+
   const {
     users: { allUsers },
   } = state;
-  console.log(allUsers);
-  const { id } = useParams();
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -75,16 +77,15 @@ const EmployeeTable = () => {
                       </Typography>
                     </TableCell>
                     <TableCell>
-                      <Link to={user._id}>
-                        <ModeEditOutlineSharpIcon
-                          className={classes.editIcon}
-                        />
-                      </Link>
-                      <Link to={user._id}>
-                        <DeleteForeverSharpIcon
-                          className={classes.deleteIcon}
-                        />
-                      </Link>
+                      {(decodeToken.id === user._id || decodeToken.isAdmin) && (
+                        <>
+                          <Link to={user._id}>
+                            <DeleteForeverSharpIcon
+                              className={classes.deleteIcon}
+                            />
+                          </Link>
+                        </>
+                      )}
                     </TableCell>
                   </TableRow>
                 ))}

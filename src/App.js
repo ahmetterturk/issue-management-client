@@ -34,7 +34,7 @@ const App = () => {
         console.log(data);
       })
       .catch((err) => console.log(err));
-  }, [state.currentUser]);
+  }, [state.currentUser, state.counter]);
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>
