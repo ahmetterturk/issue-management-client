@@ -9,11 +9,15 @@ import { useParams } from 'react-router-dom';
 import { getIssue } from '../../apiServices/IssueApi';
 import IssueEditForm from './IssueEditForm';
 import { useGlobalContext } from '../../contextReducer/Context';
+import jwtdecode from 'jwt-decode';
 
 const IssuePage = () => {
   const classes = useStyles();
   const { id } = useParams();
   const { state } = useGlobalContext();
+  const { currentUser } = state;
+  const { token } = currentUser;
+  const decodedToken = jwtdecode(token);
 
   const [issue, setIssue] = useState([]);
 
@@ -26,7 +30,9 @@ const IssuePage = () => {
   return (
     <>
       <Container className={classes.container}>
-        <IssueEditForm issue={issue} id={id} />
+        {(decodedToken.id === issue.userId || decodedToken.isAdmin) && (
+          <IssueEditForm issue={issue} id={id} />
+        )}
 
         <Typography className={classes.header} variant="h4">
           Ticket
