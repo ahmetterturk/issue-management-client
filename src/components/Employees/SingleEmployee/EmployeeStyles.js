@@ -3,6 +3,7 @@ import { makeStyles } from '@mui/styles';
 export const useStyles = makeStyles(() => ({
   card: {
     margin: '50px auto',
+    position: 'relative',
   },
   userImage: {
     display: 'block',
@@ -16,5 +17,12 @@ export const useStyles = makeStyles(() => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+  },
+  backBtn: {
+    textDecoration: 'none',
+    position: 'absolute',
+    right: '20px',
+    bottom: '15px',
+    color: 'skyblue',
   },
 }));

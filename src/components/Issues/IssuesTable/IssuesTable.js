@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -10,12 +10,9 @@ import useStyles from './styles';
 import { Link } from 'react-router-dom';
 import { Chip, Typography } from '@mui/material';
 import TablePagination from '@mui/material/TablePagination';
-import { useGlobalContext } from '../../../contextReducer/Context';
-import { getIssues } from '../../../apiServices/IssueApi';
 
 const IssuesTable = ({ issuesList }) => {
   const classes = useStyles();
-  const { dispatch, state } = useGlobalContext();
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -31,11 +28,11 @@ const IssuesTable = ({ issuesList }) => {
 
   return (
     <>
-      <Typography variant="h3" align="center" className={classes.heading}>
+      <Typography variant='h3' align='center' className={classes.heading}>
         Tickets
       </Typography>
       <TableContainer component={Paper} className={classes.tableContainer}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table sx={{ minWidth: 650 }} aria-label='simple table'>
           <TableHead>
             <TableRow>
               <TableCell className={classes.tableHeaderCell}>Issue</TableCell>
@@ -86,7 +83,7 @@ const IssuesTable = ({ issuesList }) => {
             <TablePagination
               className={classes.tablePagination}
               rowsPerPageOptions={[5, 10, 25]}
-              component="div"
+              component='div'
               count={issuesList && issuesList.length}
               rowsPerPage={rowsPerPage}
               page={page}
