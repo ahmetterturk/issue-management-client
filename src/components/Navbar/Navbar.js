@@ -10,7 +10,6 @@ const Navbar = () => {
   const classes = useStyles();
   const { state } = useGlobalContext();
   const { userDetails } = state.currentUser;
-  console.log(userDetails);
 
   return (
     <>

@@ -82,16 +82,17 @@ const Sidebar = () => {
           href='/issues'
           icon={ReceiptLongRoundedIcon}
         />
+
         <SidebarLink
           text='Graphs'
           href='/graphs'
           icon={AssessmentOutlinedIcon}
         />
-        {/* <SidebarLink
-          text="Employees"
-          href="/profiles"
+        <SidebarLink
+          text='Employees'
+          href='/employee'
           icon={PeopleOutlineIcon}
-        /> */}
+        />
         {state.currentUser && (
           <SidebarLink
             text='Profile'

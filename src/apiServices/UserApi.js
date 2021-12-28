@@ -11,11 +11,41 @@ export const loginUser = async (userObject) => {
   }
 };
 
+// get all users
+
+export const allUsers = async () => {
+  try {
+    const res = await API.get('/user');
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// get single user
+export const singleUser = async (id) => {
+  try {
+    const res = await API.get(`/user/${id}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 // update user
 
 export const updateUser = async (userObject, id) => {
   try {
     const res = await API.patch(`/user/${id}`, userObject);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// delete user
+export const deleteUser = async (id) => {
+  try {
+    const res = await API.delete(`/user/${id}`);
     return res.data;
   } catch (error) {
     console.log(error);

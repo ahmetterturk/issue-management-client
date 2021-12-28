@@ -12,6 +12,9 @@ import Issues from './components/Issues/Issues';
 import SideNavbar from './components/Sidebar/sidebar';
 import useStyles from './styles';
 import UserProfileForm from './components/UserProfile/UserProfileForm';
+import EmployeeTable from './components/Employees/EmployeeTable';
+import { allUsers } from './apiServices/UserApi';
+import Employee from './components/Employees/SingleEmployee/Employee';
 
 const App = () => {
   const classes = useStyles();
@@ -24,6 +27,15 @@ const App = () => {
       .catch((err) => console.log(err));
   }, [state.counter, state.currentUser]);
 
+  useEffect(() => {
+    allUsers()
+      .then((data) => {
+        dispatch({ type: 'GET_USERS', data: data });
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
+  }, [state.currentUser]);
+
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       <BrowserRouter>
@@ -32,10 +44,12 @@ const App = () => {
           <Box className={classes.rightContent}>
             {state.currentUser && <Navbar />}
             <Routes>
-              <Route path="*" element={<Login />} />
-              <Route path="/issues/:id" element={<IssuePage />} />
-              <Route path="/issues" element={<Issues />} />
-              <Route path="/userProfile/:id" element={<UserProfileForm />} />
+              <Route path='*' element={<Login />} />
+              <Route path='/issues/:id' element={<IssuePage />} />
+              <Route path='/issues' element={<Issues />} />
+              <Route path='/userProfile/:id' element={<UserProfileForm />} />
+              <Route path='/employee' element={<EmployeeTable />} />
+              <Route path='/employee/:id' element={<Employee />} />
             </Routes>
           </Box>
         </Box>
