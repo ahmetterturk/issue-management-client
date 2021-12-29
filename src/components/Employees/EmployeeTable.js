@@ -11,12 +11,15 @@ import {
   Typography,
   TablePagination,
   Avatar,
+  Alert,
+  Stack,
 } from '@mui/material';
 import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
 import { useStyles } from './EmployeStyle';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import jwtdecode from 'jwt-decode';
+
 const EmployeeTable = () => {
   const { state } = useGlobalContext();
   const classes = useStyles();
@@ -42,6 +45,13 @@ const EmployeeTable = () => {
 
   return (
     <>
+      {state.isUpdated && (
+        <Stack sx={{ width: '100%' }} spacing={2}>
+          <Alert severity='warning'>
+            You have updated your profile successfully
+          </Alert>
+        </Stack>
+      )}
       <Typography variant='h3' align='center' className={classes.heading}>
         Tickets
       </Typography>

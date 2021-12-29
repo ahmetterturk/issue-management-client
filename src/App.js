@@ -31,7 +31,9 @@ const App = () => {
     allUsers()
       .then((data) => {
         dispatch({ type: 'GET_USERS', data: data });
-        console.log(data);
+        setTimeout(() => {
+          dispatch({ type: 'AFTER_LOGGEDIN' });
+        }, 4000);
       })
       .catch((err) => console.log(err));
   }, [state.currentUser, state.counter]);

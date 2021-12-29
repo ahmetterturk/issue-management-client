@@ -7,6 +7,9 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -51,6 +54,7 @@ const Login = () => {
           setHasError(false);
           setErrorObject(null);
           dispatch({ type: 'LOGIN_INFO', data: data });
+          dispatch({ type: 'LOGIN_SUCCESS' });
           localStorage.setItem('user', JSON.stringify(data));
           navigate('/issues');
         }
@@ -94,7 +98,10 @@ const Login = () => {
           }}
         >
           {hasError && errorObject ? (
-            <p style={{ color: 'red' }}>{errorObject.data.message}</p>
+            <Alert severity='error'>
+              <AlertTitle>Error</AlertTitle>
+              {errorObject.data.message}
+            </Alert>
           ) : null}
           <Box
             component='form'
