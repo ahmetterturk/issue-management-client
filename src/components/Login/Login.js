@@ -28,25 +28,34 @@ const theme = createTheme({
 });
 
 const Login = () => {
-  const { dispatch } = useGlobalContext();
+  const { state, dispatch } = useGlobalContext();
   const navigate = useNavigate();
-  const [hasError, setHasError] = useState('');
+  const [hasError, setHasError] = useState(false);
+  const [errorObject, setErrorObject] = useState(null);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     loginUser(data)
       .then((data) => {
-        dispatch({ type: 'LOGIN_INFO', data: data });
-        localStorage.setItem('user', JSON.stringify(data));
-        navigate('/issues');
+        if (data.status == '400') {
+          setHasError(true);
+          setErrorObject(data);
+        } else if (data.status == '404') {
+          setHasError(true);
+          setErrorObject(data);
+        } else {
+          setHasError(false);
+          setErrorObject(null);
+          dispatch({ type: 'LOGIN_INFO', data: data });
+          localStorage.setItem('user', JSON.stringify(data));
+          navigate('/issues');
+        }
       })
       .catch((err) => {
-        dispatch({ type: 'LOGIN_FAILURE' });
-        setHasError(`Wrong Password!`);
         console.log(err);
       });
   };
@@ -84,9 +93,9 @@ const Login = () => {
             alignItems: 'center',
           }}
         >
-          {/* <div>
-            {state.user.error && <p style={{ color: 'red' }}>{hasError}</p>}
-          </div> */}
+          {hasError && errorObject ? (
+            <p style={{ color: 'red' }}>{errorObject.data.message}</p>
+          ) : null}
           <Box
             component='form'
             onSubmit={handleSubmit(onSubmit)}
