@@ -31,7 +31,7 @@ const theme = createTheme({
 });
 
 const Login = () => {
-  const { state, dispatch } = useGlobalContext();
+  const { dispatch } = useGlobalContext();
   const navigate = useNavigate();
   const [hasError, setHasError] = useState(false);
   const [errorObject, setErrorObject] = useState(null);
@@ -44,10 +44,10 @@ const Login = () => {
   const onSubmit = async (data) => {
     loginUser(data)
       .then((data) => {
-        if (data.status == '400') {
+        if (data.status === 400) {
           setHasError(true);
           setErrorObject(data);
-        } else if (data.status == '404') {
+        } else if (data.status === 404) {
           setHasError(true);
           setErrorObject(data);
         } else {

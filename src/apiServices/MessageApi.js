@@ -17,3 +17,12 @@ export const createMessage = async (messageData) => {
     console.log(error);
   }
 };
+
+export const deleteMessage = async (id) => {
+  try {
+    const response = await API.delete(`/messages/${id}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
