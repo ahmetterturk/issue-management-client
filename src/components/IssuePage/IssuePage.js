@@ -10,6 +10,7 @@ import { getIssue } from '../../apiServices/IssueApi';
 import IssueEditForm from './IssueEditForm';
 import { useGlobalContext } from '../../contextReducer/Context';
 import jwtdecode from 'jwt-decode';
+import { getAllMessages } from '../../apiServices/MessageApi';
 
 const IssuePage = () => {
   const classes = useStyles();
@@ -20,12 +21,23 @@ const IssuePage = () => {
   const decodedToken = jwtdecode(token);
 
   const [issue, setIssue] = useState([]);
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     getIssue(id)
       .then((response) => setIssue(response))
       .catch((error) => console.log(error));
   }, [id, state.counter]);
+
+  useEffect(() => {
+    getAllMessages()
+      .then((response) => {
+        setMessages(response);
+      })
+      .catch((error) => console.log(error));
+  }, [state.counter]);
+
+  // console.log(messages.filter((message) => message.issueId === issue._id));
 
   return (
     <>
@@ -47,7 +59,11 @@ const IssuePage = () => {
 
         <PersonSelect />
 
-        <Messages messages={issueData.messages} />
+        <Messages
+          messages={messages}
+          issueId={id}
+          userName={currentUser.userDetails.name}
+        />
       </Container>
     </>
   );

@@ -7,9 +7,9 @@ const Message = ({ message }) => {
 
   return (
     <div className={classes.mutualContainer}>
-      <Typography>{message.author}</Typography>
+      <Typography>{message.userName}</Typography>
       <Divider />
-      <Typography>{message.message}</Typography>
+      <Typography>{message.messageBody}</Typography>
     </div>
   );
 };

@@ -2,13 +2,16 @@ import React from 'react';
 import Message from './Message';
 import MessageForm from './MessageForm';
 
-const Messages = ({ messages }) => {
+const Messages = ({ messages, issueId, userName }) => {
+  const filteredMessages = messages.filter(
+    (message) => message.issueId === issueId
+  );
   return (
     <div>
-      {messages.map((message, index) => {
+      {filteredMessages.map((message, index) => {
         return <Message key={index} message={message} />;
       })}
-      <MessageForm />
+      <MessageForm issueId={issueId} userName={userName} />
     </div>
   );
 };
