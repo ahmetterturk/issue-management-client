@@ -16,6 +16,10 @@ const useStyles = makeStyles((theme) => ({
   header: {
     textAlign: 'center',
   },
+  deleteMsgIcon: {
+    color: 'red',
+    cursor: 'pointer',
+  },
 }));
 
 export default useStyles;

@@ -37,8 +37,6 @@ const IssuePage = () => {
       .catch((error) => console.log(error));
   }, [state.counter]);
 
-  // console.log(messages.filter((message) => message.issueId === issue._id));
-
   return (
     <>
       <Container className={classes.container}>
@@ -46,14 +44,14 @@ const IssuePage = () => {
           <IssueEditForm issue={issue} id={id} />
         )}
 
-        <Typography className={classes.header} variant="h4">
+        <Typography className={classes.header} variant='h4'>
           Ticket
         </Typography>
 
         <IssueInfo issue={issue} issueData={issueData} />
 
         <div className={classes.mutualContainer}>
-          <Typography variant="h6">{issue.title}</Typography>
+          <Typography variant='h6'>{issue.title}</Typography>
           <Typography>{issue.description}</Typography>
         </div>
 
