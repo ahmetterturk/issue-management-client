@@ -4,4 +4,6 @@ export const initialState = {
   currentUser: JSON.parse(localStorage.getItem('user')) || null,
   error: false,
   counter: 0,
+  isLoggedIn: false,
+  isUpdated: false,
 };

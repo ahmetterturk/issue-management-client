@@ -22,7 +22,7 @@ const UserProfileForm = () => {
   const classes = useStyles();
   const [isFetching, setIsFetching] = useState(false);
   const [profileImageInput, setProfileImageInput] = useState('');
-  const { state } = useGlobalContext();
+  const { state, dispatch } = useGlobalContext();
   const { userDetails } = state.currentUser;
   const navigate = useNavigate();
   const { id } = useParams();
@@ -44,10 +44,14 @@ const UserProfileForm = () => {
         updateUser(data, id)
           .then((userData) => {
             localStorage.setItem('user', JSON.stringify(userData));
+            dispatch({ type: 'UPDATE_SUCCESS' });
           })
           .catch((err) => console.log(err));
-        navigate('/issues');
+        navigate('/employee');
         setIsFetching(false);
+        setTimeout(() => {
+          dispatch({ type: 'AFTER_UPDATE' });
+        }, 4000);
       })
       .catch((err) => console.log(err));
     console.log(data);

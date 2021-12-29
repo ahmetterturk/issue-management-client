@@ -19,6 +19,30 @@ const reducer = (state, action) => {
         currentUser: action.data,
       };
     }
+    case 'LOGIN_SUCCESS': {
+      return {
+        ...state,
+        isLoggedIn: true,
+      };
+    }
+    case 'AFTER_LOGGEDIN': {
+      return {
+        ...state,
+        isLoggedIn: false,
+      };
+    }
+    case 'UPDATE_SUCCESS': {
+      return {
+        ...state,
+        isUpdated: true,
+      };
+    }
+    case 'AFTER_UPDATE': {
+      return {
+        ...state,
+        isUpdated: false,
+      };
+    }
     case 'LOGIN_FAILURE': {
       return {
         ...state,
