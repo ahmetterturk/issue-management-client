@@ -2,7 +2,7 @@ import React from 'react';
 import Message from './Message';
 import MessageForm from './MessageForm';
 
-const Messages = ({ messages, issueId, userName }) => {
+const Messages = ({ messages, issueId, userName, userId }) => {
   const filteredMessages = messages.filter(
     (message) => message.issueId === issueId
   );
@@ -15,7 +15,7 @@ const Messages = ({ messages, issueId, userName }) => {
           </>
         );
       })}
-      <MessageForm issueId={issueId} userName={userName} />
+      <MessageForm issueId={issueId} userName={userName} userId={userId} />
     </div>
   );
 };
