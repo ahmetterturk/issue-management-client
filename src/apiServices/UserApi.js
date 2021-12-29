@@ -7,7 +7,7 @@ export const loginUser = async (userObject) => {
     const res = await API.post('/user/signin', userObject);
     return res.data;
   } catch (error) {
-    console.log(error);
+    return error.response;
   }
 };
 
