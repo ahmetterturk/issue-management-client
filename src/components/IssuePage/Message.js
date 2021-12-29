@@ -10,12 +10,16 @@ const Message = ({ message }) => {
     state: {
       currentUser: { token },
     },
+    dispatch,
   } = useGlobalContext();
   const decodedToken = jwtdecode(token);
   const classes = useStyles();
   const handleDelete = (id) => {
     deleteMessage(id)
-      .then((data) => console.log(data))
+      .then((data) => {
+        console.log(data);
+        dispatch({ type: 'INCREASE_COUNTER' });
+      })
       .catch((err) => console.log(err));
   };
 
@@ -24,7 +28,7 @@ const Message = ({ message }) => {
       <Typography>{message.userName}</Typography>
       <Divider />
       <Typography>{message.messageBody}</Typography>
-      {(decodedToken.name === message.userName || decodedToken.isAdmin) && (
+      {(decodedToken.id === message.userId || decodedToken.isAdmin) && (
         <DeleteForeverSharpIcon
           className={classes.deleteMsgIcon}
           onClick={() => handleDelete(message._id)}

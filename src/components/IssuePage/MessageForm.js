@@ -5,12 +5,13 @@ import SendIcon from '@mui/icons-material/Send';
 import { createMessage } from '../../apiServices/MessageApi';
 import { useGlobalContext } from '../../contextReducer/Context';
 
-const MessageForm = ({ issueId, userName }) => {
+const MessageForm = ({ issueId, userName, userId }) => {
   const { dispatch } = useGlobalContext();
   const data = {
     messageBody: '',
     issueId: issueId,
     userName: userName,
+    userId: userId,
   };
   const classes = useStyles();
   const [formData, setFormData] = useState(data);
