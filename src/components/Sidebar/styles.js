@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
     textDecoration: 'none',
+    height: '100vh',
   },
   sidebarButtons: {
     display: 'flex',

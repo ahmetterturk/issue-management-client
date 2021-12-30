@@ -1,6 +1,9 @@
 import { makeStyles } from '@mui/styles';
+import { createTheme } from '@mui/material/styles';
 
-const useStyles = makeStyles((theme) => ({
+export const theme = createTheme();
+
+const useStyles = makeStyles(() => ({
   appWrapper: {
     display: 'flex',
     height: '100vh',
@@ -8,6 +11,9 @@ const useStyles = makeStyles((theme) => ({
   rightContent: {
     backgroundColor: '#E6E6E6',
     flex: 1,
+    [theme.breakpoints.up('lg')]: {
+      paddingLeft: 226,
+    },
   },
 }));
 
