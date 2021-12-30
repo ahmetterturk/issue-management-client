@@ -10,9 +10,19 @@ import useStyles from './styles';
 import { Link } from 'react-router-dom';
 import { Chip, Typography } from '@mui/material';
 import TablePagination from '@mui/material/TablePagination';
+import moment from 'moment';
+import DeleteIcon from '@mui/icons-material/Delete';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import { useGlobalContext } from '../../../contextReducer/Context';
+import jwtdecode from 'jwt-decode';
+import DeleteIssueConfirmation from './DeleteIssueConfirmation';
 
 const IssuesTable = ({ issuesList }) => {
   const classes = useStyles();
+  const { state } = useGlobalContext();
+  const { currentUser } = state;
+  const { token } = currentUser;
+  const decodedToken = jwtdecode(token);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -28,11 +38,11 @@ const IssuesTable = ({ issuesList }) => {
 
   return (
     <>
-      <Typography variant='h3' align='center' className={classes.heading}>
+      <Typography variant="h3" align="center" className={classes.heading}>
         Tickets
       </Typography>
       <TableContainer component={Paper} className={classes.tableContainer}>
-        <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell className={classes.tableHeaderCell}>Issue</TableCell>
@@ -42,6 +52,7 @@ const IssuesTable = ({ issuesList }) => {
               <TableCell className={classes.tableHeaderCell}>
                 Created By
               </TableCell>
+              <TableCell className={classes.tableHeaderCell}>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -72,18 +83,28 @@ const IssuesTable = ({ issuesList }) => {
                     </TableCell>
                     <TableCell>
                       <Typography>
-                        {issue.createdAt && issue.createdAt.slice(0, 10)}
+                        {issue.createdAt &&
+                          moment(issue.createdAt).format('ll')}
                       </Typography>
                     </TableCell>
                     <TableCell>
                       <Typography>{issue.userName}</Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Link className={classes.issueTitle} to={issue._id}>
+                        <VisibilityIcon />
+                      </Link>
+                      {(decodedToken.id === issue.userId ||
+                        decodedToken.isAdmin) && (
+                        <DeleteIssueConfirmation issueId={issue._id} />
+                      )}
                     </TableCell>
                   </TableRow>
                 ))}
             <TablePagination
               className={classes.tablePagination}
               rowsPerPageOptions={[5, 10, 25]}
-              component='div'
+              component="div"
               count={issuesList && issuesList.length}
               rowsPerPage={rowsPerPage}
               page={page}
