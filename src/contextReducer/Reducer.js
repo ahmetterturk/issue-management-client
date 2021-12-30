@@ -43,6 +43,18 @@ const reducer = (state, action) => {
         isUpdated: false,
       };
     }
+    case 'CREATE_SUCCESS': {
+      return {
+        ...state,
+        isCreated: true,
+      };
+    }
+    case 'AFTER_CREATE': {
+      return {
+        ...state,
+        isCreated: false,
+      };
+    }
     case 'LOGIN_FAILURE': {
       return {
         ...state,

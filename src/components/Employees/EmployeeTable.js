@@ -45,15 +45,17 @@ const EmployeeTable = () => {
 
   return (
     <>
-      {state.isUpdated && (
-        <Stack sx={{ width: '100%' }} spacing={2}>
-          <Alert severity='warning'>
-            You have updated your profile successfully
-          </Alert>
-        </Stack>
-      )}
+      {state.isUpdated ||
+        (state.isCreated && (
+          <Stack sx={{ width: '100%' }} spacing={2}>
+            <Alert severity={state.isUpdated ? 'warning' : 'success'}>
+              {state.isUpdated && 'You have updated your profile successfully'}
+              {state.isCreated && 'You have created a new account successfully'}
+            </Alert>
+          </Stack>
+        ))}
       <Typography variant='h3' align='center' className={classes.heading}>
-        Tickets
+        Employees
       </Typography>
       <TableContainer component={Paper} className={classes.tableContainer}>
         <Table sx={{ minWidth: 650 }} aria-label='simple table'>
