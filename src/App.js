@@ -16,6 +16,7 @@ import EmployeeTable from './components/Employees/EmployeeTable';
 import { allUsers } from './apiServices/UserApi';
 import Employee from './components/Employees/SingleEmployee/Employee';
 import GraphsPage from './components/Graphs/GraphsPage';
+import SignupPage from './components/Signup/SignupPage';
 
 const App = () => {
   const classes = useStyles();
@@ -53,6 +54,7 @@ const App = () => {
               <Route path="/userProfile/:id" element={<UserProfileForm />} />
               <Route path="/employee" element={<EmployeeTable />} />
               <Route path="/employee/:id" element={<Employee />} />
+              <Route path="/employeeSignup" element={<SignupPage />} />
               <Route path="/graphs" element={<GraphsPage />} />
             </Routes>
           </Box>

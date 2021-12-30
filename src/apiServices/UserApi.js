@@ -1,6 +1,16 @@
 import API from './api';
 // const url = 'https://issue-management-backend.herokuapp.com';
 
+// signup user
+export const signupUser = async (userObject) => {
+  try {
+    const res = await API.post('/user/signup', userObject);
+    return res.data;
+  } catch (error) {
+    return error.response;
+  }
+};
+
 // login request
 export const loginUser = async (userObject) => {
   try {

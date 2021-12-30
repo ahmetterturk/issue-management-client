@@ -8,6 +8,8 @@ import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined';
 import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 import MeetingRoomOutlinedIcon from '@mui/icons-material/MeetingRoomOutlined';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import PersonIcon from '@mui/icons-material/Person';
 import useStyles from './styles';
 import { useGlobalContext } from '../../contextReducer/Context';
 
@@ -91,6 +93,11 @@ const Sidebar = () => {
           text="Employees"
           href="/employee"
           icon={PeopleOutlineIcon}
+        />
+        <SidebarLink
+          text='Create Employee'
+          href='/employeeSignup'
+          icon={ManageAccountsIcon}
         />
         {state.currentUser && (
           <SidebarLink
