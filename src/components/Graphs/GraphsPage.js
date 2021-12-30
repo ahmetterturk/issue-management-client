@@ -8,7 +8,6 @@ import moment from 'moment';
 const GraphsPage = () => {
   const { state, dispatch } = useGlobalContext();
   const { issues } = state;
-  console.log(issues);
 
   // Data for doughnut charts
   const priority = issues.map((issue) => issue.priority);
@@ -29,27 +28,17 @@ const GraphsPage = () => {
     (element) => type.filter((x) => x === element).length
   );
 
-  //   console.log(priority);
-  //   console.log(status);
-  //   console.log(type);
-
-  //   console.log(prioritySet);
-  //   console.log(statusSet);
-  //   console.log(typeSet);
-
-  //   console.log(prioritySetNumbers);
-  //   console.log(statusSetNumbers);
-  //   console.log(typeSetNumbers);
-
   // Data for line chart
-  const dates = issues.map((issue) => moment(issue.createdAt).format('ll'));
+  // just had to change the format og the moment and then chain sort to it to sort the items
+  const dates = issues
+    .map((issue) => moment(issue.createdAt).format('YYYYMMDD'))
+    .sort((a, b) => a - b);
   const datesSet = [...new Set(dates)];
+  // we needed to create another array and then with proper moment format to pass as our dates in linechart compoenet
+  const datesSetNew = datesSet.map((date) => moment(date).format('ll'));
   const issuesAtDateCount = datesSet.map(
     (date) => dates.filter((x) => x === date).length
   );
-  console.log(dates);
-  console.log(datesSet);
-  console.log(issuesAtDateCount);
 
   return (
     <Grid container spacing={2}>
@@ -57,21 +46,21 @@ const GraphsPage = () => {
         <DoughnutChart
           labels={prioritySet}
           data={prioritySetNumbers}
-          title="Priority"
+          title='Priority'
         />
       </Grid>
       <Grid item lg={4} md={6} sm={12}>
         <DoughnutChart
           labels={statusSet}
           data={statusSetNumbers}
-          title="Status"
+          title='Status'
         />
       </Grid>
       <Grid item lg={4} md={6} sm={12}>
-        <DoughnutChart labels={typeSet} data={typeSetNumbers} title="Type" />
+        <DoughnutChart labels={typeSet} data={typeSetNumbers} title='Type' />
       </Grid>
       <Grid item lg={10}>
-        <LineChart dates={datesSet} issuesAtDateCount={issuesAtDateCount} />
+        <LineChart dates={datesSetNew} issuesAtDateCount={issuesAtDateCount} />
       </Grid>
     </Grid>
   );

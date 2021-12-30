@@ -56,7 +56,7 @@ const SignupForm = () => {
       .catch((err) => console.log(err));
     setTimeout(() => {
       dispatch({ type: 'AFTER_CREATE' });
-      isFetching(false);
+      setIsFetching(false);
     }, 5000);
   };
   console.log(errorObject);
