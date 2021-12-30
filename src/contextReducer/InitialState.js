@@ -6,4 +6,5 @@ export const initialState = {
   counter: 0,
   isLoggedIn: false,
   isUpdated: false,
+  isCreated: false,
 };
