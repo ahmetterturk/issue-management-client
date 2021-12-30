@@ -10,6 +10,7 @@ import useStyles from './styles';
 import { Link } from 'react-router-dom';
 import { Chip, Typography } from '@mui/material';
 import TablePagination from '@mui/material/TablePagination';
+import moment from 'moment';
 
 const IssuesTable = ({ issuesList }) => {
   const classes = useStyles();
@@ -28,11 +29,11 @@ const IssuesTable = ({ issuesList }) => {
 
   return (
     <>
-      <Typography variant='h3' align='center' className={classes.heading}>
+      <Typography variant="h3" align="center" className={classes.heading}>
         Tickets
       </Typography>
       <TableContainer component={Paper} className={classes.tableContainer}>
-        <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell className={classes.tableHeaderCell}>Issue</TableCell>
@@ -72,7 +73,8 @@ const IssuesTable = ({ issuesList }) => {
                     </TableCell>
                     <TableCell>
                       <Typography>
-                        {issue.createdAt && issue.createdAt.slice(0, 10)}
+                        {issue.createdAt &&
+                          moment(issue.createdAt).format('ll')}
                       </Typography>
                     </TableCell>
                     <TableCell>
@@ -83,7 +85,7 @@ const IssuesTable = ({ issuesList }) => {
             <TablePagination
               className={classes.tablePagination}
               rowsPerPageOptions={[5, 10, 25]}
-              component='div'
+              component="div"
               count={issuesList && issuesList.length}
               rowsPerPage={rowsPerPage}
               page={page}

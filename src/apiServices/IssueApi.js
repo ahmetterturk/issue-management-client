@@ -41,3 +41,13 @@ export const updateIssue = async (id, updatedIssueData) => {
     console.log(error);
   }
 };
+
+// Delete Issue
+export const deleteIssue = async (id) => {
+  try {
+    const response = await API.delete('/issues/' + id);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
