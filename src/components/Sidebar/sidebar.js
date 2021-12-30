@@ -92,7 +92,6 @@ const Sidebar = (props) => {
           href="/issues"
           icon={ReceiptLongRoundedIcon}
         />
-
         <SidebarLink
           text="Graphs"
           href="/graphs"
