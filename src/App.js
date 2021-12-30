@@ -15,6 +15,7 @@ import UserProfileForm from './components/UserProfile/UserProfileForm';
 import EmployeeTable from './components/Employees/EmployeeTable';
 import { allUsers } from './apiServices/UserApi';
 import Employee from './components/Employees/SingleEmployee/Employee';
+import GraphsPage from './components/Graphs/GraphsPage';
 
 const App = () => {
   const classes = useStyles();
@@ -46,12 +47,13 @@ const App = () => {
           <Box className={classes.rightContent}>
             {state.currentUser && <Navbar />}
             <Routes>
-              <Route path='*' element={<Login />} />
-              <Route path='/issues/:id' element={<IssuePage />} />
-              <Route path='/issues' element={<Issues />} />
-              <Route path='/userProfile/:id' element={<UserProfileForm />} />
-              <Route path='/employee' element={<EmployeeTable />} />
-              <Route path='/employee/:id' element={<Employee />} />
+              <Route path="*" element={<Login />} />
+              <Route path="/issues/:id" element={<IssuePage />} />
+              <Route path="/issues" element={<Issues />} />
+              <Route path="/userProfile/:id" element={<UserProfileForm />} />
+              <Route path="/employee" element={<EmployeeTable />} />
+              <Route path="/employee/:id" element={<Employee />} />
+              <Route path="/graphs" element={<GraphsPage />} />
             </Routes>
           </Box>
         </Box>

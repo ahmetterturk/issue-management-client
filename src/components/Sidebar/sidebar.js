@@ -71,43 +71,42 @@ const Sidebar = () => {
     <Box className={classes.sidebar}>
       <Box className={classes.sidebarButtons}>
         <img
-          alt='Product logo - Shield with check icon'
+          alt="Product logo - Shield with check icon"
           className={classes.logo}
           src={logo}
         />
-        <hr className='rounded' />
-        <SidebarLink text='Dashboard' href='/dashboard' icon={GridViewIcon} />
+        <hr className="rounded" />
+        <SidebarLink text="Dashboard" href="/dashboard" icon={GridViewIcon} />
         <SidebarLink
-          text='Issues'
-          href='/issues'
+          text="Issues"
+          href="/issues"
           icon={ReceiptLongRoundedIcon}
         />
-
         <SidebarLink
-          text='Graphs'
-          href='/graphs'
+          text="Graphs"
+          href="/graphs"
           icon={AssessmentOutlinedIcon}
         />
         <SidebarLink
-          text='Employees'
-          href='/employee'
+          text="Employees"
+          href="/employee"
           icon={PeopleOutlineIcon}
         />
         {state.currentUser && (
           <SidebarLink
-            text='Profile'
+            text="Profile"
             href={`/userProfile/${decodedToken.id}`}
             icon={ManageAccountsOutlinedIcon}
           />
         )}
         <SidebarLink
-          text='Log out'
-          href='/login'
+          text="Log out"
+          href="/login"
           onClick={handleLogout}
           icon={MeetingRoomOutlinedIcon}
         />
       </Box>
-      <Box className='footer'>
+      <Box className="footer">
         <span>© Lock Security</span>
       </Box>
     </Box>
