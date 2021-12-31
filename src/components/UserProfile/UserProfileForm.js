@@ -45,16 +45,17 @@ const UserProfileForm = () => {
           .then((userData) => {
             localStorage.setItem('user', JSON.stringify(userData));
             dispatch({ type: 'UPDATE_SUCCESS' });
+            localStorage.removeItem('user');
+            dispatch({ type: 'LOGOUT' });
           })
           .catch((err) => console.log(err));
-        navigate('/employee');
+        navigate('*');
         setIsFetching(false);
         setTimeout(() => {
           dispatch({ type: 'AFTER_UPDATE' });
         }, 4000);
       })
       .catch((err) => console.log(err));
-    console.log(data);
   };
 
   return (
@@ -116,9 +117,9 @@ const UserProfileForm = () => {
                   type='password'
                   xs={12}
                   md={12}
-                  size={6}
+                  size={5}
                   errors={errors.password}
-                  errorMessage="Password can't be blank, minimum of 6 charactes"
+                  errorMessage="Password can't be blank, minimum of 5 charactes"
                   className={classes.error}
                 />
                 <Grid item md={12} xs={12}>

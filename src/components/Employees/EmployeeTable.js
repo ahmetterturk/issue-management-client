@@ -80,7 +80,7 @@ const EmployeeTable = () => {
                           src={user.imageUrl}
                           className={classes.avatarIcon}
                         />
-                        <Typography>{user.name}</Typography>
+                        <Typography>{`${user.firstName} ${user.lastName}`}</Typography>
                       </Link>
                     </TableCell>
                     <TableCell>

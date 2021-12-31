@@ -22,7 +22,7 @@ const Navbar = (props) => {
   const menuIcon = (
     <IconButton
       onClick={onMenuClick}
-      edge="start"
+      edge='start'
       sx={{
         display: {
           xs: 'inline-flex',
@@ -30,7 +30,7 @@ const Navbar = (props) => {
         },
       }}
     >
-      <MenuIcon fontSize="small" />
+      <MenuIcon fontSize='small' />
     </IconButton>
   );
 
@@ -40,11 +40,13 @@ const Navbar = (props) => {
         {!isLargeScreen && menuIcon}
         <Box className={classes.avatarWrapper}>
           <span className={classes.userGreeting}>
-            Hi {state.currentUser && userDetails.name}
+            Hi{' '}
+            {state.currentUser &&
+              `${userDetails.firstName} ${userDetails.lastName}`}
           </span>
           <Box sx={{ flexGrow: 0 }}>
             <Avatar
-              alt="Remy Sharp"
+              alt='Remy Sharp'
               src={state.currentUser && userDetails.image}
             />
           </Box>

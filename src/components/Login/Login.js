@@ -17,7 +17,7 @@ import { loginUser } from '../../apiServices/UserApi';
 import { useGlobalContext } from '../../contextReducer/Context';
 import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
-
+import jwtDecode from 'jwt-decode';
 const theme = createTheme({
   palette: {
     type: 'light',
@@ -56,7 +56,13 @@ const Login = () => {
           dispatch({ type: 'LOGIN_INFO', data: data });
           dispatch({ type: 'LOGIN_SUCCESS' });
           localStorage.setItem('user', JSON.stringify(data));
-          navigate('/issues');
+          const decodeToken = jwtDecode(data.token);
+          console.log(decodeToken);
+          if (data.userDetails.image === null) {
+            navigate(`/userProfile/${decodeToken.id}`);
+          } else {
+            navigate('/issues');
+          }
         }
       })
       .catch((err) => {
