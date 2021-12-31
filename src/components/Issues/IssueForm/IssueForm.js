@@ -11,6 +11,7 @@ import { useGlobalContext } from '../../../contextReducer/Context';
 import { createIssue } from '../../../apiServices/IssueApi';
 import { useForm } from 'react-hook-form/dist/index.cjs';
 import jwtdecode from 'jwt-decode';
+import { Typography } from '@mui/material';
 
 const style = {
   position: 'absolute',
@@ -30,6 +31,7 @@ const IssueForm = () => {
   const { token } = currentUser;
 
   const decodedToken = jwtdecode(token);
+  console.log(currentUser.userDetails);
 
   const {
     register,
@@ -56,20 +58,27 @@ const IssueForm = () => {
   return (
     <>
       <div>
-        <Button onClick={handleOpen}>New Issue</Button>
+        {currentUser.userDetails.image === null ? (
+          <Typography variant='p'>
+            In order to publish ticket you need to create a profile first
+          </Typography>
+        ) : (
+          <Button onClick={handleOpen}>New Issue</Button>
+        )}
+
         <Modal
           open={open}
           onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
+          aria-labelledby='modal-modal-title'
+          aria-describedby='modal-modal-description'
         >
           <Box sx={style}>
             <form onSubmit={handleSubmit(onSubmit)}>
               <TextField
                 {...register('title', { required: true })}
-                id="outlined-basic"
-                label="Title"
-                variant="outlined"
+                id='outlined-basic'
+                label='Title'
+                variant='outlined'
               />
               {errors.title && (
                 <p style={{ color: 'red' }}>Title can't be blank!</p>
@@ -79,7 +88,7 @@ const IssueForm = () => {
                 multiline
                 rows={2}
                 maxRows={4}
-                label="Description"
+                label='Description'
               />
               {errors.description && (
                 <p style={{ color: 'red' }}>Description can't be blank!</p>
@@ -97,7 +106,7 @@ const IssueForm = () => {
                 <p style={{ color: 'red' }}>Status can't be blank!</p>
               )}
               {/* <MembersDropdown name="members" /> */}
-              <input type="submit" value="Submit" />
+              <input type='submit' value='Submit' />
             </form>
           </Box>
         </Modal>

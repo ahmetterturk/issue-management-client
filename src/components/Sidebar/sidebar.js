@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import GridViewIcon from '@mui/icons-material/GridView';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -64,8 +65,10 @@ const Sidebar = (props) => {
   const { state, dispatch } = useGlobalContext();
   const classes = useStyles();
   const { token } = state.currentUser && state.currentUser;
+  useEffect(() => {
+    return state.currentUser;
+  }, [state.currentUser]);
   const decodedToken = jwtDecode(token);
-
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'), {
     defaultMatches: true,
     noSsr: false,
@@ -81,47 +84,76 @@ const Sidebar = (props) => {
     <Box className={classes.sidebar}>
       <Box className={classes.sidebarButtons}>
         <img
-          alt="Product logo - Shield with check icon"
+          alt='Product logo - Shield with check icon'
           className={classes.logo}
           src={logo}
         />
-        <hr className="rounded" />
-        <SidebarLink text="Dashboard" href="/dashboard" icon={GridViewIcon} />
-        <SidebarLink
-          text="Issues"
-          href="/issues"
-          icon={ReceiptLongRoundedIcon}
-        />
-        <SidebarLink
-          text="Graphs"
-          href="/graphs"
-          icon={AssessmentOutlinedIcon}
-        />
-        <SidebarLink
-          text="Employees"
-          href="/employee"
-          icon={PeopleOutlineIcon}
-        />
-        <SidebarLink
-          text="Create Employee"
-          href="/employeeSignup"
-          icon={ManageAccountsIcon}
-        />
-        {state.currentUser && (
-          <SidebarLink
-            text="Profile"
-            href={`/userProfile/${decodedToken.id}`}
-            icon={ManageAccountsOutlinedIcon}
-          />
+        <hr className='rounded' />
+        {decodedToken.isAdmin ? (
+          <>
+            <SidebarLink
+              text='Dashboard'
+              href='/dashboard'
+              icon={GridViewIcon}
+            />
+            <SidebarLink
+              text='Issues'
+              href='/issues'
+              icon={ReceiptLongRoundedIcon}
+            />
+            <SidebarLink
+              text='Graphs'
+              href='/graphs'
+              icon={AssessmentOutlinedIcon}
+            />
+            <SidebarLink
+              text='Employees'
+              href='/employee'
+              icon={PeopleOutlineIcon}
+            />
+            <SidebarLink
+              text='Create Employee'
+              href='/employeeSignup'
+              icon={ManageAccountsIcon}
+            />
+            {state.currentUser && (
+              <SidebarLink
+                text='Profile'
+                href={`/userProfile/${decodedToken.id}`}
+                icon={ManageAccountsOutlinedIcon}
+              />
+            )}
+            <SidebarLink
+              text='Log out'
+              href='/login'
+              onClick={handleLogout}
+              icon={MeetingRoomOutlinedIcon}
+            />
+          </>
+        ) : (
+          <>
+            <SidebarLink
+              text='Issues'
+              href='/issues'
+              icon={ReceiptLongRoundedIcon}
+            />
+            {state.currentUser && (
+              <SidebarLink
+                text='Profile'
+                href={`/userProfile/${decodedToken.id}`}
+                icon={ManageAccountsOutlinedIcon}
+              />
+            )}
+            <SidebarLink
+              text='Log out'
+              href='/login'
+              onClick={handleLogout}
+              icon={MeetingRoomOutlinedIcon}
+            />
+          </>
         )}
-        <SidebarLink
-          text="Log out"
-          href="/login"
-          onClick={handleLogout}
-          icon={MeetingRoomOutlinedIcon}
-        />
       </Box>
-      <Box className="footer" sx={{ textAlign: 'center', padding: '15px' }}>
+      <Box className='footer' sx={{ textAlign: 'center', padding: '15px' }}>
         <span>© Lock Security</span>
       </Box>
     </Box>
@@ -130,7 +162,7 @@ const Sidebar = (props) => {
   if (lgUp) {
     return (
       <Drawer
-        anchor="left"
+        anchor='left'
         open
         PaperProps={{
           sx: {
@@ -139,7 +171,7 @@ const Sidebar = (props) => {
             width: 226,
           },
         }}
-        variant="permanent"
+        variant='permanent'
       >
         {drawerContent}
       </Drawer>
@@ -148,7 +180,7 @@ const Sidebar = (props) => {
 
   return (
     <Drawer
-      anchor="left"
+      anchor='left'
       onClose={onClose}
       open={isOpen}
       PaperProps={{
@@ -159,7 +191,7 @@ const Sidebar = (props) => {
         },
       }}
       sx={{ zIndex: (theme) => theme.zIndex.appBar + 100 }}
-      variant="temporary"
+      variant='temporary'
     >
       {drawerContent}
     </Drawer>
