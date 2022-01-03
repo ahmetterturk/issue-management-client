@@ -85,6 +85,12 @@ const reducer = (state, action) => {
         issueUpdateMembers: action.data,
       };
     }
+    case 'SET_ASSIGNED_ISSUES': {
+      return {
+        ...state,
+        assignedIssues: action.data,
+      };
+    }
     default:
       return state;
   }

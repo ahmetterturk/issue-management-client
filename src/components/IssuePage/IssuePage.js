@@ -16,8 +16,8 @@ import Members from './Members';
 const IssuePage = () => {
   const classes = useStyles();
   const { id } = useParams();
-  const { state } = useGlobalContext();
-  const { currentUser } = state;
+  const { state, dispatch } = useGlobalContext();
+  const { currentUser, assignedIssues } = state;
   const { token } = currentUser;
   const decodedToken = jwtdecode(token);
 
@@ -38,6 +38,13 @@ const IssuePage = () => {
       .catch((error) => console.log(error));
   }, [state.counter]);
 
+  useEffect(() => {
+    const currentAssignedIssues = assignedIssues.filter(
+      (issue) => issue._id !== id
+    );
+    dispatch({ type: 'SET_ASSIGNED_ISSUES', data: currentAssignedIssues });
+  }, [id]);
+
   return (
     <>
       <Container className={classes.container}>
@@ -45,14 +52,14 @@ const IssuePage = () => {
           <IssueEditForm issue={issue} id={id} />
         )}
 
-        <Typography className={classes.header} variant="h4">
+        <Typography className={classes.header} variant='h4'>
           Ticket
         </Typography>
 
         <IssueInfo issue={issue} />
 
         <div className={classes.mutualContainer}>
-          <Typography variant="h6">{issue.title}</Typography>
+          <Typography variant='h6'>{issue.title}</Typography>
           <Typography>{issue.description}</Typography>
         </div>
 

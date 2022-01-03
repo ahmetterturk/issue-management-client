@@ -11,10 +11,10 @@ const DropDownIssues = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
-  const { state, disptach } = useGlobalContext();
+  const { state, dispatch } = useGlobalContext();
   const { userDetails } = state.currentUser;
-  const { issues } = state;
-  const [assignedIssues, setAssignedIssues] = React.useState([]);
+  const { issues, assignedIssues } = state;
+  // const [assignedIssues, setAssignedIssues] = React.useState([]);
 
   React.useEffect(() => {
     if (state.currentUser) {
@@ -29,7 +29,7 @@ const DropDownIssues = () => {
           }
         })
         .filter((issue) => issue !== undefined);
-      setAssignedIssues(currentAssignedIssues);
+      dispatch({ type: 'SET_ASSIGNED_ISSUES', data: currentAssignedIssues });
     }
   }, [state.currentUser, state.issues, state.counter]);
 
@@ -66,18 +66,16 @@ const DropDownIssues = () => {
         {assignedIssues &&
           assignedIssues.map((issue) => {
             return (
-              <>
-                <Link
-                  key={issue._id}
-                  to={`/issues/${issue._id}`}
-                  style={{
-                    textDecoration: 'none',
-                    color: '#555',
-                  }}
-                >
-                  <MenuItem onClick={handleClose}>{issue.title}</MenuItem>
-                </Link>
-              </>
+              <Link
+                key={issue._id}
+                to={`/issues/${issue._id}`}
+                style={{
+                  textDecoration: 'none',
+                  color: '#555',
+                }}
+              >
+                <MenuItem onClick={handleClose}>{issue.title}</MenuItem>
+              </Link>
             );
           })}
       </Menu>

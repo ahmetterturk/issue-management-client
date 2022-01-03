@@ -9,4 +9,5 @@ export const initialState = {
   isCreated: false,
   issueMembers: [],
   issueUpdateMembers: [],
+  assignedIssues: []
 };
