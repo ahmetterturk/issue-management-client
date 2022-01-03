@@ -22,7 +22,7 @@ import { ThemeProvider } from '@mui/styles';
 const App = () => {
   const classes = useStyles();
 
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [state, dispatch] = useReducer(reducer, initialState);
 
   // get all issues
