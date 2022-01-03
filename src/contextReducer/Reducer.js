@@ -12,7 +12,6 @@ const reducer = (state, action) => {
         users: action.data,
       };
     }
-
     case 'LOGIN_INFO': {
       return {
         ...state,
@@ -72,6 +71,18 @@ const reducer = (state, action) => {
       return {
         ...state,
         counter: state.counter + 1,
+      };
+    }
+    case 'SET_ISSUE_MEMBERS': {
+      return {
+        ...state,
+        issueMembers: action.data,
+      };
+    }
+    case 'SET_ISSUE_UPDATE_MEMBERS': {
+      return {
+        ...state,
+        issueUpdateMembers: action.data,
       };
     }
     default:

@@ -1,11 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import issueData from './issueData';
+import { useGlobalContext } from '../../contextReducer/Context';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -18,8 +18,6 @@ const MenuProps = {
   },
 };
 
-const names = issueData.names;
-
 function getStyles(name, personName, theme) {
   return {
     fontWeight:
@@ -29,26 +27,34 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function MultipleSelect() {
+const MembersUpdateDropdown = ({ issueData, name }) => {
   const theme = useTheme();
-  const [personName, setPersonName] = React.useState([]);
+  const { state, dispatch } = useGlobalContext();
+  const [personName, setPersonName] = React.useState(issueData.members);
+
+  const users = state.users.allUsers.map((user) => [
+    `${user.firstName} ${user.lastName}`,
+    user._id,
+  ]);
+
+  // console.log(users);
 
   const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
     setPersonName(
-      // On autofill we get a the stringified value.
-      typeof value === 'string' ? value.split(',') : value
+      typeof event.target.value === 'string'
+        ? event.target.value.split(',')
+        : event.target.value
     );
+    dispatch({ type: 'SET_ISSUE_UPDATE_MEMBERS', data: event.target.value });
+    // console.log(personName);
+    // console.log(state.issueUpdateMembers);
   };
 
   return (
     <div>
-      <FormControl sx={{ mb: 5, width: '100%' }}>
+      <FormControl sx={{ m: 1, width: 300 }}>
         <InputLabel id="demo-multiple-name-label">Name</InputLabel>
         <Select
-          sx={{ borderRadius: 16 }}
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
           multiple
@@ -56,18 +62,21 @@ export default function MultipleSelect() {
           onChange={handleChange}
           input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
+          name={name}
         >
-          {names.map((name) => (
+          {users.map((user) => (
             <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
+              key={user[1]}
+              value={user[0]}
+              style={getStyles(user, personName, theme)}
             >
-              {name}
+              {user[0]}
             </MenuItem>
           ))}
         </Select>
       </FormControl>
     </div>
   );
-}
+};
+
+export default MembersUpdateDropdown;
