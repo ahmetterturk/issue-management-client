@@ -11,6 +11,7 @@ import {
   FormControl,
   TextField,
 } from '@mui/material';
+import MembersUpdateDropdown from './MembersUpdateDropdown';
 
 const style = {
   position: 'absolute',
@@ -31,7 +32,7 @@ const IssueEditForm = ({ issue, id }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const { dispatch } = useGlobalContext();
+  const { dispatch, state } = useGlobalContext();
 
   const data = {
     title: issue.title,
@@ -41,6 +42,7 @@ const IssueEditForm = ({ issue, id }) => {
     type: issue.type,
     userId: issue.userId,
     userName: issue.userName,
+    members: issue.members,
   };
 
   const [issueData, setIssueData] = useState(data);
@@ -67,9 +69,10 @@ const IssueEditForm = ({ issue, id }) => {
       setErrorMessageDesc("Description can't be blank");
     } else {
       setHasError(false);
-      updateIssue(id, issueData)
+      updateIssue(id, { ...issueData, members: state.issueUpdateMembers })
         .then(() => {
           dispatch({ type: 'INCREASE_COUNTER' });
+          dispatch({ type: 'SET_ISSUE_UPDATE_MEMBERS', data: [] });
         })
         .catch((error) => {
           console.log(error);
@@ -84,17 +87,17 @@ const IssueEditForm = ({ issue, id }) => {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
           <form onSubmit={handleSubmit}>
             <TextField
               value={issueData.title}
-              name='title'
-              id='outlined-basic'
-              label='Title'
-              variant='outlined'
+              name="title"
+              id="outlined-basic"
+              label="Title"
+              variant="outlined"
               onChange={handleChange}
             />
             {hasError && (
@@ -102,60 +105,61 @@ const IssueEditForm = ({ issue, id }) => {
             )}
             <TextField
               value={issueData.description}
-              name='description'
+              name="description"
               multiline
               rows={2}
               maxRows={4}
-              label='Description'
+              label="Description"
               onChange={handleChange}
             />
             {hasError && (
               <span style={{ color: 'red' }}>{errorMessageDesc}</span>
             )}
             <FormControl sx={{ minWidth: 150 }}>
-              <InputLabel id='demo-simple-select-label'>Type</InputLabel>
+              <InputLabel id="demo-simple-select-label">Type</InputLabel>
               <Select
-                labelId='demo-simple-select-label'
-                id='demo-simple-select'
-                label='Type'
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                label="Type"
                 value={issueData.type}
-                name='type'
+                name="type"
                 onChange={handleChange}
               >
-                <MenuItem value='Public'>Public</MenuItem>
-                <MenuItem value='Private'>Private</MenuItem>
+                <MenuItem value="Public">Public</MenuItem>
+                <MenuItem value="Private">Private</MenuItem>
               </Select>
             </FormControl>
             <FormControl sx={{ minWidth: 150 }}>
-              <InputLabel id='demo-simple-select-label'>Status</InputLabel>
+              <InputLabel id="demo-simple-select-label">Status</InputLabel>
               <Select
-                labelId='demo-simple-select-label'
-                id='demo-simple-select'
-                label='Status'
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                label="Status"
                 value={issueData.status}
-                name='status'
+                name="status"
                 onChange={handleChange}
               >
-                <MenuItem value='New'>New</MenuItem>
-                <MenuItem value='Pending'>Pending</MenuItem>
-                <MenuItem value='Resolved'>Resolved</MenuItem>
+                <MenuItem value="New">New</MenuItem>
+                <MenuItem value="Pending">Pending</MenuItem>
+                <MenuItem value="Resolved">Resolved</MenuItem>
               </Select>
             </FormControl>
             <FormControl sx={{ minWidth: 150 }}>
-              <InputLabel id='demo-simple-select-label'>Priority</InputLabel>
+              <InputLabel id="demo-simple-select-label">Priority</InputLabel>
               <Select
-                labelId='demo-simple-select-label'
-                id='demo-simple-select'
-                label='Status'
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                label="Status"
                 value={issueData.priority}
-                name='priority'
+                name="priority"
                 onChange={handleChange}
               >
-                <MenuItem value='Low'>Low</MenuItem>
-                <MenuItem value='High'>High</MenuItem>
+                <MenuItem value="Low">Low</MenuItem>
+                <MenuItem value="High">High</MenuItem>
               </Select>
+              <MembersUpdateDropdown name="members" issueData={issueData} />
             </FormControl>
-            <input type='submit' value='Update Issue' />
+            <input type="submit" value="Update Issue" />
           </form>
         </Box>
       </Modal>

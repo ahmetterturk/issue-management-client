@@ -79,6 +79,12 @@ const reducer = (state, action) => {
         issueMembers: action.data,
       };
     }
+    case 'SET_ISSUE_UPDATE_MEMBERS': {
+      return {
+        ...state,
+        issueUpdateMembers: action.data,
+      };
+    }
     default:
       return state;
   }

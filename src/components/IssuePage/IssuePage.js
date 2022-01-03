@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Messages from './Messages';
 // import issueData from './issueData';
 import IssueInfo from './IssueInfo';
-import PersonSelect from './PersonSelect';
+// import PersonSelect from './PersonSelect';
 import useStyles from './styles';
 import { useParams } from 'react-router-dom';
 import { getIssue } from '../../apiServices/IssueApi';
@@ -11,6 +11,7 @@ import IssueEditForm from './IssueEditForm';
 import { useGlobalContext } from '../../contextReducer/Context';
 import jwtdecode from 'jwt-decode';
 import { getAllMessages } from '../../apiServices/MessageApi';
+import Members from './Members';
 
 const IssuePage = () => {
   const classes = useStyles();
@@ -56,6 +57,7 @@ const IssuePage = () => {
         </div>
 
         {/* <PersonSelect /> */}
+        <Members issue={issue} />
 
         <Messages
           messages={messages}
