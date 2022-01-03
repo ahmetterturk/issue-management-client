@@ -8,6 +8,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useStyles } from './NavbarStyle';
 import { useGlobalContext } from '../../contextReducer/Context';
 import { useMediaQuery } from '@mui/material';
+import DropDownIssues from './DropDownIssues';
 
 const Navbar = (props) => {
   const { onMenuClick } = props;
@@ -16,8 +17,9 @@ const Navbar = (props) => {
     noSsr: false,
   });
   const classes = useStyles({ isLargeScreen });
-  const { state } = useGlobalContext();
+  const { state, disptach } = useGlobalContext();
   const { userDetails } = state.currentUser;
+  const { issues } = state;
 
   const menuIcon = (
     <IconButton
@@ -37,6 +39,7 @@ const Navbar = (props) => {
   return (
     <>
       <Toolbar className={classes.navbar}>
+        <DropDownIssues />
         {!isLargeScreen && menuIcon}
         <Box className={classes.avatarWrapper}>
           <span className={classes.userGreeting}>
