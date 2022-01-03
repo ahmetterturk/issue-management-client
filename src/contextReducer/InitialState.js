@@ -7,4 +7,5 @@ export const initialState = {
   isLoggedIn: false,
   isUpdated: false,
   isCreated: false,
+  issueMembers: [],
 };

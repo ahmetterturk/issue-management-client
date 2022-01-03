@@ -5,7 +5,8 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import issueData from './issueData';
+// import issueData from './issueData';
+// import { useGlobalContext } from '../../contextReducer/Context';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -18,7 +19,7 @@ const MenuProps = {
   },
 };
 
-const names = issueData.names;
+const names = ['Harry', 'Hermoine'];
 
 function getStyles(name, personName, theme) {
   return {

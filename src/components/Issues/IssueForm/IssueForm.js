@@ -27,11 +27,8 @@ const style = {
 const IssueForm = () => {
   const { state, dispatch } = useGlobalContext();
   const { currentUser } = state;
-
   const { token } = currentUser;
-
   const decodedToken = jwtdecode(token);
-  console.log(currentUser.userDetails);
 
   const {
     register,
@@ -45,7 +42,12 @@ const IssueForm = () => {
 
   const onSubmit = (data) => {
     data.userId = currentUser && decodedToken.id;
-    data.userName = currentUser && decodedToken.name;
+    data.userName =
+      currentUser &&
+      `${currentUser.userDetails.firstName} ${currentUser.userDetails.lastName}`;
+    data.members = state.issueMembers !== [] && state.issueMembers;
+
+    console.log(data);
 
     createIssue(data)
       .then(() => {
@@ -53,13 +55,15 @@ const IssueForm = () => {
       })
       .catch((error) => console.log(error));
     setOpen(false);
+
+    dispatch({ type: 'SET_ISSUE_MEMBERS', data: [] });
   };
 
   return (
     <>
       <div>
         {currentUser.userDetails.image === null ? (
-          <Typography variant='p'>
+          <Typography variant="p">
             In order to publish ticket you need to create a profile first
           </Typography>
         ) : (
@@ -69,16 +73,16 @@ const IssueForm = () => {
         <Modal
           open={open}
           onClose={handleClose}
-          aria-labelledby='modal-modal-title'
-          aria-describedby='modal-modal-description'
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
             <form onSubmit={handleSubmit(onSubmit)}>
               <TextField
                 {...register('title', { required: true })}
-                id='outlined-basic'
-                label='Title'
-                variant='outlined'
+                id="outlined-basic"
+                label="Title"
+                variant="outlined"
               />
               {errors.title && (
                 <p style={{ color: 'red' }}>Title can't be blank!</p>
@@ -88,7 +92,7 @@ const IssueForm = () => {
                 multiline
                 rows={2}
                 maxRows={4}
-                label='Description'
+                label="Description"
               />
               {errors.description && (
                 <p style={{ color: 'red' }}>Description can't be blank!</p>
@@ -105,8 +109,8 @@ const IssueForm = () => {
               {errors.status && (
                 <p style={{ color: 'red' }}>Status can't be blank!</p>
               )}
-              {/* <MembersDropdown name="members" /> */}
-              <input type='submit' value='Submit' />
+              <MembersDropdown name="members" />
+              <input type="submit" value="Submit" />
             </form>
           </Box>
         </Modal>

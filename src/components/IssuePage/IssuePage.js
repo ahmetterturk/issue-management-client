@@ -1,7 +1,7 @@
 import { Container, Typography } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import Messages from './Messages';
-import issueData from './issueData';
+// import issueData from './issueData';
 import IssueInfo from './IssueInfo';
 import PersonSelect from './PersonSelect';
 import useStyles from './styles';
@@ -48,19 +48,19 @@ const IssuePage = () => {
           Ticket
         </Typography>
 
-        <IssueInfo issue={issue} issueData={issueData} />
+        <IssueInfo issue={issue} />
 
         <div className={classes.mutualContainer}>
           <Typography variant="h6">{issue.title}</Typography>
           <Typography>{issue.description}</Typography>
         </div>
 
-        <PersonSelect />
+        {/* <PersonSelect /> */}
 
         <Messages
           messages={messages}
           issueId={id}
-          userName={currentUser.userDetails.name}
+          userName={`${currentUser.userDetails.firstName} ${currentUser.userDetails.lastName}`}
           userId={decodedToken.id}
         />
       </Container>
