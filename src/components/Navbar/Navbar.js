@@ -39,9 +39,9 @@ const Navbar = (props) => {
   return (
     <>
       <Toolbar className={classes.navbar}>
-        <DropDownIssues />
         {!isLargeScreen && menuIcon}
         <Box className={classes.avatarWrapper}>
+          <DropDownIssues />
           <span className={classes.userGreeting}>
             Hi{' '}
             {state.currentUser &&

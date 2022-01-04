@@ -25,7 +25,7 @@ const FormInput = ({
           type={type}
           label={label}
           {...register(name, { required: true, minLength: size })}
-          variant='filled'
+          variant='outlined'
           InputProps={{
             startAdornment: (
               <InputAdornment position='start' className={className}>

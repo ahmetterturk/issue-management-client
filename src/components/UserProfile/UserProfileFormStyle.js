@@ -5,9 +5,19 @@ export const useStyles = makeStyles(() => ({
     paddingBottom: '15px',
     color: '#6787E3',
   },
+  profileForm: {
+    ['@media (max-width:780px)']: {
+      padding: '5px',
+    },
+  },
   card: {
+    border: '1px solid lightgrey',
+    borderBottom: 'none',
     maxWidth: '600px',
     margin: '10px auto',
+    ['@media (max-width:780px)']: {
+      maxWidth: 370,
+    },
   },
   icon: {
     color: '#6787E3',

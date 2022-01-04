@@ -9,7 +9,7 @@ const useStyles = makeStyles(() => ({
     height: '100vh',
   },
   rightContent: {
-    backgroundColor: '#E6E6E6',
+    backgroundColor: '#fff',
     flex: 1,
     [theme.breakpoints.up('lg')]: {
       paddingLeft: 226,
