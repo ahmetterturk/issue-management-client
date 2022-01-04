@@ -52,7 +52,6 @@ const DropDownIssues = () => {
         <Badge badgeContent={assignedIssues.length} color='secondary'>
           <NotificationsIcon color='action' />
         </Badge>
-        Assigned Issues
       </Button>
       <Menu
         id='basic-menu'

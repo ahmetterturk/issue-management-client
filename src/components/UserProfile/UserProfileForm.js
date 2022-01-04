@@ -64,7 +64,12 @@ const UserProfileForm = () => {
         <Typography variant='h3' align='center' className={classes.heading}>
           Profile
         </Typography>
-        <form autoComplete='off' noValidate onSubmit={handleSubmit(onSubmit)}>
+        <form
+          autoComplete='off'
+          noValidate
+          onSubmit={handleSubmit(onSubmit)}
+          className={classes.profileForm}
+        >
           <Card className={classes.card}>
             <CardContent>
               <Grid container spacing={3}>

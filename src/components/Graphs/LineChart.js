@@ -1,9 +1,11 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
-
-const LineChart = ({ dates, issuesAtDateCount }) => {
+import { useStyles } from './GraphPageStyles';
+import { Card } from '@mui/material';
+const LineChart = ({ dates, issuesAtDateCount }, props) => {
+  const classes = useStyles();
   return (
-    <div>
+    <Card {...props} className={classes.LineChartCard}>
       <Line
         data={{
           labels: dates,
@@ -33,7 +35,7 @@ const LineChart = ({ dates, issuesAtDateCount }) => {
         // height={400}
         // width={800}
       />
-    </div>
+    </Card>
   );
 };
 

@@ -2,12 +2,13 @@ import React from 'react';
 import { useGlobalContext } from '../../contextReducer/Context';
 import DoughnutChart from './DoughnutChart';
 import LineChart from './LineChart';
-import { Grid } from '@mui/material';
+import { Grid, Container } from '@mui/material';
 import moment from 'moment';
-
+import { useStyles } from './GraphPageStyles';
 const GraphsPage = () => {
-  const { state, dispatch } = useGlobalContext();
+  const { state } = useGlobalContext();
   const { issues } = state;
+  const classes = useStyles();
 
   // Data for doughnut charts
   const priority = issues.map((issue) => issue.priority);
@@ -41,28 +42,33 @@ const GraphsPage = () => {
   );
 
   return (
-    <Grid container spacing={2}>
-      <Grid item lg={4} md={6} sm={12}>
-        <DoughnutChart
-          labels={prioritySet}
-          data={prioritySetNumbers}
-          title='Priority'
-        />
+    <Container maxWidth={false}>
+      <Grid container spacing={3} className={classes.dounutGraphs}>
+        <Grid item lg={4} sm={6} xl={3} xs={12} sx={{ maxWidth: 370 }}>
+          <DoughnutChart
+            labels={prioritySet}
+            data={prioritySetNumbers}
+            title='Priority'
+          />
+        </Grid>
+        <Grid item lg={4} sm={6} xl={3} xs={12} sx={{ maxWidth: 370 }}>
+          <DoughnutChart
+            labels={statusSet}
+            data={statusSetNumbers}
+            title='Status'
+          />
+        </Grid>
+        <Grid item lg={4} sm={6} xl={3} xs={12} sx={{ maxWidth: 370 }}>
+          <DoughnutChart labels={typeSet} data={typeSetNumbers} title='Type' />
+        </Grid>
+        <Grid item lg={8} md={8} xl={9} xs={10}>
+          <LineChart
+            dates={datesSetNew}
+            issuesAtDateCount={issuesAtDateCount}
+          />
+        </Grid>
       </Grid>
-      <Grid item lg={4} md={6} sm={12}>
-        <DoughnutChart
-          labels={statusSet}
-          data={statusSetNumbers}
-          title='Status'
-        />
-      </Grid>
-      <Grid item lg={4} md={6} sm={12}>
-        <DoughnutChart labels={typeSet} data={typeSetNumbers} title='Type' />
-      </Grid>
-      <Grid item lg={10}>
-        <LineChart dates={datesSetNew} issuesAtDateCount={issuesAtDateCount} />
-      </Grid>
-    </Grid>
+    </Container>
   );
 };
 
