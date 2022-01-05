@@ -20,10 +20,9 @@ import SignupPage from './components/Signup/SignupPage';
 import { ThemeProvider } from '@mui/styles';
 
 const App = () => {
-  const classes = useStyles();
-
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [state, dispatch] = useReducer(reducer, initialState);
+  const classes = useStyles({ isLoggedIn: !!state.currentUser });
 
   // get all issues
   useEffect(() => {

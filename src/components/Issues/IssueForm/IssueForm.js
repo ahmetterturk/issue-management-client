@@ -61,9 +61,9 @@ const IssueForm = () => {
         ) : (
           <Button
             onClick={handleOpen}
-            color="primary"
             variant="contained"
             startIcon={<AddCircleOutlineIcon />}
+            sx={{ backgroundColor: '#4E73DF', margin: 2 }}
           >
             New Issue
           </Button>
