@@ -6,6 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useGlobalContext } from '../../../contextReducer/Context';
+import useStyles from './styles';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -31,6 +32,7 @@ const MembersDropdown = () => {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
   const { state, dispatch } = useGlobalContext();
+  const classes = useStyles();
 
   const users = state.users.allUsers.map((user) => [
     `${user.firstName} ${user.lastName}`,
@@ -51,7 +53,7 @@ const MembersDropdown = () => {
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 300 }}>
+      <FormControl>
         <InputLabel id="demo-multiple-name-label">Name</InputLabel>
         <Select
           labelId="demo-multiple-name-label"
@@ -61,6 +63,7 @@ const MembersDropdown = () => {
           onChange={handleChange}
           input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
+          className={classes.personSelect}
         >
           {users.map((user) => (
             <MenuItem

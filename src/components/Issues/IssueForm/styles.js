@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'white',
     position: 'absolute',
     width: 500,
-    height: 600,
+    height: 650,
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: theme.spacing(1),
     [theme.breakpoints.down('sm')]: {
       width: 250,
-      height: 550,
+      height: 650,
       padding: theme.spacing(7),
     },
   },
@@ -30,10 +30,9 @@ const useStyles = makeStyles((theme) => ({
   },
   select: {
     minWidth: 280,
-    marginBottom: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(4),
-    },
+    // [theme.breakpoints.up('sm')]: {
+    //   //   marginBottom: theme.spacing(4),
+    // },
     [theme.breakpoints.down('sm')]: {
       minWidth: 316,
     },
@@ -46,8 +45,8 @@ const useStyles = makeStyles((theme) => ({
       maxWidth: 316,
     },
   },
-  gridItem: {
-    margin: theme.spacing(3),
+  individualSelectBox: {
+    marginBottom: theme.spacing(3),
   },
   titleDiv: {
     marginBottom: theme.spacing(2),
@@ -64,25 +63,6 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: theme.spacing(4),
     },
     marginBottom: theme.spacing(2),
-  },
-  container: {
-    marginTop: '50px',
-  },
-  mutualContainer: {
-    backgroundColor: '#F6F6F6',
-    borderRadius: '25px',
-    margin: '50px 0',
-    padding: '15px',
-  },
-  sendIcon: {
-    paddingLeft: '20px',
-  },
-  header: {
-    textAlign: 'center',
-  },
-  deleteMsgIcon: {
-    color: 'red',
-    cursor: 'pointer',
   },
 }));
 
