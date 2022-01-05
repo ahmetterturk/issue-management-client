@@ -168,7 +168,7 @@ const Sidebar = (props) => {
             width: 226,
           },
         }}
-        variant="permanent"
+        variant="persistent"
       >
         {drawerContent}
       </Drawer>

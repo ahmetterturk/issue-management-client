@@ -13,6 +13,8 @@ import { useForm } from 'react-hook-form/dist/index.cjs';
 import jwtdecode from 'jwt-decode';
 import { Typography } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { padding } from '@mui/system';
+import { Padding } from '@mui/icons-material';
 
 const style = {
   position: 'absolute',
@@ -64,15 +66,15 @@ const IssueForm = () => {
     <>
       <div>
         {currentUser.userDetails.image === null ? (
-          <Typography variant='p'>
+          <Typography variant="p">
             In order to publish ticket you need to create a profile first
           </Typography>
         ) : (
           <Button
             onClick={handleOpen}
-            color='primary'
-            variant='contained'
+            variant="contained"
             startIcon={<AddCircleOutlineIcon />}
+            sx={{ backgroundColor: '#4E73DF', margin: 2 }}
           >
             New Issue
           </Button>
@@ -81,16 +83,16 @@ const IssueForm = () => {
         <Modal
           open={open}
           onClose={handleClose}
-          aria-labelledby='modal-modal-title'
-          aria-describedby='modal-modal-description'
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
             <form onSubmit={handleSubmit(onSubmit)}>
               <TextField
                 {...register('title', { required: true })}
-                id='outlined-basic'
-                label='Title'
-                variant='outlined'
+                id="outlined-basic"
+                label="Title"
+                variant="outlined"
               />
               {errors.title && (
                 <p style={{ color: 'red' }}>Title can't be blank!</p>
@@ -100,7 +102,7 @@ const IssueForm = () => {
                 multiline
                 rows={2}
                 maxRows={4}
-                label='Description'
+                label="Description"
               />
               {errors.description && (
                 <p style={{ color: 'red' }}>Description can't be blank!</p>
@@ -117,8 +119,8 @@ const IssueForm = () => {
               {errors.status && (
                 <p style={{ color: 'red' }}>Status can't be blank!</p>
               )}
-              <MembersDropdown name='members' />
-              <input type='submit' value='Submit' />
+              <MembersDropdown name="members" />
+              <input type="submit" value="Submit" />
             </form>
           </Box>
         </Modal>
