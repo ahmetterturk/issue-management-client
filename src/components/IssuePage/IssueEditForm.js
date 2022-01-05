@@ -123,7 +123,6 @@ const IssueEditForm = ({ issue, id }) => {
                 <span style={{ color: 'red' }}>{errorMessageDesc}</span>
               )}
             </div>
-
             <MembersUpdateDropdown
               className={classes.members}
               name="members"
