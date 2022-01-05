@@ -31,7 +31,6 @@ const App = () => {
       .then((data) => dispatch({ type: 'GET_ISSUES', data: data }))
       .catch((err) => console.log(err));
   }, [state.counter, state.currentUser]);
-  console.log(state.issues);
   useEffect(() => {
     allUsers()
       .then((data) => {
@@ -59,14 +58,14 @@ const App = () => {
                 <Navbar onMenuClick={() => setIsSidebarOpen(true)} />
               )}
               <Routes>
-                <Route path='*' element={<Login />} />
-                <Route path='/issues/:id' element={<IssuePage />} />
-                <Route path='/issues' element={<Issues />} />
-                <Route path='/userProfile/:id' element={<UserProfileForm />} />
-                <Route path='/employee' element={<EmployeeTable />} />
-                <Route path='/employee/:id' element={<Employee />} />
-                <Route path='/employeeSignup' element={<SignupPage />} />
-                <Route path='/graphs' element={<GraphsPage />} />
+                <Route path="*" element={<Login />} />
+                <Route path="/issues/:id" element={<IssuePage />} />
+                <Route path="/issues" element={<Issues />} />
+                <Route path="/userProfile/:id" element={<UserProfileForm />} />
+                <Route path="/employee" element={<EmployeeTable />} />
+                <Route path="/employee/:id" element={<Employee />} />
+                <Route path="/employeeSignup" element={<SignupPage />} />
+                <Route path="/graphs" element={<GraphsPage />} />
               </Routes>
             </Box>
           </Box>
