@@ -18,6 +18,7 @@ import Employee from './components/Employees/SingleEmployee/Employee';
 import GraphsPage from './components/Graphs/GraphsPage';
 import SignupPage from './components/Signup/SignupPage';
 import { ThemeProvider } from '@mui/styles';
+import IssuesTable from './components/Issues/IssuesTable/IssuesTable';
 
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -57,14 +58,14 @@ const App = () => {
                 <Navbar onMenuClick={() => setIsSidebarOpen(true)} />
               )}
               <Routes>
-                <Route path="*" element={<Login />} />
-                <Route path="/issues/:id" element={<IssuePage />} />
-                <Route path="/issues" element={<Issues />} />
-                <Route path="/userProfile/:id" element={<UserProfileForm />} />
-                <Route path="/employee" element={<EmployeeTable />} />
-                <Route path="/employee/:id" element={<Employee />} />
-                <Route path="/employeeSignup" element={<SignupPage />} />
-                <Route path="/graphs" element={<GraphsPage />} />
+                <Route path='*' element={<Login />} />
+                <Route path='/issues/:id' element={<IssuePage />} />
+                <Route path='/issues' element={<Issues />} />
+                <Route path='/userProfile/:id' element={<UserProfileForm />} />
+                <Route path='/employee' element={<EmployeeTable />} />
+                <Route path='/employee/:id' element={<Employee />} />
+                <Route path='/employeeSignup' element={<SignupPage />} />
+                <Route path='/graphs' element={<GraphsPage />} />
               </Routes>
             </Box>
           </Box>

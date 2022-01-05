@@ -3,8 +3,10 @@ import { makeStyles } from '@mui/styles';
 export const useStyles = makeStyles(() => ({
   tableContainer: {
     borderRadius: 15,
-    margin: '10px auto',
-    maxWidth: 950,
+    maxWidth: '100%',
+    ['@media (max-width:780px)']: {
+      maxWidth: 950,
+    },
   },
   tableHeaderCell: {
     fontWeight: 'bold',

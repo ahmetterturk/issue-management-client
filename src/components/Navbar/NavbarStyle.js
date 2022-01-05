@@ -10,5 +10,6 @@ export const useStyles = makeStyles(() => ({
   avatarWrapper: { display: 'flex', alignItems: 'center' },
   userGreeting: {
     marginRight: '10px',
+    color: '#555',
   },
 }));
