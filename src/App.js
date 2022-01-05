@@ -19,6 +19,7 @@ import GraphsPage from './components/Graphs/GraphsPage';
 import SignupPage from './components/Signup/SignupPage';
 import { ThemeProvider } from '@mui/styles';
 import IssuesTable from './components/Issues/IssuesTable/IssuesTable';
+import { CssBaseline } from '@mui/material';
 
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);

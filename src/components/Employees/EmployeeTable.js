@@ -55,7 +55,12 @@ const EmployeeTable = () => {
             </Alert>
           </Stack>
         ))}
-      <Grid item xs={10} sx={{ margin: '60px auto 0' }} justifyContent='center'>
+      <Grid
+        item
+        xs={10}
+        sx={{ margin: '100px auto 0' }}
+        justifyContent='center'
+      >
         <Typography variant='h3' align='center' className={classes.heading}>
           Employees
         </Typography>
