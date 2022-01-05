@@ -11,25 +11,16 @@ import { useGlobalContext } from '../../../contextReducer/Context';
 import { createIssue } from '../../../apiServices/IssueApi';
 import { useForm } from 'react-hook-form/dist/index.cjs';
 import jwtdecode from 'jwt-decode';
-import { Typography } from '@mui/material';
+import { Typography, Grid } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 500,
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  p: 4,
-};
+import useStyles from './styles';
 
 const IssueForm = () => {
   const { state, dispatch } = useGlobalContext();
   const { currentUser } = state;
   const { token } = currentUser;
   const decodedToken = jwtdecode(token);
+  const classes = useStyles();
 
   const {
     register,
@@ -64,14 +55,14 @@ const IssueForm = () => {
     <>
       <div>
         {currentUser.userDetails.image === null ? (
-          <Typography variant='p'>
+          <Typography variant="p">
             In order to publish ticket you need to create a profile first
           </Typography>
         ) : (
           <Button
             onClick={handleOpen}
-            color='primary'
-            variant='contained'
+            color="primary"
+            variant="contained"
             startIcon={<AddCircleOutlineIcon />}
           >
             New Issue
@@ -81,44 +72,58 @@ const IssueForm = () => {
         <Modal
           open={open}
           onClose={handleClose}
-          aria-labelledby='modal-modal-title'
-          aria-describedby='modal-modal-description'
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
         >
-          <Box sx={style}>
+          <Box className={classes.boxContainer}>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <TextField
-                {...register('title', { required: true })}
-                id='outlined-basic'
-                label='Title'
-                variant='outlined'
-              />
-              {errors.title && (
-                <p style={{ color: 'red' }}>Title can't be blank!</p>
-              )}
-              <TextField
-                {...register('description', { required: true })}
-                multiline
-                rows={2}
-                maxRows={4}
-                label='Description'
-              />
-              {errors.description && (
-                <p style={{ color: 'red' }}>Description can't be blank!</p>
-              )}
-              <TypeDropdown register={register} />
-              {errors.type && (
-                <p style={{ color: 'red' }}>Type can't be blank!</p>
-              )}
-              <PriorityDropdown register={register} />
-              {errors.priority && (
-                <p style={{ color: 'red' }}>Priority can't be blank!</p>
-              )}
-              <StatusDropdown register={register} />
-              {errors.status && (
-                <p style={{ color: 'red' }}>Status can't be blank!</p>
-              )}
-              <MembersDropdown name='members' />
-              <input type='submit' value='Submit' />
+              <div className={classes.titleDiv}>
+                <TextField
+                  {...register('title', { required: true })}
+                  id="outlined-basic"
+                  label="Title"
+                  variant="outlined"
+                  fullWidth
+                />
+                {errors.title && (
+                  <p style={{ color: 'red' }}>Title can't be blank!</p>
+                )}
+              </div>
+              <div className={classes.descriptionDiv}>
+                <TextField
+                  {...register('description', { required: true })}
+                  multiline
+                  rows={5}
+                  maxRows={10}
+                  label="Description"
+                  fullWidth
+                />
+                {errors.description && (
+                  <p style={{ color: 'red' }}>Description can't be blank!</p>
+                )}
+              </div>
+              <MembersDropdown name="members" className={classes.members} />
+
+              <Grid container className={classes.dropdownContainer}>
+                <Grid item className={classes.gridItem}>
+                  <TypeDropdown register={register} errors={errors} />
+                </Grid>
+                <Grid item className={classes.gridItem}>
+                  <PriorityDropdown register={register} errors={errors} />
+                </Grid>
+                <Grid item className={classes.gridItem}>
+                  <StatusDropdown register={register} errors={errors} />
+                </Grid>
+              </Grid>
+              <Button
+                type="submit"
+                variant="contained"
+                fullWidth
+                disableElevation
+                size="large"
+              >
+                Create Issue
+              </Button>
             </form>
           </Box>
         </Modal>
