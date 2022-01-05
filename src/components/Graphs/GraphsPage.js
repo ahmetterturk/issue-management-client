@@ -42,7 +42,7 @@ const GraphsPage = () => {
   );
 
   return (
-    <Container maxWidth={false}>
+    <Container maxWidth={false} sx={{ margin: '100px auto 0' }}>
       <Grid container spacing={3} className={classes.dounutGraphs}>
         <Grid item lg={4} sm={6} xl={3} xs={12} sx={{ maxWidth: 370 }}>
           <DoughnutChart

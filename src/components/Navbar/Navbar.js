@@ -37,7 +37,7 @@ const Navbar = (props) => {
   );
 
   return (
-    <AppBar>
+    <AppBar position='fixed'>
       <Toolbar className={classes.navbar}>
         {!isLargeScreen && menuIcon}
         <Box className={classes.avatarWrapper}>

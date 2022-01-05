@@ -47,7 +47,7 @@ const IssuePage = () => {
 
   return (
     <>
-      <Container className={classes.container}>
+      <Container className={classes.container} sx={{ margin: '100px auto 0' }}>
         {(decodedToken.id === issue.userId || decodedToken.isAdmin) && (
           <IssueEditForm issue={issue} id={id} />
         )}

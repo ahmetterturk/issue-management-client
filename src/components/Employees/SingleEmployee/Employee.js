@@ -6,6 +6,7 @@ import {
   CardActions,
   CardMedia,
   Button,
+  Grid,
 } from '@mui/material';
 import jwtdecode from 'jwt-decode';
 import { useGlobalContext } from '../../../contextReducer/Context';
@@ -44,7 +45,7 @@ const Employee = () => {
   };
 
   return (
-    <>
+    <Grid item sx={{ margin: '100px auto 0' }}>
       <Card sx={{ maxWidth: 450 }} className={classes.card}>
         <CardMedia
           component='img'
@@ -78,7 +79,7 @@ const Employee = () => {
           </Link>
         </CardActions>
       </Card>
-    </>
+    </Grid>
   );
 };
 

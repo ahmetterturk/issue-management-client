@@ -59,7 +59,7 @@ const UserProfileForm = () => {
   };
 
   return (
-    <>
+    <Grid item sx={{ margin: '100px auto 0' }}>
       <Box>
         <Typography variant='h3' align='center' className={classes.heading}>
           Profile
@@ -165,7 +165,7 @@ const UserProfileForm = () => {
           </Card>
         </form>
       </Box>
-    </>
+    </Grid>
   );
 };
 
