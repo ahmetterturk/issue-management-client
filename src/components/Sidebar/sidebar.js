@@ -66,15 +66,10 @@ const Sidebar = (props) => {
   const classes = useStyles();
   const { token } = state.currentUser && state.currentUser;
   const decodedToken = jwtDecode(token);
-  const lgUp = useMediaQuery(
-    (theme) =>
-      console.log(theme.breakpoints.up('lg')) || theme.breakpoints.up('lg'),
-    {
-      defaultMatches: true,
-      noSsr: false,
-    }
-  );
-  console.log('lgUp', lgUp);
+  const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'), {
+    defaultMatches: true,
+    noSsr: false,
+  });
 
   // logout function
   const handleLogout = () => {
