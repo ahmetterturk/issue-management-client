@@ -31,7 +31,7 @@ const Errors = ({
           }}
         >
           <Typography align='center' color='textPrimary' variant='h3'>
-            {status}: {title}
+            {status} {title}
           </Typography>
           <Typography align='center' color='textPrimary' variant='subtitle2'>
             {errorMessage}
