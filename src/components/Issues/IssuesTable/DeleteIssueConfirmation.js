@@ -7,6 +7,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Stack from '@mui/material/Stack';
 import { deleteIssue } from '../../../apiServices/IssueApi';
 import { useGlobalContext } from '../../../contextReducer/Context';
+import useStyles from './styles';
 
 const style = {
   position: 'absolute',
@@ -24,6 +25,7 @@ const DeleteIssueConfirmation = ({ issueId }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const classes = useStyles();
 
   const handleDelete = () => {
     deleteIssue(issueId)
@@ -35,8 +37,12 @@ const DeleteIssueConfirmation = ({ issueId }) => {
 
   return (
     <div>
-      <Button onClick={handleOpen}>
-        <DeleteIcon style={{ fill: 'red' }} />
+      <Button sx={{ p: 0 }}>
+        <DeleteIcon
+          className={classes.deleteButton}
+          style={{ fill: 'red' }}
+          onClick={handleOpen}
+        />
       </Button>
       <Modal
         open={open}

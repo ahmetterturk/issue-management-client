@@ -1,30 +1,26 @@
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles((theme) => ({
-  tableContainer: {
-    borderRadius: 15,
-    maxWidth: '100%',
-    ['@media (max-width:780px)']: {
-      maxWidth: 950,
+  paper: {
+    width: '100%',
+    alignSelf: 'center',
+    overflow: 'hidden',
+    [theme.breakpoints.down('sm')]: {
+      width: 375,
     },
   },
-  tableHeaderCell: {
-    fontWeight: 'bold',
-    backgroundColor: '#E8E8E8',
-    color: '#25282B',
+  icons: {
+    display: 'flex',
   },
-  issueTitle: {
-    textDecoration: 'none',
+  visibilityIcon: {
+    display: 'flex',
+    padding: 0,
   },
-  tablePagination: {
-    content: '',
-    width: '100%',
-    display: 'inline-block',
+  tableCell: {
+    height: theme.spacing(6),
+    borderBottom: 'none',
   },
-  heading: {
-    paddingBottom: '15px',
-    color: '#6787E3',
-  },
+  tablePagination: {},
 }));
 
 export default useStyles;
