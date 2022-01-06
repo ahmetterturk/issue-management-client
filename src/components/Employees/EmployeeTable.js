@@ -74,7 +74,12 @@ const EmployeeTable = () => {
 
   return (
     <>
-      <Grid item xs={10} sx={{ margin: '70px auto 0' }} justifyContent='center'>
+      <Grid
+        item
+        xs={10}
+        sx={{ margin: '100px auto 0' }}
+        justifyContent='center'
+      >
         {state.isUpdated ||
           (state.isCreated && (
             <Stack sx={{ width: '100%' }} spacing={2}>
@@ -86,7 +91,6 @@ const EmployeeTable = () => {
               </Alert>
             </Stack>
           ))}
-
         <Typography variant='h3' align='center' className={classes.heading}>
           Employees
         </Typography>

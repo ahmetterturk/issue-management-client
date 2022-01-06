@@ -9,7 +9,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
-
+import CircularProgress from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -18,6 +18,7 @@ import { useGlobalContext } from '../../contextReducer/Context';
 import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import jwtDecode from 'jwt-decode';
+
 const theme = createTheme({
   palette: {
     type: 'light',
@@ -35,6 +36,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [hasError, setHasError] = useState(false);
   const [errorObject, setErrorObject] = useState(null);
+  const [isFetching, setIsFetching] = useState(false);
   const {
     register,
     handleSubmit,
@@ -42,20 +44,27 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
+    setIsFetching(true);
     loginUser(data)
       .then((data) => {
         if (data.status === 400) {
+          setIsFetching(true);
           setHasError(true);
           setErrorObject(data);
+          setIsFetching(false);
         } else if (data.status === 404) {
+          setIsFetching(true);
           setHasError(true);
           setErrorObject(data);
+          setIsFetching(false);
         } else {
+          setIsFetching(true);
           setHasError(false);
           setErrorObject(null);
           dispatch({ type: 'LOGIN_INFO', data: data });
           dispatch({ type: 'LOGIN_SUCCESS' });
           localStorage.setItem('user', JSON.stringify(data));
+          setIsFetching(false);
           const decodeToken = jwtDecode(data.token);
           if (data.userDetails.image === null) {
             navigate(`/userProfile/${decodeToken.id}`);
@@ -156,7 +165,11 @@ const Login = () => {
               variant='contained'
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              {isFetching ? (
+                <CircularProgress style={{ color: 'white' }} />
+              ) : (
+                'Sign in'
+              )}
             </Button>
             <Grid container>
               <Grid item xs></Grid>
