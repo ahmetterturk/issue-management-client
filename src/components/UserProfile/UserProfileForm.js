@@ -16,8 +16,8 @@ import { useForm } from 'react-hook-form';
 import { useGlobalContext } from '../../contextReducer/Context';
 import { uploadProfileImage, updateUser } from '../../apiServices/UserApi';
 import { useNavigate } from 'react-router';
-import { useParams, Link } from 'react-router-dom';
-
+import { useParams } from 'react-router-dom';
+import CircularProgress from '@mui/material/CircularProgress';
 const UserProfileForm = () => {
   const classes = useStyles();
   const [isFetching, setIsFetching] = useState(false);
@@ -51,7 +51,7 @@ const UserProfileForm = () => {
             dispatch({ type: 'LOGOUT' });
           })
           .catch((err) => console.log(err));
-        navigate('*');
+        navigate('/login');
         setIsFetching(false);
         setTimeout(() => {
           dispatch({ type: 'AFTER_UPDATE' });
@@ -66,6 +66,7 @@ const UserProfileForm = () => {
         <Typography variant='h3' align='center' className={classes.heading}>
           Profile
         </Typography>
+
         <form
           autoComplete='off'
           noValidate
@@ -157,7 +158,11 @@ const UserProfileForm = () => {
                       style={{ marginLeft: '5px', backgroundColor: '#6787E3' }}
                       type='submit'
                     >
-                      {isFetching ? 'Wait...' : 'Create'}
+                      {isFetching ? (
+                        <CircularProgress style={{ color: 'white' }} />
+                      ) : (
+                        'Create'
+                      )}
                     </Button>
                   </Box>
                 </Grid>

@@ -9,6 +9,7 @@ import IssuesTable from './IssuesTable/IssuesTable';
 import useStyles from './styles';
 import Errors from '../ErrorPages/Errors';
 import loginImage from '../../images/login.jpg';
+
 const Issues = () => {
   const { state } = useGlobalContext();
   const classes = useStyles();
