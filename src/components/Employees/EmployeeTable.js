@@ -24,16 +24,47 @@ import jwtdecode from 'jwt-decode';
 const EmployeeTable = () => {
   const { state } = useGlobalContext();
   const classes = useStyles();
-  const {
-    currentUser: { token },
-  } = state;
-  const decodeToken = jwtdecode(token);
-
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  if (!state.currentUser) {
+    return (
+      <h1 style={{ marginTop: '100px', textAlign: 'center' }}>
+        You need to login first
+        <Link to='/login' className={classes.link}>
+          Log In
+        </Link>
+      </h1>
+    );
+  }
   const {
     users: { allUsers },
   } = state;
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  const {
+    currentUser: { token },
+  } = state;
+  const decodedToken = jwtdecode(token);
+  const { isAdmin } = decodedToken;
+
+  if (!isAdmin) {
+    return (
+      <>
+        <h1 style={{ marginTop: '100px' }}>
+          You are not authorized to visit this page
+        </h1>
+        <Link
+          to='/issues'
+          style={{
+            display: 'inline-block',
+            color: '#3489eb',
+            marginLeft: '5px',
+          }}
+        >
+          Back to Main page
+        </Link>
+      </>
+    );
+  }
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -94,8 +125,8 @@ const EmployeeTable = () => {
                         </Typography>
                       </TableCell>
                       <TableCell>
-                        {(decodeToken.id === user._id ||
-                          decodeToken.isAdmin) && (
+                        {(decodedToken.id === user._id ||
+                          decodedToken.isAdmin) && (
                           <>
                             <Link to={user._id}>
                               <DeleteForeverSharpIcon

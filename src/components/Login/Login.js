@@ -57,7 +57,6 @@ const Login = () => {
           dispatch({ type: 'LOGIN_SUCCESS' });
           localStorage.setItem('user', JSON.stringify(data));
           const decodeToken = jwtDecode(data.token);
-          console.log(decodeToken);
           if (data.userDetails.image === null) {
             navigate(`/userProfile/${decodeToken.id}`);
           } else {

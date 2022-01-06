@@ -16,16 +16,18 @@ import { useForm } from 'react-hook-form';
 import { useGlobalContext } from '../../contextReducer/Context';
 import { uploadProfileImage, updateUser } from '../../apiServices/UserApi';
 import { useNavigate } from 'react-router';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 const UserProfileForm = () => {
   const classes = useStyles();
   const [isFetching, setIsFetching] = useState(false);
   const [profileImageInput, setProfileImageInput] = useState('');
   const { state, dispatch } = useGlobalContext();
+
   const { userDetails } = state.currentUser;
   const navigate = useNavigate();
   const { id } = useParams();
+
   const {
     register,
     handleSubmit,
