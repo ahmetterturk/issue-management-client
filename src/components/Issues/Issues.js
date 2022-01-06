@@ -10,9 +10,9 @@ import { Link } from 'react-router-dom';
 import IssuesTable from './IssuesTable/IssuesTable';
 import useStyles from './styles';
 
-
 const Issues = () => {
   const { state } = useGlobalContext();
+  const classes = useStyles();
   if (!state.currentUser) {
     return (
       <h1 style={{ marginTop: '100px', textAlign: 'center' }}>
@@ -22,13 +22,12 @@ const Issues = () => {
     );
   }
   const issuesList = state.issues;
-  const classes = useStyles();
 
   return (
     <Grid className={classes.issuesGrid}>
       {state.isLoggedIn && (
         <Stack sx={{ width: '100%' }} spacing={2}>
-          <Alert severity="success">You have logged in successfully</Alert>
+          <Alert severity='success'>You have logged in successfully</Alert>
         </Stack>
       )}
       <IssueForm />
