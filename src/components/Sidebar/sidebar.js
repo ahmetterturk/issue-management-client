@@ -16,7 +16,7 @@ import { useGlobalContext } from '../../contextReducer/Context';
 import { Drawer, useMediaQuery } from '@mui/material';
 
 import logo from './logo2.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 
 const SidebarLink = (props) => {
@@ -61,7 +61,7 @@ const SidebarLink = (props) => {
 
 const Sidebar = (props) => {
   const { isOpen, onClose } = props;
-
+  const navigate = useNavigate();
   const { state, dispatch } = useGlobalContext();
   const classes = useStyles();
   const { token } = state.currentUser && state.currentUser;
@@ -75,6 +75,7 @@ const Sidebar = (props) => {
   const handleLogout = () => {
     localStorage.removeItem('user');
     dispatch({ type: 'LOGOUT' });
+    navigate('/login');
   };
 
   const drawerContent = (

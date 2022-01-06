@@ -46,21 +46,19 @@ const EmployeeTable = () => {
 
   return (
     <>
-      {state.isUpdated ||
-        (state.isCreated && (
-          <Stack sx={{ width: '100%' }} spacing={2}>
-            <Alert severity={state.isUpdated ? 'warning' : 'success'}>
-              {state.isUpdated && 'You have updated your profile successfully'}
-              {state.isCreated && 'You have created a new account successfully'}
-            </Alert>
-          </Stack>
-        ))}
-      <Grid
-        item
-        xs={10}
-        sx={{ margin: '100px auto 0' }}
-        justifyContent='center'
-      >
+      <Grid item xs={10} sx={{ margin: '70px auto 0' }} justifyContent='center'>
+        {state.isUpdated ||
+          (state.isCreated && (
+            <Stack sx={{ width: '100%' }} spacing={2}>
+              <Alert severity={state.isUpdated ? 'warning' : 'success'}>
+                {state.isUpdated &&
+                  'You have updated your profile successfully'}
+                {state.isCreated &&
+                  'You have created a new account successfully'}
+              </Alert>
+            </Stack>
+          ))}
+
         <Typography variant='h3' align='center' className={classes.heading}>
           Employees
         </Typography>

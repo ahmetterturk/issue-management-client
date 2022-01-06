@@ -27,7 +27,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "CI= react-scripts build",
     "test": "react-scripts test",
     "test:coverage": "react-scripts test --no-cache --coverage",
     "eject": "react-scripts eject"
