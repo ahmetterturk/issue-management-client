@@ -11,7 +11,7 @@ const Issues = () => {
   const issuesList = state.issues;
 
   return (
-    <Grid item sx={{ margin: '100px auto 0' }}>
+    <Grid item sx={{ margin: '70px auto 0' }}>
       {state.isLoggedIn && (
         <Stack sx={{ width: '100%' }} spacing={2}>
           <Alert severity='success'>You have logged in successfully</Alert>
