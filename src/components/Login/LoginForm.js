@@ -1,37 +1,45 @@
 import React, { useState } from 'react';
+import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
-import CircularProgress from '@mui/material/CircularProgress';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import { useStyles } from './Style';
+import Link from '@mui/material/Link';
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 import { loginUser } from '../../apiServices/UserApi';
 import { useGlobalContext } from '../../contextReducer/Context';
 import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import jwtDecode from 'jwt-decode';
+function Copyright(props) {
+  return (
+    <Grid item>
+      <Typography
+        variant='body2'
+        color='text.secondary'
+        align='center'
+        {...props}
+      >
+        {'Copyright © '}
+        <Link color='inherit' href='https://mui.com/'>
+          Lock Security
+        </Link>{' '}
+        {new Date().getFullYear()}
+        {'.'}
+      </Typography>
+    </Grid>
+  );
+}
 
-const theme = createTheme({
-  palette: {
-    type: 'light',
-    primary: {
-      main: '#6887E3',
-    },
-    secondary: {
-      main: '#6887E3',
-    },
-  },
-});
-
-const Login = () => {
+const LoginForm = () => {
   const { dispatch } = useGlobalContext();
   const navigate = useNavigate();
   const [hasError, setHasError] = useState(false);
@@ -42,6 +50,7 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const classes = useStyles();
 
   const onSubmit = async (data) => {
     setIsFetching(true);
@@ -79,59 +88,33 @@ const Login = () => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Typography
-        component='h1'
-        variant='h4'
-        color='#6887E3'
-        textAlign={'center'}
-        padding={4}
-      >
-        Lock Security
-      </Typography>
-      {/* <Bar /> */}
-      <Container
-        component='main'
-        maxWidth='xs'
-        Box
-        sx={{
-          border: 0.5,
-          borderRadius: 3,
-          borderColor: '6887E3',
-          bgcolor: '#E8E8E8',
-        }}
-      >
-        <CssBaseline />
-
-        <Box
-          sx={{
-            marginTop: 2,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
+    // <ThemeProvider theme={theme}>
+    <Box className={classes.bg}>
+      <Container component='main' maxWidth='xs' className={classes.container}>
+        <Box className={classes.cardBox}>
+          <Avatar sx={{ m: 1, bgcolor: '#1c79fc' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component='h1' variant='h5'>
+            Sign in
+          </Typography>
           {hasError && errorObject ? (
-            <Alert severity='error'>
-              <AlertTitle>Error</AlertTitle>
-              {errorObject.data.message}
-            </Alert>
+            <Alert severity='error'>{errorObject.data.message}</Alert>
           ) : null}
           <Box
             component='form'
             onSubmit={handleSubmit(onSubmit)}
             noValidate
-            sx={{ mt: 1 }}
+            sx={{ mt: 2 }}
           >
             <TextField
               margin='normal'
-              required
               fullWidth
               id='email'
               label='Email Address'
               autoComplete='email'
-              background='white'
               {...register('email', { required: true })}
+              autoFocus
               autoFocus
             />
             {errors.email && (
@@ -141,9 +124,8 @@ const Login = () => {
             )}
             <TextField
               margin='normal'
-              required
               fullWidth
-              {...register('password', { required: true })}
+              {...register('password', { required: true, minLength: 5 })}
               label='Password'
               type='password'
               id='password'
@@ -151,53 +133,39 @@ const Login = () => {
             />
             {errors.password && (
               <Typography variant='span' style={{ color: 'red' }}>
-                Password is required with min of 6 characters
+                Password is required with min of 5 characters
               </Typography>
             )}
             <FormControlLabel
               control={<Checkbox value='remember' color='primary' />}
               label='Remember me'
             />
-
             <Button
               type='submit'
-              // fullWidth
+              fullWidth
               variant='contained'
               sx={{ mt: 3, mb: 2 }}
             >
               {isFetching ? (
                 <CircularProgress style={{ color: 'white' }} />
               ) : (
-                'Sign in'
+                'Sign In'
               )}
             </Button>
             <Grid container>
-              <Grid item xs></Grid>
+              <Grid item xs>
+                <Link href='#' variant='body2'>
+                  Forgot password?
+                </Link>
+              </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5, mb: 3 }} />
-        <Link href='#' variant='body2' textAlign={'center'}>
-          Forgot password?
-        </Link>
+        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
-    </ThemeProvider>
+    </Box>
+    // </ThemeProvider>
   );
 };
 
-function Copyright(props) {
-  return (
-    <>
-      <Typography
-        variant='body2'
-        color='text.secondary'
-        align='center'
-        {...props}
-      >
-        {' © Lock Security '}
-      </Typography>
-    </>
-  );
-}
-
-export default Login;
+export default LoginForm;
