@@ -1,9 +1,7 @@
 import { Container, Typography } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import Messages from './Messages';
-// import issueData from './issueData';
 import IssueInfo from './IssueInfo';
-// import PersonSelect from './PersonSelect';
 import useStyles from './styles';
 import { useParams } from 'react-router-dom';
 import { getIssue } from '../../apiServices/IssueApi';
@@ -12,6 +10,7 @@ import { useGlobalContext } from '../../contextReducer/Context';
 import jwtdecode from 'jwt-decode';
 import { getAllMessages } from '../../apiServices/MessageApi';
 import Members from './Members';
+import { Grid } from '@mui/material';
 
 const IssuePage = () => {
   const classes = useStyles();
@@ -45,6 +44,8 @@ const IssuePage = () => {
     dispatch({ type: 'SET_ASSIGNED_ISSUES', data: currentAssignedIssues });
   }, [id]);
 
+  console.log(issue);
+
   return (
     <>
       <Container className={classes.container} sx={{ margin: '100px auto 0' }}>
@@ -52,26 +53,26 @@ const IssuePage = () => {
           <IssueEditForm issue={issue} id={id} />
         )}
 
-        <Typography className={classes.header} variant='h4'>
+        <Typography className={classes.header} variant="h4">
           Ticket
         </Typography>
 
-        <IssueInfo issue={issue} />
-
-        <div className={classes.mutualContainer}>
-          <Typography variant='h6'>{issue.title}</Typography>
-          <Typography>{issue.description}</Typography>
-        </div>
-
-        {/* <PersonSelect /> */}
-        <Members issue={issue} />
-
-        <Messages
-          messages={messages}
-          issueId={id}
-          userName={`${currentUser.userDetails.firstName} ${currentUser.userDetails.lastName}`}
-          userId={decodedToken.id}
-        />
+        <Grid container>
+          <Grid lg={8} md={8} xs={12}>
+            <IssueInfo issue={issue} />
+          </Grid>
+          <Grid lg={4} md={4} xs={12}>
+            <Members issue={issue} />
+          </Grid>
+          <Grid lg={12} xs={12}>
+            <Messages
+              messages={messages}
+              issueId={id}
+              userName={`${currentUser.userDetails.firstName} ${currentUser.userDetails.lastName}`}
+              userId={decodedToken.id}
+            />
+          </Grid>
+        </Grid>
       </Container>
     </>
   );

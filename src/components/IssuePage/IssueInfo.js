@@ -1,12 +1,31 @@
-import { Grid } from '@mui/material';
+import { CardHeader, Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 const useStyles = makeStyles((theme) => ({
   container: {
     backgroundColor: '#ff8a80',
   },
+  // titleNameContainer: {
+  //   marginBottom: theme.spacing(3),
+  // },
+  // issueDate: {
+  //   marginBottom: theme.spacing(3),
+  // },
+  // issueDescription: {
+  //   marginBottom: theme.spacing(3),
+  // },
+  // specItems: {
+  //   marginBottom: theme.spacing(3),
+  // },
 }));
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -22,17 +41,105 @@ const IssueInfo = ({ issue }) => {
   const classes = useStyles();
 
   return (
-    <Grid justifyContent="space-between" container spacing={2}>
-      <Grid item xs={6} md={3}>
-        <Item className={classes.mutualContainer}>{issue.userName}</Item>
-      </Grid>
-      <Grid item xs={6} md={3}>
-        <Item>{issue.createdAt}</Item>
-      </Grid>
-      <Grid item xs={6} md={3}>
-        <Item>{issue.type}</Item>
-      </Grid>
-    </Grid>
+    <Card>
+      <CardContent>
+        <Grid container className={classes.titleNameContainer}>
+          <Grid item md={7} xs={12}>
+            <Typography
+              gutterBottom
+              variant="caption"
+              component="div"
+              color="text.secondary"
+            >
+              Issue Title
+            </Typography>
+            <Typography gutterBottom variant="body1" component="div">
+              {issue.title}
+            </Typography>
+          </Grid>
+          <Grid item md={4} xs={12}>
+            <Typography
+              gutterBottom
+              variant="caption"
+              component="div"
+              color="text.secondary"
+            >
+              Issue Author
+            </Typography>
+            <Typography gutterBottom variant="body1" component="div">
+              {issue.userName}
+            </Typography>
+          </Grid>
+        </Grid>
+        <Grid className={classes.issueDate}>
+          <Typography
+            gutterBottom
+            variant="caption"
+            component="div"
+            color="text.secondary"
+          >
+            Issue Date
+          </Typography>
+          <Typography gutterBottom variant="body1">
+            {issue.createdAt}
+          </Typography>
+        </Grid>
+        <Grid className={issue.issueDescription}>
+          <Typography
+            gutterBottom
+            variant="caption"
+            component="div"
+            color="text.secondary"
+          >
+            Issue Description
+          </Typography>
+          <Typography gutterBottom variant="body1">
+            {issue.description}
+          </Typography>
+        </Grid>
+        <Grid container>
+          <Grid item md={4} sm={12} xs={12} className={classes.specItems}>
+            <Typography
+              gutterBottom
+              variant="caption"
+              component="div"
+              color="text.secondary"
+            >
+              Issue Type
+            </Typography>
+            <Typography gutterBottom variant="body1" component="div">
+              {issue.type}
+            </Typography>
+          </Grid>
+          <Grid item md={4} sm={12} xs={12} className={classes.specItems}>
+            <Typography
+              gutterBottom
+              variant="caption"
+              component="div"
+              color="text.secondary"
+            >
+              Issue Status
+            </Typography>
+            <Typography gutterBottom variant="body1" component="div">
+              {issue.priority}
+            </Typography>
+          </Grid>
+          <Grid item md={4} sm={12} xs={12} className={classes.specItems}>
+            <Typography
+              gutterBottom
+              variant="caption"
+              component="div"
+              color="text.secondary"
+            >
+              Issue Priority
+            </Typography>
+            <Typography gutterBottom variant="body1" component="div">
+              {issue.status}
+            </Typography>
+          </Grid>
+        </Grid>
+      </CardContent>
+    </Card>
   );
 };
 
