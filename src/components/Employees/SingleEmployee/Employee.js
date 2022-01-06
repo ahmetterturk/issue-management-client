@@ -24,6 +24,7 @@ const Employee = () => {
     dispatch,
   } = useGlobalContext();
   const decodedToken = jwtdecode(token);
+  const { isAdmin } = decodedToken;
   const { id } = useParams();
   const [user, setUser] = useState([]);
   const navigate = useNavigate();
@@ -43,6 +44,26 @@ const Employee = () => {
       })
       .catch((err) => console.log(err));
   };
+
+  if (!isAdmin) {
+    return (
+      <>
+        <h1 style={{ marginTop: '100px' }}>
+          You are not authorized to visit this page
+        </h1>
+        <Link
+          to='/issues'
+          style={{
+            display: 'inline-block',
+            color: '#3489eb',
+            marginLeft: '5px',
+          }}
+        >
+          Back to Main page
+        </Link>
+      </>
+    );
+  }
 
   return (
     <Grid item sx={{ margin: '100px auto 0' }}>

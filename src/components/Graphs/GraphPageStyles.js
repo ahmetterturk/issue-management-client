@@ -17,4 +17,9 @@ export const useStyles = makeStyles(() => ({
   LineChartCard: {
     marginBottom: '50px',
   },
+  link: {
+    display: 'inline-block',
+    color: '#3489eb',
+    marginLeft: '5px',
+  },
 }));

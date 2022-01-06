@@ -18,13 +18,14 @@ import Employee from './components/Employees/SingleEmployee/Employee';
 import GraphsPage from './components/Graphs/GraphsPage';
 import SignupPage from './components/Signup/SignupPage';
 import { ThemeProvider } from '@mui/styles';
-
+import jwtDecode from 'jwt-decode';
 import NotFoundPage from './components/ErrorPages/NotFoundPage';
 
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [state, dispatch] = useReducer(reducer, initialState);
   const classes = useStyles({ isLoggedIn: !!state.currentUser });
+  const { currentUser } = state;
 
   // get all issues
   useEffect(() => {

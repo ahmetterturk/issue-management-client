@@ -5,10 +5,48 @@ import LineChart from './LineChart';
 import { Grid, Container } from '@mui/material';
 import moment from 'moment';
 import { useStyles } from './GraphPageStyles';
+import jwtDecode from 'jwt-decode';
+import { Link } from 'react-router-dom';
+
 const GraphsPage = () => {
   const { state } = useGlobalContext();
-  const { issues } = state;
   const classes = useStyles();
+  if (!state.currentUser) {
+    return (
+      <h1 style={{ marginTop: '100px', textAlign: 'center' }}>
+        You need to login first
+        <Link to='/login' className={classes.link}>
+          Log In
+        </Link>
+      </h1>
+    );
+  }
+  const {
+    issues,
+    currentUser: { token },
+  } = state;
+  const decodedToken = jwtDecode(token);
+  const { isAdmin } = decodedToken;
+
+  if (!isAdmin) {
+    return (
+      <>
+        <h1 style={{ marginTop: '100px' }}>
+          You are not authorized to visit this page
+        </h1>
+        <Link
+          to='/issues'
+          style={{
+            display: 'inline-block',
+            color: '#3489eb',
+            marginLeft: '5px',
+          }}
+        >
+          Back to Main page
+        </Link>
+      </>
+    );
+  }
 
   // Data for doughnut charts
   const priority = issues.map((issue) => issue.priority);
