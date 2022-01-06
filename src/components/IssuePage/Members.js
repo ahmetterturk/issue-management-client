@@ -23,7 +23,7 @@ const Members = ({ issue, id }) => {
     <Card>
       <CardContent>
         <Grid container>
-          <Grid item xs={7}>
+          <Grid item sm={9} xs={8}>
             {issue.members && issue.members.length > 0 && (
               <Typography gutterBottom variant="h5" component="div">
                 Members
@@ -38,7 +38,7 @@ const Members = ({ issue, id }) => {
               <Typography>Add Members To This Issue</Typography>
             )}
           </Grid>
-          <Grid item xs={5}>
+          <Grid item sm={3} xs={4}>
             <AddMembersForm issue={issue} id={id} />
           </Grid>
         </Grid>

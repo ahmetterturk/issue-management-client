@@ -57,14 +57,13 @@ const IssuePage = () => {
           Ticket
         </Typography>
 
-        <Grid container className={classes.container}>
-          <Grid item lg={8} md={8} xs={12}>
+        <Grid container className={classes.container} spacing={2}>
+          <Grid item lg={7} md={7} xs={12}>
             <IssueInfo issue={issue} id={id} />
-          </Grid>
-          <Grid item lg={4} md={4} xs={12}>
+            <br></br>
             <Members issue={issue} id={id} />
           </Grid>
-          <Grid item lg={12} xs={12} className={classes.messagesGrid}>
+          <Grid item lg={5} md={5} xs={12}>
             <Messages
               messages={messages}
               issueId={id}

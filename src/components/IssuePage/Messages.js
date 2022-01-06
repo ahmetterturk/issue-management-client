@@ -11,7 +11,7 @@ const Messages = ({ messages, issueId, userName, userId }) => {
     <Card>
       <CardContent>
         <Grid container>
-          <Grid item md={7} xs={12}>
+          <Grid item xs={12}>
             {filteredMessages.length > 0 ? (
               filteredMessages.map((message, index) => {
                 return (
@@ -31,7 +31,7 @@ const Messages = ({ messages, issueId, userName, userId }) => {
               </Card>
             )}
           </Grid>
-          <Grid item md={5} xs={12}>
+          <Grid item xs={12}>
             <MessageForm
               issueId={issueId}
               userName={userName}

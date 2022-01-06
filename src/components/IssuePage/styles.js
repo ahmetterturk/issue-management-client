@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   select: {
-    minWidth: 280,
+    minWidth: 230,
     marginBottom: theme.spacing(2),
     [theme.breakpoints.up('sm')]: {
       marginBottom: theme.spacing(4),

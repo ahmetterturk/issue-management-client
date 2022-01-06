@@ -29,7 +29,11 @@ const Message = ({ message, index }) => {
 
   console.log(message);
   return (
-    <Card key={index} className={classes.mutualContainer}>
+    <Card
+      key={index}
+      className={classes.mutualContainer}
+      sx={{ marginBottom: 2 }}
+    >
       <CardContent>
         <Grid container>
           <Grid item md={6} xs={12}>
