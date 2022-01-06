@@ -1,7 +1,6 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import Box from '@mui/material/Box';
 import { getIssues } from './apiServices/IssueApi';
-import Login from './components/Login/Login';
 import IssuePage from './components/IssuePage/IssuePage';
 import { AppContext } from './contextReducer/Context';
 import { initialState } from './contextReducer/InitialState';
@@ -18,8 +17,8 @@ import Employee from './components/Employees/SingleEmployee/Employee';
 import GraphsPage from './components/Graphs/GraphsPage';
 import SignupPage from './components/Signup/SignupPage';
 import { ThemeProvider } from '@mui/styles';
-import jwtDecode from 'jwt-decode';
 import NotFoundPage from './components/ErrorPages/NotFoundPage';
+import LoginForm from './components/Login/LoginForm';
 
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -60,8 +59,8 @@ const App = () => {
                 <Navbar onMenuClick={() => setIsSidebarOpen(true)} />
               )}
               <Routes>
-                <Route path='/' element={<Login />} />
-                <Route path='/login' element={<Login />} />
+                <Route path='/' element={<LoginForm />} />
+                <Route path='/login' element={<LoginForm />} />
                 <Route path='/issues/:id' element={<IssuePage />} />
                 <Route path='/issues' element={<Issues />} />
                 <Route path='/userProfile/:id' element={<UserProfileForm />} />

@@ -6,19 +6,23 @@ import { Grid, Container } from '@mui/material';
 import moment from 'moment';
 import { useStyles } from './GraphPageStyles';
 import jwtDecode from 'jwt-decode';
-import { Link } from 'react-router-dom';
+
+import Errors from '../ErrorPages/Errors';
+import unauthorizedImage from '../../images/unauthorized.jpg';
+import loginImage from '../../images/login.jpg';
 
 const GraphsPage = () => {
   const { state } = useGlobalContext();
   const classes = useStyles();
   if (!state.currentUser) {
     return (
-      <h1 style={{ marginTop: '100px', textAlign: 'center' }}>
-        You need to login first
-        <Link to='/login' className={classes.link}>
-          Log In
-        </Link>
-      </h1>
+      <Errors
+        title='You need to login first'
+        errorMessage='You cannot access the application unless you login first'
+        route='/login'
+        imageSrc={loginImage}
+        btnMessage='Back to login page'
+      />
     );
   }
   const {
@@ -30,21 +34,15 @@ const GraphsPage = () => {
 
   if (!isAdmin) {
     return (
-      <>
-        <h1 style={{ marginTop: '100px' }}>
-          You are not authorized to visit this page
-        </h1>
-        <Link
-          to='/issues'
-          style={{
-            display: 'inline-block',
-            color: '#3489eb',
-            marginLeft: '5px',
-          }}
-        >
-          Back to Main page
-        </Link>
-      </>
+      <Errors
+        status='401'
+        title='You are not authorized to access this page'
+        errorMessage='You either tried to access the unauthorized route or you came here by mistake.
+      Whichever it is, try using the navigation'
+        route='/issues'
+        imageSrc={unauthorizedImage}
+        btnMessage='Back to login page'
+      />
     );
   }
 

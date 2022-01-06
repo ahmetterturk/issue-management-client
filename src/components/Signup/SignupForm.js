@@ -20,6 +20,7 @@ import { useForm } from 'react-hook-form';
 import Checkbox from '@mui/material/Checkbox';
 import { signupUser } from '../../apiServices/UserApi';
 import { useGlobalContext } from '../../contextReducer/Context';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const label = { inputProps: { 'aria-label': 'Admin' } };
 const SignupForm = () => {
@@ -130,7 +131,11 @@ const SignupForm = () => {
                       style={{ marginLeft: '5px', backgroundColor: '#6787E3' }}
                       type='submit'
                     >
-                      {isFetching ? 'Wait...' : 'Create account'}
+                      {isFetching ? (
+                        <CircularProgress style={{ color: 'white' }} />
+                      ) : (
+                        'Create account'
+                      )}
                     </Button>
                   </Box>
                 </Grid>
