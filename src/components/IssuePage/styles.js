@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   select: {
-    minWidth: 280,
+    minWidth: 230,
     marginBottom: theme.spacing(2),
     [theme.breakpoints.up('sm')]: {
       marginBottom: theme.spacing(4),
@@ -68,10 +68,13 @@ const useStyles = makeStyles((theme) => ({
   container: {
     marginTop: '50px',
   },
+  messagesGrid: {
+    marginTop: theme.spacing(5),
+  },
   mutualContainer: {
     backgroundColor: '#F6F6F6',
     borderRadius: '25px',
-    margin: '50px 0',
+    // margin: '50px 0',
     padding: '15px',
   },
   sendIcon: {

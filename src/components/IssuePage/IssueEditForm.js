@@ -35,7 +35,7 @@ const IssueEditForm = ({ issue, id }) => {
     type: issue.type,
     userId: issue.userId,
     userName: issue.userName,
-    members: issue.members,
+    // members: issue.members,
   };
 
   const [issueData, setIssueData] = useState(data);
@@ -62,7 +62,7 @@ const IssueEditForm = ({ issue, id }) => {
       setErrorMessageDesc("Description can't be blank");
     } else {
       setHasError(false);
-      updateIssue(id, { ...issueData, members: state.issueUpdateMembers })
+      updateIssue(id, { ...issueData })
         .then(() => {
           dispatch({ type: 'INCREASE_COUNTER' });
           dispatch({ type: 'SET_ISSUE_UPDATE_MEMBERS', data: [] });
@@ -80,7 +80,7 @@ const IssueEditForm = ({ issue, id }) => {
         onClick={handleOpen}
         color="primary"
         variant="contained"
-        startIcon={<EditIcon />}
+        size="small"
       >
         Edit Issue
       </Button>
@@ -123,11 +123,11 @@ const IssueEditForm = ({ issue, id }) => {
                 <span style={{ color: 'red' }}>{errorMessageDesc}</span>
               )}
             </div>
-            <MembersUpdateDropdown
+            {/* <MembersUpdateDropdown
               className={classes.members}
               name="members"
               issueData={issueData}
-            />
+            /> */}
             <Grid container className={classes.dropdownContainer}>
               <Grid item className={classes.gridItem}>
                 <FormControl>
@@ -193,7 +193,6 @@ const IssueEditForm = ({ issue, id }) => {
             >
               Update Issue
             </Button>
-            {/* <input type="submit" value="Update Issue" /> */}
           </form>
         </Box>
       </Modal>
