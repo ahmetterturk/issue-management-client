@@ -60,6 +60,7 @@ const App = () => {
                 <Navbar onMenuClick={() => setIsSidebarOpen(true)} />
               )}
               <Routes>
+                <Route path='/' element={<Login />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/issues/:id' element={<IssuePage />} />
                 <Route path='/issues' element={<Issues />} />

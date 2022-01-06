@@ -27,7 +27,7 @@ const Issues = () => {
     <Grid className={classes.issuesGrid}>
       {state.isLoggedIn && (
         <Stack sx={{ width: '100%' }} spacing={2}>
-          <Alert severity="success">You have logged in successfully</Alert>
+          <Alert severity='success'>You have logged in successfully</Alert>
         </Stack>
       )}
       <IssueForm />
