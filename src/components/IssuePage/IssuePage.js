@@ -62,7 +62,7 @@ const IssuePage = () => {
             <IssueInfo issue={issue} id={id} />
           </Grid>
           <Grid item lg={4} md={4} xs={12}>
-            <Members issue={issue} />
+            <Members issue={issue} id={id} />
           </Grid>
           <Grid item lg={12} xs={12} className={classes.messagesGrid}>
             <Messages
