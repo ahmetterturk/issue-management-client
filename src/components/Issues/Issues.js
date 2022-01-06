@@ -10,19 +10,18 @@ import { Link } from 'react-router-dom';
 import IssuesTable from './IssuesTable/IssuesTable';
 import useStyles from './styles';
 
-
 const Issues = () => {
   const { state } = useGlobalContext();
+  const classes = useStyles();
   if (!state.currentUser) {
     return (
       <h1 style={{ marginTop: '100px', textAlign: 'center' }}>
         You need to login first
-        <Link to='/login'>Log In</Link>
+        <Link to="/login">Log In</Link>
       </h1>
     );
   }
   const issuesList = state.issues;
-  const classes = useStyles();
 
   return (
     <Grid className={classes.issuesGrid}>
