@@ -1,0 +1,17 @@
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles((theme) => ({
+  issuesGrid: {
+    margin: '100px auto 0',
+    [theme.breakpoints.up('sm')]: {
+      padding: theme.spacing(3),
+    },
+    [theme.breakpoints.down('sm')]: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+    },
+  },
+}));
+
+export default useStyles;
