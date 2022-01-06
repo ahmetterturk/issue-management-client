@@ -15,6 +15,8 @@ import { deleteUser, singleUser } from '../../../apiServices/UserApi';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import Errors from '../../ErrorPages/Errors';
+import unauthorizedImage from '../../../images/unauthorized.jpg';
 const Employee = () => {
   const classes = useStyles();
   const {
@@ -47,21 +49,15 @@ const Employee = () => {
 
   if (!isAdmin) {
     return (
-      <>
-        <h1 style={{ marginTop: '100px' }}>
-          You are not authorized to visit this page
-        </h1>
-        <Link
-          to='/issues'
-          style={{
-            display: 'inline-block',
-            color: '#3489eb',
-            marginLeft: '5px',
-          }}
-        >
-          Back to Main page
-        </Link>
-      </>
+      <Errors
+        status='401'
+        title='You are not authorized to access this page'
+        errorMessage='You either tried to access the unauthorized route or you came here by mistake.
+      Whichever it is, try using the navigation'
+        route='/issues'
+        imageSrc={unauthorizedImage}
+        btnMessage='Back to login page'
+      />
     );
   }
 

@@ -7,6 +7,7 @@ const useStyles = makeStyles(() => ({
   appWrapper: {
     display: 'flex',
     height: '100vh',
+    backgroundColor: 'red',
   },
   rightContent: {
     backgroundColor: '#fff',

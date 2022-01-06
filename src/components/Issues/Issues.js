@@ -4,21 +4,24 @@ import IssueForm from './IssueForm/IssueForm';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import { Grid } from '@mui/material';
-
 import { Link } from 'react-router-dom';
-
 import IssuesTable from './IssuesTable/IssuesTable';
 import useStyles from './styles';
+import Errors from '../ErrorPages/Errors';
+import loginImage from '../../images/login.jpg';
 
 const Issues = () => {
   const { state } = useGlobalContext();
   const classes = useStyles();
   if (!state.currentUser) {
     return (
-      <h1 style={{ marginTop: '100px', textAlign: 'center' }}>
-        You need to login first
-        <Link to="/login">Log In</Link>
-      </h1>
+      <Errors
+        title="You need to login first"
+        errorMessage="You cannot access the application unless you login first"
+        route="/login"
+        imageSrc={loginImage}
+        btnMessage="Back to login page"
+      />
     );
   }
   const issuesList = state.issues;
@@ -27,7 +30,7 @@ const Issues = () => {
     <Grid className={classes.issuesGrid}>
       {state.isLoggedIn && (
         <Stack sx={{ width: '100%' }} spacing={2}>
-          <Alert severity='success'>You have logged in successfully</Alert>
+          <Alert severity="success">You have logged in successfully</Alert>
         </Stack>
       )}
       <IssueForm />
