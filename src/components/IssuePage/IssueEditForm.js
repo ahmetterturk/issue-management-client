@@ -80,7 +80,7 @@ const IssueEditForm = ({ issue, id }) => {
         onClick={handleOpen}
         color="primary"
         variant="contained"
-        startIcon={<EditIcon />}
+        // startIcon={<EditIcon />}
       >
         Edit Issue
       </Button>

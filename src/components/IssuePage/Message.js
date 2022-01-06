@@ -1,11 +1,15 @@
-import { Divider, Typography } from '@mui/material';
+import { Divider, Typography, Card, CardContent, Grid } from '@mui/material';
 import React from 'react';
-import useStyles from './styles';
 import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
 import { deleteMessage } from '../../apiServices/MessageApi';
 import { useGlobalContext } from '../../contextReducer/Context';
 import jwtdecode from 'jwt-decode';
-const Message = ({ message }) => {
+import { makeStyles } from '@mui/styles';
+import moment from 'moment';
+
+const useStyles = makeStyles((theme) => ({}));
+
+const Message = ({ message, index }) => {
   const {
     state: {
       currentUser: { token },
@@ -23,18 +27,36 @@ const Message = ({ message }) => {
       .catch((err) => console.log(err));
   };
 
+  console.log(message);
   return (
-    <div className={classes.mutualContainer}>
-      <Typography>{message.userName}</Typography>
-      <Divider />
-      <Typography>{message.messageBody}</Typography>
-      {(decodedToken.id === message.userId || decodedToken.isAdmin) && (
-        <DeleteForeverSharpIcon
-          className={classes.deleteMsgIcon}
-          onClick={() => handleDelete(message._id)}
-        />
-      )}
-    </div>
+    <Card key={index} className={classes.mutualContainer}>
+      <CardContent>
+        <Grid container>
+          <Grid item md={6} xs={12}>
+            <Typography>{message.userName}</Typography>
+          </Grid>
+          <Grid item md={6} xs={12}>
+            <Typography color="GrayText">
+              {moment(message.createdAt).format('MMM Do YYYY, h:mm:ss a')}
+            </Typography>
+          </Grid>
+        </Grid>
+        <Divider />
+        <Grid container>
+          <Grid item xs={11}>
+            <Typography>{message.messageBody}</Typography>
+          </Grid>
+          <Grid item xs={1}>
+            {(decodedToken.id === message.userId || decodedToken.isAdmin) && (
+              <DeleteForeverSharpIcon
+                className={classes.deleteMsgIcon}
+                onClick={() => handleDelete(message._id)}
+              />
+            )}
+          </Grid>
+        </Grid>
+      </CardContent>
+    </Card>
   );
 };
 

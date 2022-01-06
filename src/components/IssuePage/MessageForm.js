@@ -34,23 +34,23 @@ const MessageForm = ({ issueId, userName, userId }) => {
   };
 
   return (
-    <Grid className={classes.container} container justifyContent="center">
+    <Grid>
       <form onSubmit={handleSubmit}>
         <TextField
           fullWidth={true}
           placeholder="Enter Comment"
           multiline
-          rows={5}
+          rows={1}
           name="messageBody"
           value={formData.messageBody}
           onChange={handleChange}
         ></TextField>
         <Button
-          size="large"
-          sx={{ m: 2 }}
+          size="medium"
           className={classes.sendButton}
           variant="contained"
           type="submit"
+          fullWidth
         >
           Send Message
           <SendIcon fontSize="small" className={classes.sendIcon} />

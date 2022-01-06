@@ -9,6 +9,9 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import IssueEditForm from './IssueEditForm';
+import jwtdecode from 'jwt-decode';
+import { useGlobalContext } from '../../contextReducer/Context';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -37,14 +40,18 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: '15px',
 }));
 
-const IssueInfo = ({ issue }) => {
+const IssueInfo = ({ issue, id }) => {
   const classes = useStyles();
+  const { state, dispatch } = useGlobalContext();
+  const { currentUser, assignedIssues } = state;
+  const { token } = currentUser;
+  const decodedToken = jwtdecode(token);
 
   return (
     <Card>
       <CardContent>
         <Grid container className={classes.titleNameContainer}>
-          <Grid item md={7} xs={12}>
+          <Grid item md={9} xs={7}>
             <Typography
               gutterBottom
               variant="caption"
@@ -57,21 +64,24 @@ const IssueInfo = ({ issue }) => {
               {issue.title}
             </Typography>
           </Grid>
-          <Grid item md={4} xs={12}>
-            <Typography
-              gutterBottom
-              variant="caption"
-              component="div"
-              color="text.secondary"
-            >
-              Issue Author
-            </Typography>
-            <Typography gutterBottom variant="body1" component="div">
-              {issue.userName}
-            </Typography>
+          <Grid item md={3} xs={5}>
+            {(decodedToken.id === issue.userId || decodedToken.isAdmin) && (
+              <IssueEditForm issue={issue} id={id} />
+            )}
           </Grid>
         </Grid>
         <Grid className={classes.issueDate}>
+          <Typography
+            gutterBottom
+            variant="caption"
+            component="div"
+            color="text.secondary"
+          >
+            Issue Author
+          </Typography>
+          <Typography gutterBottom variant="body1" component="div">
+            {issue.userName}
+          </Typography>
           <Typography
             gutterBottom
             variant="caption"

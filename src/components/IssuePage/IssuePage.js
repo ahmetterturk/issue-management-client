@@ -48,23 +48,23 @@ const IssuePage = () => {
 
   return (
     <>
-      <Container className={classes.container} sx={{ margin: '100px auto 0' }}>
-        {(decodedToken.id === issue.userId || decodedToken.isAdmin) && (
+      <Container sx={{ margin: '150px auto 0' }}>
+        {/* {(decodedToken.id === issue.userId || decodedToken.isAdmin) && (
           <IssueEditForm issue={issue} id={id} />
-        )}
+        )} */}
 
         <Typography className={classes.header} variant="h4">
           Ticket
         </Typography>
 
-        <Grid container>
-          <Grid lg={8} md={8} xs={12}>
-            <IssueInfo issue={issue} />
+        <Grid container className={classes.container}>
+          <Grid item lg={8} md={8} xs={12}>
+            <IssueInfo issue={issue} id={id} />
           </Grid>
-          <Grid lg={4} md={4} xs={12}>
+          <Grid item lg={4} md={4} xs={12}>
             <Members issue={issue} />
           </Grid>
-          <Grid lg={12} xs={12}>
+          <Grid item lg={12} xs={12} className={classes.messagesGrid}>
             <Messages
               messages={messages}
               issueId={id}
