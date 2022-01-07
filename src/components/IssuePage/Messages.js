@@ -1,7 +1,7 @@
 import React from 'react';
 import Message from './Message';
 import MessageForm from './MessageForm';
-import { Grid, Card, CardContent, Typography } from '@mui/material';
+import { Grid, Card, CardContent, Typography, Divider } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 
 const Messages = ({ messages, issueId, userName, userId, isLoading }) => {
@@ -18,6 +18,8 @@ const Messages = ({ messages, issueId, userName, userId, isLoading }) => {
         ) : (
           <Grid container>
             <Grid item xs={12}>
+              <Typography variant="h5">Messages</Typography>
+              <Divider sx={{ marginBottom: 2 }} />
               {filteredMessages.length > 0 ? (
                 filteredMessages.map((message, index) => {
                   return (

@@ -24,6 +24,7 @@ const IssuePage = () => {
   const [issue, setIssue] = useState([]);
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [issueMembers, setIssueMembers] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -50,7 +51,16 @@ const IssuePage = () => {
     dispatch({ type: 'SET_ASSIGNED_ISSUES', data: currentAssignedIssues });
   }, [id]);
 
-  console.log(issue);
+  useEffect(() => {
+    if (issue.members && state.users.allUsers) {
+      const members = state.users.allUsers.filter((user) =>
+        issue.members.includes(`${user.firstName} ${user.lastName}`)
+      );
+      setIssueMembers(members);
+    }
+  }, [issue, state.users.allUsers]);
+
+  // console.log(issueMembers);
 
   return (
     <Grid sx={{ marginTop: 14 }}>
@@ -62,7 +72,12 @@ const IssuePage = () => {
         <Grid item lg={7} md={7} xs={12}>
           <IssueInfo isLoading={isLoading} issue={issue} id={id} />
           <br></br>
-          <Members issue={issue} id={id} isLoading={isLoading} />
+          <Members
+            issueMembers={issueMembers}
+            issue={issue}
+            id={id}
+            isLoading={isLoading}
+          />
         </Grid>
         <Grid item lg={5} md={5} xs={12}>
           <Messages

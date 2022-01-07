@@ -71,6 +71,7 @@ const AddMembersForm = ({ issue, id }) => {
         color="primary"
         variant="contained"
         size="small"
+        sx={{ marginTop: 3 }}
       >
         Add Members
       </Button>
