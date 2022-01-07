@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import IssueEditForm from './IssueEditForm';
 import jwtdecode from 'jwt-decode';
 import { useGlobalContext } from '../../contextReducer/Context';
+import moment from 'moment';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -91,7 +92,7 @@ const IssueInfo = ({ issue, id }) => {
             Issue Date
           </Typography>
           <Typography gutterBottom variant="body1">
-            {issue.createdAt}
+            {moment(issue.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
           </Typography>
         </Grid>
         <Grid className={issue.issueDescription}>

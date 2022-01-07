@@ -21,9 +21,9 @@ const Messages = ({ messages, issueId, userName, userId }) => {
                 );
               })
             ) : (
-              <Card>
+              <Card sx={{ marginBottom: 2 }}>
                 <CardContent>
-                  <Typography>
+                  <Typography fontSize={18}>
                     There are no messages on this issue. Be the first one to
                     send a message.
                   </Typography>

@@ -8,9 +8,14 @@ import Typography from '@mui/material/Typography';
 import { useGlobalContext } from '../../contextReducer/Context';
 import { Grid } from '@mui/material';
 import AddMembersForm from './AddMembersForm';
+import jwtdecode from 'jwt-decode';
 
 const Members = ({ issue, id }) => {
-  const { state } = useGlobalContext();
+  const { state, dispatch } = useGlobalContext();
+  const { currentUser, assignedIssues } = state;
+  const { token } = currentUser;
+  const decodedToken = jwtdecode(token);
+
   console.log(issue.members);
   // console.log(state.users.allUsers);
   // console.log(
@@ -23,7 +28,7 @@ const Members = ({ issue, id }) => {
     <Card>
       <CardContent>
         <Grid container>
-          <Grid item sm={9} xs={8}>
+          <Grid item sm={9} xs={7}>
             {issue.members && issue.members.length > 0 && (
               <Typography gutterBottom variant="h5" component="div">
                 Members
@@ -35,11 +40,15 @@ const Members = ({ issue, id }) => {
                 return <Typography variant="h6">{member}</Typography>;
               })
             ) : (
-              <Typography>Add Members To This Issue</Typography>
+              <Typography>
+                There are currently no members on this issue
+              </Typography>
             )}
           </Grid>
-          <Grid item sm={3} xs={4}>
-            <AddMembersForm issue={issue} id={id} />
+          <Grid item sm={3} xs={5}>
+            {(decodedToken.id === issue.userId || decodedToken.isAdmin) && (
+              <AddMembersForm issue={issue} id={id} />
+            )}
           </Grid>
         </Grid>
       </CardContent>

@@ -48,31 +48,26 @@ const IssuePage = () => {
 
   return (
     <>
-      <Container sx={{ margin: '150px auto 0' }}>
-        {/* {(decodedToken.id === issue.userId || decodedToken.isAdmin) && (
-          <IssueEditForm issue={issue} id={id} />
-        )} */}
+      <Typography className={classes.header} variant="h4">
+        Ticket
+      </Typography>
 
-        <Typography className={classes.header} variant="h4">
-          Ticket
-        </Typography>
-
-        <Grid container className={classes.container} spacing={2}>
-          <Grid item lg={7} md={7} xs={12}>
-            <IssueInfo issue={issue} id={id} />
-            <br></br>
-            <Members issue={issue} id={id} />
-          </Grid>
-          <Grid item lg={5} md={5} xs={12}>
-            <Messages
-              messages={messages}
-              issueId={id}
-              userName={`${currentUser.userDetails.firstName} ${currentUser.userDetails.lastName}`}
-              userId={decodedToken.id}
-            />
-          </Grid>
+      <Grid container className={classes.container} spacing={2}>
+        <Grid item lg={7} md={7} xs={12}>
+          <IssueInfo issue={issue} id={id} />
+          <br></br>
+          <Members issue={issue} id={id} />
         </Grid>
-      </Container>
+        <Grid item lg={5} md={5} xs={12}>
+          <Messages
+            messages={messages}
+            issueId={id}
+            userName={`${currentUser.userDetails.firstName} ${currentUser.userDetails.lastName}`}
+            userId={decodedToken.id}
+          />
+        </Grid>
+      </Grid>
+      {/* </Container> */}
     </>
   );
 };
