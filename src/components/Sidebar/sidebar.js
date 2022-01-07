@@ -10,10 +10,10 @@ import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 import MeetingRoomOutlinedIcon from '@mui/icons-material/MeetingRoomOutlined';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import useStyles from './styles';
 import { useGlobalContext } from '../../contextReducer/Context';
-import { Drawer, useMediaQuery } from '@mui/material';
+import { Drawer, useMediaQuery, Avatar } from '@mui/material';
 
 import logo from './logo2.png';
 import { Link, useNavigate } from 'react-router-dom';
@@ -81,11 +81,16 @@ const Sidebar = (props) => {
   const drawerContent = (
     <Box className={classes.sidebar}>
       <Box className={classes.sidebarButtons}>
-        <img
-          alt='Product logo - Shield with check icon'
-          className={classes.logo}
-          src={logo}
-        />
+        <Avatar
+          sx={{
+            m: '50px auto',
+            bgcolor: '#fff',
+            color: '#1c79fc',
+            padding: '20px',
+          }}
+        >
+          <LockOutlinedIcon fontSize='large' />
+        </Avatar>
         <hr className='rounded' />
         {decodedToken.isAdmin ? (
           <>

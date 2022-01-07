@@ -10,7 +10,6 @@ import Navbar from './components/Navbar/Navbar';
 import Issues from './components/Issues/Issues';
 import SideNavbar from './components/Sidebar/sidebar';
 import useStyles, { theme } from './styles';
-import UserProfileForm from './components/UserProfile/UserProfileForm';
 import EmployeeTable from './components/Employees/EmployeeTable';
 import { allUsers } from './apiServices/UserApi';
 import Employee from './components/Employees/SingleEmployee/Employee';
@@ -19,6 +18,7 @@ import SignupPage from './components/Signup/SignupPage';
 import { ThemeProvider } from '@mui/styles';
 import NotFoundPage from './components/ErrorPages/NotFoundPage';
 import LoginForm from './components/Login/LoginForm';
+import ProfilePage from './components/UserProfile/ProfilePage';
 
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -63,7 +63,7 @@ const App = () => {
                 <Route path='/login' element={<LoginForm />} />
                 <Route path='/issues/:id' element={<IssuePage />} />
                 <Route path='/issues' element={<Issues />} />
-                <Route path='/userProfile/:id' element={<UserProfileForm />} />
+                <Route path='/userProfile/:id' element={<ProfilePage />} />
                 <Route path='/employee' element={<EmployeeTable />} />
                 <Route path='/employee/:id' element={<Employee />} />
                 <Route path='/employeeSignup' element={<SignupPage />} />

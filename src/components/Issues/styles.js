@@ -2,7 +2,7 @@ import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles((theme) => ({
   issuesGrid: {
-    margin: '100px auto 0',
+    margin: '50px auto 0',
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(3),
     },

@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles';
 const useStyles = makeStyles((theme) => ({
   sidebar: {
     width: '226px',
-    backgroundColor: '#6887e3',
+    backgroundColor: '#1c79fc',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
