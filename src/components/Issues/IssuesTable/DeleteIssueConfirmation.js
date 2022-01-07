@@ -5,20 +5,10 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Stack from '@mui/material/Stack';
+import { Grid } from '@mui/material';
 import { deleteIssue } from '../../../apiServices/IssueApi';
 import { useGlobalContext } from '../../../contextReducer/Context';
 import useStyles from './styles';
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  p: 4,
-};
 
 const DeleteIssueConfirmation = ({ issueId }) => {
   const { state, dispatch } = useGlobalContext();
@@ -36,7 +26,7 @@ const DeleteIssueConfirmation = ({ issueId }) => {
   };
 
   return (
-    <div>
+    <Grid>
       <Button sx={{ p: 0 }}>
         <DeleteIcon
           className={classes.deleteButton}
@@ -50,12 +40,17 @@ const DeleteIssueConfirmation = ({ issueId }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+        <Box className={classes.deleteModal} sx={{ boxShadow: 24 }}>
+          <Typography
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+            sx={{ marginBottom: 2 }}
+          >
             Are you sure you want to delete this issue?
           </Typography>
-          <Stack spacing={2} direction="row">
-            <Button variant="contained" onClick={handleDelete}>
+          <Stack spacing={2} direction="row" justifyContent="center">
+            <Button variant="contained" onClick={handleDelete} color="error">
               Delete
             </Button>
             <Button variant="outlined" onClick={handleClose}>
@@ -64,7 +59,7 @@ const DeleteIssueConfirmation = ({ issueId }) => {
           </Stack>
         </Box>
       </Modal>
-    </div>
+    </Grid>
   );
 };
 
