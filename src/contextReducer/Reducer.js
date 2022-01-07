@@ -67,6 +67,12 @@ const reducer = (state, action) => {
         currentUser: null,
       };
     }
+    case 'SET_ISSUESISLOADING': {
+      return {
+        ...state,
+        issuesIsLoading: action.data,
+      };
+    }
     case 'INCREASE_COUNTER': {
       return {
         ...state,
