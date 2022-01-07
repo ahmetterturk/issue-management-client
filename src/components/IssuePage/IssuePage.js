@@ -23,10 +23,15 @@ const IssuePage = () => {
 
   const [issue, setIssue] = useState([]);
   const [messages, setMessages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     getIssue(id)
-      .then((response) => setIssue(response))
+      .then((response) => {
+        setIssue(response);
+        setIsLoading(false);
+      })
       .catch((error) => console.log(error));
   }, [id, state.counter]);
 
@@ -55,12 +60,13 @@ const IssuePage = () => {
 
       <Grid container className={classes.container} spacing={2}>
         <Grid item lg={7} md={7} xs={12}>
-          <IssueInfo issue={issue} id={id} />
+          <IssueInfo isLoading={isLoading} issue={issue} id={id} />
           <br></br>
-          <Members issue={issue} id={id} />
+          <Members issue={issue} id={id} isLoading={isLoading} />
         </Grid>
         <Grid item lg={5} md={5} xs={12}>
           <Messages
+            isLoading={isLoading}
             messages={messages}
             issueId={id}
             userName={`${currentUser.userDetails.firstName} ${currentUser.userDetails.lastName}`}

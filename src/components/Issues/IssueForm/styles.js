@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'white',
     position: 'absolute',
     width: 500,
-    height: 650,
+    height: 600,
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
@@ -16,14 +16,15 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: theme.spacing(1),
     [theme.breakpoints.down('sm')]: {
       width: 250,
-      height: 650,
+      height: 500,
+      // height: '%50',
       padding: theme.spacing(7),
     },
   },
   dropdownContainer: {
     display: 'flex',
     justifyContent: 'space-between',
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(1),
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(4),
     },
@@ -46,10 +47,13 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   individualSelectBox: {
-    marginBottom: theme.spacing(3),
+    marginBottom: theme.spacing(1),
+    [theme.breakpoints.up('sm')]: {
+      marginBottom: theme.spacing(3),
+    },
   },
   titleDiv: {
-    marginBottom: theme.spacing(2),
+    marginBottom: theme.spacing(1),
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(4),
     },
@@ -62,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(4),
       marginBottom: theme.spacing(4),
     },
-    marginBottom: theme.spacing(2),
+    marginBottom: theme.spacing(1),
   },
 }));
 

@@ -15,12 +15,23 @@ const useStyles = makeStyles((theme) => ({
   visibilityIcon: {
     display: 'flex',
     padding: 0,
+    color: 'black',
+    '&:hover': {
+      color: '#0046bf',
+    },
   },
   tableCell: {
     height: theme.spacing(6),
     borderBottom: 'none',
   },
   tablePagination: {},
+  issueTitle: {
+    textDecoration: 'none',
+    color: 'black',
+    '&:hover': {
+      color: '#0046bf',
+    },
+  },
 }));
 
 export default useStyles;

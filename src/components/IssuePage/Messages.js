@@ -2,43 +2,50 @@ import React from 'react';
 import Message from './Message';
 import MessageForm from './MessageForm';
 import { Grid, Card, CardContent, Typography } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 
-const Messages = ({ messages, issueId, userName, userId }) => {
+const Messages = ({ messages, issueId, userName, userId, isLoading }) => {
   const filteredMessages = messages.filter(
     (message) => message.issueId === issueId
   );
   return (
-    <Card>
+    <Card elevation={3} sx={{ marginBottom: 20 }}>
       <CardContent>
-        <Grid container>
-          <Grid item xs={12}>
-            {filteredMessages.length > 0 ? (
-              filteredMessages.map((message, index) => {
-                return (
-                  <>
-                    <Message key={index} message={message} />
-                  </>
-                );
-              })
-            ) : (
-              <Card sx={{ marginBottom: 2 }}>
-                <CardContent>
-                  <Typography fontSize={18}>
-                    There are no messages on this issue. Be the first one to
-                    send a message.
-                  </Typography>
-                </CardContent>
-              </Card>
-            )}
+        {isLoading ? (
+          <Grid container justifyContent="center">
+            <CircularProgress />
           </Grid>
-          <Grid item xs={12}>
-            <MessageForm
-              issueId={issueId}
-              userName={userName}
-              userId={userId}
-            />
+        ) : (
+          <Grid container>
+            <Grid item xs={12}>
+              {filteredMessages.length > 0 ? (
+                filteredMessages.map((message, index) => {
+                  return (
+                    <>
+                      <Message key={index} message={message} />
+                    </>
+                  );
+                })
+              ) : (
+                <Card sx={{ marginBottom: 2 }}>
+                  <CardContent>
+                    <Typography fontSize={18}>
+                      There are no messages on this issue. Be the first one to
+                      send a message.
+                    </Typography>
+                  </CardContent>
+                </Card>
+              )}
+            </Grid>
+            <Grid item xs={12}>
+              <MessageForm
+                issueId={issueId}
+                userName={userName}
+                userId={userId}
+              />
+            </Grid>
           </Grid>
-        </Grid>
+        )}
       </CardContent>
     </Card>
   );

@@ -9,14 +9,15 @@ import { useGlobalContext } from '../../contextReducer/Context';
 import { Grid } from '@mui/material';
 import AddMembersForm from './AddMembersForm';
 import jwtdecode from 'jwt-decode';
+import CircularProgress from '@mui/material/CircularProgress';
 
-const Members = ({ issue, id }) => {
+const Members = ({ issue, id, isLoading }) => {
   const { state, dispatch } = useGlobalContext();
   const { currentUser, assignedIssues } = state;
   const { token } = currentUser;
   const decodedToken = jwtdecode(token);
 
-  console.log(issue.members);
+  // console.log(issue.members)
   // console.log(state.users.allUsers);
   // console.log(
   //   state.users.allUsers.filter((user) =>
@@ -25,32 +26,38 @@ const Members = ({ issue, id }) => {
   // );
 
   return (
-    <Card>
+    <Card elevation={3}>
       <CardContent>
-        <Grid container>
-          <Grid item sm={9} xs={7}>
-            {issue.members && issue.members.length > 0 && (
-              <Typography gutterBottom variant="h5" component="div">
-                Members
-              </Typography>
-            )}
+        {isLoading ? (
+          <Grid container justifyContent="center">
+            <CircularProgress />
+          </Grid>
+        ) : (
+          <Grid container>
+            <Grid item sm={9} xs={7}>
+              {issue.members && issue.members.length > 0 && (
+                <Typography gutterBottom variant="h5" component="div">
+                  Members
+                </Typography>
+              )}
 
-            {issue.members && issue.members.length > 0 ? (
-              issue.members.map((member) => {
-                return <Typography variant="h6">{member}</Typography>;
-              })
-            ) : (
-              <Typography>
-                There are currently no members on this issue
-              </Typography>
-            )}
+              {issue.members && issue.members.length > 0 ? (
+                issue.members.map((member) => {
+                  return <Typography variant="h6">{member}</Typography>;
+                })
+              ) : (
+                <Typography>
+                  There are currently no members on this issue
+                </Typography>
+              )}
+            </Grid>
+            <Grid item sm={3} xs={5}>
+              {(decodedToken.id === issue.userId || decodedToken.isAdmin) && (
+                <AddMembersForm issue={issue} id={id} />
+              )}
+            </Grid>
           </Grid>
-          <Grid item sm={3} xs={5}>
-            {(decodedToken.id === issue.userId || decodedToken.isAdmin) && (
-              <AddMembersForm issue={issue} id={id} />
-            )}
-          </Grid>
-        </Grid>
+        )}
       </CardContent>
     </Card>
   );

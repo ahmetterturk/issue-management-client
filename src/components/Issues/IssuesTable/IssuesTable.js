@@ -39,7 +39,7 @@ const IssuesTable = ({ issuesList }) => {
   };
 
   return (
-    <Paper className={classes.paper}>
+    <Paper elevation={3} className={classes.paper}>
       <TableContainer>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
