@@ -14,7 +14,7 @@ const ProfilePage = () => {
       >
         <Container maxWidth='lg'>
           <Typography sx={{ mb: 3 }} variant='h4'>
-            Account
+            Profile Account
           </Typography>
           <ProfileDetails />
         </Container>

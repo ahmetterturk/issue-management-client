@@ -10,7 +10,6 @@ import Navbar from './components/Navbar/Navbar';
 import Issues from './components/Issues/Issues';
 import SideNavbar from './components/Sidebar/sidebar';
 import useStyles, { theme } from './styles';
-import UserProfileForm from './components/UserProfile/UserProfileForm';
 import EmployeeTable from './components/Employees/EmployeeTable';
 import { allUsers } from './apiServices/UserApi';
 import Employee from './components/Employees/SingleEmployee/Employee';
