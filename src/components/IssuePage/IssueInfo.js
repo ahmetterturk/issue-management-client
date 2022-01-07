@@ -61,7 +61,12 @@ const IssueInfo = ({ issue, id }) => {
             >
               Issue Title
             </Typography>
-            <Typography gutterBottom variant="body1" component="div">
+            <Typography
+              gutterBottom
+              variant="body1"
+              component="div"
+              fontSize={18}
+            >
               {issue.title}
             </Typography>
           </Grid>
@@ -80,7 +85,12 @@ const IssueInfo = ({ issue, id }) => {
           >
             Issue Author
           </Typography>
-          <Typography gutterBottom variant="body1" component="div">
+          <Typography
+            gutterBottom
+            variant="body1"
+            component="div"
+            fontSize={18}
+          >
             {issue.userName}
           </Typography>
           <Typography
@@ -91,7 +101,7 @@ const IssueInfo = ({ issue, id }) => {
           >
             Issue Date
           </Typography>
-          <Typography gutterBottom variant="body1">
+          <Typography gutterBottom variant="body1" fontSize={18}>
             {moment(issue.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
           </Typography>
         </Grid>
@@ -104,7 +114,7 @@ const IssueInfo = ({ issue, id }) => {
           >
             Issue Description
           </Typography>
-          <Typography gutterBottom variant="body1">
+          <Typography gutterBottom variant="body1" fontSize={18}>
             {issue.description}
           </Typography>
         </Grid>
@@ -118,7 +128,12 @@ const IssueInfo = ({ issue, id }) => {
             >
               Issue Type
             </Typography>
-            <Typography gutterBottom variant="body1" component="div">
+            <Typography
+              gutterBottom
+              variant="body1"
+              component="div"
+              fontSize={18}
+            >
               {issue.type}
             </Typography>
           </Grid>
@@ -131,7 +146,17 @@ const IssueInfo = ({ issue, id }) => {
             >
               Issue Status
             </Typography>
-            <Typography gutterBottom variant="body1" component="div">
+            <Typography
+              gutterBottom
+              variant="body1"
+              component="div"
+              fontSize={18}
+              style={{
+                color:
+                  (issue.priority === 'High' && '#ED5500') ||
+                  (issue.priority === 'Low' && '#00CC8F'),
+              }}
+            >
               {issue.priority}
             </Typography>
           </Grid>
@@ -144,7 +169,18 @@ const IssueInfo = ({ issue, id }) => {
             >
               Issue Priority
             </Typography>
-            <Typography gutterBottom variant="body1" component="div">
+            <Typography
+              gutterBottom
+              variant="body1"
+              component="div"
+              fontSize={18}
+              style={{
+                color:
+                  (issue.status === 'Pending' && '#007BF5') ||
+                  (issue.status === 'New' && '#ED5500') ||
+                  (issue.status === 'Resolved' && '#00CC8F'),
+              }}
+            >
               {issue.status}
             </Typography>
           </Grid>

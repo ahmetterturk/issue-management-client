@@ -21,6 +21,9 @@ const IssuesTable = ({ issuesList }) => {
   const { currentUser } = state;
   const { token } = currentUser;
   const decodedToken = jwtdecode(token);
+  const visibleIssues = decodedToken.isAdmin
+    ? issuesList
+    : issuesList.filter((issue) => issue.type === 'Public');
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -52,8 +55,8 @@ const IssuesTable = ({ issuesList }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {issuesList &&
-              issuesList
+            {visibleIssues &&
+              visibleIssues
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((issue) => {
                   return (

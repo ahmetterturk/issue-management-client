@@ -11,6 +11,7 @@ import jwtdecode from 'jwt-decode';
 import { getAllMessages } from '../../apiServices/MessageApi';
 import Members from './Members';
 import { Grid } from '@mui/material';
+import { borderTop } from '@mui/system';
 
 const IssuePage = () => {
   const classes = useStyles();
@@ -47,9 +48,9 @@ const IssuePage = () => {
   console.log(issue);
 
   return (
-    <>
+    <Grid sx={{ marginTop: 14 }}>
       <Typography className={classes.header} variant="h4">
-        Ticket
+        {issue.title}
       </Typography>
 
       <Grid container className={classes.container} spacing={2}>
@@ -67,8 +68,7 @@ const IssuePage = () => {
           />
         </Grid>
       </Grid>
-      {/* </Container> */}
-    </>
+    </Grid>
   );
 };
 
