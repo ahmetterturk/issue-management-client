@@ -38,7 +38,7 @@ const MessageForm = ({ issueId, userName, userId }) => {
       <form onSubmit={handleSubmit}>
         <TextField
           fullWidth={true}
-          placeholder="Enter Comment"
+          placeholder="Enter Message"
           multiline
           rows={1}
           name="messageBody"
@@ -51,6 +51,7 @@ const MessageForm = ({ issueId, userName, userId }) => {
           variant="contained"
           type="submit"
           fullWidth
+          sx={{ marginTop: 1 }}
         >
           Send Message
           <SendIcon fontSize="small" className={classes.sendIcon} />

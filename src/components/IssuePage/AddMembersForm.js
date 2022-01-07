@@ -53,15 +53,6 @@ const AddMembersForm = ({ issue, id }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // if (event.target[0].value === '') {
-    //   setHasError(true);
-    //   setErrorMessageTitle("Title can't be blank");
-    // } else if (event.target[2].textContent === '') {
-    //   setHasError(false);
-    //   setHasError(true);
-    //   setErrorMessageDesc("Description can't be blank");
-    // } else {
-    //   setHasError(false);
     updateIssue(id, { ...issueData, members: state.issueUpdateMembers })
       .then(() => {
         dispatch({ type: 'INCREASE_COUNTER' });
@@ -71,7 +62,6 @@ const AddMembersForm = ({ issue, id }) => {
         console.log(error);
       });
     handleClose();
-    // }
   };
 
   return (
@@ -81,6 +71,7 @@ const AddMembersForm = ({ issue, id }) => {
         color="primary"
         variant="contained"
         size="small"
+        sx={{ marginTop: 3 }}
       >
         Add Members
       </Button>
@@ -90,7 +81,7 @@ const AddMembersForm = ({ issue, id }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={{ boxShadow: 24 }} className={classes.boxContainer}>
+        <Box sx={{ boxShadow: 24 }} className={classes.membersBoxContainer}>
           <form onSubmit={handleSubmit}>
             <MembersUpdateDropdown
               className={classes.members}

@@ -28,10 +28,15 @@ const App = () => {
 
   // get all issues
   useEffect(() => {
+    dispatch({ type: 'SET_ISSUESISLOADING', data: true });
     getIssues()
-      .then((data) => dispatch({ type: 'GET_ISSUES', data: data }))
+      .then((data) => {
+        dispatch({ type: 'GET_ISSUES', data: data });
+        dispatch({ type: 'SET_ISSUESISLOADING', data: false });
+      })
       .catch((err) => console.log(err));
   }, [state.counter, state.currentUser]);
+
   useEffect(() => {
     allUsers()
       .then((data) => {
@@ -59,17 +64,17 @@ const App = () => {
                 <Navbar onMenuClick={() => setIsSidebarOpen(true)} />
               )}
               <Routes>
-                <Route path='/' element={<LoginForm />} />
-                <Route path='/login' element={<LoginForm />} />
-                <Route path='/issues/:id' element={<IssuePage />} />
-                <Route path='/issues' element={<Issues />} />
-                <Route path='/userProfile/:id' element={<ProfilePage />} />
-                <Route path='/employee' element={<EmployeeTable />} />
-                <Route path='/employee/:id' element={<Employee />} />
-                <Route path='/employeeSignup' element={<SignupPage />} />
-                <Route path='/graphs' element={<GraphsPage />} />
-                <Route path='/404' element={<NotFoundPage />} />
-                <Route path='*' element={<Navigate to='/404' />} />
+                <Route path="/" element={<LoginForm />} />
+                <Route path="/login" element={<LoginForm />} />
+                <Route path="/issues/:id" element={<IssuePage />} />
+                <Route path="/issues" element={<Issues />} />
+                <Route path="/userProfile/:id" element={<ProfilePage />} />
+                <Route path="/employee" element={<EmployeeTable />} />
+                <Route path="/employee/:id" element={<Employee />} />
+                <Route path="/employeeSignup" element={<SignupPage />} />
+                <Route path="/graphs" element={<GraphsPage />} />
+                <Route path="/404" element={<NotFoundPage />} />
+                <Route path="*" element={<Navigate to="/404" />} />
               </Routes>
             </Box>
           </Box>

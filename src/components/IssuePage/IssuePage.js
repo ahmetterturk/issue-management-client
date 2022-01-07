@@ -11,6 +11,7 @@ import jwtdecode from 'jwt-decode';
 import { getAllMessages } from '../../apiServices/MessageApi';
 import Members from './Members';
 import { Grid } from '@mui/material';
+import { borderTop } from '@mui/system';
 
 const IssuePage = () => {
   const classes = useStyles();
@@ -22,10 +23,16 @@ const IssuePage = () => {
 
   const [issue, setIssue] = useState([]);
   const [messages, setMessages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [issueMembers, setIssueMembers] = useState([]);
 
   useEffect(() => {
+    setIsLoading(true);
     getIssue(id)
-      .then((response) => setIssue(response))
+      .then((response) => {
+        setIssue(response);
+        setIsLoading(false);
+      })
       .catch((error) => console.log(error));
   }, [id, state.counter]);
 
@@ -44,36 +51,45 @@ const IssuePage = () => {
     dispatch({ type: 'SET_ASSIGNED_ISSUES', data: currentAssignedIssues });
   }, [id]);
 
-  console.log(issue);
+  useEffect(() => {
+    if (issue.members && state.users.allUsers) {
+      const members = state.users.allUsers.filter((user) =>
+        issue.members.includes(`${user.firstName} ${user.lastName}`)
+      );
+      setIssueMembers(members);
+    }
+  }, [issue, state.users.allUsers]);
+
+  // console.log(issueMembers);
 
   return (
-    <>
-      <Container sx={{ margin: '150px auto 0' }}>
-        {/* {(decodedToken.id === issue.userId || decodedToken.isAdmin) && (
-          <IssueEditForm issue={issue} id={id} />
-        )} */}
+    <Grid sx={{ marginTop: 14 }}>
+      <Typography className={classes.header} variant="h4">
+        {issue.title}
+      </Typography>
 
-        <Typography className={classes.header} variant="h4">
-          Ticket
-        </Typography>
-
-        <Grid container className={classes.container} spacing={2}>
-          <Grid item lg={7} md={7} xs={12}>
-            <IssueInfo issue={issue} id={id} />
-            <br></br>
-            <Members issue={issue} id={id} />
-          </Grid>
-          <Grid item lg={5} md={5} xs={12}>
-            <Messages
-              messages={messages}
-              issueId={id}
-              userName={`${currentUser.userDetails.firstName} ${currentUser.userDetails.lastName}`}
-              userId={decodedToken.id}
-            />
-          </Grid>
+      <Grid container className={classes.container} spacing={2}>
+        <Grid item lg={7} md={7} xs={12}>
+          <IssueInfo isLoading={isLoading} issue={issue} id={id} />
+          <br></br>
+          <Members
+            issueMembers={issueMembers}
+            issue={issue}
+            id={id}
+            isLoading={isLoading}
+          />
         </Grid>
-      </Container>
-    </>
+        <Grid item lg={5} md={5} xs={12}>
+          <Messages
+            isLoading={isLoading}
+            messages={messages}
+            issueId={id}
+            userName={`${currentUser.userDetails.firstName} ${currentUser.userDetails.lastName}`}
+            userId={decodedToken.id}
+          />
+        </Grid>
+      </Grid>
+    </Grid>
   );
 };
 

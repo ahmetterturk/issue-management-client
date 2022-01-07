@@ -1,14 +1,14 @@
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles((theme) => ({
-  boxContainer: {
+  membersBoxContainer: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'space-between',
     backgroundColor: 'white',
     position: 'absolute',
     width: 500,
-    height: 600,
+    height: 150,
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
@@ -16,7 +16,26 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: theme.spacing(1),
     [theme.breakpoints.down('sm')]: {
       width: 250,
-      height: 550,
+      height: 110,
+      padding: theme.spacing(7),
+    },
+  },
+  boxContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'space-between',
+    backgroundColor: 'white',
+    position: 'absolute',
+    width: 500,
+    height: 530,
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    padding: theme.spacing(10),
+    borderRadius: theme.spacing(1),
+    [theme.breakpoints.down('sm')]: {
+      width: 250,
+      height: 500,
       padding: theme.spacing(7),
     },
   },
@@ -67,6 +86,10 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     marginTop: '50px',
+    padding: theme.spacing(4),
+    [theme.breakpoints.down('sm')]: {
+      padding: theme.spacing(2),
+    },
   },
   messagesGrid: {
     marginTop: theme.spacing(5),
