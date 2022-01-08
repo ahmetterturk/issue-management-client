@@ -6,6 +6,8 @@ import { useGlobalContext } from '../../contextReducer/Context';
 import { Link } from 'react-router-dom';
 import Badge from '@mui/material/Badge';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import SingleDropdownIssue from './SingleDropdownIssue';
+import { Typography } from '@mui/material';
 
 const DropDownIssues = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -43,26 +45,27 @@ const DropDownIssues = () => {
   return (
     <div>
       <Button
-        id='basic-button'
+        id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup='true'
+        aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        <Badge badgeContent={assignedIssues.length} color='secondary'>
-          <NotificationsIcon color='action' />
+        <Badge badgeContent={assignedIssues.length} color="secondary">
+          <NotificationsIcon color="action" />
         </Badge>
       </Button>
       <Menu
-        id='basic-menu'
+        id="basic-menu"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
         MenuListProps={{
           'aria-labelledby': 'basic-button',
+          disablePadding: true,
         }}
       >
-        {assignedIssues &&
+        {assignedIssues && Object.keys(assignedIssues).length > 0 ? (
           assignedIssues.map((issue) => {
             return (
               <Link
@@ -73,10 +76,15 @@ const DropDownIssues = () => {
                   color: '#555',
                 }}
               >
-                <MenuItem onClick={handleClose}>{issue.title}</MenuItem>
+                <SingleDropdownIssue handleClose={handleClose} issue={issue} />
               </Link>
             );
-          })}
+          })
+        ) : (
+          <MenuItem onClick={handleClose}>
+            <Typography fontSize={18}>You have no new notifications</Typography>
+          </MenuItem>
+        )}
       </Menu>
     </div>
   );
