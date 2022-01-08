@@ -25,8 +25,8 @@ const ProfileDetails = (props) => {
   const [isFetching, setIsFetching] = useState(false);
   const [profileImageInput, setProfileImageInput] = useState('');
   const { state, dispatch } = useGlobalContext();
-
-  const { userDetails } = state.currentUser;
+  let { currentUser } = state;
+  let { userDetails } = state.currentUser;
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -42,24 +42,22 @@ const ProfileDetails = (props) => {
     setIsFetching(true);
     delete data.name;
     delete data.image;
-    uploadProfileImage({ image: profileImageInput })
-      .then((imageData) => {
-        data.imageUrl = imageData && imageData.image.src;
-        updateUser(data, id)
-          .then((userData) => {
-            localStorage.setItem('user', JSON.stringify(userData));
-            dispatch({ type: 'UPDATE_SUCCESS' });
-            localStorage.removeItem('user');
-            dispatch({ type: 'LOGOUT' });
-          })
-          .catch((err) => console.log(err));
-        navigate('/login');
+    data.imageUrl = userDetails.image;
+    updateUser(data, id)
+      .then((userData) => {
+        localStorage.setItem('user', JSON.stringify(userData));
+        dispatch({ type: 'UPDATE_SUCCESS' });
+        currentUser = userData;
+        console.log(userData);
+
+        navigate('/issues');
+        window.location.reload();
         setIsFetching(false);
-        setTimeout(() => {
-          dispatch({ type: 'AFTER_UPDATE' });
-        }, 4000);
       })
       .catch((err) => console.log(err));
+    setTimeout(() => {
+      dispatch({ type: 'AFTER_UPDATE' });
+    }, 4000);
   };
 
   return (
