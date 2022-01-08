@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -16,9 +16,9 @@ import jwtdecode from 'jwt-decode';
 import DeleteIssueConfirmation from './DeleteIssueConfirmation';
 import useStyles from './styles';
 import CircularProgress from '@mui/material/CircularProgress';
-
+import { deleteIssue } from '../../../apiServices/IssueApi';
 const IssuesTable = ({ issuesList }) => {
-  const { state } = useGlobalContext();
+  const { state, dispatch } = useGlobalContext();
   const { currentUser } = state;
   const { token } = currentUser;
   const decodedToken = jwtdecode(token);
@@ -30,6 +30,7 @@ const IssuesTable = ({ issuesList }) => {
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [isFetching, setIsFetching] = useState(false);
   const classes = useStyles();
 
   const handleChangePage = (event, newPage) => {
@@ -41,16 +42,27 @@ const IssuesTable = ({ issuesList }) => {
     setPage(0);
   };
 
+  // added handle issue function in issuesTable instead of the deleteIssueConfiramtion, we can reuse the modal now
+  const handleDelete = (issueId) => {
+    setIsFetching(true);
+    deleteIssue(issueId)
+      .then(() => {
+        dispatch({ type: 'INCREASE_COUNTER' });
+        setIsFetching(false);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <>
       {state.issuesIsLoading ? (
-        <Grid container justifyContent="center" sx={{ marginTop: 10 }}>
+        <Grid container justifyContent='center' sx={{ marginTop: 10 }}>
           <CircularProgress />
         </Grid>
       ) : (
         <Paper elevation={3} className={classes.paper}>
           <TableContainer>
-            <Table stickyHeader aria-label="sticky table">
+            <Table stickyHeader aria-label='sticky table'>
               <TableHead>
                 <TableRow>
                   <TableCell className={classes.tableHeaderCell}>
@@ -83,7 +95,7 @@ const IssuesTable = ({ issuesList }) => {
                           className={classes.tableRow}
                           key={issue._id}
                           hover
-                          role="checkbox"
+                          role='checkbox'
                           tabIndex={-1}
                         >
                           <TableCell className={classes.tableCell}>
@@ -125,7 +137,10 @@ const IssuesTable = ({ issuesList }) => {
                               </Link>
                               {(decodedToken.id === issue.userId ||
                                 decodedToken.isAdmin) && (
-                                <DeleteIssueConfirmation issueId={issue._id} />
+                                <DeleteIssueConfirmation
+                                  handleDelete={() => handleDelete(issue._id)}
+                                  isFetching={isFetching}
+                                />
                               )}
                             </Grid>
                           </TableCell>
@@ -138,7 +153,7 @@ const IssuesTable = ({ issuesList }) => {
 
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
-            component="div"
+            component='div'
             count={issuesList.length}
             rowsPerPage={rowsPerPage}
             page={page}

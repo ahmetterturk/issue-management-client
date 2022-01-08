@@ -6,24 +6,15 @@ import Modal from '@mui/material/Modal';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Stack from '@mui/material/Stack';
 import { Grid } from '@mui/material';
-import { deleteIssue } from '../../../apiServices/IssueApi';
 import { useGlobalContext } from '../../../contextReducer/Context';
 import useStyles from './styles';
+import CircularProgress from '@mui/material/CircularProgress';
 
-const DeleteIssueConfirmation = ({ issueId }) => {
-  const { state, dispatch } = useGlobalContext();
+const DeleteIssueConfirmation = ({ handleDelete, isFetching }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const classes = useStyles();
-
-  const handleDelete = () => {
-    deleteIssue(issueId)
-      .then(() => {
-        dispatch({ type: 'INCREASE_COUNTER' });
-      })
-      .catch((err) => console.log(err));
-  };
 
   return (
     <Grid>
@@ -37,23 +28,27 @@ const DeleteIssueConfirmation = ({ issueId }) => {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
       >
         <Box className={classes.deleteModal} sx={{ boxShadow: 24 }}>
           <Typography
-            id="modal-modal-title"
-            variant="h6"
-            component="h2"
+            id='modal-modal-title'
+            variant='h6'
+            component='h2'
             sx={{ marginBottom: 2 }}
           >
             Are you sure you want to delete this issue?
           </Typography>
-          <Stack spacing={2} direction="row" justifyContent="center">
-            <Button variant="contained" onClick={handleDelete} color="error">
-              Delete
+          <Stack spacing={2} direction='row' justifyContent='center'>
+            <Button variant='contained' onClick={handleDelete} color='error'>
+              {isFetching ? (
+                <CircularProgress sx={{ color: '#fff' }} />
+              ) : (
+                'Delete'
+              )}
             </Button>
-            <Button variant="outlined" onClick={handleClose}>
+            <Button variant='outlined' onClick={handleClose}>
               Cancel
             </Button>
           </Stack>
