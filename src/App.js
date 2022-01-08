@@ -19,6 +19,7 @@ import { ThemeProvider } from '@mui/styles';
 import NotFoundPage from './components/ErrorPages/NotFoundPage';
 import LoginForm from './components/Login/LoginForm';
 import ProfilePage from './components/UserProfile/ProfilePage';
+import DashboardPage from './components/Dashboard/DashboardPage';
 
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -64,17 +65,18 @@ const App = () => {
                 <Navbar onMenuClick={() => setIsSidebarOpen(true)} />
               )}
               <Routes>
-                <Route path="/" element={<LoginForm />} />
-                <Route path="/login" element={<LoginForm />} />
-                <Route path="/issues/:id" element={<IssuePage />} />
-                <Route path="/issues" element={<Issues />} />
-                <Route path="/userProfile/:id" element={<ProfilePage />} />
-                <Route path="/employee" element={<EmployeeTable />} />
-                <Route path="/employee/:id" element={<Employee />} />
-                <Route path="/employeeSignup" element={<SignupPage />} />
-                <Route path="/graphs" element={<GraphsPage />} />
-                <Route path="/404" element={<NotFoundPage />} />
-                <Route path="*" element={<Navigate to="/404" />} />
+                <Route path='/' element={<LoginForm />} />
+                <Route path='/login' element={<LoginForm />} />
+                <Route path='/dashboard' element={<DashboardPage />} />
+                <Route path='/issues' element={<Issues />} />
+                <Route path='/graphs' element={<GraphsPage />} />
+                <Route path='/issues/:id' element={<IssuePage />} />
+                <Route path='/employee' element={<EmployeeTable />} />
+                <Route path='/employee/:id' element={<Employee />} />
+                <Route path='/userProfile/:id' element={<ProfilePage />} />
+                <Route path='/employeeSignup' element={<SignupPage />} />
+                <Route path='/404' element={<NotFoundPage />} />
+                <Route path='*' element={<Navigate to='/404' />} />
               </Routes>
             </Box>
           </Box>
