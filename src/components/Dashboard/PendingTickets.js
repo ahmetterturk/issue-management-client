@@ -7,22 +7,19 @@ import {
   Grid,
   Typography,
 } from '@mui/material';
-import FiberNewIcon from '@mui/icons-material/FiberNew';
+import PendingActionsIcon from '@mui/icons-material/PendingActions';
 import { useGlobalContext } from '../../contextReducer/Context';
 import { Link } from 'react-router-dom';
 import { useStyles } from './Styles';
-import CloudDoneIcon from '@mui/icons-material/CloudDone';
 
-const ResolvedTickets = ({ title, total, subtitle, to }) => {
+const PendingTickets = ({ title, total, subtitle, to }) => {
   const { state } = useGlobalContext();
   const styleProps = {
-    borderColor: 'rgba(76, 0, 217, 0.5)',
+    borderColor: 'rgba(255, 0, 89, 0.5)',
     height: '100%',
     cursor: 'pointer',
   };
-
   const classes = useStyles(styleProps);
-
   return (
     <Link to={to} className={classes.link}>
       <Card className={classes.border}>
@@ -39,12 +36,12 @@ const ResolvedTickets = ({ title, total, subtitle, to }) => {
             <Grid item>
               <Avatar
                 sx={{
-                  backgroundColor: '#4c00d9',
+                  backgroundColor: '#ff0059',
                   height: 56,
                   width: 56,
                 }}
               >
-                <CloudDoneIcon />
+                <PendingActionsIcon />
               </Avatar>
             </Grid>
           </Grid>
@@ -65,4 +62,4 @@ const ResolvedTickets = ({ title, total, subtitle, to }) => {
   );
 };
 
-export default ResolvedTickets;
+export default PendingTickets;

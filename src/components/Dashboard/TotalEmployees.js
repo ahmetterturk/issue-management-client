@@ -14,14 +14,21 @@ import { useStyles } from './Styles';
 
 const TotalEmployees = ({ title, total, subtitle, to }) => {
   const { state } = useGlobalContext();
-  const classes = useStyles();
+
+  const styleProps = {
+    borderColor: 'rgba(0, 255, 187, 0.5)',
+    height: '100%',
+    cursor: 'pointer',
+  };
+
+  const classes = useStyles(styleProps);
   return (
     <Link to={to} className={classes.link}>
-      <Card sx={{ height: '100%', cursor: 'pointer' }}>
+      <Card className={classes.border}>
         <CardContent>
           <Grid container spacing={3} sx={{ justifyContent: 'space-between' }}>
             <Grid item>
-              <Typography color='textSecondary' gutterBottom variant='h3'>
+              <Typography color='textSecondary' gutterBottom variant='h4'>
                 {title}
               </Typography>
               <Typography color='textPrimary' variant='h5'>
