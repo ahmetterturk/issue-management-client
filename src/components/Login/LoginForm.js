@@ -39,7 +39,7 @@ function Copyright(props) {
 }
 
 const LoginForm = () => {
-  const { dispatch } = useGlobalContext();
+  const { dispatch, state } = useGlobalContext();
   const navigate = useNavigate();
   const [hasError, setHasError] = useState(false);
   const [errorObject, setErrorObject] = useState(null);
@@ -76,6 +76,8 @@ const LoginForm = () => {
           const decodeToken = jwtDecode(data.token);
           if (data.userDetails.image === null) {
             navigate(`/userProfile/${decodeToken.id}`);
+          } else if (decodeToken.isAdmin) {
+            navigate('/dashboard');
           } else {
             navigate('/issues');
           }
