@@ -24,7 +24,9 @@ const IssuesTable = ({ issuesList }) => {
   const decodedToken = jwtdecode(token);
   const visibleIssues = decodedToken.isAdmin
     ? issuesList
-    : issuesList.filter((issue) => issue.type === 'Public');
+    : issuesList.filter(
+        (issue) => issue.type === 'Public' || issue.userId === decodedToken.id
+      );
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
