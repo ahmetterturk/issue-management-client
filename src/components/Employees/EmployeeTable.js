@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useGlobalContext } from '../../contextReducer/Context';
 import {
   Table,
@@ -23,10 +23,14 @@ import jwtdecode from 'jwt-decode';
 import Errors from '../ErrorPages/Errors';
 import unauthorizedImage from '../../images/unauthorized.jpg';
 import loginImage from '../../images/login.jpg';
+import { deleteUser } from '../../apiServices/UserApi';
+import DeleteIssueConfirmation from '../Issues/IssuesTable/DeleteIssueConfirmation';
+
 const EmployeeTable = () => {
-  const { state } = useGlobalContext();
+  const { state, dispatch } = useGlobalContext();
   const classes = useStyles();
-  const [page, setPage] = React.useState(0);
+  const [page, setPage] = useState(0);
+  const [isFetching, setIsFetching] = useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   if (!state.currentUser) {
     return (
@@ -70,6 +74,15 @@ const EmployeeTable = () => {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
+  };
+  const handleDelete = (id) => {
+    setIsFetching(true);
+    deleteUser(id)
+      .then((data) => {
+        dispatch({ type: 'INCREASE_COUNTER' });
+        setIsFetching(false);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -129,11 +142,10 @@ const EmployeeTable = () => {
                         {(decodedToken.id === user._id ||
                           decodedToken.isAdmin) && (
                           <>
-                            <Link to={user._id}>
-                              <DeleteForeverSharpIcon
-                                className={classes.deleteIcon}
-                              />
-                            </Link>
+                            <DeleteIssueConfirmation
+                              handleDelete={() => handleDelete(user._id)}
+                              isFetching={isFetching}
+                            />
                           </>
                         )}
                       </TableCell>

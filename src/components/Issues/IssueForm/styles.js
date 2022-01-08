@@ -6,6 +6,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'space-between',
     backgroundColor: 'white',
+    border: '4px solid',
+    borderColor: 'rgba(28, 121, 252, 0.5)',
     position: 'absolute',
     width: 500,
     height: 600,
@@ -20,6 +22,12 @@ const useStyles = makeStyles((theme) => ({
       // height: '%50',
       padding: theme.spacing(7),
     },
+  },
+  divider: {
+    backgroundColor: '#007bff',
+    height: '5px',
+    borderRadius: '10px',
+    marginBottom: '5px',
   },
   dropdownContainer: {
     display: 'flex',
