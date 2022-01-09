@@ -15,7 +15,7 @@ import PasswordIcon from '@mui/icons-material/Password';
 import EmailIcon from '@mui/icons-material/Email';
 import { useForm } from 'react-hook-form';
 import { useGlobalContext } from '../../contextReducer/Context';
-import { uploadProfileImage, updateUser } from '../../apiServices/UserApi';
+import { updateUser } from '../../apiServices/UserApi';
 import { useNavigate } from 'react-router';
 import { useParams } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -23,7 +23,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 const ProfileDetails = (props) => {
   const classes = useStyles();
   const [isFetching, setIsFetching] = useState(false);
-  const [profileImageInput, setProfileImageInput] = useState('');
+  const [setProfileImageInput] = useState('');
   const { state, dispatch } = useGlobalContext();
   let { currentUser } = state;
   let { userDetails } = state.currentUser;
@@ -47,7 +47,6 @@ const ProfileDetails = (props) => {
       .then((userData) => {
         localStorage.setItem('user', JSON.stringify(userData));
         dispatch({ type: 'UPDATE_SUCCESS' });
-        currentUser = userData;
         console.log(userData);
 
         navigate('/issues');

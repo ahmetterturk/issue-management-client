@@ -65,7 +65,6 @@ describe('Login', () => {
     await act(async () => {
       await userEvent.click(screen.getByRole('button'));
     });
-    screen.debug();
 
     expect(screen.getByText(errorMessage)).toBeInTheDocument();
   });
@@ -82,7 +81,6 @@ describe('Login', () => {
     await act(async () => {
       await userEvent.click(screen.getByRole('button'));
     });
-    screen.debug();
 
     expect(screen.getByText(errorMessage)).toBeInTheDocument();
   });

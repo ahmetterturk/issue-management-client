@@ -6,7 +6,6 @@ import Modal from '@mui/material/Modal';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Stack from '@mui/material/Stack';
 import { Grid } from '@mui/material';
-import { useGlobalContext } from '../../../contextReducer/Context';
 import useStyles from './styles';
 import CircularProgress from '@mui/material/CircularProgress';
 
