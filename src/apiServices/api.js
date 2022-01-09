@@ -4,7 +4,7 @@ const API = axios.create({
   baseURL: 'https://issue-management-backend.herokuapp.com',
 });
 
-API.interceptors.request.use((req) => {
+export const apiRequestInterceptor = (req) => {
   if (localStorage.getItem('user')) {
     req.headers.Authorization = `Bearer ${
       JSON.parse(localStorage.getItem('user')).token
@@ -12,6 +12,8 @@ API.interceptors.request.use((req) => {
   }
 
   return req;
-});
+}
+
+API.interceptors.request.use(apiRequestInterceptor);
 
 export default API;
