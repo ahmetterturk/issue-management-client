@@ -4,7 +4,6 @@ import IssueForm from './IssueForm/IssueForm';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import { Grid } from '@mui/material';
-import { Link } from 'react-router-dom';
 import IssuesTable from './IssuesTable/IssuesTable';
 import useStyles from './styles';
 import Errors from '../ErrorPages/Errors';

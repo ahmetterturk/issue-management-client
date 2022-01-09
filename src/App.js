@@ -25,7 +25,6 @@ const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [state, dispatch] = useReducer(reducer, initialState);
   const classes = useStyles({ isLoggedIn: !!state.currentUser });
-  const { currentUser } = state;
 
   // get all issues
   useEffect(() => {

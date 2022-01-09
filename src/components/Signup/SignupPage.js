@@ -1,7 +1,6 @@
 import { Grid } from '@mui/material';
 import React from 'react';
 import SignupForm from './SignupForm';
-import { Link } from 'react-router-dom';
 import { useGlobalContext } from '../../contextReducer/Context';
 import jwtDecode from 'jwt-decode';
 import Errors from '../ErrorPages/Errors';

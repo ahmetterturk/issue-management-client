@@ -1,17 +1,15 @@
-import { Container, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import Messages from './Messages';
 import IssueInfo from './IssueInfo';
 import useStyles from './styles';
 import { useParams } from 'react-router-dom';
 import { getIssue } from '../../apiServices/IssueApi';
-import IssueEditForm from './IssueEditForm';
 import { useGlobalContext } from '../../contextReducer/Context';
 import jwtdecode from 'jwt-decode';
 import { getAllMessages } from '../../apiServices/MessageApi';
 import Members from './Members';
 import { Grid } from '@mui/material';
-import { borderTop } from '@mui/system';
 
 const IssuePage = () => {
   const classes = useStyles();
@@ -59,8 +57,6 @@ const IssuePage = () => {
       setIssueMembers(members);
     }
   }, [issue, state.users.allUsers]);
-
-  // console.log(issueMembers);
 
   return (
     <Grid sx={{ marginTop: 14 }}>

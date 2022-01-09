@@ -39,8 +39,6 @@ const MembersUpdateDropdown = ({ issueData, name }) => {
     user._id,
   ]);
 
-  // console.log(users);
-
   const handleChange = (event) => {
     setPersonName(
       typeof event.target.value === 'string'
@@ -48,8 +46,6 @@ const MembersUpdateDropdown = ({ issueData, name }) => {
         : event.target.value
     );
     dispatch({ type: 'SET_ISSUE_UPDATE_MEMBERS', data: event.target.value });
-    // console.log(personName);
-    // console.log(state.issueUpdateMembers);
   };
 
   return (

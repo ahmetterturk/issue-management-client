@@ -12,15 +12,11 @@ import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOu
 import { useGlobalContext } from '../../contextReducer/Context';
 import { useForm } from 'react-hook-form';
 import { uploadProfileImage } from '../../apiServices/UserApi';
-import { useNavigate } from 'react-router';
-import { useParams } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 const ProfileAvatar = (props) => {
-  const { state, dispatch } = useGlobalContext();
+  const { state } = useGlobalContext();
   const [profileImageInput, setProfileImageInput] = useState('');
   const [isFetching, setIsFetching] = useState(false);
-  const { id } = useParams();
-  const navigate = useNavigate();
   const {
     currentUser: {
       userDetails: { image },
@@ -28,7 +24,7 @@ const ProfileAvatar = (props) => {
   } = state;
   const { userDetails } = state.currentUser;
 
-  const { register, handleSubmit } = useForm({
+  const { handleSubmit } = useForm({
     defaultValues: userDetails,
   });
 

@@ -22,7 +22,6 @@ import { signupUser } from '../../apiServices/UserApi';
 import { useGlobalContext } from '../../contextReducer/Context';
 import CircularProgress from '@mui/material/CircularProgress';
 
-const label = { inputProps: { 'aria-label': 'Admin' } };
 const SignupForm = () => {
   const classes = useStyles();
   const { dispatch } = useGlobalContext();

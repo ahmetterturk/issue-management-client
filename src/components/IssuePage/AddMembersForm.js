@@ -5,22 +5,10 @@ import Modal from '@mui/material/Modal';
 import { updateIssue } from '../../apiServices/IssueApi';
 import { useGlobalContext } from '../../contextReducer/Context';
 import MembersUpdateDropdown from './MembersUpdateDropdown';
-import EditIcon from '@mui/icons-material/Edit';
-import {
-  MenuItem,
-  Select,
-  InputLabel,
-  FormControl,
-  TextField,
-  Grid,
-} from '@mui/material';
 import useStyles from './styles';
 
 const AddMembersForm = ({ issue, id }) => {
   const [open, setOpen] = React.useState(false);
-  const [hasError, setHasError] = useState(false);
-  const [errorMessageTitle, setErrorMessageTitle] = useState('');
-  const [errorMessageDesc, setErrorMessageDesc] = useState('');
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -43,13 +31,6 @@ const AddMembersForm = ({ issue, id }) => {
   useEffect(() => {
     setIssueData(data);
   }, [issue]);
-
-  const handleChange = (event) => {
-    setIssueData({
-      ...issueData,
-      [event.target.name]: event.target.value,
-    });
-  };
 
   const handleSubmit = (event) => {
     event.preventDefault();

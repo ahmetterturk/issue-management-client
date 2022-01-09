@@ -4,8 +4,6 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { updateIssue } from '../../apiServices/IssueApi';
 import { useGlobalContext } from '../../contextReducer/Context';
-import MembersUpdateDropdown from './MembersUpdateDropdown';
-import EditIcon from '@mui/icons-material/Edit';
 import {
   MenuItem,
   Select,
@@ -24,7 +22,7 @@ const IssueEditForm = ({ issue, id }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const { dispatch, state } = useGlobalContext();
+  const { dispatch } = useGlobalContext();
   const classes = useStyles();
 
   const data = {
@@ -123,11 +121,6 @@ const IssueEditForm = ({ issue, id }) => {
                 <span style={{ color: 'red' }}>{errorMessageDesc}</span>
               )}
             </div>
-            {/* <MembersUpdateDropdown
-              className={classes.members}
-              name="members"
-              issueData={issueData}
-            /> */}
             <Grid container className={classes.dropdownContainer}>
               <Grid item className={classes.gridItem}>
                 <FormControl>

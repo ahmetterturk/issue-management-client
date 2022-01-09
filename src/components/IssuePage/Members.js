@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useGlobalContext } from '../../contextReducer/Context';
 import { Divider, Grid } from '@mui/material';
@@ -13,8 +10,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 import IssueMembersTable from './IssueMembersTable';
 
 const Members = ({ issue, id, isLoading, issueMembers }) => {
-  const { state, dispatch } = useGlobalContext();
-  const { currentUser, assignedIssues } = state;
+  const { state } = useGlobalContext();
+  const { currentUser } = state;
   const { token } = currentUser;
   const decodedToken = jwtdecode(token);
 
@@ -40,19 +37,6 @@ const Members = ({ issue, id, isLoading, issueMembers }) => {
                 </>
               )}
 
-              {/* {issue.members && issue.members.length > 0 ? (
-                issue.members.map((member) => {
-                  return (
-                    <Typography key={member} variant="h6">
-                      {member}
-                    </Typography>
-                  );
-                })
-              ) : (
-                <Typography>
-                  There are currently no members on this issue
-                </Typography>
-              )} */}
               {issueMembers && issueMembers.length > 0 ? (
                 <IssueMembersTable issueMembers={issueMembers} />
               ) : (

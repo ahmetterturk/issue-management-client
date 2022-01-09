@@ -1,13 +1,8 @@
-import { CardHeader, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import Paper from '@mui/material/Paper';
-import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import IssueEditForm from './IssueEditForm';
 import jwtdecode from 'jwt-decode';
@@ -21,19 +16,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  textAlign: 'center',
-  backgroundColor: '#F6F6F6',
-  borderRadius: '15px',
-  margin: '10px 0',
-  padding: '15px',
-}));
-
 const IssueInfo = ({ issue, id, isLoading, setIsLoading }) => {
   const classes = useStyles();
-  const { state, dispatch } = useGlobalContext();
-  const { currentUser, assignedIssues } = state;
+  const { state } = useGlobalContext();
+  const { currentUser } = state;
   const { token } = currentUser;
   const decodedToken = jwtdecode(token);
 
