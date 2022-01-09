@@ -38,8 +38,9 @@ function Copyright(props) {
   );
 }
 
-const LoginForm = () => {
-  const { dispatch, state } = useGlobalContext();
+export const LoginFormView = (props) => {
+  const { loginUser } = props;
+  const { dispatch } = useGlobalContext();
   const navigate = useNavigate();
   const [hasError, setHasError] = useState(false);
   const [errorObject, setErrorObject] = useState(null);
@@ -97,7 +98,7 @@ const LoginForm = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component='h1' variant='h5'>
-            Sign in
+            Sign In
           </Typography>
           {hasError && errorObject ? (
             <Alert severity='error'>{errorObject.data.message}</Alert>
@@ -115,7 +116,6 @@ const LoginForm = () => {
               label='Email Address'
               autoComplete='email'
               {...register('email', { required: true })}
-              autoFocus
               autoFocus
             />
             {errors.email && (
@@ -169,4 +169,6 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+
+const LoginForm = (props) => <LoginFormView loginUser={loginUser} {...props}></LoginFormView>;
+export default LoginForm
