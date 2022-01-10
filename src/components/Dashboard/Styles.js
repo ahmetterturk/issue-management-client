@@ -25,8 +25,8 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('sm')]: {
       width: 375,
     },
-    // [theme.breakpoints.down('md')]: {
-    //   width: 600,
-    // },
+    [theme.breakpoints.up('sm')]: {
+      width: 600,
+    },
   },
 }));
