@@ -15,6 +15,7 @@ const FormInput = ({
   size,
   errors,
   errorMessage,
+  required,
 }) => {
   return (
     <>
@@ -24,7 +25,7 @@ const FormInput = ({
           placeholder={placeholder}
           type={type}
           label={label}
-          {...register(name, { required: true, minLength: size })}
+          {...register(name, { required: required, minLength: size })}
           variant='outlined'
           InputProps={{
             startAdornment: (

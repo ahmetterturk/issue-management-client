@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useGlobalContext } from '../../contextReducer/Context';
 import IssueForm from './IssueForm/IssueForm';
 import Alert from '@mui/material/Alert';
@@ -10,6 +10,7 @@ import Errors from '../ErrorPages/Errors';
 import loginImage from '../../images/login.jpg';
 import { useLocation } from 'react-router-dom';
 import API from '../../apiServices/api';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Issues = () => {
   const { state, dispatch } = useGlobalContext();
@@ -19,6 +20,8 @@ const Issues = () => {
   // Fetching all issues again with useLocation search, if the query string exist issues will get reassing to the global state with only qery search otherwise it always fetch all existing issues
   useEffect(() => {
     const fetchIssues = async () => {
+      dispatch({ type: 'SET_ISSUESISLOADING', data: true });
+
       try {
         const response = await API.get('/issues' + search);
         dispatch({ type: 'GET_ISSUES', data: response.data });
@@ -34,11 +37,11 @@ const Issues = () => {
   if (!state.currentUser) {
     return (
       <Errors
-        title="You need to login first"
-        errorMessage="You cannot access the application unless you login first"
-        route="/login"
+        title='You need to login first'
+        errorMessage='You cannot access the application unless you login first'
+        route='/login'
         imageSrc={loginImage}
-        btnMessage="Back to login page"
+        btnMessage='Back to login page'
       />
     );
   }
@@ -48,11 +51,12 @@ const Issues = () => {
     <Grid className={classes.issuesGrid}>
       {state.isLoggedIn && (
         <Stack sx={{ width: '100%' }} spacing={2}>
-          <Alert severity="success">You have logged in successfully</Alert>
+          <Alert severity='success'>You have logged in successfully</Alert>
         </Stack>
       )}
 
       <IssueForm />
+
       <IssuesTable issuesList={issuesList} />
     </Grid>
   );

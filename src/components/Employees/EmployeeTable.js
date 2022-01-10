@@ -15,7 +15,6 @@ import {
   Stack,
   Grid,
 } from '@mui/material';
-import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
 import { useStyles } from './EmployeStyle';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
@@ -24,7 +23,6 @@ import Errors from '../ErrorPages/Errors';
 import unauthorizedImage from '../../images/unauthorized.jpg';
 import loginImage from '../../images/login.jpg';
 import { deleteUser } from '../../apiServices/UserApi';
-import DeleteIssueConfirmation from '../Issues/IssuesTable/DeleteIssueConfirmation';
 import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
 
 const EmployeeTable = () => {
@@ -36,11 +34,11 @@ const EmployeeTable = () => {
   if (!state.currentUser) {
     return (
       <Errors
-        title="You need to login first"
-        errorMessage="You cannot access the application unless you login first"
-        route="/login"
+        title='You need to login first'
+        errorMessage='You cannot access the application unless you login first'
+        route='/login'
         imageSrc={loginImage}
-        btnMessage="Back to login page"
+        btnMessage='Back to login page'
       />
     );
   }
@@ -57,13 +55,13 @@ const EmployeeTable = () => {
   if (!isAdmin) {
     return (
       <Errors
-        status="401"
-        title="You are not authorized to access this page"
-        errorMessage="You either tried to access the unauthorized route or you came here by mistake.
-      Whichever it is, try using the navigation"
-        route="/issues"
+        status='401'
+        title='You are not authorized to access this page'
+        errorMessage='You either tried to access the unauthorized route or you came here by mistake.
+      Whichever it is, try using the navigation'
+        route='/issues'
         imageSrc={unauthorizedImage}
-        btnMessage="Back to login page"
+        btnMessage='Back to login page'
       />
     );
   }
@@ -92,7 +90,7 @@ const EmployeeTable = () => {
         item
         xs={10}
         sx={{ margin: '100px auto 0' }}
-        justifyContent="center"
+        justifyContent='center'
       >
         {state.isUpdated ||
           (state.isCreated && (
@@ -105,11 +103,11 @@ const EmployeeTable = () => {
               </Alert>
             </Stack>
           ))}
-        <Typography variant="h3" align="center" className={classes.heading}>
+        <Typography variant='h3' align='center' className={classes.heading}>
           Employees
         </Typography>
         <TableContainer component={Paper} className={classes.tableContainer}>
-          <Table aria-label="simple table">
+          <Table aria-label='simple table'>
             <TableHead>
               <TableRow>
                 <TableCell className={classes.tableHeaderCell}>Name</TableCell>
@@ -144,13 +142,8 @@ const EmployeeTable = () => {
                         {(decodedToken.id === user._id ||
                           decodedToken.isAdmin) && (
                           <>
-                            {/* <DeleteIssueConfirmation
-                              entity="employee"
-                              handleDelete={() => handleDelete(user._id)}
-                              isFetching={isFetching}
-                            /> */}
                             <DeleteConfirmation
-                              entity="employee"
+                              entity='employee'
                               handleDelete={() => handleDelete(user._id)}
                               isFetching={isFetching}
                             />
@@ -162,7 +155,7 @@ const EmployeeTable = () => {
               <TablePagination
                 className={classes.tablePagination}
                 rowsPerPageOptions={[5, 10, 25]}
-                component="div"
+                component='div'
                 count={allUsers && allUsers.length}
                 rowsPerPage={rowsPerPage}
                 page={page}

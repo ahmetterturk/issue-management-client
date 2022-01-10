@@ -92,10 +92,10 @@ const SignupForm = () => {
                   label='First Name'
                   name='firstName'
                   type='text'
+                  required={false}
                   xs={12}
                   md={6}
                   size={3}
-                  className={classes.icon}
                   errors={errors.firstName}
                   errorMessage="Firstname can't be blank, minimum of 3 characters"
                   className={classes.error}
@@ -105,6 +105,7 @@ const SignupForm = () => {
                   label='Last Name'
                   name='lastName'
                   type='text'
+                  required={false}
                   xs={12}
                   md={6}
                   size={3}
@@ -117,11 +118,11 @@ const SignupForm = () => {
                   label='Email'
                   name='email'
                   type='email'
+                  required={true}
                   xs={12}
                   md={12}
                   size={3}
                   icons={<EmailIcon />}
-                  className={classes.icon}
                   errors={errors.email}
                   errorMessage="Please add your email, input can't be blank"
                   className={classes.error}
@@ -131,11 +132,11 @@ const SignupForm = () => {
                   label='Password'
                   name='password'
                   type='password'
+                  required={true}
                   xs={12}
                   md={12}
                   size={6}
                   icons={<PasswordIcon />}
-                  className={classes.icon}
                   errors={errors.password}
                   errorMessage="Password can't be blank, minimum of 6 chracters."
                   className={classes.error}
