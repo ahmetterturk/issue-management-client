@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Divider, Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import * as React from 'react';
 import Card from '@mui/material/Card';
@@ -24,7 +24,7 @@ const IssueInfo = ({ issue, id, isLoading, setIsLoading }) => {
   const decodedToken = jwtdecode(token);
 
   return (
-    <Card elevation={3}>
+    <Card elevation={5}>
       <CardContent>
         {isLoading ? (
           <Grid
@@ -37,6 +37,13 @@ const IssueInfo = ({ issue, id, isLoading, setIsLoading }) => {
         ) : (
           <>
             <Grid container className={classes.titleNameContainer}>
+              <Grid sx={{ marginBottom: 2 }} xs={12}>
+                <Typography gutterBottom variant="h5">
+                  Issue Details
+                </Typography>
+                <Divider />
+              </Grid>
+
               <Grid item md={9} xs={7}>
                 <Typography
                   gutterBottom

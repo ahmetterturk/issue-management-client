@@ -98,8 +98,8 @@ const ChartBar = () => {
   };
 
   return (
-    <Card className={classes.border}>
-      <CardHeader title='Latest Issues' />
+    <Card elevation={5} className={classes.border}>
+      <CardHeader title="Latest Issues" />
       <Divider />
       <CardContent>
         <Box

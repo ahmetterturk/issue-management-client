@@ -5,7 +5,7 @@ import { useStyles } from './GraphPageStyles';
 const DoughnutChart = ({ data, title, labels }, props) => {
   const classes = useStyles();
   return (
-    <Card>
+    <Card elevation={5}>
       <CardContent>
         <Grid
           className={classes.cardContentGrid}

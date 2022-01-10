@@ -1,4 +1,11 @@
-import { Divider, Typography, Card, CardContent, Grid } from '@mui/material';
+import {
+  Divider,
+  Typography,
+  Card,
+  CardContent,
+  Grid,
+  Button,
+} from '@mui/material';
 import React from 'react';
 import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
 import { deleteMessage } from '../../apiServices/MessageApi';
@@ -30,6 +37,7 @@ const Message = ({ message, index }) => {
   console.log(message);
   return (
     <Card
+      elevation={3}
       key={index}
       className={classes.mutualContainer}
       sx={{ marginBottom: 2 }}
