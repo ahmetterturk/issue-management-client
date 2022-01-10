@@ -62,7 +62,7 @@ const ProfileAvatar = (props) => {
         </Box>
       </CardContent>
       <Divider />
-      <CardActions>
+      <CardActions jus>
         <form onSubmit={handleSubmit(onSubmit)}>
           <input
             type='file'

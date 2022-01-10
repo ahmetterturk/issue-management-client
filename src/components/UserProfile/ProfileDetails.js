@@ -93,11 +93,11 @@ const ProfileDetails = (props) => {
                     register={register}
                     label='First Name'
                     name='firstName'
+                    required={true}
                     type='text'
                     xs={12}
                     md={6}
                     size={3}
-                    className={classes.icon}
                     errors={errors.firstName}
                     errorMessage="Firstname can't be blank, minimum of 3 characters"
                     className={classes.error}
@@ -106,6 +106,7 @@ const ProfileDetails = (props) => {
                     register={register}
                     label='Last Name'
                     name='lastName'
+                    required={true}
                     type='text'
                     xs={12}
                     md={6}
@@ -119,6 +120,7 @@ const ProfileDetails = (props) => {
                     register={register}
                     label='Email'
                     name='email'
+                    required={true}
                     type='text'
                     xs={12}
                     md={12}
@@ -133,6 +135,7 @@ const ProfileDetails = (props) => {
                     register={register}
                     label='Password'
                     name='password'
+                    required={true}
                     type='password'
                     xs={12}
                     md={12}
