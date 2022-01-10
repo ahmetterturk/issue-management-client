@@ -13,9 +13,9 @@ describe('Sidebar', () => {
     expect(screen.getByText('Dashboard')).toBeInTheDocument();
   });
 
-  it('should logout', () => {
+  it('should logout', async () => {
     render(<SidebarWithProviders />);
-    userEvent.click(screen.getByText('Log out'));
+    await userEvent.click(screen.getByText('Log out'));
     expect(mockDispatch).toHaveBeenCalled();
   });
 
