@@ -17,11 +17,11 @@ const GraphsPage = () => {
   if (!state.currentUser) {
     return (
       <Errors
-        title='You need to login first'
-        errorMessage='You cannot access the application unless you login first'
-        route='/login'
+        title="You need to login first"
+        errorMessage="You cannot access the application unless you login first"
+        route="/login"
         imageSrc={loginImage}
-        btnMessage='Back to login page'
+        btnMessage="Back to login page"
       />
     );
   }
@@ -35,13 +35,13 @@ const GraphsPage = () => {
   if (!isAdmin) {
     return (
       <Errors
-        status='401'
-        title='You are not authorized to access this page'
-        errorMessage='You either tried to access the unauthorized route or you came here by mistake.
-      Whichever it is, try using the navigation'
-        route='/issues'
+        status="401"
+        title="You are not authorized to access this page"
+        errorMessage="You either tried to access the unauthorized route or you came here by mistake.
+      Whichever it is, try using the navigation"
+        route="/issues"
         imageSrc={unauthorizedImage}
-        btnMessage='Back to login page'
+        btnMessage="Back to login page"
       />
     );
   }
@@ -76,35 +76,71 @@ const GraphsPage = () => {
   const issuesAtDateCount = datesSet.map(
     (date) => dates.filter((x) => x === date).length
   );
-
+  //
   return (
-    <Container maxWidth={false} sx={{ margin: '100px auto 0' }}>
-      <Grid container spacing={3} className={classes.dounutGraphs}>
-        <Grid item lg={4} sm={6} xl={3} xs={12} sx={{ maxWidth: 370 }}>
-          <DoughnutChart
-            labels={prioritySet}
-            data={prioritySetNumbers}
-            title='Priority'
-          />
+    <>
+      <Container maxWidth={false} className={classes.graphsPageContainerGrid}>
+        <Grid container spacing={2}>
+          <Grid
+            item
+            className={classes.singleDonutGrid}
+            lg={4}
+            md={6}
+            sm={12}
+            xs={12}
+          >
+            <DoughnutChart
+              labels={prioritySet}
+              data={prioritySetNumbers}
+              title="Priority"
+            />
+          </Grid>
+          <Grid
+            item
+            className={classes.singleDonutGrid}
+            lg={4}
+            md={6}
+            sm={12}
+            xs={12}
+          >
+            <DoughnutChart
+              labels={statusSet}
+              data={statusSetNumbers}
+              title="Status"
+            />
+          </Grid>
+          <Grid
+            item
+            lg={4}
+            md={6}
+            sm={12}
+            xs={12}
+            className={classes.singleDonutGrid}
+          >
+            <DoughnutChart
+              labels={typeSet}
+              data={typeSetNumbers}
+              title="Type"
+            />
+          </Grid>
+          <Grid
+            item
+            className={classes.singleLineGrid}
+            lg={12}
+            md={12}
+            sm={12}
+            xs={12}
+          >
+            <LineChart
+              dates={datesSetNew}
+              issuesAtDateCount={issuesAtDateCount}
+            />
+          </Grid>
         </Grid>
-        <Grid item lg={4} sm={6} xl={3} xs={12} sx={{ maxWidth: 370 }}>
-          <DoughnutChart
-            labels={statusSet}
-            data={statusSetNumbers}
-            title='Status'
-          />
-        </Grid>
-        <Grid item lg={4} sm={6} xl={3} xs={12} sx={{ maxWidth: 370 }}>
-          <DoughnutChart labels={typeSet} data={typeSetNumbers} title='Type' />
-        </Grid>
-        <Grid item lg={8} md={8} xl={9} xs={10}>
-          <LineChart
-            dates={datesSetNew}
-            issuesAtDateCount={issuesAtDateCount}
-          />
-        </Grid>
-      </Grid>
-    </Container>
+      </Container>
+
+      {/* <LineChart dates={datesSetNew} issuesAtDateCount={issuesAtDateCount} /> */}
+    </>
   );
 };
 

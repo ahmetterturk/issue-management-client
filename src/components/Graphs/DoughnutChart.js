@@ -5,15 +5,19 @@ import { useStyles } from './GraphPageStyles';
 const DoughnutChart = ({ data, title, labels }, props) => {
   const classes = useStyles();
   return (
-    <Card sx={{ height: '100%' }} {...props}>
+    <Card>
       <CardContent>
-        <Grid container spacing={3} sx={{ justifyContent: 'space-between' }}>
+        <Grid
+          className={classes.cardContentGrid}
+          spacing={3}
+          flexDirection="column"
+        >
           <Grid item xs={12}>
             <Typography
-              variant='h4'
-              color='textSecondary'
+              variant="h4"
+              color="textSecondary"
               gutterBottom
-              align='center'
+              align="center"
             >
               {title}
             </Typography>
@@ -31,25 +35,17 @@ const DoughnutChart = ({ data, title, labels }, props) => {
                   },
                 ],
               }}
+              options={{
+                responsive: false,
+                maintainAspectRatio: false,
+              }}
+              height={200}
+              width={200}
             />
           </Grid>
         </Grid>
       </CardContent>
     </Card>
-    // <Typography>{title}</Typography>
-    // <Doughnut
-    //   data={{
-    //     labels: labels,
-    //     datasets: [
-    //       {
-    //         data: data,
-    //         backgroundColor: ['#F6C23E', '#1CC88A', '#4E73DF'],
-    //         borderColor: ['#F6C23E', '#1CC88A', '#4E73DF'],
-    //         borderWidth: 1,
-    //       },
-    //     ],
-    //   }}
-    // />
   );
 };
 
