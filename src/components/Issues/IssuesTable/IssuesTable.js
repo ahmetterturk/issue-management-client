@@ -13,7 +13,6 @@ import moment from 'moment';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useGlobalContext } from '../../../contextReducer/Context';
 import jwtdecode from 'jwt-decode';
-import DeleteIssueConfirmation from './DeleteIssueConfirmation';
 import useStyles from './styles';
 import CircularProgress from '@mui/material/CircularProgress';
 import { deleteIssue } from '../../../apiServices/IssueApi';
@@ -57,13 +56,13 @@ const IssuesTable = ({ issuesList }) => {
   return (
     <>
       {state.issuesIsLoading ? (
-        <Grid container justifyContent="center" sx={{ marginTop: 10 }}>
+        <Grid container justifyContent='center' sx={{ marginTop: 10 }}>
           <CircularProgress />
         </Grid>
       ) : (
         <Paper elevation={3} className={classes.paper}>
           <TableContainer>
-            <Table stickyHeader aria-label="sticky table">
+            <Table stickyHeader aria-label='sticky table'>
               <TableHead>
                 <TableRow>
                   <TableCell className={classes.tableHeaderCell}>
@@ -97,7 +96,7 @@ const IssuesTable = ({ issuesList }) => {
                           className={classes.tableRow}
                           key={issue._id}
                           hover
-                          role="checkbox"
+                          role='checkbox'
                           tabIndex={-1}
                         >
                           <TableCell className={classes.tableCell}>
@@ -145,7 +144,7 @@ const IssuesTable = ({ issuesList }) => {
                                 //   isFetching={isFetching}
                                 // />
                                 <DeleteConfirmation
-                                  entity="issue"
+                                  entity='issue'
                                   handleDelete={() => handleDelete(issue._id)}
                                   isFetching={isFetching}
                                 />
@@ -161,7 +160,7 @@ const IssuesTable = ({ issuesList }) => {
 
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
-            component="div"
+            component='div'
             count={issuesList.length}
             rowsPerPage={rowsPerPage}
             page={page}

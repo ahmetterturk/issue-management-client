@@ -14,8 +14,6 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import useStyles from './styles';
 import { useGlobalContext } from '../../contextReducer/Context';
 import { Drawer, useMediaQuery, Avatar } from '@mui/material';
-
-import logo from './logo2.png';
 import { Link, useNavigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 

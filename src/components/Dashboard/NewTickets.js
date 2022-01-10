@@ -8,12 +8,11 @@ import {
   Typography,
 } from '@mui/material';
 import FiberNewIcon from '@mui/icons-material/FiberNew';
-import { useGlobalContext } from '../../contextReducer/Context';
+
 import { Link } from 'react-router-dom';
 import { useStyles } from './Styles';
 
 const NewTickets = ({ title, total, subtitle, to }) => {
-  const { state } = useGlobalContext();
   const styleProps = {
     borderColor: 'rgba(252, 157, 23, 0.5)',
     height: '100%',

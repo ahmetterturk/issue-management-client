@@ -76,27 +76,27 @@ const IssueEditForm = ({ issue, id }) => {
     <>
       <Button
         onClick={handleOpen}
-        color="primary"
-        variant="contained"
-        size="small"
+        color='primary'
+        variant='contained'
+        size='small'
       >
         Edit Issue
       </Button>
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
       >
         <Box sx={{ boxShadow: 24 }} className={classes.boxContainer}>
           <form onSubmit={handleSubmit}>
             <div className={classes.titleDiv}>
               <TextField
                 value={issueData.title}
-                name="title"
-                id="outlined-basic"
-                label="Title"
-                variant="outlined"
+                name='title'
+                id='outlined-basic'
+                label='Title'
+                variant='outlined'
                 onChange={handleChange}
                 fullWidth
               />
@@ -109,11 +109,11 @@ const IssueEditForm = ({ issue, id }) => {
               <TextField
                 className={classes.description}
                 value={issueData.description}
-                name="description"
+                name='description'
                 multiline
                 rows={5}
                 maxRows={10}
-                label="Description"
+                label='Description'
                 onChange={handleChange}
                 fullWidth
               />
@@ -124,65 +124,65 @@ const IssueEditForm = ({ issue, id }) => {
             <Grid container className={classes.dropdownContainer}>
               <Grid item className={classes.gridItem}>
                 <FormControl>
-                  <InputLabel id="demo-simple-select-label">Type</InputLabel>
+                  <InputLabel id='demo-simple-select-label'>Type</InputLabel>
                   <Select
                     className={classes.select}
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    label="Type"
+                    labelId='demo-simple-select-label'
+                    id='demo-simple-select'
+                    label='Type'
                     value={issueData.type}
-                    name="type"
+                    name='type'
                     onChange={handleChange}
                   >
-                    <MenuItem value="Public">Public</MenuItem>
-                    <MenuItem value="Private">Private</MenuItem>
+                    <MenuItem value='Public'>Public</MenuItem>
+                    <MenuItem value='Private'>Private</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
               <Grid item className={classes.gridItem}>
                 <FormControl>
-                  <InputLabel id="demo-simple-select-label">Status</InputLabel>
+                  <InputLabel id='demo-simple-select-label'>Status</InputLabel>
                   <Select
                     className={classes.select}
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    label="Status"
+                    labelId='demo-simple-select-label'
+                    id='demo-simple-select'
+                    label='Status'
                     value={issueData.status}
-                    name="status"
+                    name='status'
                     onChange={handleChange}
                   >
-                    <MenuItem value="New">New</MenuItem>
-                    <MenuItem value="Pending">Pending</MenuItem>
-                    <MenuItem value="Resolved">Resolved</MenuItem>
+                    <MenuItem value='New'>New</MenuItem>
+                    <MenuItem value='Pending'>Pending</MenuItem>
+                    <MenuItem value='Resolved'>Resolved</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
               <Grid item className={classes.gridItem}>
                 <FormControl>
-                  <InputLabel id="demo-simple-select-label">
+                  <InputLabel id='demo-simple-select-label'>
                     Priority
                   </InputLabel>
                   <Select
                     className={classes.select}
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    label="Status"
+                    labelId='demo-simple-select-label'
+                    id='demo-simple-select'
+                    label='Status'
                     value={issueData.priority}
-                    name="priority"
+                    name='priority'
                     onChange={handleChange}
                   >
-                    <MenuItem value="Low">Low</MenuItem>
-                    <MenuItem value="High">High</MenuItem>
+                    <MenuItem value='Low'>Low</MenuItem>
+                    <MenuItem value='High'>High</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
             </Grid>
             <Button
-              type="submit"
-              variant="contained"
+              type='submit'
+              variant='contained'
               fullWidth
               disableElevation
-              size="large"
+              size='large'
             >
               Update Issue
             </Button>

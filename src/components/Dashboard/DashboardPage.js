@@ -50,7 +50,7 @@ const DashboardPage = () => {
     return () => {
       clearTimeout(timer);
     };
-  }, [location.pathname]);
+  }, [location.pathname, dispatch]);
 
   return (
     <>

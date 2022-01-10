@@ -116,7 +116,7 @@ const ProfileDetails = (props) => {
                     className={classes.error}
                   />
                   <FormInput
-                    icons={<EmailIcon />}
+                    icons={<EmailIcon sx={{ color: '#555' }} />}
                     register={register}
                     label='Email'
                     name='email'
@@ -131,7 +131,7 @@ const ProfileDetails = (props) => {
                   />
 
                   <FormInput
-                    icons={<PasswordIcon />}
+                    icons={<PasswordIcon sx={{ color: '#555' }} />}
                     register={register}
                     label='Password'
                     name='password'

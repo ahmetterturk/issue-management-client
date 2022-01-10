@@ -47,7 +47,7 @@ const IssuePage = () => {
       (issue) => issue._id !== id
     );
     dispatch({ type: 'SET_ASSIGNED_ISSUES', data: currentAssignedIssues });
-  }, [id]);
+  }, [id, dispatch]);
 
   useEffect(() => {
     if (issue.members && state.users.allUsers) {
@@ -60,7 +60,7 @@ const IssuePage = () => {
 
   return (
     <Grid sx={{ marginTop: 14 }}>
-      <Typography className={classes.header} variant="h4">
+      <Typography className={classes.header} variant='h4'>
         {issue.title}
       </Typography>
 

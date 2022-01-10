@@ -62,7 +62,7 @@ const ProfileAvatar = (props) => {
         </Box>
       </CardContent>
       <Divider />
-      <CardActions jus>
+      <CardActions>
         <form onSubmit={handleSubmit(onSubmit)}>
           <input
             type='file'
@@ -71,19 +71,21 @@ const ProfileAvatar = (props) => {
             onChange={(e) => setProfileImageInput(e.target.files[0])}
             style={{ display: 'none' }}
           />
-          <Button
-            variant='contained'
-            startIcon={<AddCircleOutlineOutlinedIcon />}
-          >
-            <label for='file'>Upload Image</label>
-          </Button>
-          <Button variant='contained' type='submit' sx={{ ml: 5 }}>
-            {isFetching ? (
-              <CircularProgress style={{ color: 'white' }} />
-            ) : (
-              'Save Image'
-            )}
-          </Button>
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 2 }}>
+            <Button
+              variant='contained'
+              startIcon={<AddCircleOutlineOutlinedIcon />}
+            >
+              <label for='file'>Upload Image</label>
+            </Button>
+            <Button variant='contained' type='submit' sx={{ ml: 5 }}>
+              {isFetching ? (
+                <CircularProgress style={{ color: 'white' }} />
+              ) : (
+                'Save Image'
+              )}
+            </Button>
+          </Box>
         </form>
       </CardActions>
     </Card>

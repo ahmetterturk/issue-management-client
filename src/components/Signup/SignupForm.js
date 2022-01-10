@@ -122,7 +122,7 @@ const SignupForm = () => {
                   xs={12}
                   md={12}
                   size={3}
-                  icons={<EmailIcon />}
+                  icons={<EmailIcon sx={{ color: '#555' }} />}
                   errors={errors.email}
                   errorMessage="Please add your email, input can't be blank"
                   className={classes.error}
@@ -136,7 +136,7 @@ const SignupForm = () => {
                   xs={12}
                   md={12}
                   size={6}
-                  icons={<PasswordIcon />}
+                  icons={<PasswordIcon sx={{ color: '#555' }} />}
                   errors={errors.password}
                   errorMessage="Password can't be blank, minimum of 6 chracters."
                   className={classes.error}
