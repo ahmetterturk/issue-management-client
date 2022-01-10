@@ -25,6 +25,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 const SignupForm = () => {
   const classes = useStyles();
   const { dispatch } = useGlobalContext();
+
   const [isFetching, setIsFetching] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [errorObject, setErrorObject] = useState(null);
