@@ -130,9 +130,9 @@ const DashboardPage = () => {
               className={classes.chartBarGrid}
               item
               xs={12}
-              sm={8}
+              sm={12}
               lg={12}
-              md={8}
+              md={12}
             >
               <ChartBar />
             </Grid>
