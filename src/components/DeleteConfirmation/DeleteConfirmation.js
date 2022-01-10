@@ -7,7 +7,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Stack from '@mui/material/Stack';
 import { Grid } from '@mui/material';
 import useStyles from './styles';
-import CircularProgress from '@mui/material/CircularProgress';
 
 const DeleteConfirmation = ({ handleDelete, isFetching, entity }) => {
   const [open, setOpen] = React.useState(false);
@@ -27,28 +26,23 @@ const DeleteConfirmation = ({ handleDelete, isFetching, entity }) => {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
       >
         <Box className={classes.deleteModal} sx={{ boxShadow: 24 }}>
           <Typography
-            id="modal-modal-title"
-            variant="h6"
-            component="h2"
+            id='modal-modal-title'
+            variant='h6'
+            component='h2'
             sx={{ marginBottom: 2 }}
           >
             Are you sure you want to delete this {entity}?
           </Typography>
-          <Stack spacing={2} direction="row" justifyContent="center">
-            <Button variant="contained" onClick={handleDelete} color="error">
-              {/* {isFetching ? (
-                <CircularProgress sx={{ color: '#fff' }} />
-              ) : (
-                'Delete'
-              )} */}
+          <Stack spacing={2} direction='row' justifyContent='center'>
+            <Button variant='contained' onClick={handleDelete} color='error'>
               Delete
             </Button>
-            <Button variant="outlined" onClick={handleClose}>
+            <Button variant='outlined' onClick={handleClose}>
               Cancel
             </Button>
           </Stack>

@@ -1,7 +1,6 @@
 import { Bar } from 'react-chartjs-2';
 import {
   Box,
-  Button,
   Card,
   CardContent,
   CardHeader,
@@ -100,7 +99,7 @@ const ChartBar = () => {
 
   return (
     <Card className={classes.border}>
-      <CardHeader title="Latest Issues" />
+      <CardHeader title='Latest Issues' />
       <Divider />
       <CardContent>
         <Box

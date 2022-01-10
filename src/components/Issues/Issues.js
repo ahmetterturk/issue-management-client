@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useGlobalContext } from '../../contextReducer/Context';
 import IssueForm from './IssueForm/IssueForm';
 import Alert from '@mui/material/Alert';
@@ -10,8 +10,6 @@ import Errors from '../ErrorPages/Errors';
 import loginImage from '../../images/login.jpg';
 import { useLocation } from 'react-router-dom';
 import API from '../../apiServices/api';
-import CircularProgress from '@mui/material/CircularProgress';
-
 const Issues = () => {
   const { state, dispatch } = useGlobalContext();
   // destructure the serach property to get the query string from it
@@ -31,7 +29,7 @@ const Issues = () => {
       }
     };
     fetchIssues();
-  }, [search]);
+  }, [search, dispatch]);
 
   const classes = useStyles();
   if (!state.currentUser) {

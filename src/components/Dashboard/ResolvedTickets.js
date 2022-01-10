@@ -7,14 +7,12 @@ import {
   Grid,
   Typography,
 } from '@mui/material';
-import FiberNewIcon from '@mui/icons-material/FiberNew';
-import { useGlobalContext } from '../../contextReducer/Context';
+
 import { Link } from 'react-router-dom';
 import { useStyles } from './Styles';
 import CloudDoneIcon from '@mui/icons-material/CloudDone';
 
 const ResolvedTickets = ({ title, total, subtitle, to }) => {
-  const { state } = useGlobalContext();
   const styleProps = {
     borderColor: 'rgba(76, 0, 217, 0.5)',
     height: '100%',

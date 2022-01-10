@@ -8,12 +8,11 @@ import {
   Typography,
 } from '@mui/material';
 import PendingActionsIcon from '@mui/icons-material/PendingActions';
-import { useGlobalContext } from '../../contextReducer/Context';
+
 import { Link } from 'react-router-dom';
 import { useStyles } from './Styles';
 
 const PendingTickets = ({ title, total, subtitle, to }) => {
-  const { state } = useGlobalContext();
   const styleProps = {
     borderColor: 'rgba(255, 0, 89, 0.5)',
     height: '100%',

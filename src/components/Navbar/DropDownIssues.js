@@ -33,7 +33,7 @@ const DropDownIssues = () => {
         .filter((issue) => issue !== undefined);
       dispatch({ type: 'SET_ASSIGNED_ISSUES', data: currentAssignedIssues });
     }
-  }, [state.currentUser, state.issues, state.counter]);
+  }, [state.currentUser, state.issues, state.counter, dispatch]);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -45,18 +45,18 @@ const DropDownIssues = () => {
   return (
     <div>
       <Button
-        id="basic-button"
+        id='basic-button'
         aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
+        aria-haspopup='true'
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        <Badge badgeContent={assignedIssues.length} color="secondary">
-          <NotificationsIcon color="action" />
+        <Badge badgeContent={assignedIssues.length} color='secondary'>
+          <NotificationsIcon color='action' />
         </Badge>
       </Button>
       <Menu
-        id="basic-menu"
+        id='basic-menu'
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}

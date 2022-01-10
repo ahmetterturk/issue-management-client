@@ -2,7 +2,7 @@ import { makeStyles } from '@mui/styles';
 
 export const useStyles = makeStyles(() => ({
   icon: {
-    color: '#6787E3',
+    color: 'blue',
   },
 
   error: {

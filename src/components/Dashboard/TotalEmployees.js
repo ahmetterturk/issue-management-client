@@ -8,13 +8,10 @@ import {
   Typography,
 } from '@mui/material';
 import GroupIcon from '@mui/icons-material/Group';
-import { useGlobalContext } from '../../contextReducer/Context';
 import { Link } from 'react-router-dom';
 import { useStyles } from './Styles';
 
 const TotalEmployees = ({ title, total, subtitle, to }) => {
-  const { state } = useGlobalContext();
-
   const styleProps = {
     borderColor: 'rgba(0, 255, 187, 0.5)',
     height: '100%',
