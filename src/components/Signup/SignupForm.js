@@ -72,7 +72,12 @@ const SignupForm = () => {
         >
           Create Employee Account
         </Typography>
-        <form autoComplete='off' noValidate onSubmit={handleSubmit(onSubmit)}>
+        <form
+          autoComplete='off'
+          noValidate
+          onSubmit={handleSubmit(onSubmit)}
+          className={classes.formBorder}
+        >
           <Card className={classes.card}>
             <CardContent>
               {hasError && errorObject ? (
@@ -82,6 +87,31 @@ const SignupForm = () => {
                 </Alert>
               ) : null}
               <Grid container spacing={3}>
+                <FormInput
+                  register={register}
+                  label='First Name'
+                  name='firstName'
+                  type='text'
+                  xs={12}
+                  md={6}
+                  size={3}
+                  className={classes.icon}
+                  errors={errors.firstName}
+                  errorMessage="Firstname can't be blank, minimum of 3 characters"
+                  className={classes.error}
+                />
+                <FormInput
+                  register={register}
+                  label='Last Name'
+                  name='lastName'
+                  type='text'
+                  xs={12}
+                  md={6}
+                  size={3}
+                  errors={errors.lastName}
+                  errorMessage="Lastname can't be blank, minimum of 3 characters"
+                  className={classes.error}
+                />
                 <FormInput
                   register={register}
                   label='Email'
@@ -126,9 +156,8 @@ const SignupForm = () => {
                     }}
                   >
                     <Button
-                      color='primary'
                       variant='contained'
-                      style={{ marginLeft: '5px', backgroundColor: '#6787E3' }}
+                      style={{ marginLeft: '5px', backgroundColor: '#1c79fc' }}
                       type='submit'
                     >
                       {isFetching ? (
