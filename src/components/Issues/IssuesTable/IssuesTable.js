@@ -17,6 +17,7 @@ import DeleteIssueConfirmation from './DeleteIssueConfirmation';
 import useStyles from './styles';
 import CircularProgress from '@mui/material/CircularProgress';
 import { deleteIssue } from '../../../apiServices/IssueApi';
+import DeleteConfirmation from '../../DeleteConfirmation/DeleteConfirmation';
 const IssuesTable = ({ issuesList }) => {
   const { state, dispatch } = useGlobalContext();
   const { currentUser } = state;
@@ -138,7 +139,13 @@ const IssuesTable = ({ issuesList }) => {
                               </Link>
                               {(decodedToken.id === issue.userId ||
                                 decodedToken.isAdmin) && (
-                                <DeleteIssueConfirmation
+                                // <DeleteIssueConfirmation
+                                //   entity="issue"
+                                //   handleDelete={() => handleDelete(issue._id)}
+                                //   isFetching={isFetching}
+                                // />
+                                <DeleteConfirmation
+                                  entity="issue"
                                   handleDelete={() => handleDelete(issue._id)}
                                   isFetching={isFetching}
                                 />

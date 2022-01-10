@@ -9,7 +9,7 @@ import { Grid } from '@mui/material';
 import useStyles from './styles';
 import CircularProgress from '@mui/material/CircularProgress';
 
-const DeleteIssueConfirmation = ({ handleDelete, isFetching, entity }) => {
+const DeleteConfirmation = ({ handleDelete, isFetching, entity }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -41,11 +41,12 @@ const DeleteIssueConfirmation = ({ handleDelete, isFetching, entity }) => {
           </Typography>
           <Stack spacing={2} direction="row" justifyContent="center">
             <Button variant="contained" onClick={handleDelete} color="error">
-              {isFetching ? (
+              {/* {isFetching ? (
                 <CircularProgress sx={{ color: '#fff' }} />
               ) : (
                 'Delete'
-              )}
+              )} */}
+              Delete
             </Button>
             <Button variant="outlined" onClick={handleClose}>
               Cancel
@@ -57,4 +58,4 @@ const DeleteIssueConfirmation = ({ handleDelete, isFetching, entity }) => {
   );
 };
 
-export default DeleteIssueConfirmation;
+export default DeleteConfirmation;

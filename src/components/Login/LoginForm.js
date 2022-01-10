@@ -22,13 +22,13 @@ function Copyright(props) {
   return (
     <Grid item>
       <Typography
-        variant='body2'
-        color='text.secondary'
-        align='center'
+        variant="body2"
+        color="text.secondary"
+        align="center"
         {...props}
       >
         {'Copyright © '}
-        <Link color='inherit' href='https://mui.com/'>
+        <Link color="inherit" href="https://mui.com/">
           Lock Security
         </Link>{' '}
         {new Date().getFullYear()}
@@ -92,59 +92,60 @@ export const LoginFormView = (props) => {
   return (
     // <ThemeProvider theme={theme}>
     <Box className={classes.bg}>
-      <Container component='main' maxWidth='xs' className={classes.container}>
+      <Container component="main" maxWidth="xs" className={classes.container}>
         <Box className={classes.cardBox}>
           <Avatar sx={{ m: 1, bgcolor: '#1c79fc' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component='h1' variant='h5'>
+          <Typography component="h1" variant="h5">
             Sign In
           </Typography>
           {hasError && errorObject ? (
-            <Alert severity='error'>{errorObject.data.message}</Alert>
+            <Alert severity="error">{errorObject.data.message}</Alert>
           ) : null}
           <Box
-            component='form'
+            component="form"
             onSubmit={handleSubmit(onSubmit)}
             noValidate
             sx={{ mt: 2 }}
           >
             <TextField
-              margin='normal'
+              margin="normal"
               fullWidth
-              id='email'
-              label='Email Address'
-              autoComplete='email'
+              id="email"
+              label="Email Address"
+              autoComplete="email"
               {...register('email', { required: true })}
               autoFocus
             />
             {errors.email && (
-              <Typography variant='span' style={{ color: 'red' }}>
+              <Typography variant="span" style={{ color: 'red' }}>
                 Email cannot be blank!
               </Typography>
             )}
             <TextField
-              margin='normal'
+              margin="normal"
               fullWidth
-              {...register('password', { required: true, minLength: 5 })}
-              label='Password'
-              type='password'
-              id='password'
-              autoComplete='current-password'
+              {...register('password', { required: true })}
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
             />
             {errors.password && (
-              <Typography variant='span' style={{ color: 'red' }}>
-                Password is required with min of 5 characters
+              <Typography variant="span" style={{ color: 'red' }}>
+                Password cannot be blank!
               </Typography>
             )}
+            <br></br>
             <FormControlLabel
-              control={<Checkbox value='remember' color='primary' />}
-              label='Remember me'
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
             />
             <Button
-              type='submit'
+              type="submit"
               fullWidth
-              variant='contained'
+              variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
               {isFetching ? (
@@ -155,7 +156,7 @@ export const LoginFormView = (props) => {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href='#' variant='body2'>
+                <Link href="#" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
@@ -169,6 +170,7 @@ export const LoginFormView = (props) => {
   );
 };
 
-
-const LoginForm = (props) => <LoginFormView loginUser={loginUser} {...props}></LoginFormView>;
-export default LoginForm
+const LoginForm = (props) => (
+  <LoginFormView loginUser={loginUser} {...props}></LoginFormView>
+);
+export default LoginForm;

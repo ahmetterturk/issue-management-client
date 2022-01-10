@@ -34,11 +34,11 @@ const Issues = () => {
   if (!state.currentUser) {
     return (
       <Errors
-        title='You need to login first'
-        errorMessage='You cannot access the application unless you login first'
-        route='/login'
+        title="You need to login first"
+        errorMessage="You cannot access the application unless you login first"
+        route="/login"
         imageSrc={loginImage}
-        btnMessage='Back to login page'
+        btnMessage="Back to login page"
       />
     );
   }
@@ -48,7 +48,7 @@ const Issues = () => {
     <Grid className={classes.issuesGrid}>
       {state.isLoggedIn && (
         <Stack sx={{ width: '100%' }} spacing={2}>
-          <Alert severity='success'>You have logged in successfully</Alert>
+          <Alert severity="success">You have logged in successfully</Alert>
         </Stack>
       )}
 
