@@ -31,7 +31,7 @@ describe('Login', () => {
   });
 
   it('shouldnt login if password is empty', async () => {
-    const passwordError = 'Password is required with min of 5 characters';
+    const passwordError = 'Password cannot be blank!';
 
     render(<LoginWithProviders />);
     userEvent.click(screen.getByRole('button'));
