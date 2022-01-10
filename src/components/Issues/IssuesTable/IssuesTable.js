@@ -13,7 +13,6 @@ import moment from 'moment';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useGlobalContext } from '../../../contextReducer/Context';
 import jwtdecode from 'jwt-decode';
-import DeleteIssueConfirmation from './DeleteIssueConfirmation';
 import useStyles from './styles';
 import CircularProgress from '@mui/material/CircularProgress';
 import { deleteIssue } from '../../../apiServices/IssueApi';
