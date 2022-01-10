@@ -1,12 +1,14 @@
 import { makeStyles } from '@mui/styles';
 
-export const useStyles = makeStyles(() => ({
-  dounutGraphs: {
-    justifyContent: 'center',
-    marginBottom: '50px',
-    ['@media (max-width:780px)']: {
-      justifyContent: 'center',
-      flexDirection: 'column',
+export const useStyles = makeStyles((theme) => ({
+  graphsPageContainerGrid: {
+    marginTop: theme.spacing(15),
+    marginRight: theme.spacing(3),
+    marginLeft: theme.spacing(3),
+  },
+  singleDonutGrid: {
+    [theme.breakpoints.down('md')]: {
+      width: 355,
     },
   },
   dounutCard: {
@@ -14,12 +16,16 @@ export const useStyles = makeStyles(() => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  LineChartCard: {
-    marginBottom: '50px',
+  cardContentGrid: {
+    display: 'flex',
+    alignItems: 'center',
   },
-  link: {
-    display: 'inline-block',
-    color: '#3489eb',
-    marginLeft: '5px',
+  singleLineGrid: {
+    [theme.breakpoints.down('sm')]: {
+      width: 375,
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: 600,
+    },
   },
 }));
