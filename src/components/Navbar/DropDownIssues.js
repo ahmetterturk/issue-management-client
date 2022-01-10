@@ -45,18 +45,18 @@ const DropDownIssues = () => {
   return (
     <div>
       <Button
-        id='basic-button'
+        id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup='true'
+        aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        <Badge badgeContent={assignedIssues.length} color='secondary'>
-          <NotificationsIcon color='action' />
+        <Badge badgeContent={assignedIssues.length} color="secondary">
+          <NotificationsIcon color="action" />
         </Badge>
       </Button>
       <Menu
-        id='basic-menu'
+        id="basic-menu"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
@@ -65,11 +65,6 @@ const DropDownIssues = () => {
           disablePadding: true,
         }}
       >
-        {Object.keys(assignedIssues).length > 0 ? (
-          <Typography fontWeight='bold' sx={{ p: 2 }}>
-            You have been assigned to a new issue
-          </Typography>
-        ) : null}
         <Divider />
         {assignedIssues && Object.keys(assignedIssues).length > 0 ? (
           assignedIssues.map((issue) => {

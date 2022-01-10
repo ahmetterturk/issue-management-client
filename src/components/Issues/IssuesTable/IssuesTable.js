@@ -17,6 +17,7 @@ import DeleteIssueConfirmation from './DeleteIssueConfirmation';
 import useStyles from './styles';
 import CircularProgress from '@mui/material/CircularProgress';
 import { deleteIssue } from '../../../apiServices/IssueApi';
+import DeleteConfirmation from '../../DeleteConfirmation/DeleteConfirmation';
 const IssuesTable = ({ issuesList }) => {
   const { state, dispatch } = useGlobalContext();
   const { currentUser } = state;
@@ -56,13 +57,13 @@ const IssuesTable = ({ issuesList }) => {
   return (
     <>
       {state.issuesIsLoading ? (
-        <Grid container justifyContent='center' sx={{ marginTop: 10 }}>
+        <Grid container justifyContent="center" sx={{ marginTop: 10 }}>
           <CircularProgress />
         </Grid>
       ) : (
         <Paper elevation={3} className={classes.paper}>
           <TableContainer>
-            <Table stickyHeader aria-label='sticky table'>
+            <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
                   <TableCell className={classes.tableHeaderCell}>
@@ -89,13 +90,14 @@ const IssuesTable = ({ issuesList }) => {
                 {visibleIssues &&
                   visibleIssues
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .reverse()
                     .map((issue) => {
                       return (
                         <TableRow
                           className={classes.tableRow}
                           key={issue._id}
                           hover
-                          role='checkbox'
+                          role="checkbox"
                           tabIndex={-1}
                         >
                           <TableCell className={classes.tableCell}>
@@ -137,7 +139,13 @@ const IssuesTable = ({ issuesList }) => {
                               </Link>
                               {(decodedToken.id === issue.userId ||
                                 decodedToken.isAdmin) && (
-                                <DeleteIssueConfirmation
+                                // <DeleteIssueConfirmation
+                                //   entity="issue"
+                                //   handleDelete={() => handleDelete(issue._id)}
+                                //   isFetching={isFetching}
+                                // />
+                                <DeleteConfirmation
+                                  entity="issue"
                                   handleDelete={() => handleDelete(issue._id)}
                                   isFetching={isFetching}
                                 />
@@ -153,7 +161,7 @@ const IssuesTable = ({ issuesList }) => {
 
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
-            component='div'
+            component="div"
             count={issuesList.length}
             rowsPerPage={rowsPerPage}
             page={page}

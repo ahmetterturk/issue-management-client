@@ -1,10 +1,9 @@
 import { makeStyles } from '@mui/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: 'none',
   },
-
   border: (props) => ({
     border: '3px solid',
     borderColor: props.borderColor,
@@ -21,5 +20,13 @@ export const useStyles = makeStyles(() => ({
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
+  },
+  chartBarGrid: {
+    [theme.breakpoints.down('sm')]: {
+      width: 375,
+    },
+    // [theme.breakpoints.down('md')]: {
+    //   width: 600,
+    // },
   },
 }));
