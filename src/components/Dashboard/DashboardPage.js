@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import { Box, Container, Grid } from '@mui/material';
 import TotalTickets from './TotalTickets';
 import TotalEmployees from './TotalEmployees';
@@ -6,13 +7,40 @@ import ResolvedTickets from './ResolvedTickets';
 import ChartBar from './ChartBar';
 import PendingTickets from './PendingTickets';
 import { useGlobalContext } from '../../contextReducer/Context';
+import { useLocation } from 'react-router-dom';
+import CircularProgress from '@mui/material/CircularProgress';
 const DashboardPage = () => {
+  const { state, dispatch } = useGlobalContext();
+  const location = useLocation();
+
   const {
-    state: { users, issues },
-  } = useGlobalContext();
-  const newIssues = issues.filter((issue) => issue.status === 'New');
-  const resolvedIssues = issues.filter((issue) => issue.status === 'Resolved');
-  const pendingIssues = issues.filter((issue) => issue.status === 'Pending');
+    users: { allUsers },
+    issues,
+  } = state;
+  console.log(issues);
+  const [issuesCount, setIssuesCount] = useState(0);
+  const [userCount, setUserCount] = useState(0);
+  const [newIssuesCount, setNewIssuesCount] = useState(0);
+  const [pendingIssuesCount, setPendingIssuesCount] = useState(0);
+  const [resolvedIssuesCount, setResolvedIssuesCount] = useState(0);
+
+  useEffect(() => {
+    const newIssues = issues.filter((issue) => issue.status === 'New');
+    const resolvedIssues = issues.filter(
+      (issue) => issue.status === 'Resolved'
+    );
+    const pendingIssues = issues.filter((issue) => issue.status === 'Pending');
+    setIssuesCount(issues.length);
+    setUserCount(allUsers ? allUsers.length : 1);
+    setNewIssuesCount(newIssues.length);
+    setResolvedIssuesCount(resolvedIssues.length);
+    setPendingIssuesCount(pendingIssues.length);
+  }, [issues, allUsers]);
+  useEffect(() => {
+    if (location.pathname === '/dashboard') {
+      dispatch({ type: 'INCREASE_COUNTER' });
+    }
+  }, [location.pathname]);
 
   return (
     <>
@@ -29,7 +57,13 @@ const DashboardPage = () => {
             <Grid item lg={4} sm={6} xl={4} xs={12}>
               <TotalTickets
                 title='Issues'
-                total={issues.length}
+                total={
+                  issuesCount !== 0 ? (
+                    issuesCount
+                  ) : (
+                    <CircularProgress sx={{ color: '#1c79fc' }} />
+                  )
+                }
                 subtitle='Check Tickets'
                 to='/issues'
               />
@@ -37,7 +71,13 @@ const DashboardPage = () => {
             <Grid item xl={4} lg={4} sm={6} xs={12}>
               <TotalEmployees
                 title='Employees'
-                total={users ? users.allUsers.length - 1 : 0}
+                total={
+                  userCount !== 1 ? (
+                    userCount
+                  ) : (
+                    <CircularProgress sx={{ color: '#00ffbb' }} />
+                  )
+                }
                 subtitle="Check employee's page"
                 to='/employee'
               />
@@ -45,39 +85,48 @@ const DashboardPage = () => {
             <Grid item xl={4} lg={4} sm={6} xs={12}>
               <NewTickets
                 title='New Tickets'
-                total={newIssues.length}
+                total={
+                  newIssuesCount !== 0 ? (
+                    newIssuesCount
+                  ) : (
+                    <CircularProgress sx={{ color: '#fc9d17' }} />
+                  )
+                }
                 subtitle='Check Tickets'
-                to='/issues'
+                to='/issues?status=New'
               />
             </Grid>
             <Grid item xl={4} lg={4} sm={6} xs={12}>
               <ResolvedTickets
                 title='Resolved'
-                total={resolvedIssues.length}
+                total={
+                  resolvedIssuesCount !== 0 ? (
+                    resolvedIssuesCount
+                  ) : (
+                    <CircularProgress sx={{ color: '#4c00d9' }} />
+                  )
+                }
                 subtitle='Check Tickets'
-                to='/issues'
+                to='/issues?status=Resolved'
               />
             </Grid>
             <Grid item xl={4} lg={4} sm={6} xs={12}>
               <PendingTickets
                 title='Pending'
-                total={pendingIssues.length}
+                total={
+                  pendingIssuesCount !== 0 ? (
+                    pendingIssuesCount
+                  ) : (
+                    <CircularProgress sx={{ color: '#ff0059' }} />
+                  )
+                }
                 subtitle='Check Tickets'
-                to='/issues'
+                to='/issues?status=Pending'
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={10} sm={8} lg={12} md={8}>
               <ChartBar />
             </Grid>
-            {/* <Grid item lg={4} md={6} xl={3} xs={12}>
-              <TrafficByDevice sx={{ height: '100%' }} />
-            </Grid>
-            <Grid item lg={4} md={6} xl={3} xs={12}>
-              <LatestProducts sx={{ height: '100%' }} />
-            </Grid>
-            <Grid item lg={8} md={12} xl={9} xs={12}>
-              <LatestOrders />
-            </Grid> */}
           </Grid>
         </Container>
       </Box>

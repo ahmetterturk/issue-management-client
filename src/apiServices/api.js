@@ -12,7 +12,7 @@ export const apiRequestInterceptor = (req) => {
   }
 
   return req;
-}
+};
 
 API.interceptors.request.use(apiRequestInterceptor);
 
