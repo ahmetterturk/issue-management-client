@@ -80,7 +80,7 @@ const DashboardPage = () => {
                     <CircularProgress sx={{ color: '#00ffbb' }} />
                   )
                 }
-                subtitle="Check employee's page"
+                subtitle="Check Employees Page"
                 to="/employee"
               />
             </Grid>

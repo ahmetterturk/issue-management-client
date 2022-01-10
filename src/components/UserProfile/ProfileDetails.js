@@ -7,6 +7,7 @@ import {
   CardHeader,
   Divider,
   Grid,
+  FormControlLabel,
 } from '@mui/material';
 import ProfileAvatar from './ProfileAvatar';
 import { useStyles } from './UserProfileFormStyle';
@@ -15,10 +16,12 @@ import PasswordIcon from '@mui/icons-material/Password';
 import EmailIcon from '@mui/icons-material/Email';
 import { useForm } from 'react-hook-form';
 import { useGlobalContext } from '../../contextReducer/Context';
+import Checkbox from '@mui/material/Checkbox';
 import { updateUser } from '../../apiServices/UserApi';
 import { useNavigate } from 'react-router';
 import { useParams } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
+import jwtDecode from 'jwt-decode';
 
 const ProfileDetails = (props) => {
   const classes = useStyles();
@@ -26,7 +29,10 @@ const ProfileDetails = (props) => {
   const [setProfileImageInput] = useState('');
   const { state, dispatch } = useGlobalContext();
   let { currentUser } = state;
-  let { userDetails } = state.currentUser;
+  let { userDetails } = currentUser;
+  const { token } = currentUser;
+  const decodedToken = jwtDecode(token);
+  const { isAdmin } = decodedToken;
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -39,6 +45,7 @@ const ProfileDetails = (props) => {
   });
 
   const onSubmit = (data) => {
+    console.log(data);
     setIsFetching(true);
     delete data.name;
     delete data.image;
@@ -68,7 +75,6 @@ const ProfileDetails = (props) => {
           />
         </Grid>
         <Grid item lg={8} md={6} xs={12}>
-          {/* <ProfileDetails /> */}
           <form
             autoComplete='off'
             noValidate
@@ -135,6 +141,14 @@ const ProfileDetails = (props) => {
                     errorMessage="Password can't be blank, minimum of 5 charactes"
                     className={classes.error}
                   />
+                  {isAdmin && (
+                    <Grid item xs={6} md={6}>
+                      <FormControlLabel
+                        control={<Checkbox {...register('isAdmin')} />}
+                        label='Admin'
+                      />
+                    </Grid>
+                  )}
                 </Grid>
               </CardContent>
               <Divider />
