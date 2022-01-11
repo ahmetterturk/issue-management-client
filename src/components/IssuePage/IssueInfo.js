@@ -50,6 +50,11 @@ const IssueInfo = ({ issue, id, isLoading, setIsLoading }) => {
                   variant="caption"
                   component="div"
                   color="text.secondary"
+                  fontSize={15}
+                  sx={{
+                    display: 'inline-block',
+                    borderBottom: '1px solid #c4c4c4',
+                  }}
                 >
                   Issue Title
                 </Typography>
@@ -74,6 +79,11 @@ const IssueInfo = ({ issue, id, isLoading, setIsLoading }) => {
                 variant="caption"
                 component="div"
                 color="text.secondary"
+                fontSize={15}
+                sx={{
+                  display: 'inline-block',
+                  borderBottom: '1px solid #c4c4c4',
+                }}
               >
                 Issue Author
               </Typography>
@@ -90,6 +100,11 @@ const IssueInfo = ({ issue, id, isLoading, setIsLoading }) => {
                 variant="caption"
                 component="div"
                 color="text.secondary"
+                fontSize={15}
+                sx={{
+                  display: 'inline-block',
+                  borderBottom: '1px solid #c4c4c4',
+                }}
               >
                 Issue Date
               </Typography>
@@ -103,6 +118,11 @@ const IssueInfo = ({ issue, id, isLoading, setIsLoading }) => {
                 variant="caption"
                 component="div"
                 color="text.secondary"
+                fontSize={15}
+                sx={{
+                  display: 'inline-block',
+                  borderBottom: '1px solid #c4c4c4',
+                }}
               >
                 Issue Description
               </Typography>
@@ -117,6 +137,11 @@ const IssueInfo = ({ issue, id, isLoading, setIsLoading }) => {
                   variant="caption"
                   component="div"
                   color="text.secondary"
+                  fontSize={15}
+                  sx={{
+                    display: 'inline-block',
+                    borderBottom: '1px solid #c4c4c4',
+                  }}
                 >
                   Issue Type
                 </Typography>
@@ -135,6 +160,11 @@ const IssueInfo = ({ issue, id, isLoading, setIsLoading }) => {
                   variant="caption"
                   component="div"
                   color="text.secondary"
+                  fontSize={15}
+                  sx={{
+                    display: 'inline-block',
+                    borderBottom: '1px solid #c4c4c4',
+                  }}
                 >
                   Issue Status
                 </Typography>
@@ -158,6 +188,11 @@ const IssueInfo = ({ issue, id, isLoading, setIsLoading }) => {
                   variant="caption"
                   component="div"
                   color="text.secondary"
+                  fontSize={15}
+                  sx={{
+                    display: 'inline-block',
+                    borderBottom: '1px solid #c4c4c4',
+                  }}
                 >
                   Issue Priority
                 </Typography>
