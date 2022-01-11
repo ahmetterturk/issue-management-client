@@ -5,7 +5,7 @@ import SendIcon from '@mui/icons-material/Send';
 import { createMessage } from '../../apiServices/MessageApi';
 import { useGlobalContext } from '../../contextReducer/Context';
 
-const MessageForm = ({ issueId, userName, userId }) => {
+export const MessageFormView = ({ issueId, userName, userId, createMessage }) => {
   const { dispatch } = useGlobalContext();
   const data = {
     messageBody: '',
@@ -42,6 +42,8 @@ const MessageForm = ({ issueId, userName, userId }) => {
           multiline
           rows={1}
           name="messageBody"
+          label="messageBody"
+          hiddenLabel
           value={formData.messageBody}
           onChange={handleChange}
         ></TextField>
@@ -61,4 +63,5 @@ const MessageForm = ({ issueId, userName, userId }) => {
   );
 };
 
+const MessageForm = (props) => <MessageFormView createMessage={createMessage} {...props}></MessageFormView>
 export default MessageForm;

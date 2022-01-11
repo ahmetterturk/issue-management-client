@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Message = ({ message, index }) => {
+export const MessageView = ({ message, index, deleteMessage }) => {
   const {
     state: {
       currentUser: { token },
@@ -74,4 +74,7 @@ const Message = ({ message, index }) => {
   );
 };
 
+const Message = (props) => (
+  <MessageView deleteMessage={deleteMessage} {...props}></MessageView>
+);
 export default Message;
