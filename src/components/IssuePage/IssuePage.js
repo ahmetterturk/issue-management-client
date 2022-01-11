@@ -11,7 +11,7 @@ import { getAllMessages } from '../../apiServices/MessageApi';
 import Members from './Members';
 import { Grid } from '@mui/material';
 
-const IssuePage = () => {
+export const IssuePageView = ({ getAllMessages, getIssue, useParams }) => {
   const classes = useStyles();
   const { id } = useParams();
   const { state, dispatch } = useGlobalContext();
@@ -60,7 +60,11 @@ const IssuePage = () => {
 
   return (
     <Grid sx={{ marginTop: 14 }}>
-      <Typography className={classes.header} variant='h4'>
+      <Typography
+        data-testid="issue-title"
+        className={classes.header}
+        variant="h4"
+      >
         {issue.title}
       </Typography>
 
@@ -89,4 +93,12 @@ const IssuePage = () => {
   );
 };
 
+const IssuePage = (props) => (
+  <IssuePageView
+    getAllMessages={getAllMessages}
+    getIssue={getIssue}
+    useParams={useParams}
+    {...props}
+  ></IssuePageView>
+);
 export default IssuePage;
