@@ -25,4 +25,13 @@ export const useStyles = makeStyles(() => ({
     bottom: '15px',
     color: 'skyblue',
   },
+  avatarBorder: {
+    border: 'solid 4px rgba(28, 121, 252, 0.4)',
+  },
+  employeeDetails: {
+    border: 'solid 4px rgba(255, 0, 89, 0.5)',
+  },
+  employeeTypo: {
+    color: '#666',
+  },
 }));

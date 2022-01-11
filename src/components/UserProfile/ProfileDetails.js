@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   Button,
@@ -22,11 +22,11 @@ import { useNavigate } from 'react-router';
 import { useParams } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 import jwtDecode from 'jwt-decode';
+import { useLocation } from 'react-router-dom';
 
 const ProfileDetails = (props) => {
   const classes = useStyles();
   const [isFetching, setIsFetching] = useState(false);
-  const [setProfileImageInput] = useState('');
   const { state, dispatch } = useGlobalContext();
   let { currentUser } = state;
   let { userDetails } = currentUser;
@@ -59,20 +59,18 @@ const ProfileDetails = (props) => {
         navigate('/issues');
         window.location.reload();
         setIsFetching(false);
+        setTimeout(() => {
+          dispatch({ type: 'AFTER_UPDATE' });
+        }, 8000);
       })
       .catch((err) => console.log(err));
-    setTimeout(() => {
-      dispatch({ type: 'AFTER_UPDATE' });
-    }, 4000);
   };
 
   return (
     <>
       <Grid container spacing={3}>
         <Grid item lg={4} md={6} xs={12}>
-          <ProfileAvatar
-            onChange={(e) => setProfileImageInput(e.target.files[0])}
-          />
+          <ProfileAvatar />
         </Grid>
         <Grid item lg={8} md={6} xs={12}>
           <form
@@ -81,7 +79,7 @@ const ProfileDetails = (props) => {
             {...props}
             onSubmit={handleSubmit(onSubmit)}
           >
-            <Card>
+            <Card elevation={5}>
               <CardHeader
                 subheader='The information can be edited'
                 title='Profile'
@@ -147,7 +145,7 @@ const ProfileDetails = (props) => {
                   {isAdmin && (
                     <Grid item xs={6} md={6}>
                       <FormControlLabel
-                        control={<Checkbox {...register('isAdmin')} />}
+                        control={<Checkbox {...register('isAdmin')} checked />}
                         label='Admin'
                       />
                     </Grid>

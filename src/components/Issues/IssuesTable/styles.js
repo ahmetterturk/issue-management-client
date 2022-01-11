@@ -24,20 +24,7 @@ const useStyles = makeStyles((theme) => ({
     height: theme.spacing(6),
     borderBottom: 'none',
   },
-  // deleteModal: {
-  //   position: 'absolute',
-  //   top: '50%',
-  //   left: '50%',
-  //   transform: 'translate(-50%, -50%)',
-  //   width: 400,
-  //   backgroundColor: 'white',
-  //   textAlign: 'center',
-  //   padding: theme.spacing(5),
-  //   borderRadius: theme.spacing(1),
-  //   [theme.breakpoints.down('sm')]: {
-  //     width: 200,
-  //   },
-  // },
+
   issueTitle: {
     textDecoration: 'none',
     color: 'black',
