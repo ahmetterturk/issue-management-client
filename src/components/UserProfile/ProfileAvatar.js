@@ -13,7 +13,8 @@ import { useGlobalContext } from '../../contextReducer/Context';
 import { useForm } from 'react-hook-form';
 import { uploadProfileImage } from '../../apiServices/UserApi';
 import CircularProgress from '@mui/material/CircularProgress';
-const ProfileAvatar = (props) => {
+
+export const ProfileAvatarView = ({ uploadProfileImage, ...props }) => {
   const { state } = useGlobalContext();
   const [profileImageInput, setProfileImageInput] = useState('');
   const [isFetching, setIsFetching] = useState(false);
@@ -92,4 +93,10 @@ const ProfileAvatar = (props) => {
   );
 };
 
+const ProfileAvatar = (props) => (
+  <ProfileAvatarView
+    uploadProfileImage={uploadProfileImage}
+    {...props}
+  ></ProfileAvatarView>
+);
 export default ProfileAvatar;
