@@ -1,13 +1,22 @@
 import { Divider, Typography, Card, CardContent, Grid } from '@mui/material';
 import React from 'react';
-import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { deleteMessage } from '../../apiServices/MessageApi';
 import { useGlobalContext } from '../../contextReducer/Context';
 import jwtdecode from 'jwt-decode';
 import { makeStyles } from '@mui/styles';
 import moment from 'moment';
 
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles((theme) => ({
+  deleteMsgIcon: {
+    color: '#ED5500',
+    cursor: 'pointer',
+    transition: 'ease-in-out',
+    '&:hover': {
+      color: 'red',
+    },
+  },
+}));
 
 const Message = ({ message, index }) => {
   const {
@@ -53,7 +62,7 @@ const Message = ({ message, index }) => {
           </Grid>
           <Grid item xs={1}>
             {(decodedToken.id === message.userId || decodedToken.isAdmin) && (
-              <DeleteForeverSharpIcon
+              <DeleteIcon
                 className={classes.deleteMsgIcon}
                 onClick={() => handleDelete(message._id)}
               />
