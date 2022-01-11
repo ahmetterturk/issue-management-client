@@ -2,7 +2,6 @@ import { Grid, Typography } from '@mui/material';
 import React from 'react';
 
 const issueMembersTable = ({ issueMembers }) => {
-  console.log(issueMembers);
   return (
     <>
       <Grid container>
@@ -14,9 +13,9 @@ const issueMembersTable = ({ issueMembers }) => {
         </Grid>
       </Grid>
       {issueMembers &&
-        issueMembers.map((member) => {
+        issueMembers.map((member, index) => {
           return (
-            <Grid container>
+            <Grid container key={index}>
               <Grid item xs={6}>
                 <Typography>
                   {member.firstName} {member.lastName}

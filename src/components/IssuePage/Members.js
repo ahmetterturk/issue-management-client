@@ -15,10 +15,8 @@ const Members = ({ issue, id, isLoading, issueMembers }) => {
   const { token } = currentUser;
   const decodedToken = jwtdecode(token);
 
-  console.log(issueMembers);
-
   return (
-    <Card elevation={3}>
+    <Card elevation={5}>
       <CardContent>
         {isLoading ? (
           <Grid container justifyContent="center">

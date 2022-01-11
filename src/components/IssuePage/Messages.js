@@ -9,7 +9,7 @@ const Messages = ({ messages, issueId, userName, userId, isLoading }) => {
     (message) => message.issueId === issueId
   );
   return (
-    <Card elevation={3} sx={{ marginBottom: 20 }}>
+    <Card elevation={5} sx={{ marginBottom: 20 }}>
       <CardContent>
         {isLoading ? (
           <Grid container justifyContent="center">
@@ -18,7 +18,9 @@ const Messages = ({ messages, issueId, userName, userId, isLoading }) => {
         ) : (
           <Grid container>
             <Grid item xs={12}>
-              <Typography variant="h5">Messages</Typography>
+              <Typography gutterBottom variant="h5">
+                Messages
+              </Typography>
               <Divider sx={{ marginBottom: 2 }} />
               {filteredMessages.length > 0 ? (
                 filteredMessages.map((message, index) => {
@@ -29,7 +31,7 @@ const Messages = ({ messages, issueId, userName, userId, isLoading }) => {
                   );
                 })
               ) : (
-                <Card sx={{ marginBottom: 2 }}>
+                <Card elevation={3} sx={{ marginBottom: 2 }}>
                   <CardContent>
                     <Typography fontSize={18}>
                       There are no messages on this issue. Be the first one to

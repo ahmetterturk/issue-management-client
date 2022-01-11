@@ -30,6 +30,7 @@ const Message = ({ message, index }) => {
   console.log(message);
   return (
     <Card
+      elevation={3}
       key={index}
       className={classes.mutualContainer}
       sx={{ marginBottom: 2 }}

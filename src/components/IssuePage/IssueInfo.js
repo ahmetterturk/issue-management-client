@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Divider, Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import * as React from 'react';
 import Card from '@mui/material/Card';
@@ -24,7 +24,7 @@ const IssueInfo = ({ issue, id, isLoading, setIsLoading }) => {
   const decodedToken = jwtdecode(token);
 
   return (
-    <Card elevation={3}>
+    <Card elevation={5}>
       <CardContent>
         {isLoading ? (
           <Grid
@@ -37,12 +37,24 @@ const IssueInfo = ({ issue, id, isLoading, setIsLoading }) => {
         ) : (
           <>
             <Grid container className={classes.titleNameContainer}>
+              <Grid item sx={{ marginBottom: 2 }} xs={12}>
+                <Typography gutterBottom variant="h5">
+                  Issue Details
+                </Typography>
+                <Divider />
+              </Grid>
+
               <Grid item md={9} xs={7}>
                 <Typography
                   gutterBottom
                   variant="caption"
                   component="div"
                   color="text.secondary"
+                  fontSize={15}
+                  sx={{
+                    display: 'inline-block',
+                    borderBottom: '1px solid #c4c4c4',
+                  }}
                 >
                   Issue Title
                 </Typography>
@@ -67,6 +79,11 @@ const IssueInfo = ({ issue, id, isLoading, setIsLoading }) => {
                 variant="caption"
                 component="div"
                 color="text.secondary"
+                fontSize={15}
+                sx={{
+                  display: 'inline-block',
+                  borderBottom: '1px solid #c4c4c4',
+                }}
               >
                 Issue Author
               </Typography>
@@ -83,6 +100,11 @@ const IssueInfo = ({ issue, id, isLoading, setIsLoading }) => {
                 variant="caption"
                 component="div"
                 color="text.secondary"
+                fontSize={15}
+                sx={{
+                  display: 'inline-block',
+                  borderBottom: '1px solid #c4c4c4',
+                }}
               >
                 Issue Date
               </Typography>
@@ -96,6 +118,11 @@ const IssueInfo = ({ issue, id, isLoading, setIsLoading }) => {
                 variant="caption"
                 component="div"
                 color="text.secondary"
+                fontSize={15}
+                sx={{
+                  display: 'inline-block',
+                  borderBottom: '1px solid #c4c4c4',
+                }}
               >
                 Issue Description
               </Typography>
@@ -110,6 +137,11 @@ const IssueInfo = ({ issue, id, isLoading, setIsLoading }) => {
                   variant="caption"
                   component="div"
                   color="text.secondary"
+                  fontSize={15}
+                  sx={{
+                    display: 'inline-block',
+                    borderBottom: '1px solid #c4c4c4',
+                  }}
                 >
                   Issue Type
                 </Typography>
@@ -128,6 +160,11 @@ const IssueInfo = ({ issue, id, isLoading, setIsLoading }) => {
                   variant="caption"
                   component="div"
                   color="text.secondary"
+                  fontSize={15}
+                  sx={{
+                    display: 'inline-block',
+                    borderBottom: '1px solid #c4c4c4',
+                  }}
                 >
                   Issue Status
                 </Typography>
@@ -151,6 +188,11 @@ const IssueInfo = ({ issue, id, isLoading, setIsLoading }) => {
                   variant="caption"
                   component="div"
                   color="text.secondary"
+                  fontSize={15}
+                  sx={{
+                    display: 'inline-block',
+                    borderBottom: '1px solid #c4c4c4',
+                  }}
                 >
                   Issue Priority
                 </Typography>

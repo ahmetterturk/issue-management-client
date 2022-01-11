@@ -19,14 +19,14 @@ const TotalTickets = ({ title, total, subtitle, to }) => {
   const classes = useStyles(styleProps);
   return (
     <Link to={to} className={classes.link}>
-      <Card className={classes.border}>
+      <Card elevation={5} className={classes.border}>
         <CardContent>
           <Grid container spacing={3} sx={{ justifyContent: 'space-between' }}>
             <Grid item>
-              <Typography color='textSecondary' gutterBottom variant='h4'>
+              <Typography color="textSecondary" gutterBottom variant="h4">
                 {title}
               </Typography>
-              <Typography color='textPrimary' variant='h5'>
+              <Typography color="textPrimary" variant="h5">
                 Total: {total}
               </Typography>
             </Grid>
@@ -49,7 +49,7 @@ const TotalTickets = ({ title, total, subtitle, to }) => {
               alignItems: 'center',
             }}
           >
-            <Typography color='textSecondary' variant='caption'>
+            <Typography color="textSecondary" variant="caption">
               {subtitle}
             </Typography>
           </Box>
