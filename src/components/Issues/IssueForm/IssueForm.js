@@ -56,16 +56,22 @@ const IssueForm = () => {
       <div>
         {currentUser.userDetails.image === null ? (
           <>
-            <Typography variant='h5' sx={{ p: 2, color: '#666' }}>
+            <Typography variant="h5" sx={{ p: 2, color: '#666' }}>
               In order to publish ticket you need to create a profile first
             </Typography>
           </>
         ) : (
           <Button
             onClick={handleOpen}
-            variant='contained'
+            variant="contained"
             startIcon={<AddCircleOutlineIcon />}
-            sx={{ backgroundColor: '#4E73DF', margin: 2 }}
+            sx={{
+              backgroundColor: '#4E73DF',
+              // margin: 2,
+              // position: 'fixed',
+              // bottom: '50px',
+              // right: '50px',
+            }}
           >
             New Issue
           </Button>
@@ -74,13 +80,13 @@ const IssueForm = () => {
         <Modal
           open={open}
           onClose={handleClose}
-          aria-labelledby='modal-modal-title'
-          aria-describedby='modal-modal-description'
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
         >
           <Box className={classes.boxContainer}>
             <form onSubmit={handleSubmit(onSubmit)}>
               <Typography
-                variant='h4'
+                variant="h4"
                 sx={{ color: '#665', textAlign: 'center' }}
               >
                 New Issue
@@ -89,9 +95,9 @@ const IssueForm = () => {
               <div className={classes.titleDiv}>
                 <TextField
                   {...register('title', { required: true })}
-                  id='outlined-basic'
-                  label='Title'
-                  variant='outlined'
+                  id="outlined-basic"
+                  label="Title"
+                  variant="outlined"
                   fullWidth
                 />
                 {errors.title && (
@@ -104,14 +110,14 @@ const IssueForm = () => {
                   multiline
                   rows={5}
                   maxRows={10}
-                  label='Description'
+                  label="Description"
                   fullWidth
                 />
                 {errors.description && (
                   <p style={{ color: 'red' }}>Description can't be blank!</p>
                 )}
               </div>
-              <MembersDropdown name='members' className={classes.members} />
+              <MembersDropdown name="members" className={classes.members} />
 
               <Grid container className={classes.dropdownContainer}>
                 <Grid item className={classes.gridItem}>
@@ -125,11 +131,11 @@ const IssueForm = () => {
                 </Grid>
               </Grid>
               <Button
-                type='submit'
-                variant='contained'
+                type="submit"
+                variant="contained"
                 fullWidth
                 disableElevation
-                size='large'
+                size="large"
               >
                 Create Issue
               </Button>

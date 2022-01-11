@@ -36,7 +36,7 @@ const Message = ({ message, index }) => {
       .catch((err) => console.log(err));
   };
 
-  console.log(message);
+  // console.log(message);
   return (
     <Card
       elevation={3}
