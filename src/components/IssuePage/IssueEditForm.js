@@ -112,7 +112,6 @@ export const IssueEditFormView = ({ issue, id, updateIssue }) => {
                 name="description"
                 multiline
                 rows={5}
-                maxRows={10}
                 label="Description"
                 onChange={handleChange}
                 fullWidth
