@@ -9,6 +9,7 @@ export const currentUser = {
     firstName: 'John',
     lastName: 'Doe',
     image: 'some-image',
+    email: 'email@email.com',
   },
   token:
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJpc0FkbWluIjp0cnVlLCJpZCI6MTAwfQ.cPODiQNnsmxal-KoU6iKwDuEatK9bCHE8DdBh80RYY4',

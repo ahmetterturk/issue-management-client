@@ -24,7 +24,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import jwtDecode from 'jwt-decode';
 import { useLocation } from 'react-router-dom';
 
-const ProfileDetails = (props) => {
+export const ProfileDetailsView = ({ updateUser, ...props }) => {
   const classes = useStyles();
   const [isFetching, setIsFetching] = useState(false);
   const { state, dispatch } = useGlobalContext();
@@ -74,25 +74,25 @@ const ProfileDetails = (props) => {
         </Grid>
         <Grid item lg={8} md={6} xs={12}>
           <form
-            autoComplete='off'
+            autoComplete="off"
             noValidate
-            {...props}
+            {...{ ...props }}
             onSubmit={handleSubmit(onSubmit)}
           >
             <Card elevation={5}>
               <CardHeader
-                subheader='The information can be edited'
-                title='Profile'
+                subheader="The information can be edited"
+                title="Profile"
               />
               <Divider />
               <CardContent>
                 <Grid container spacing={3}>
                   <FormInput
                     register={register}
-                    label='First Name'
-                    name='firstName'
+                    label="First Name"
+                    name="firstName"
                     required={true}
-                    type='text'
+                    type="text"
                     xs={12}
                     md={6}
                     size={3}
@@ -102,10 +102,10 @@ const ProfileDetails = (props) => {
                   />
                   <FormInput
                     register={register}
-                    label='Last Name'
-                    name='lastName'
+                    label="Last Name"
+                    name="lastName"
                     required={true}
-                    type='text'
+                    type="text"
                     xs={12}
                     md={6}
                     size={3}
@@ -116,10 +116,10 @@ const ProfileDetails = (props) => {
                   <FormInput
                     icons={<EmailIcon sx={{ color: '#555' }} />}
                     register={register}
-                    label='Email'
-                    name='email'
+                    label="Email"
+                    name="email"
                     required={true}
-                    type='text'
+                    type="text"
                     xs={12}
                     md={12}
                     size={3}
@@ -131,10 +131,10 @@ const ProfileDetails = (props) => {
                   <FormInput
                     icons={<PasswordIcon sx={{ color: '#555' }} />}
                     register={register}
-                    label='Password'
-                    name='password'
+                    label="Password"
+                    name="password"
                     required={true}
-                    type='password'
+                    type="password"
                     xs={12}
                     md={12}
                     size={5}
@@ -146,7 +146,7 @@ const ProfileDetails = (props) => {
                     <Grid item xs={6} md={6}>
                       <FormControlLabel
                         control={<Checkbox {...register('isAdmin')} checked />}
-                        label='Admin'
+                        label="Admin"
                       />
                     </Grid>
                   )}
@@ -160,7 +160,7 @@ const ProfileDetails = (props) => {
                   p: 2,
                 }}
               >
-                <Button color='primary' variant='contained' type='submit'>
+                <Button color="primary" variant="contained" type="submit">
                   {isFetching ? (
                     <CircularProgress style={{ color: 'white' }} />
                   ) : (
@@ -176,4 +176,7 @@ const ProfileDetails = (props) => {
   );
 };
 
+const ProfileDetails = (props) => (
+  <ProfileDetailsView updateUser={updateUser} {...props}></ProfileDetailsView>
+);
 export default ProfileDetails;
