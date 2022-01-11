@@ -5,9 +5,10 @@ import { useStyles } from './GraphPageStyles';
 const DoughnutChart = ({ data, title, labels }, props) => {
   const classes = useStyles();
   return (
-    <Card elevation={5}>
+    <Card sx={{ paddingBottom: 3 }} elevation={5}>
       <CardContent>
         <Grid
+          container
           className={classes.cardContentGrid}
           spacing={3}
           flexDirection="column"
