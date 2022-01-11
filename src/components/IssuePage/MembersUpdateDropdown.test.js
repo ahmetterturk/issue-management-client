@@ -19,7 +19,6 @@ describe('MembersUpdateDropdown', () => {
     await userEvent.click(screen.getByLabelText('Name'));
     await userEvent.click(screen.getByText('Jane Doe'));
     await userEvent.click(screen.getByText('Jane Doe'));
-    screen.debug();
     expect(mockDispatch).toHaveBeenCalledWith({
       type: 'SET_ISSUE_UPDATE_MEMBERS',
       data: ['John Doe'],
