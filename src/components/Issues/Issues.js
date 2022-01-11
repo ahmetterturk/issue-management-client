@@ -3,7 +3,7 @@ import { useGlobalContext } from '../../contextReducer/Context';
 import IssueForm from './IssueForm/IssueForm';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
-import { Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import IssuesTable from './IssuesTable/IssuesTable';
 import useStyles from './styles';
 import Errors from '../ErrorPages/Errors';
@@ -35,11 +35,11 @@ const Issues = () => {
   if (!state.currentUser) {
     return (
       <Errors
-        title='You need to login first'
-        errorMessage='You cannot access the application unless you login first'
-        route='/login'
+        title="You need to login first"
+        errorMessage="You cannot access the application unless you login first"
+        route="/login"
         imageSrc={loginImage}
-        btnMessage='Back to login page'
+        btnMessage="Back to login page"
       />
     );
   }
@@ -49,9 +49,10 @@ const Issues = () => {
     <Grid className={classes.issuesGrid}>
       {state.isLoggedIn && (
         <Stack sx={{ width: '100%' }} spacing={2}>
-          <Alert severity='success'>You have logged in successfully</Alert>
+          <Alert severity="success">You have logged in successfully</Alert>
         </Stack>
       )}
+      <Typography variant="h1">Issues</Typography>
 
       <IssueForm />
 

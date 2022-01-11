@@ -1,8 +1,19 @@
 import { makeStyles } from '@mui/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
+  tablePaper: {
+    alignSelf: 'center',
+    overflow: 'hidden',
+    marginLeft: theme.spacing(4),
+    marginRight: theme.spacing(4),
+    margin: '50px auto',
+    [theme.breakpoints.down('sm')]: {
+      width: 375,
+      margin: '100px auto',
+    },
+  },
   tableContainer: {
-    borderRadius: 15,
+    // borderRadius: 15,
     maxWidth: '100%',
     ['@media (max-width:780px)']: {
       maxWidth: 950,
@@ -37,7 +48,6 @@ export const useStyles = makeStyles(() => ({
     display: 'inline-block',
   },
   heading: {
-    paddingBottom: '15px',
     color: '#6787E3',
   },
 }));
