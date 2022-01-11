@@ -1,11 +1,4 @@
-import {
-  Divider,
-  Typography,
-  Card,
-  CardContent,
-  Grid,
-  Button,
-} from '@mui/material';
+import { Divider, Typography, Card, CardContent, Grid } from '@mui/material';
 import React from 'react';
 import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
 import { deleteMessage } from '../../apiServices/MessageApi';

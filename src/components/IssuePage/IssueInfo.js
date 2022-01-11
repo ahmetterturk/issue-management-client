@@ -37,7 +37,7 @@ const IssueInfo = ({ issue, id, isLoading, setIsLoading }) => {
         ) : (
           <>
             <Grid container className={classes.titleNameContainer}>
-              <Grid sx={{ marginBottom: 2 }} xs={12}>
+              <Grid item sx={{ marginBottom: 2 }} xs={12}>
                 <Typography gutterBottom variant="h5">
                   Issue Details
                 </Typography>

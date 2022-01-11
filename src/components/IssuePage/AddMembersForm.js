@@ -49,9 +49,9 @@ const AddMembersForm = ({ issue, id }) => {
     <>
       <Button
         onClick={handleOpen}
-        color='primary'
-        variant='contained'
-        size='small'
+        color="primary"
+        variant="contained"
+        size="small"
         sx={{ marginTop: 3 }}
       >
         Add Members
@@ -59,22 +59,22 @@ const AddMembersForm = ({ issue, id }) => {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
       >
         <Box sx={{ boxShadow: 24 }} className={classes.membersBoxContainer}>
           <form onSubmit={handleSubmit}>
             <MembersUpdateDropdown
               className={classes.members}
-              name='members'
+              name="members"
               issueData={issueData}
             />
             <Button
-              type='submit'
-              variant='contained'
+              type="submit"
+              variant="contained"
               fullWidth
               disableElevation
-              size='large'
+              size="large"
             >
               Update Members
             </Button>
