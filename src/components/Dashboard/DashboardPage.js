@@ -10,7 +10,8 @@ import { useGlobalContext } from '../../contextReducer/Context';
 import { useLocation } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useStyles } from './Styles';
-const DashboardPage = () => {
+
+export const DashboardPageView = ({ useLocation }) => {
   const { state, dispatch } = useGlobalContext();
   const location = useLocation();
   const classes = useStyles();
@@ -55,7 +56,7 @@ const DashboardPage = () => {
   return (
     <>
       <Box
-        component='main'
+        component="main"
         sx={{
           flexGrow: 1,
           py: 8,
@@ -66,7 +67,7 @@ const DashboardPage = () => {
           <Grid container spacing={3}>
             <Grid item lg={4} sm={6} xl={4} xs={12}>
               <TotalTickets
-                title='Issues'
+                title="Issues"
                 total={
                   issuesCount !== 0 ? (
                     issuesCount
@@ -74,13 +75,13 @@ const DashboardPage = () => {
                     <CircularProgress sx={{ color: '#1c79fc' }} />
                   )
                 }
-                subtitle='Check Tickets'
-                to='/issues'
+                subtitle="Check Tickets"
+                to="/issues"
               />
             </Grid>
             <Grid item xl={4} lg={4} sm={6} xs={12}>
               <TotalEmployees
-                title='Employees'
+                title="Employees"
                 total={
                   userCount !== 1 ? (
                     userCount
@@ -88,13 +89,13 @@ const DashboardPage = () => {
                     <CircularProgress sx={{ color: '#00ffbb' }} />
                   )
                 }
-                subtitle='Check Employees Page'
-                to='/employee'
+                subtitle="Check Employees Page"
+                to="/employee"
               />
             </Grid>
             <Grid item xl={4} lg={4} sm={6} xs={12}>
               <NewTickets
-                title='New Tickets'
+                title="New Tickets"
                 total={
                   newIssuesCount !== 0 ? (
                     newIssuesCount
@@ -104,13 +105,13 @@ const DashboardPage = () => {
                     newIssuesCount
                   )
                 }
-                subtitle='Check Tickets'
-                to='/issues?status=New'
+                subtitle="Check Tickets"
+                to="/issues?status=New"
               />
             </Grid>
             <Grid item xl={4} lg={4} sm={6} xs={12}>
               <ResolvedTickets
-                title='Resolved'
+                title="Resolved"
                 total={
                   resolvedIssuesCount !== 0 ? (
                     resolvedIssuesCount
@@ -120,13 +121,13 @@ const DashboardPage = () => {
                     resolvedIssuesCount
                   )
                 }
-                subtitle='Check Tickets'
-                to='/issues?status=Resolved'
+                subtitle="Check Tickets"
+                to="/issues?status=Resolved"
               />
             </Grid>
             <Grid item xl={4} lg={4} sm={6} xs={12}>
               <PendingTickets
-                title='Pending'
+                title="Pending"
                 total={
                   pendingIssuesCount !== 0 ? (
                     pendingIssuesCount
@@ -136,8 +137,8 @@ const DashboardPage = () => {
                     pendingIssuesCount
                   )
                 }
-                subtitle='Check Tickets'
-                to='/issues?status=Pending'
+                subtitle="Check Tickets"
+                to="/issues?status=Pending"
               />
             </Grid>
             <Grid
@@ -157,4 +158,7 @@ const DashboardPage = () => {
   );
 };
 
+const DashboardPage = (props) => (
+  <DashboardPageView useLocaton={useLocation} {...props}></DashboardPageView>
+);
 export default DashboardPage;
