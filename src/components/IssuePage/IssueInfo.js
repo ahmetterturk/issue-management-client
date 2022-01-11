@@ -150,6 +150,11 @@ const IssueInfo = ({ issue, id, isLoading, setIsLoading }) => {
                   variant="body1"
                   component="div"
                   fontSize={18}
+                  style={{
+                    color:
+                      (issue.type === 'Private' && '#ED5500') ||
+                      (issue.type === 'Public' && '#00CC8F'),
+                  }}
                 >
                   {issue.type}
                 </Typography>
