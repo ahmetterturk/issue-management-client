@@ -40,7 +40,7 @@ const Message = ({ message, index }) => {
   return (
     <Card
       elevation={3}
-      key={index}
+      // key={index}
       className={classes.mutualContainer}
       sx={{ marginBottom: 2 }}
     >

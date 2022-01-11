@@ -24,11 +24,7 @@ const Messages = ({ messages, issueId, userName, userId, isLoading }) => {
               <Divider sx={{ marginBottom: 2 }} />
               {filteredMessages.length > 0 ? (
                 filteredMessages.map((message, index) => {
-                  return (
-                    <>
-                      <Message key={index} message={message} />
-                    </>
-                  );
+                  return <Message message={message} key={index} />;
                 })
               ) : (
                 <Card elevation={3} sx={{ marginBottom: 2 }}>

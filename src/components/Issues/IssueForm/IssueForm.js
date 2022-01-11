@@ -109,7 +109,6 @@ const IssueForm = () => {
                   {...register('description', { required: true })}
                   multiline
                   rows={5}
-                  maxRows={10}
                   label="Description"
                   fullWidth
                 />
