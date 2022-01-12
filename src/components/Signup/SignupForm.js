@@ -22,7 +22,7 @@ import { signupUser } from '../../apiServices/UserApi';
 import { useGlobalContext } from '../../contextReducer/Context';
 import CircularProgress from '@mui/material/CircularProgress';
 
-const SignupForm = () => {
+export const SignupFormView = ({ signupUser }) => {
   const classes = useStyles();
   const { dispatch } = useGlobalContext();
 
@@ -65,15 +65,15 @@ const SignupForm = () => {
     <>
       <Box sx={{ m: 5 }}>
         <Typography
-          variant='h4'
-          align='center'
+          variant="h4"
+          align="center"
           gutterBottom
           className={classes.heading}
         >
           Create Employee Account
         </Typography>
         <form
-          autoComplete='off'
+          autoComplete="off"
           noValidate
           onSubmit={handleSubmit(onSubmit)}
           className={classes.formBorder}
@@ -81,7 +81,7 @@ const SignupForm = () => {
           <Card className={classes.card}>
             <CardContent>
               {hasError && errorObject ? (
-                <Alert severity='warning' p={4}>
+                <Alert severity="warning" p={4}>
                   <AlertTitle>Warning</AlertTitle>
                   {errorObject.data.message}
                 </Alert>
@@ -89,9 +89,9 @@ const SignupForm = () => {
               <Grid container spacing={3}>
                 <FormInput
                   register={register}
-                  label='First Name'
-                  name='firstName'
-                  type='text'
+                  label="First Name"
+                  name="firstName"
+                  type="text"
                   required={false}
                   xs={12}
                   md={6}
@@ -102,9 +102,9 @@ const SignupForm = () => {
                 />
                 <FormInput
                   register={register}
-                  label='Last Name'
-                  name='lastName'
-                  type='text'
+                  label="Last Name"
+                  name="lastName"
+                  type="text"
                   required={false}
                   xs={12}
                   md={6}
@@ -115,9 +115,9 @@ const SignupForm = () => {
                 />
                 <FormInput
                   register={register}
-                  label='Email'
-                  name='email'
-                  type='email'
+                  label="Email"
+                  name="email"
+                  type="email"
                   required={true}
                   xs={12}
                   md={12}
@@ -129,9 +129,9 @@ const SignupForm = () => {
                 />
                 <FormInput
                   register={register}
-                  label='Password'
-                  name='password'
-                  type='password'
+                  label="Password"
+                  name="password"
+                  type="password"
                   required={true}
                   xs={12}
                   md={12}
@@ -144,7 +144,7 @@ const SignupForm = () => {
                 <Grid item xs={12} md={12}>
                   <FormControlLabel
                     control={<Checkbox {...register('isAdmin')} />}
-                    label='Admin'
+                    label="Admin"
                   />
                 </Grid>
 
@@ -157,9 +157,9 @@ const SignupForm = () => {
                     }}
                   >
                     <Button
-                      variant='contained'
+                      variant="contained"
                       style={{ marginLeft: '5px', backgroundColor: '#1c79fc' }}
-                      type='submit'
+                      type="submit"
                     >
                       {isFetching ? (
                         <CircularProgress style={{ color: 'white' }} />
@@ -179,4 +179,7 @@ const SignupForm = () => {
   );
 };
 
+const SignupForm = (props) => (
+  <SignupFormView signupUser={signupUser} {...props}></SignupFormView>
+);
 export default SignupForm;
