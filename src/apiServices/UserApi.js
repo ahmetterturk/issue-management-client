@@ -1,7 +1,7 @@
 import API from './api';
 // const url = 'https://issue-management-backend.herokuapp.com';
 
-// signup user
+// making a post request to create a user
 export const signupUser = async (userObject) => {
   try {
     const res = await API.post('/user/signup', userObject);
@@ -11,7 +11,7 @@ export const signupUser = async (userObject) => {
   }
 };
 
-// login request
+// making a post request to login the user
 export const loginUser = async (userObject) => {
   try {
     const res = await API.post('/user/signin', userObject);
@@ -21,8 +21,7 @@ export const loginUser = async (userObject) => {
   }
 };
 
-// get all users
-
+// making a get request to get all users from server
 export const allUsers = async () => {
   try {
     const res = await API.get('/user');
@@ -32,7 +31,7 @@ export const allUsers = async () => {
   }
 };
 
-// get single user
+// making get request to get a single user from server
 export const singleUser = async (id) => {
   try {
     const res = await API.get(`/user/${id}`);
@@ -52,7 +51,7 @@ export const updateUser = async (userObject, id) => {
   }
 };
 
-// delete user
+// making a delete requset to delete the user with the current id
 export const deleteUser = async (id) => {
   try {
     const res = await API.delete(`/user/${id}`);
@@ -62,7 +61,7 @@ export const deleteUser = async (id) => {
   }
 };
 
-// image upload
+// making a post request to upload image, and return image url to use as a src on img tag
 export const uploadProfileImage = async ({ image }) => {
   const formData = new FormData();
   formData.append('image', image);

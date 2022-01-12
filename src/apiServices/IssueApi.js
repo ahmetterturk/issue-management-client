@@ -1,6 +1,6 @@
 import API from './api';
 
-// const url = 'https://issue-management-backend.herokuapp.com';
+
 
 // Fetch All Issues
 export const getIssues = async () => {
