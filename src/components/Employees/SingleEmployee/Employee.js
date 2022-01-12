@@ -53,6 +53,7 @@ const Employee = () => {
           setErrorObject(data);
         } else {
           setUser(data.singleUser);
+          setHasError(false);
           setIsFetching(false);
         }
       })
