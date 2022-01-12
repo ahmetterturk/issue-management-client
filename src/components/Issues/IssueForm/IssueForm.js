@@ -11,7 +11,7 @@ import { useGlobalContext } from '../../../contextReducer/Context';
 import { createIssue } from '../../../apiServices/IssueApi';
 import { useForm } from 'react-hook-form/dist/index.cjs';
 import jwtdecode from 'jwt-decode';
-import { Typography, Grid, Divider } from '@mui/material';
+import { Typography, Grid } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import useStyles from './styles';
 
@@ -85,13 +85,6 @@ export const IssueFormView = ({ createIssue }) => {
         >
           <Box className={classes.boxContainer}>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <Typography
-                variant="h4"
-                sx={{ color: '#665', textAlign: 'center' }}
-              >
-                New Issue
-              </Typography>
-              <Divider className={classes.divider} />
               <div className={classes.titleDiv}>
                 <TextField
                   {...register('title', { required: true })}

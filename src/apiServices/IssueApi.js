@@ -8,7 +8,7 @@ export const getIssues = async () => {
     const response = await API.get('/issues');
     return response.data;
   } catch (error) {
-    console.log(error);
+    return error.response;
   }
 };
 
@@ -18,7 +18,7 @@ export const createIssue = async (issueData) => {
     const response = await API.post('/issues', issueData);
     return response.data;
   } catch (error) {
-    console.log(error);
+    return error.response;
   }
 };
 
@@ -28,7 +28,7 @@ export const getIssue = async (id) => {
     const response = await API.get('/issues/' + id);
     return response.data;
   } catch (error) {
-    console.log(error);
+    return error.response;
   }
 };
 

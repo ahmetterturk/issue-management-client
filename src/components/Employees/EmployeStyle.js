@@ -9,7 +9,8 @@ export const useStyles = makeStyles((theme) => ({
     margin: '50px auto',
     [theme.breakpoints.down('sm')]: {
       width: 375,
-      margin: '100px auto',
+      margin: '75px auto',
+      marginBottom: theme.spacing(6),
     },
   },
   tableContainer: {

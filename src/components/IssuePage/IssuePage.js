@@ -10,6 +10,8 @@ import jwtdecode from 'jwt-decode';
 import { getAllMessages } from '../../apiServices/MessageApi';
 import Members from './Members';
 import { Grid } from '@mui/material';
+import notFoundImage from '../../images/notFound2.jpg';
+import Errors from '../ErrorPages/Errors';
 
 export const IssuePageView = ({ getAllMessages, getIssue, useParams }) => {
   const classes = useStyles();
@@ -18,7 +20,7 @@ export const IssuePageView = ({ getAllMessages, getIssue, useParams }) => {
   const { currentUser, assignedIssues } = state;
   const { token } = currentUser;
   const decodedToken = jwtdecode(token);
-
+  const [hasError, setHasError] = useState(false);
   const [issue, setIssue] = useState([]);
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -28,8 +30,13 @@ export const IssuePageView = ({ getAllMessages, getIssue, useParams }) => {
     setIsLoading(true);
     getIssue(id)
       .then((response) => {
-        setIssue(response);
-        setIsLoading(false);
+        if (response.status === 500) {
+          setHasError(true);
+        } else {
+          setIssue(response);
+          setIsLoading(false);
+          setHasError(false);
+        }
       })
       .catch((error) => console.log(error));
   }, [id, state.counter]);
@@ -58,12 +65,25 @@ export const IssuePageView = ({ getAllMessages, getIssue, useParams }) => {
     }
   }, [issue, state.users.allUsers]);
 
+  if (hasError) {
+    return (
+      <Errors
+        status='404'
+        title='There is no issue with current id in our server'
+        errorMessage='Please make sure issue exist'
+        route='/issues'
+        imageSrc={notFoundImage}
+        btnMessage='Back to main page'
+      />
+    );
+  }
+
   return (
     <Grid sx={{ marginTop: 14 }}>
       <Typography
-        data-testid="issue-title"
+        data-testid='issue-title'
         className={classes.header}
-        variant="h4"
+        variant='h4'
       >
         {issue.title}
       </Typography>

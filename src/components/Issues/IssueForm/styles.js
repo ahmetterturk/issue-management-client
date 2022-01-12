@@ -18,8 +18,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: theme.spacing(1),
     [theme.breakpoints.down('sm')]: {
       width: 250,
-      height: 500,
-      // height: '%50',
+      height: 600,
       padding: theme.spacing(7),
     },
   },
@@ -39,9 +38,6 @@ const useStyles = makeStyles((theme) => ({
   },
   select: {
     minWidth: 280,
-    // [theme.breakpoints.up('sm')]: {
-    //   //   marginBottom: theme.spacing(4),
-    // },
     [theme.breakpoints.down('sm')]: {
       minWidth: 316,
     },
