@@ -44,9 +44,9 @@ export const WithProviders =
               },
             ],
             issues: options.issues || [
-              { status: 'New', members: allUsers },
-              { status: 'Resolved', members: allUsers },
-              { status: 'Pending', members: allUsers },
+              { _id: 100, status: 'New', members: allUsers },
+              { _id: 101, status: 'Resolved', members: allUsers },
+              { _id: 102, status: 'Pending', members: allUsers },
             ],
             users: {
               allUsers: 'allUsers' in options ? options.allUsers : allUsers,

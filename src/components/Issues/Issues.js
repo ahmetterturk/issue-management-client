@@ -10,7 +10,8 @@ import Errors from '../ErrorPages/Errors';
 import loginImage from '../../images/login.jpg';
 import { useLocation } from 'react-router-dom';
 import API from '../../apiServices/api';
-const Issues = () => {
+
+export const IssuesView = ({ API }) => {
   const { state, dispatch } = useGlobalContext();
   // destructure the serach property to get the query string from it
   const { search } = useLocation();
@@ -34,11 +35,11 @@ const Issues = () => {
   if (!state.currentUser) {
     return (
       <Errors
-        title='You need to login first'
-        errorMessage='You cannot access the application unless you login first'
-        route='/login'
+        title="You need to login first"
+        errorMessage="You cannot access the application unless you login first"
+        route="/login"
         imageSrc={loginImage}
-        btnMessage='Back to login page'
+        btnMessage="Back to login page"
       />
     );
   }
@@ -48,17 +49,17 @@ const Issues = () => {
     <Grid container className={classes.issuesGrid}>
       {state.isLoggedIn && (
         <Stack sx={{ width: '100%' }} spacing={2}>
-          <Alert severity='success'>You have logged in successfully</Alert>
+          <Alert severity="success">You have logged in successfully</Alert>
         </Stack>
       )}
       {state.isUpdated && (
         <Stack sx={{ width: '100%' }} spacing={2}>
-          <Alert severity='success'>
+          <Alert severity="success">
             You have updated your profile successfully
           </Alert>
         </Stack>
       )}
-      <Typography variant='h3' sx={{ color: '#1c79fc', ml: 2 }}>
+      <Typography variant="h3" sx={{ color: '#1c79fc', ml: 2 }}>
         Issues
       </Typography>
 
@@ -69,4 +70,5 @@ const Issues = () => {
   );
 };
 
+const Issues = (props) => <IssuesView API={API} {...props}></IssuesView>;
 export default Issues;
