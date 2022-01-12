@@ -17,7 +17,8 @@ const PriorityDropdown = ({ register, errors }) => {
           className={classes.select}
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          label="Status"
+          label="Priority"
+          data-testid="Priority"
           {...register('priority', { required: true })}
         >
           <MenuItem value="Low">Low</MenuItem>
