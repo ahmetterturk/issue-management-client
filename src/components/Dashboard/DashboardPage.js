@@ -11,7 +11,7 @@ import { useLocation } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useStyles } from './Styles';
 
-export const DashboardPageView = ({ useLocation }) => {
+export const DashboardPageView = ({ useLocations }) => {
   const { state, dispatch } = useGlobalContext();
   const location = useLocation();
   const classes = useStyles();
@@ -56,7 +56,7 @@ export const DashboardPageView = ({ useLocation }) => {
   return (
     <>
       <Box
-        component="main"
+        component='main'
         sx={{
           flexGrow: 1,
           py: 8,
@@ -67,7 +67,7 @@ export const DashboardPageView = ({ useLocation }) => {
           <Grid container spacing={3}>
             <Grid item lg={4} sm={6} xl={4} xs={12}>
               <TotalTickets
-                title="Issues"
+                title='Issues'
                 total={
                   issuesCount !== 0 ? (
                     issuesCount
@@ -75,13 +75,13 @@ export const DashboardPageView = ({ useLocation }) => {
                     <CircularProgress sx={{ color: '#1c79fc' }} />
                   )
                 }
-                subtitle="Check Tickets"
-                to="/issues"
+                subtitle='Check Tickets'
+                to='/issues'
               />
             </Grid>
             <Grid item xl={4} lg={4} sm={6} xs={12}>
               <TotalEmployees
-                title="Employees"
+                title='Employees'
                 total={
                   userCount !== 1 ? (
                     userCount
@@ -89,13 +89,13 @@ export const DashboardPageView = ({ useLocation }) => {
                     <CircularProgress sx={{ color: '#00ffbb' }} />
                   )
                 }
-                subtitle="Check Employees Page"
-                to="/employee"
+                subtitle='Check Employees Page'
+                to='/employee'
               />
             </Grid>
             <Grid item xl={4} lg={4} sm={6} xs={12}>
               <NewTickets
-                title="New Tickets"
+                title='New Tickets'
                 total={
                   newIssuesCount !== 0 ? (
                     newIssuesCount
@@ -105,13 +105,13 @@ export const DashboardPageView = ({ useLocation }) => {
                     newIssuesCount
                   )
                 }
-                subtitle="Check Tickets"
-                to="/issues?status=New"
+                subtitle='Check Tickets'
+                to='/issues?status=New'
               />
             </Grid>
             <Grid item xl={4} lg={4} sm={6} xs={12}>
               <ResolvedTickets
-                title="Resolved"
+                title='Resolved'
                 total={
                   resolvedIssuesCount !== 0 ? (
                     resolvedIssuesCount
@@ -121,13 +121,13 @@ export const DashboardPageView = ({ useLocation }) => {
                     resolvedIssuesCount
                   )
                 }
-                subtitle="Check Tickets"
-                to="/issues?status=Resolved"
+                subtitle='Check Tickets'
+                to='/issues?status=Resolved'
               />
             </Grid>
             <Grid item xl={4} lg={4} sm={6} xs={12}>
               <PendingTickets
-                title="Pending"
+                title='Pending'
                 total={
                   pendingIssuesCount !== 0 ? (
                     pendingIssuesCount
@@ -137,8 +137,8 @@ export const DashboardPageView = ({ useLocation }) => {
                     pendingIssuesCount
                   )
                 }
-                subtitle="Check Tickets"
-                to="/issues?status=Pending"
+                subtitle='Check Tickets'
+                to='/issues?status=Pending'
               />
             </Grid>
             <Grid
@@ -159,6 +159,6 @@ export const DashboardPageView = ({ useLocation }) => {
 };
 
 const DashboardPage = (props) => (
-  <DashboardPageView useLocaton={useLocation} {...props}></DashboardPageView>
+  <DashboardPageView useLocatons={useLocation} {...props}></DashboardPageView>
 );
 export default DashboardPage;

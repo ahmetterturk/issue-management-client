@@ -22,6 +22,7 @@ import { Link } from 'react-router-dom';
 import Errors from '../../ErrorPages/Errors';
 import moment from 'moment';
 import unauthorizedImage from '../../../images/unauthorized.jpg';
+import notFoundImage from '../../../images/notFound2.jpg';
 import EmployeeAvatar from './EmployeeAvatar';
 import DeleteConfirmation from '../../DeleteConfirmation/DeleteConfirmation';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -37,6 +38,8 @@ const Employee = () => {
   const { isAdmin } = decodedToken;
   const [isFetching, setIsFetching] = useState(false);
   const { id } = useParams();
+  const [hasError, setHasError] = useState(false);
+  const [errorObject, setErrorObject] = useState(null);
   const [user, setUser] = useState([]);
   const navigate = useNavigate();
 
@@ -44,12 +47,19 @@ const Employee = () => {
     setIsFetching(true);
     singleUser(id)
       .then((data) => {
-        setUser(data.singleUser);
-        setIsFetching(false);
+        if (data.status === 500) {
+          setHasError(true);
+          setIsFetching(false);
+          setErrorObject(data);
+        } else {
+          setUser(data.singleUser);
+          setHasError(false);
+          setIsFetching(false);
+        }
       })
       .catch((err) => console.log(err));
   }, [id]);
-
+  console.log(errorObject);
   const handleDelete = (id) => {
     deleteUser(id)
       .then((data) => {
@@ -69,7 +79,19 @@ const Employee = () => {
       Whichever it is, try using the navigation'
         route='/issues'
         imageSrc={unauthorizedImage}
-        btnMessage='Back to login page'
+        btnMessage='Back to main page'
+      />
+    );
+  }
+  if (hasError) {
+    return (
+      <Errors
+        status='404'
+        title='There is no user with current id in our server'
+        errorMessage='Please make sure the user exist'
+        route='/issues'
+        imageSrc={notFoundImage}
+        btnMessage='Back to main page'
       />
     );
   }
@@ -87,6 +109,7 @@ const Employee = () => {
         <Typography sx={{ mb: 3 }} variant='h4' textAlign={'center'}>
           Employee
         </Typography>
+
         {isFetching ? (
           <Box
             component='main'
