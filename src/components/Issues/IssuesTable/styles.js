@@ -5,6 +5,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     alignSelf: 'center',
     overflow: 'hidden',
+    marginTop: 10,
     [theme.breakpoints.down('sm')]: {
       width: 375,
       marginBottom: theme.spacing(6),
