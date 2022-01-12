@@ -66,13 +66,12 @@ describe('UserApi', () => {
     });
     it('should log an error', async () => {
       const apiGetspy = jest.spyOn(API, 'get');
-      const consoleLogSpy = jest.spyOn(console, 'log');
-      const expectedError = 'Error11';
+      const expectedError = { response: 'Error11' };
       apiGetspy.mockRejectedValueOnce(expectedError);
-      await allUsers();
+      const result = await allUsers();
 
       expect(apiGetspy).toHaveBeenCalledWith('/user');
-      expect(consoleLogSpy).toHaveBeenLastCalledWith(expectedError);
+      expect(result).toBe(expectedError.response);
     });
   });
   describe('singleUser', () => {
@@ -88,14 +87,13 @@ describe('UserApi', () => {
     });
     it('should log an error of a single user', async () => {
       const apiGetspy = jest.spyOn(API, 'get');
-      const consoleLogSpy = jest.spyOn(console, 'log');
-      const expectedError = 'Error2';
+      const expectedError = { response: 'Error2' };
       const id = 600;
       apiGetspy.mockRejectedValueOnce(expectedError);
-      await singleUser(id);
+      const result = await singleUser(id);
 
       expect(apiGetspy).toHaveBeenCalledWith(`/user/${id}`);
-      expect(consoleLogSpy).toHaveBeenLastCalledWith(expectedError);
+      expect(result).toBe(expectedError.response);
     });
   });
   describe('updateUser', () => {
@@ -112,15 +110,14 @@ describe('UserApi', () => {
     });
     it('should log an error of updated user', async () => {
       const apiGetspy = jest.spyOn(API, 'patch');
-      const consoleLogSpy = jest.spyOn(console, 'log');
-      const expectedError = 'Error3';
+      const expectedError = { response: 'Error3' };
       const id = 900;
       const userObject = {};
       apiGetspy.mockRejectedValueOnce(expectedError);
-      await updateUser(userObject, id);
+      const result = await updateUser(userObject, id);
 
       expect(apiGetspy).toHaveBeenCalledWith(`/user/${id}`, userObject);
-      expect(consoleLogSpy).toHaveBeenLastCalledWith(expectedError);
+      expect(result).toBe(expectedError.response);
     });
   });
 
@@ -158,7 +155,7 @@ describe('UserApi', () => {
 
       expect(result).toBe(expectedResponse);
       const formObject = spy.mock.calls[0][1];
-      expect(formObject.get('image')).toBe(myImage)
+      expect(formObject.get('image')).toBe(myImage);
     });
     it('should log an error of an issue', async () => {
       const apiPostspy = jest.spyOn(API, 'post');
