@@ -12,11 +12,9 @@ import { Typography, Divider } from '@mui/material';
 const DropDownIssues = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-
   const { state, dispatch } = useGlobalContext();
   const { userDetails } = state.currentUser;
   const { issues, assignedIssues } = state;
-  // const [assignedIssues, setAssignedIssues] = React.useState([]);
 
   React.useEffect(() => {
     if (state.currentUser) {
