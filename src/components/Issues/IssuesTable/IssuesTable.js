@@ -1,48 +1,60 @@
 import React, { useState } from 'react';
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
 import { Link } from 'react-router-dom';
-import { Typography, Grid } from '@mui/material';
-import moment from 'moment';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useGlobalContext } from '../../../contextReducer/Context';
+import DeleteConfirmation from '../../DeleteConfirmation/DeleteConfirmation';
+import { deleteIssue } from '../../../apiServices/IssueApi';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import jwtdecode from 'jwt-decode';
 import useStyles from './styles';
-import CircularProgress from '@mui/material/CircularProgress';
-import { deleteIssue } from '../../../apiServices/IssueApi';
-import DeleteConfirmation from '../../DeleteConfirmation/DeleteConfirmation';
+import moment from 'moment';
+import {
+  Paper,
+  Typography,
+  Grid,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TablePagination,
+  TableRow,
+  CircularProgress,
+} from '@mui/material';
+
+// IssuesTable function is the main component that will be rendered
 const IssuesTable = ({ issuesList }) => {
+  // destructuring state and dispatch function from context provider
   const { state, dispatch } = useGlobalContext();
+  // defining a classes constant to use with styling of components
+  const classes = useStyles();
+  // using state and jwtdecode package to decode and use user data stored in the jwt token, stored in the local storage
   const { currentUser } = state;
   const { token } = currentUser;
   const decodedToken = jwtdecode(token);
+  // defining a constant to authenticate who can see only public issues and who can see all issues. If the current user is an admin, they can access all issues.
   const visibleIssues = decodedToken.isAdmin
     ? issuesList
     : issuesList.filter(
         (issue) => issue.type === 'Public' || issue.userId === decodedToken.id
       );
 
+  // states used in table
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  // state used to activate circular loading component
   const [isFetching, setIsFetching] = useState(false);
-  const classes = useStyles();
 
+  // mui specific table functionality methods
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
 
-  // added handle issue function in issuesTable instead of the deleteIssueConfiramtion, we can reuse the modal now
+  // the handleDelete function is called in the trash icon to delete issues, the deleteIssue function sends a delete request to the server via axios, that is defined in the the api functions
+  // we are using a counter global state value to help with the rerendering of components on its increase.
   const handleDelete = (issueId) => {
     setIsFetching(true);
     deleteIssue(issueId)
@@ -56,21 +68,21 @@ const IssuesTable = ({ issuesList }) => {
   return (
     <>
       {state.issuesIsLoading ? (
-        <Grid container justifyContent='center' sx={{ marginTop: 10 }}>
+        <Grid container justifyContent="center" sx={{ marginTop: 10 }}>
           <CircularProgress />
         </Grid>
       ) : (
         <>
           <Paper elevation={5} className={classes.paper}>
             <TableContainer>
-              <Table stickyHeader aria-label='sticky table'>
+              <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                   <TableRow>
                     <TableCell
                       className={classes.tableHeaderCell}
                       sx={{ backgroundColor: '#E8E8E8' }}
                     >
-                      <Typography fontWeight='bold' fontSize={18}>
+                      <Typography fontWeight="bold" fontSize={18}>
                         Issue
                       </Typography>
                     </TableCell>
@@ -78,7 +90,7 @@ const IssuesTable = ({ issuesList }) => {
                       className={classes.tableHeaderCell}
                       sx={{ backgroundColor: '#E8E8E8' }}
                     >
-                      <Typography fontWeight='bold' fontSize={18}>
+                      <Typography fontWeight="bold" fontSize={18}>
                         Status
                       </Typography>
                     </TableCell>
@@ -86,7 +98,7 @@ const IssuesTable = ({ issuesList }) => {
                       className={classes.tableHeaderCell}
                       sx={{ backgroundColor: '#E8E8E8' }}
                     >
-                      <Typography fontWeight='bold' fontSize={18}>
+                      <Typography fontWeight="bold" fontSize={18}>
                         Type
                       </Typography>
                     </TableCell>
@@ -94,7 +106,7 @@ const IssuesTable = ({ issuesList }) => {
                       className={classes.tableHeaderCell}
                       sx={{ backgroundColor: '#E8E8E8' }}
                     >
-                      <Typography fontWeight='bold' fontSize={18}>
+                      <Typography fontWeight="bold" fontSize={18}>
                         Date
                       </Typography>
                     </TableCell>
@@ -102,7 +114,7 @@ const IssuesTable = ({ issuesList }) => {
                       className={classes.tableHeaderCell}
                       sx={{ backgroundColor: '#E8E8E8' }}
                     >
-                      <Typography fontWeight='bold' fontSize={18}>
+                      <Typography fontWeight="bold" fontSize={18}>
                         Created By
                       </Typography>
                     </TableCell>
@@ -110,7 +122,7 @@ const IssuesTable = ({ issuesList }) => {
                       className={classes.tableHeaderCell}
                       sx={{ backgroundColor: '#E8E8E8' }}
                     >
-                      <Typography fontWeight='bold' fontSize={18}>
+                      <Typography fontWeight="bold" fontSize={18}>
                         Actions
                       </Typography>
                     </TableCell>
@@ -130,7 +142,7 @@ const IssuesTable = ({ issuesList }) => {
                             className={classes.tableRow}
                             key={issue._id}
                             hover
-                            role='checkbox'
+                            role="checkbox"
                             tabIndex={-1}
                           >
                             <TableCell className={classes.tableCell}>
@@ -176,7 +188,7 @@ const IssuesTable = ({ issuesList }) => {
                                 {(decodedToken.id === issue.userId ||
                                   decodedToken.isAdmin) && (
                                   <DeleteConfirmation
-                                    entity='issue'
+                                    entity="issue"
                                     handleDelete={() => handleDelete(issue._id)}
                                     isFetching={isFetching}
                                   />
@@ -189,10 +201,9 @@ const IssuesTable = ({ issuesList }) => {
                 </TableBody>
               </Table>
             </TableContainer>
-
             <TablePagination
               rowsPerPageOptions={[10, 25, 100]}
-              component='div'
+              component="div"
               count={issuesList.length}
               rowsPerPage={rowsPerPage}
               page={page}

@@ -1,13 +1,16 @@
 import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 import { useGlobalContext } from '../../../contextReducer/Context';
+import { useTheme } from '@mui/material/styles';
 import useStyles from './styles';
+import {
+  OutlinedInput,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+} from '@mui/material';
 
+// mui specific constants
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -19,6 +22,7 @@ const MenuProps = {
   },
 };
 
+// mui specific function
 function getStyles(name, personName, theme) {
   return {
     fontWeight:
@@ -30,16 +34,20 @@ function getStyles(name, personName, theme) {
 
 const MembersDropdown = () => {
   const theme = useTheme();
+  // state used to organize dropdown data
   const [personName, setPersonName] = React.useState([]);
+  // destructuring state and dispatch function from context provider
   const { state, dispatch } = useGlobalContext();
+  // defining a classes constant to use with styling of components
   const classes = useStyles();
 
+  // defining a users constant to assign the names and ids of every user in the database
   const users = state.users.allUsers.map((user) => [
     `${user.firstName} ${user.lastName}`,
     user._id,
   ]);
-  console.log(users);
 
+  // handle change function to set state on dropdown action change
   const handleChange = (event) => {
     setPersonName(
       typeof event.target.value === 'string'
@@ -47,8 +55,6 @@ const MembersDropdown = () => {
         : event.target.value
     );
     dispatch({ type: 'SET_ISSUE_MEMBERS', data: event.target.value });
-    console.log(personName);
-    console.log(state.issueMembers);
   };
 
   return (
