@@ -29,7 +29,6 @@ describe('ProfileAvatar', () => {
   it('should update the user successfully', async () => {
     const uploadProfileImage = () =>
       Promise.resolve({ image: { src: 'some-src' } });
-    const consoleLogSpy = jest.spyOn(console, 'log');
     render(
       <ProfileAvatarWithProviders
         {...defaultProps}
@@ -40,10 +39,7 @@ describe('ProfileAvatar', () => {
       await userEvent.click(screen.getByText('Save Image'));
     });
 
-    expect(consoleLogSpy).toHaveBeenCalledWith('from upload image =>>', {
-      ...currentUser.userDetails,
-      image: 'some-src',
-    });
+    expect(screen.queryByRole('progressbar')).toBeNull();
   });
 
   it('should log an error when the image is not updated', async () => {

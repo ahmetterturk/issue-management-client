@@ -14,12 +14,12 @@ import { useForm } from 'react-hook-form';
 import { uploadProfileImage } from '../../apiServices/UserApi';
 import CircularProgress from '@mui/material/CircularProgress';
 
-export const ProfileAvatarView = ({ uploadProfileimage, ...props }) => {
+export const ProfileAvatarView = ({ uploadProfileImage, ...props }) => {
   // using state from globalState
   const { state } = useGlobalContext();
-  // useState hook to get file input and set to this state 
+  // useState hook to get file input and set to this state
   const [profileImageInput, setProfileImageInput] = useState('');
-  // useState to check if is fetching 
+  // useState to check if is fetching
   const [isFetching, setIsFetching] = useState(false);
   // getting image property by destructuring the currentUser from the state
   const {
@@ -75,20 +75,20 @@ export const ProfileAvatarView = ({ uploadProfileimage, ...props }) => {
       <CardActions>
         <form onSubmit={handleSubmit(onSubmit)}>
           <input
-            type='file'
-            id='file'
-            accept='image/*'
+            type="file"
+            id="file"
+            accept="image/*"
             onChange={(e) => setProfileImageInput(e.target.files[0])}
             style={{ display: 'none' }}
           />
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 2 }}>
             <Button
-              variant='contained'
+              variant="contained"
               startIcon={<AddCircleOutlineOutlinedIcon />}
             >
-              <label htmlFor='file'>Upload Image</label>
+              <label htmlFor="file">Upload Image</label>
             </Button>
-            <Button variant='contained' type='submit' sx={{ ml: 5 }}>
+            <Button variant="contained" type="submit" sx={{ ml: 5 }}>
               {isFetching ? (
                 <CircularProgress style={{ color: 'white' }} />
               ) : (
@@ -104,7 +104,7 @@ export const ProfileAvatarView = ({ uploadProfileimage, ...props }) => {
 
 const ProfileAvatar = (props) => (
   <ProfileAvatarView
-    uploadProfileimage={uploadProfileImage}
+    uploadProfileImage={uploadProfileImage}
     {...props}
   ></ProfileAvatarView>
 );

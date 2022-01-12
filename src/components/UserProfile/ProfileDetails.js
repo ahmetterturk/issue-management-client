@@ -23,7 +23,7 @@ import { useParams } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 import jwtDecode from 'jwt-decode';
 
-export const ProfileDetailsView = ({ updateuser, ...props }) => {
+export const ProfileDetailsView = ({ updateUser, ...props }) => {
   // using useStyles which been created by makeStyle from materail ui to have custom styles
   const classes = useStyles();
   // useState to set is fetching if there is any request
@@ -90,25 +90,25 @@ export const ProfileDetailsView = ({ updateuser, ...props }) => {
         </Grid>
         <Grid item lg={8} md={6} xs={12}>
           <form
-            autoComplete='off'
+            autoComplete="off"
             noValidate
             {...{ ...props }}
             onSubmit={handleSubmit(onSubmit)}
           >
             <Card elevation={5}>
               <CardHeader
-                subheader='The information can be edited'
-                title='Profile'
+                subheader="The information can be edited"
+                title="Profile"
               />
               <Divider />
               <CardContent>
                 <Grid container spacing={3}>
                   <FormInput
                     register={register}
-                    label='First Name'
-                    name='firstName'
+                    label="First Name"
+                    name="firstName"
                     required={true}
-                    type='text'
+                    type="text"
                     xs={12}
                     md={6}
                     size={3}
@@ -118,10 +118,10 @@ export const ProfileDetailsView = ({ updateuser, ...props }) => {
                   />
                   <FormInput
                     register={register}
-                    label='Last Name'
-                    name='lastName'
+                    label="Last Name"
+                    name="lastName"
                     required={true}
-                    type='text'
+                    type="text"
                     xs={12}
                     md={6}
                     size={3}
@@ -132,10 +132,10 @@ export const ProfileDetailsView = ({ updateuser, ...props }) => {
                   <FormInput
                     icons={<EmailIcon sx={{ color: '#555' }} />}
                     register={register}
-                    label='Email'
-                    name='email'
+                    label="Email"
+                    name="email"
                     required={true}
-                    type='text'
+                    type="text"
                     xs={12}
                     md={12}
                     size={3}
@@ -147,10 +147,10 @@ export const ProfileDetailsView = ({ updateuser, ...props }) => {
                   <FormInput
                     icons={<PasswordIcon sx={{ color: '#555' }} />}
                     register={register}
-                    label='Password'
-                    name='password'
+                    label="Password"
+                    name="password"
                     required={true}
-                    type='password'
+                    type="password"
                     xs={12}
                     md={12}
                     size={5}
@@ -163,7 +163,7 @@ export const ProfileDetailsView = ({ updateuser, ...props }) => {
                     <Grid item xs={6} md={6}>
                       <FormControlLabel
                         control={<Checkbox {...register('isAdmin')} checked />}
-                        label='Admin'
+                        label="Admin"
                       />
                     </Grid>
                   )}
@@ -177,7 +177,7 @@ export const ProfileDetailsView = ({ updateuser, ...props }) => {
                   p: 2,
                 }}
               >
-                <Button color='primary' variant='contained' type='submit'>
+                <Button color="primary" variant="contained" type="submit">
                   {isFetching ? (
                     <CircularProgress style={{ color: 'white' }} />
                   ) : (
@@ -194,6 +194,6 @@ export const ProfileDetailsView = ({ updateuser, ...props }) => {
 };
 
 const ProfileDetails = (props) => (
-  <ProfileDetailsView updateuser={updateUser} {...props}></ProfileDetailsView>
+  <ProfileDetailsView updateUser={updateUser} {...props}></ProfileDetailsView>
 );
 export default ProfileDetails;
