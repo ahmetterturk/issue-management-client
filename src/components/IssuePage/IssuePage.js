@@ -69,7 +69,7 @@ export const IssuePageView = ({ getAllMessages, getIssue, useParams }) => {
     return (
       <Errors
         status='404'
-        title='There is no issues with current id in our server'
+        title='There is no issue with current id in our server'
         errorMessage='Please make sure issue exist'
         route='/issues'
         imageSrc={notFoundImage}
