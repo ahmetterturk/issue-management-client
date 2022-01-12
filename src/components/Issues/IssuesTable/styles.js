@@ -7,7 +7,11 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
     [theme.breakpoints.down('sm')]: {
       width: 375,
+      marginBottom: theme.spacing(6),
     },
+  },
+  issuesGrid: {
+    display: 'flex',
   },
   icons: {
     display: 'flex',
@@ -24,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
     height: theme.spacing(6),
     borderBottom: 'none',
   },
-
   issueTitle: {
     textDecoration: 'none',
     color: 'black',

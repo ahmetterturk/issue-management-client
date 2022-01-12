@@ -35,11 +35,11 @@ const EmployeeTable = () => {
   if (!state.currentUser) {
     return (
       <Errors
-        title='You need to login first'
-        errorMessage='You cannot access the application unless you login first'
-        route='/login'
+        title="You need to login first"
+        errorMessage="You cannot access the application unless you login first"
+        route="/login"
         imageSrc={loginImage}
-        btnMessage='Back to login page'
+        btnMessage="Back to login page"
       />
     );
   }
@@ -57,13 +57,13 @@ const EmployeeTable = () => {
   if (!isAdmin) {
     return (
       <Errors
-        status='401'
-        title='You are not authorized to access this page'
-        errorMessage='You either tried to access the unauthorized route or you came here by mistake.
-      Whichever it is, try using the navigation'
-        route='/issues'
+        status="401"
+        title="You are not authorized to access this page"
+        errorMessage="You either tried to access the unauthorized route or you came here by mistake.
+      Whichever it is, try using the navigation"
+        route="/issues"
         imageSrc={unauthorizedImage}
-        btnMessage='Back to login page'
+        btnMessage="Back to login page"
       />
     );
   }
@@ -89,14 +89,14 @@ const EmployeeTable = () => {
   return (
     <>
       {state.issuesIsLoading ? (
-        <Grid container justifyContent='center' sx={{ marginTop: '200px' }}>
+        <Grid container justifyContent="center" sx={{ marginTop: '200px' }}>
           <CircularProgress />
         </Grid>
       ) : (
         <Grid>
           <Typography
-            variant='h3'
-            align='center'
+            variant="h3"
+            align="center"
             className={classes.heading}
             sx={{ marginTop: '100px' }}
           >
@@ -116,23 +116,33 @@ const EmployeeTable = () => {
                 </Stack>
               ))}
             <TableContainer className={classes.tableContainer}>
-              <Table aria-label='simple table'>
+              <Table aria-label="simple table">
                 <TableHead>
                   <TableRow>
                     <TableCell className={classes.tableHeaderCell}>
-                      Name
+                      <Typography fontWeight="bold" fontSize={18}>
+                        Name
+                      </Typography>
                     </TableCell>
                     <TableCell className={classes.tableHeaderCell}>
-                      Role
+                      <Typography fontWeight="bold" fontSize={18}>
+                        Role
+                      </Typography>
                     </TableCell>
                     <TableCell className={classes.tableHeaderCell}>
-                      Email
+                      <Typography fontWeight="bold" fontSize={18}>
+                        Email
+                      </Typography>
                     </TableCell>
                     <TableCell className={classes.tableHeaderCell}>
-                      Hire Date
+                      <Typography fontWeight="bold" fontSize={18}>
+                        Hire Date
+                      </Typography>
                     </TableCell>
                     <TableCell className={classes.tableHeaderCell}>
-                      Actions
+                      <Typography fontWeight="bold" fontSize={18}>
+                        Actions
+                      </Typography>
                     </TableCell>
                   </TableRow>
                 </TableHead>
@@ -173,7 +183,7 @@ const EmployeeTable = () => {
                               decodedToken.isAdmin) && (
                               <>
                                 <DeleteConfirmation
-                                  entity='employee'
+                                  entity="employee"
                                   handleDelete={() => handleDelete(user._id)}
                                   isFetching={isFetching}
                                 />
@@ -188,7 +198,7 @@ const EmployeeTable = () => {
             <TablePagination
               className={classes.tablePagination}
               rowsPerPageOptions={[5, 10, 25]}
-              component='div'
+              component="div"
               count={allUsers && allUsers.length}
               rowsPerPage={rowsPerPage}
               page={page}
