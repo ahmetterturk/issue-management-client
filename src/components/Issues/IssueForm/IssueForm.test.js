@@ -32,6 +32,8 @@ describe('IssueForm', () => {
     expect(screen.getByText('Create Issue')).toBeInTheDocument();
   });
   it('should show an error message when title is blank', async () => {
+    jest.setTimeout(10000);
+
     const { getByText, getByLabelText, getByTestId } = render(
       <IssueFormWithProviders {...defaultProps} />
     );
@@ -87,6 +89,7 @@ describe('IssueForm', () => {
     expect(screen.getByText("Type can't be blank!")).toBeInTheDocument();
   });
   it('should show an error message when Priority is not selected', async () => {
+    jest.setTimeout(10000);
     const { getByText, getByLabelText, getByTestId } = render(
       <IssueFormWithProviders {...defaultProps} />
     );
@@ -105,6 +108,7 @@ describe('IssueForm', () => {
     expect(screen.getByText("Priority can't be blank!")).toBeInTheDocument();
   });
   it('should show an error message when Status is not selected', async () => {
+    jest.setTimeout(10000);
     const { getByText, getByLabelText, getByTestId } = render(
       <IssueFormWithProviders {...defaultProps} />
     );
