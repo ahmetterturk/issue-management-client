@@ -17,6 +17,7 @@ const StatusDropdown = ({ register, errors }) => {
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           label="Status"
+          data-testid="Status"
           {...register('status', { required: true })}
         >
           <MenuItem value="New">New</MenuItem>

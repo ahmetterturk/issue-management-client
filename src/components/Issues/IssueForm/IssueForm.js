@@ -15,7 +15,7 @@ import { Typography, Grid } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import useStyles from './styles';
 
-const IssueForm = () => {
+export const IssueFormView = ({ createIssue }) => {
   const { state, dispatch } = useGlobalContext();
   const { currentUser } = state;
   const { token } = currentUser;
@@ -139,4 +139,7 @@ const IssueForm = () => {
   );
 };
 
+const IssueForm = (props) => (
+  <IssueFormView createIssue={createIssue} {...props}></IssueFormView>
+);
 export default IssueForm;

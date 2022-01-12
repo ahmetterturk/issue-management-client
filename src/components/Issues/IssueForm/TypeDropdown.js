@@ -17,6 +17,7 @@ const TypeDropdown = ({ register, errors }) => {
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           label="Type"
+          data-testid="Type"
           {...register('type', { required: true })}
         >
           <MenuItem value="Public">Public</MenuItem>
