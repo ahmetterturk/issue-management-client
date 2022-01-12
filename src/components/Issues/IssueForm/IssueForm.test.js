@@ -32,7 +32,7 @@ describe('IssueForm', () => {
     expect(screen.getByText('Create Issue')).toBeInTheDocument();
   });
   it('should show an error message when title is blank', async () => {
-    const { getByText, getByLabelText, getByTestId, debug } = render(
+    const { getByText, getByLabelText, getByTestId } = render(
       <IssueFormWithProviders {...defaultProps} />
     );
 

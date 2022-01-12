@@ -2,7 +2,6 @@ import React from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
 import { DashboardPageView } from './DashboardPage';
 import { WithProviders, mockDispatch } from '../../testUtils/WithProviders';
-import userEvent from '@testing-library/user-event';
 
 const DashboardPageViewWithProviders = WithProviders(DashboardPageView);
 

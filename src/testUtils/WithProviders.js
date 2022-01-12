@@ -18,11 +18,13 @@ const allUsers = [
   {
     firstName: 'John',
     lastName: 'Doe',
+    isAdmin: false,
     _id: 300,
   },
   {
     firstName: 'Jane',
     lastName: 'Doe',
+    isAdmin: true,
     _id: 301,
   },
 ];
@@ -33,6 +35,7 @@ export const WithProviders =
       <AppContext.Provider
         value={{
           state: {
+            issuesIsLoading: false,
             currentUser:
               'currentUser' in options ? options.currentUser : currentUser,
             assignedIssues: [
@@ -48,6 +51,7 @@ export const WithProviders =
             users: {
               allUsers: 'allUsers' in options ? options.allUsers : allUsers,
             },
+            ...(options.state ? options.state : {}),
           },
           dispatch: mockDispatch,
         }}

@@ -26,7 +26,7 @@ import {
   Grid,
 } from '@mui/material';
 
-const EmployeeTable = () => {
+export const EmployeeTableView = ({ deleteUser }) => {
   const { state, dispatch } = useGlobalContext();
   const classes = useStyles();
   const [page, setPage] = useState(0);
@@ -49,7 +49,6 @@ const EmployeeTable = () => {
 
   const {
     currentUser: { token },
-    isUpdated,
   } = state;
   const decodedToken = jwtdecode(token);
   const { isAdmin } = decodedToken;
@@ -104,17 +103,16 @@ const EmployeeTable = () => {
           </Typography>
 
           <Paper elevation={5} className={classes.tablePaper}>
-            {state.isUpdated ||
-              (state.isCreated && (
-                <Stack sx={{ width: '100%' }} spacing={2}>
-                  <Alert severity={state.isUpdated ? 'warning' : 'success'}>
-                    {state.isUpdated &&
-                      'You have updated your profile successfully'}
-                    {state.isCreated &&
-                      'You have created a new account successfully'}
-                  </Alert>
-                </Stack>
-              ))}
+            {(state.isUpdated || state.isCreated) && (
+              <Stack sx={{ width: '100%' }} spacing={2}>
+                <Alert severity={state.isUpdated ? 'warning' : 'success'}>
+                  {state.isUpdated &&
+                    'You have updated your profile successfully'}
+                  {state.isCreated &&
+                    'You have created a new account successfully'}
+                </Alert>
+              </Stack>
+            )}
             <TableContainer className={classes.tableContainer}>
               <Table aria-label="simple table">
                 <TableHead>
@@ -212,4 +210,7 @@ const EmployeeTable = () => {
   );
 };
 
+const EmployeeTable = (props) => (
+  <EmployeeTableView deleteUser={deleteUser} {...props}></EmployeeTableView>
+);
 export default EmployeeTable;
