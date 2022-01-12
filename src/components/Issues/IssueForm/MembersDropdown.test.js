@@ -11,7 +11,6 @@ describe('MembersDropdown', () => {
     const { getByLabelText } = render(<MembersDropdownWithProviders />);
 
     await userEvent.click(getByLabelText('Name'));
-    screen.debug();
 
     expect(screen.getByText('John Doe')).toBeInTheDocument();
     expect(screen.getByText('Jane Doe')).toBeInTheDocument();
@@ -21,7 +20,6 @@ describe('MembersDropdown', () => {
 
     await userEvent.click(getByLabelText('Name'));
     await userEvent.click(screen.getByText('Jane Doe'));
-    screen.debug();
 
     expect(mockDispatch).toHaveBeenCalledWith({
       type: 'SET_ISSUE_MEMBERS',

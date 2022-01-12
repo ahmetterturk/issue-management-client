@@ -33,7 +33,8 @@ export const WithProviders =
       <AppContext.Provider
         value={{
           state: {
-            currentUser,
+            currentUser:
+              'currentUser' in options ? options.currentUser : currentUser,
             assignedIssues: [
               {
                 _id: 100,
