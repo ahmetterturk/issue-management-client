@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Box from '@mui/material/Box';
+import { Box, Container } from '@mui/material';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
@@ -53,44 +53,51 @@ const IssueForm = () => {
 
   return (
     <>
-      <div>
+      <Container>
         {currentUser.userDetails.image === null ? (
           <>
-            <Typography variant="h5" sx={{ p: 2, color: '#666' }}>
+            <Typography variant='h5' sx={{ p: 2, color: '#666' }}>
               In order to publish ticket you need to create a profile first
             </Typography>
           </>
         ) : (
-          <Button
-            onClick={handleOpen}
-            variant="contained"
-            startIcon={<AddCircleOutlineIcon />}
-            sx={{
-              backgroundColor: '#4E73DF',
-              // margin: 2,
-              // position: 'fixed',
-              // bottom: '50px',
-              // right: '50px',
-            }}
-          >
-            New Issue
-          </Button>
+          <>
+            <Grid
+              container
+              rowSpacing={1}
+              columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+              justify='flex-end'
+            >
+              <Grid item xs={12} lg={12} xl={12}></Grid>
+              <Grid item xs={12} lg={12} xl={12} sx={{ mt: 1 }}>
+                <Button
+                  variant='contained'
+                  color='primary'
+                  onClick={handleOpen}
+                  xs={{ height: 40 }}
+                  startIcon={<AddCircleOutlineIcon />}
+                >
+                  New Issue
+                </Button>
+              </Grid>
+            </Grid>
+          </>
         )}
 
         <Modal
           open={open}
           onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
+          aria-labelledby='modal-modal-title'
+          aria-describedby='modal-modal-description'
         >
           <Box className={classes.boxContainer}>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className={classes.titleDiv}>
                 <TextField
                   {...register('title', { required: true })}
-                  id="outlined-basic"
-                  label="Title"
-                  variant="outlined"
+                  id='outlined-basic'
+                  label='Title'
+                  variant='outlined'
                   fullWidth
                 />
                 {errors.title && (
@@ -102,14 +109,14 @@ const IssueForm = () => {
                   {...register('description', { required: true })}
                   multiline
                   rows={5}
-                  label="Description"
+                  label='Description'
                   fullWidth
                 />
                 {errors.description && (
                   <p style={{ color: 'red' }}>Description can't be blank!</p>
                 )}
               </div>
-              <MembersDropdown name="members" className={classes.members} />
+              <MembersDropdown name='members' className={classes.members} />
 
               <Grid container className={classes.dropdownContainer}>
                 <Grid item className={classes.gridItem}>
@@ -123,18 +130,18 @@ const IssueForm = () => {
                 </Grid>
               </Grid>
               <Button
-                type="submit"
-                variant="contained"
+                type='submit'
+                variant='contained'
                 fullWidth
                 disableElevation
-                size="large"
+                size='large'
               >
                 Create Issue
               </Button>
             </form>
           </Box>
         </Modal>
-      </div>
+      </Container>
     </>
   );
 };

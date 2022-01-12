@@ -56,149 +56,152 @@ const IssuesTable = ({ issuesList }) => {
   return (
     <>
       {state.issuesIsLoading ? (
-        <Grid container justifyContent="center" sx={{ marginTop: 10 }}>
+        <Grid container justifyContent='center' sx={{ marginTop: 10 }}>
           <CircularProgress />
         </Grid>
       ) : (
-        <Paper elevation={5} className={classes.paper}>
-          <TableContainer>
-            <Table stickyHeader aria-label="sticky table">
-              <TableHead>
-                <TableRow>
-                  <TableCell
-                    className={classes.tableHeaderCell}
-                    sx={{ backgroundColor: '#E8E8E8' }}
-                  >
-                    <Typography fontWeight="bold" fontSize={18}>
-                      Issue
-                    </Typography>
-                  </TableCell>
-                  <TableCell
-                    className={classes.tableHeaderCell}
-                    sx={{ backgroundColor: '#E8E8E8' }}
-                  >
-                    <Typography fontWeight="bold" fontSize={18}>
-                      Status
-                    </Typography>
-                  </TableCell>
-                  <TableCell
-                    className={classes.tableHeaderCell}
-                    sx={{ backgroundColor: '#E8E8E8' }}
-                  >
-                    <Typography fontWeight="bold" fontSize={18}>
-                      Type
-                    </Typography>
-                  </TableCell>
-                  <TableCell
-                    className={classes.tableHeaderCell}
-                    sx={{ backgroundColor: '#E8E8E8' }}
-                  >
-                    <Typography fontWeight="bold" fontSize={18}>
-                      Date
-                    </Typography>
-                  </TableCell>
-                  <TableCell
-                    className={classes.tableHeaderCell}
-                    sx={{ backgroundColor: '#E8E8E8' }}
-                  >
-                    <Typography fontWeight="bold" fontSize={18}>
-                      Created By
-                    </Typography>
-                  </TableCell>
-                  <TableCell
-                    className={classes.tableHeaderCell}
-                    sx={{ backgroundColor: '#E8E8E8' }}
-                  >
-                    <Typography fontWeight="bold" fontSize={18}>
-                      Actions
-                    </Typography>
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {visibleIssues &&
-                  visibleIssues
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .reverse()
-                    .map((issue) => {
-                      return (
-                        <TableRow
-                          className={classes.tableRow}
-                          key={issue._id}
-                          hover
-                          role="checkbox"
-                          tabIndex={-1}
-                        >
-                          <TableCell className={classes.tableCell}>
-                            <Link className={classes.issueTitle} to={issue._id}>
-                              <Typography>{issue.title}</Typography>
-                            </Link>
-                          </TableCell>
-                          <TableCell className={classes.tableCell}>
-                            <Typography
-                              style={{
-                                color:
-                                  (issue.status === 'Pending' && '#007BF5') ||
-                                  (issue.status === 'New' && '#ED5500') ||
-                                  (issue.status === 'Resolved' && '#00CC8F'),
-                              }}
-                            >
-                              {issue.status}
-                            </Typography>
-                          </TableCell>
-                          <TableCell className={classes.tableCell}>
-                            <Typography>{issue.type}</Typography>
-                          </TableCell>
-                          <TableCell className={classes.tableCell}>
-                            <Typography>
-                              {issue.createdAt &&
-                                moment(issue.createdAt).format('ll')}
-                            </Typography>
-                          </TableCell>
-                          <TableCell className={classes.tableCell}>
-                            <Typography>{issue.userName}</Typography>
-                          </TableCell>
-                          <TableCell className={classes.tableCell}>
-                            <Grid className={classes.icons}>
+        <>
+          <Paper elevation={5} className={classes.paper}>
+            <TableContainer>
+              <Table stickyHeader aria-label='sticky table'>
+                <TableHead>
+                  <TableRow>
+                    <TableCell
+                      className={classes.tableHeaderCell}
+                      sx={{ backgroundColor: '#E8E8E8' }}
+                    >
+                      <Typography fontWeight='bold' fontSize={18}>
+                        Issue
+                      </Typography>
+                    </TableCell>
+                    <TableCell
+                      className={classes.tableHeaderCell}
+                      sx={{ backgroundColor: '#E8E8E8' }}
+                    >
+                      <Typography fontWeight='bold' fontSize={18}>
+                        Status
+                      </Typography>
+                    </TableCell>
+                    <TableCell
+                      className={classes.tableHeaderCell}
+                      sx={{ backgroundColor: '#E8E8E8' }}
+                    >
+                      <Typography fontWeight='bold' fontSize={18}>
+                        Type
+                      </Typography>
+                    </TableCell>
+                    <TableCell
+                      className={classes.tableHeaderCell}
+                      sx={{ backgroundColor: '#E8E8E8' }}
+                    >
+                      <Typography fontWeight='bold' fontSize={18}>
+                        Date
+                      </Typography>
+                    </TableCell>
+                    <TableCell
+                      className={classes.tableHeaderCell}
+                      sx={{ backgroundColor: '#E8E8E8' }}
+                    >
+                      <Typography fontWeight='bold' fontSize={18}>
+                        Created By
+                      </Typography>
+                    </TableCell>
+                    <TableCell
+                      className={classes.tableHeaderCell}
+                      sx={{ backgroundColor: '#E8E8E8' }}
+                    >
+                      <Typography fontWeight='bold' fontSize={18}>
+                        Actions
+                      </Typography>
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {visibleIssues &&
+                    visibleIssues
+                      .slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
+                      .reverse()
+                      .map((issue) => {
+                        return (
+                          <TableRow
+                            className={classes.tableRow}
+                            key={issue._id}
+                            hover
+                            role='checkbox'
+                            tabIndex={-1}
+                          >
+                            <TableCell className={classes.tableCell}>
                               <Link
-                                className={classes.visibilityIcon}
+                                className={classes.issueTitle}
                                 to={issue._id}
                               >
-                                <VisibilityIcon />
+                                <Typography>{issue.title}</Typography>
                               </Link>
-                              {(decodedToken.id === issue.userId ||
-                                decodedToken.isAdmin) && (
-                                // <DeleteIssueConfirmation
-                                //   entity="issue"
-                                //   handleDelete={() => handleDelete(issue._id)}
-                                //   isFetching={isFetching}
-                                // />
-                                <DeleteConfirmation
-                                  entity="issue"
-                                  handleDelete={() => handleDelete(issue._id)}
-                                  isFetching={isFetching}
-                                />
-                              )}
-                            </Grid>
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })}
-              </TableBody>
-            </Table>
-          </TableContainer>
+                            </TableCell>
+                            <TableCell className={classes.tableCell}>
+                              <Typography
+                                style={{
+                                  color:
+                                    (issue.status === 'Pending' && '#007BF5') ||
+                                    (issue.status === 'New' && '#ED5500') ||
+                                    (issue.status === 'Resolved' && '#00CC8F'),
+                                }}
+                              >
+                                {issue.status}
+                              </Typography>
+                            </TableCell>
+                            <TableCell className={classes.tableCell}>
+                              <Typography>{issue.type}</Typography>
+                            </TableCell>
+                            <TableCell className={classes.tableCell}>
+                              <Typography>
+                                {issue.createdAt &&
+                                  moment(issue.createdAt).format('ll')}
+                              </Typography>
+                            </TableCell>
+                            <TableCell className={classes.tableCell}>
+                              <Typography>{issue.userName}</Typography>
+                            </TableCell>
+                            <TableCell className={classes.tableCell}>
+                              <Grid className={classes.icons}>
+                                <Link
+                                  className={classes.visibilityIcon}
+                                  to={issue._id}
+                                >
+                                  <VisibilityIcon />
+                                </Link>
+                                {(decodedToken.id === issue.userId ||
+                                  decodedToken.isAdmin) && (
+                                  <DeleteConfirmation
+                                    entity='issue'
+                                    handleDelete={() => handleDelete(issue._id)}
+                                    isFetching={isFetching}
+                                  />
+                                )}
+                              </Grid>
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })}
+                </TableBody>
+              </Table>
+            </TableContainer>
 
-          <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
-            component="div"
-            count={issuesList.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-            className={classes.tablePagination}
-          />
-        </Paper>
+            <TablePagination
+              rowsPerPageOptions={[10, 25, 100]}
+              component='div'
+              count={issuesList.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+              className={classes.tablePagination}
+            />
+          </Paper>
+        </>
       )}
     </>
   );
