@@ -5,6 +5,7 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(15),
     marginRight: theme.spacing(3),
     marginLeft: theme.spacing(3),
+    paddingBottom: theme.spacing(6),
   },
   singleDonutGrid: {
     [theme.breakpoints.down('md')]: {

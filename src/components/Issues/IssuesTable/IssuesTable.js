@@ -65,23 +65,53 @@ const IssuesTable = ({ issuesList }) => {
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
-                  <TableCell className={classes.tableHeaderCell}>
-                    Issue
+                  <TableCell
+                    className={classes.tableHeaderCell}
+                    sx={{ backgroundColor: '#E8E8E8' }}
+                  >
+                    <Typography fontWeight="bold" fontSize={18}>
+                      Issue
+                    </Typography>
                   </TableCell>
-                  <TableCell className={classes.tableHeaderCell}>
-                    Status
+                  <TableCell
+                    className={classes.tableHeaderCell}
+                    sx={{ backgroundColor: '#E8E8E8' }}
+                  >
+                    <Typography fontWeight="bold" fontSize={18}>
+                      Status
+                    </Typography>
                   </TableCell>
-                  <TableCell className={classes.tableHeaderCell}>
-                    Type
+                  <TableCell
+                    className={classes.tableHeaderCell}
+                    sx={{ backgroundColor: '#E8E8E8' }}
+                  >
+                    <Typography fontWeight="bold" fontSize={18}>
+                      Type
+                    </Typography>
                   </TableCell>
-                  <TableCell className={classes.tableHeaderCell}>
-                    Date
+                  <TableCell
+                    className={classes.tableHeaderCell}
+                    sx={{ backgroundColor: '#E8E8E8' }}
+                  >
+                    <Typography fontWeight="bold" fontSize={18}>
+                      Date
+                    </Typography>
                   </TableCell>
-                  <TableCell className={classes.tableHeaderCell}>
-                    Created By
+                  <TableCell
+                    className={classes.tableHeaderCell}
+                    sx={{ backgroundColor: '#E8E8E8' }}
+                  >
+                    <Typography fontWeight="bold" fontSize={18}>
+                      Created By
+                    </Typography>
                   </TableCell>
-                  <TableCell className={classes.tableHeaderCell}>
-                    Actions
+                  <TableCell
+                    className={classes.tableHeaderCell}
+                    sx={{ backgroundColor: '#E8E8E8' }}
+                  >
+                    <Typography fontWeight="bold" fontSize={18}>
+                      Actions
+                    </Typography>
                   </TableCell>
                 </TableRow>
               </TableHead>
