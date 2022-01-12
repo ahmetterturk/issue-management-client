@@ -5,7 +5,6 @@ import { useStyles } from './EmployeeStyles';
 import { deleteUser, singleUser } from '../../../apiServices/UserApi';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import Errors from '../../ErrorPages/Errors';
 import moment from 'moment';
 import unauthorizedImage from '../../../images/unauthorized.jpg';
@@ -20,14 +19,12 @@ import {
   CardHeader,
   Typography,
   CardActions,
-  CardMedia,
-  Button,
   Grid,
   Box,
   Container,
 } from '@mui/material';
 
-const Employee = () => {
+export const EmployeeView = ({ deleteUser, singleUser }) => {
   const classes = useStyles();
   const {
     state: {
@@ -188,4 +185,11 @@ const Employee = () => {
   );
 };
 
+const Employee = (props) => (
+  <EmployeeView
+    deleteUser={deleteUser}
+    singleUser={singleUser}
+    {...props}
+  ></EmployeeView>
+);
 export default Employee;
