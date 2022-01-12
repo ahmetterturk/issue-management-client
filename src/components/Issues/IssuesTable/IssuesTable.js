@@ -17,7 +17,8 @@ import useStyles from './styles';
 import CircularProgress from '@mui/material/CircularProgress';
 import { deleteIssue } from '../../../apiServices/IssueApi';
 import DeleteConfirmation from '../../DeleteConfirmation/DeleteConfirmation';
-const IssuesTable = ({ issuesList }) => {
+
+export const IssuesTableView = ({ issuesList, deleteIssue }) => {
   const { state, dispatch } = useGlobalContext();
   const { currentUser } = state;
   const { token } = currentUser;
@@ -56,21 +57,21 @@ const IssuesTable = ({ issuesList }) => {
   return (
     <>
       {state.issuesIsLoading ? (
-        <Grid container justifyContent='center' sx={{ marginTop: 10 }}>
+        <Grid container justifyContent="center" sx={{ marginTop: 10 }}>
           <CircularProgress />
         </Grid>
       ) : (
         <>
           <Paper elevation={5} className={classes.paper}>
             <TableContainer>
-              <Table stickyHeader aria-label='sticky table'>
+              <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                   <TableRow>
                     <TableCell
                       className={classes.tableHeaderCell}
                       sx={{ backgroundColor: '#E8E8E8' }}
                     >
-                      <Typography fontWeight='bold' fontSize={18}>
+                      <Typography fontWeight="bold" fontSize={18}>
                         Issue
                       </Typography>
                     </TableCell>
@@ -78,7 +79,7 @@ const IssuesTable = ({ issuesList }) => {
                       className={classes.tableHeaderCell}
                       sx={{ backgroundColor: '#E8E8E8' }}
                     >
-                      <Typography fontWeight='bold' fontSize={18}>
+                      <Typography fontWeight="bold" fontSize={18}>
                         Status
                       </Typography>
                     </TableCell>
@@ -86,7 +87,7 @@ const IssuesTable = ({ issuesList }) => {
                       className={classes.tableHeaderCell}
                       sx={{ backgroundColor: '#E8E8E8' }}
                     >
-                      <Typography fontWeight='bold' fontSize={18}>
+                      <Typography fontWeight="bold" fontSize={18}>
                         Type
                       </Typography>
                     </TableCell>
@@ -94,7 +95,7 @@ const IssuesTable = ({ issuesList }) => {
                       className={classes.tableHeaderCell}
                       sx={{ backgroundColor: '#E8E8E8' }}
                     >
-                      <Typography fontWeight='bold' fontSize={18}>
+                      <Typography fontWeight="bold" fontSize={18}>
                         Date
                       </Typography>
                     </TableCell>
@@ -102,7 +103,7 @@ const IssuesTable = ({ issuesList }) => {
                       className={classes.tableHeaderCell}
                       sx={{ backgroundColor: '#E8E8E8' }}
                     >
-                      <Typography fontWeight='bold' fontSize={18}>
+                      <Typography fontWeight="bold" fontSize={18}>
                         Created By
                       </Typography>
                     </TableCell>
@@ -110,7 +111,7 @@ const IssuesTable = ({ issuesList }) => {
                       className={classes.tableHeaderCell}
                       sx={{ backgroundColor: '#E8E8E8' }}
                     >
-                      <Typography fontWeight='bold' fontSize={18}>
+                      <Typography fontWeight="bold" fontSize={18}>
                         Actions
                       </Typography>
                     </TableCell>
@@ -130,7 +131,7 @@ const IssuesTable = ({ issuesList }) => {
                             className={classes.tableRow}
                             key={issue._id}
                             hover
-                            role='checkbox'
+                            role="checkbox"
                             tabIndex={-1}
                           >
                             <TableCell className={classes.tableCell}>
@@ -176,7 +177,7 @@ const IssuesTable = ({ issuesList }) => {
                                 {(decodedToken.id === issue.userId ||
                                   decodedToken.isAdmin) && (
                                   <DeleteConfirmation
-                                    entity='issue'
+                                    entity="issue"
                                     handleDelete={() => handleDelete(issue._id)}
                                     isFetching={isFetching}
                                   />
@@ -192,7 +193,7 @@ const IssuesTable = ({ issuesList }) => {
 
             <TablePagination
               rowsPerPageOptions={[10, 25, 100]}
-              component='div'
+              component="div"
               count={issuesList.length}
               rowsPerPage={rowsPerPage}
               page={page}
@@ -207,4 +208,7 @@ const IssuesTable = ({ issuesList }) => {
   );
 };
 
+const IssuesTable = (props) => (
+  <IssuesTableView deleteIssue={deleteIssue} {...props}></IssuesTableView>
+);
 export default IssuesTable;
