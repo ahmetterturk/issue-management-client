@@ -28,7 +28,7 @@ export const allUsers = async () => {
     const res = await API.get('/user');
     return res.data;
   } catch (error) {
-    console.log(error);
+    return error.response;
   }
 };
 
@@ -38,7 +38,7 @@ export const singleUser = async (id) => {
     const res = await API.get(`/user/${id}`);
     return res.data;
   } catch (error) {
-    console.log(error);
+    return error.response;
   }
 };
 // update user
@@ -48,7 +48,7 @@ export const updateUser = async (userObject, id) => {
     const res = await API.patch(`/user/${id}`, userObject);
     return res.data;
   } catch (error) {
-    console.log(error);
+    return error.response;
   }
 };
 
