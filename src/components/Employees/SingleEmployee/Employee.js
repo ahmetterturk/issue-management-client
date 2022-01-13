@@ -25,92 +25,116 @@ import {
 } from '@mui/material';
 
 export const EmployeeView = ({ deleteUser, singleUser }) => {
+  // declaring classes to assign useStyles to use custom css
   const classes = useStyles();
+  // destructuring token from currentUser state, also getting dispatch from globalContext
   const {
     state: {
       currentUser: { token },
     },
     dispatch,
   } = useGlobalContext();
+  // decoding the token with jwtDeocde to get token properties
   const decodedToken = jwtdecode(token);
+  // destructuring isAdmin from decodedToken
   const { isAdmin } = decodedToken;
+  // set state for isFetching, to set to true on action to render spinner
   const [isFetching, setIsFetching] = useState(false);
+  // destructuring id from useParams react router dom, to use it for fetching singleUser
   const { id } = useParams();
+  // set state for has error, if any request or action has error will show the error page or message
   const [hasError, setHasError] = useState(false);
+  // initiate errorObject state to null, if there is any error return on request we can assing
   const [errorObject, setErrorObject] = useState(null);
+  // set state for user to set user when make a request on single user
   const [user, setUser] = useState([]);
+  // using useNavigate to redirect to different rotuer after deleting employee/user
   const navigate = useNavigate();
 
   useEffect(() => {
+    // set isFetching to true
     setIsFetching(true);
+    // call singleUser from userApi services and pass the is from usePrams which comes from url to fetch signle user
     singleUser(id)
       .then((data) => {
+        // check if the data status that comming from request is 500
         if (data.status === 500) {
+          // set hasError to true and and set isFethcing to false and also pass the current data to the errorObject
           setHasError(true);
           setIsFetching(false);
           setErrorObject(data);
+          // if status not 500, means its successfull
         } else {
+          // set state of user by passing the return data from reuqest
           setUser(data.singleUser);
+          // set hasError will be false
           setHasError(false);
+          // set isFetching will be false to stop rendering the spinner
           setIsFetching(false);
         }
       })
       .catch((err) => console.log(err));
+    // using id as a dependency to rerender every time id gets change
   }, [id]);
-  console.log(errorObject);
+
+  // handleDelete function will delete user
   const handleDelete = (id) => {
+    // makign a delete request by calling deleteUser form userApi services and passing current id
     deleteUser(id)
       .then((data) => {
         console.log(data);
+        // dispathch to increase the counter state, which has been used as a dependency on useEffect to fetch all users in App comp
         dispatch({ type: 'INCREASE_COUNTER' });
+        // after deleting redirect to the eomployees page
         navigate('/employee');
       })
       .catch((err) => console.log(err));
   };
-
+  // chekc if current user is not admin render the Errors cmponents with unauthorized error message with instruction to navigate back
   if (!isAdmin) {
     return (
       <Errors
-        status="401"
-        title="You are not authorized to access this page"
-        errorMessage="You either tried to access the unauthorized route or you came here by mistake.
-      Whichever it is, try using the navigation"
-        route="/issues"
+        status='401'
+        title='You are not authorized to access this page'
+        errorMessage='You either tried to access the unauthorized route or you came here by mistake.
+      Whichever it is, try using the navigation'
+        route='/issues'
         imageSrc={unauthorizedImage}
-        btnMessage="Back to main page"
+        btnMessage='Back to main page'
       />
     );
   }
+  // check if hasError is true, to render Errors comonents with 404 status code, and message that user wiht current id is not exist in our server
   if (hasError) {
     return (
       <Errors
-        status="404"
-        title="There is no user with current id in our server"
-        errorMessage="Please make sure the user exist"
-        route="/issues"
+        status='404'
+        title='There is no user with current id in our server'
+        errorMessage='Please make sure the user exist'
+        route='/issues'
         imageSrc={notFoundImage}
-        btnMessage="Back to main page"
+        btnMessage='Back to main page'
       />
     );
   }
 
   return (
     <Box
-      component="main"
+      component='main'
       sx={{
         flexGrow: 1,
         py: 8,
         mt: 10,
       }}
     >
-      <Container maxWidth="lg">
-        <Typography sx={{ mb: 3 }} variant="h4" textAlign={'center'}>
+      <Container maxWidth='lg'>
+        <Typography sx={{ mb: 3 }} variant='h4' textAlign={'center'}>
           Employee
         </Typography>
 
         {isFetching ? (
           <Box
-            component="main"
+            component='main'
             sx={{
               display: 'flex',
               justifyContent: 'center',
@@ -127,34 +151,34 @@ export const EmployeeView = ({ deleteUser, singleUser }) => {
             </Grid>
             <Grid item lg={8} md={6} xs={12}>
               <Card className={classes.employeeDetails} elevation={5}>
-                <CardHeader subheader="Details" title="User" />
+                <CardHeader subheader='Details' title='User' />
                 <Divider />
                 <CardContent>
                   <Grid container spacing={3}>
                     <Grid item md={12} xs={12}>
                       <Typography
-                        variant="h5"
+                        variant='h5'
                         sx={{ mb: 3 }}
                         className={classes.employeeTypo}
                       >
                         Name: {`${user.firstName} ${user.lastName}`}
                       </Typography>
                       <Typography
-                        variant="h5"
+                        variant='h5'
                         sx={{ mb: 3 }}
                         className={classes.employeeTypo}
                       >
                         Email: {user.email}
                       </Typography>
                       <Typography
-                        variant="h5"
+                        variant='h5'
                         sx={{ mb: 3 }}
                         className={classes.employeeTypo}
                       >
                         Role: {user.isAdmin ? 'Admin' : 'Employee'}
                       </Typography>
                       <Typography
-                        variant="h5"
+                        variant='h5'
                         sx={{ mb: 3 }}
                         className={classes.employeeTypo}
                       >
@@ -171,7 +195,7 @@ export const EmployeeView = ({ deleteUser, singleUser }) => {
                     {isAdmin && (
                       <DeleteConfirmation
                         handleDelete={() => handleDelete(id)}
-                        entity="employee"
+                        entity='employee'
                       />
                     )}
                   </Box>
