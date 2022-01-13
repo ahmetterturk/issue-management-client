@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
+import { Box, Button, Modal } from '@mui/material';
 import { updateIssue } from '../../apiServices/IssueApi';
 import { useGlobalContext } from '../../contextReducer/Context';
 import MembersUpdateDropdown from './MembersUpdateDropdown';
 import useStyles from './styles';
 
 const AddMembersForm = ({ issue, id }) => {
+  // mui methods to handle modal
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  // getting dispatch function and state from context provider
   const { dispatch, state } = useGlobalContext();
+  // defining a classes constant to use with styling of components
   const classes = useStyles();
 
+  // initial state constant values of the currently viewed issue
   const data = {
     title: issue.title,
     description: issue.description,
@@ -26,14 +28,18 @@ const AddMembersForm = ({ issue, id }) => {
     members: issue.members,
   };
 
+  // state that is set to issue values
   const [issueData, setIssueData] = useState(data);
 
+  // useEffect hook used to update the issueData state, as the issue being passed on from the parent component has a value of null on first render
   useEffect(() => {
     setIssueData(data);
   }, [issue]);
 
+  // handleSubmit function that is used to only update mambers of an issue
   const handleSubmit = (event) => {
     event.preventDefault();
+    // 'updateIssue()' function is defined in the api services and uses axios make a patch request
     updateIssue(id, { ...issueData, members: state.issueUpdateMembers })
       .then(() => {
         dispatch({ type: 'INCREASE_COUNTER' });

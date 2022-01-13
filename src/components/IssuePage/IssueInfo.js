@@ -1,15 +1,19 @@
-import { Divider, Grid } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
+import { useGlobalContext } from '../../contextReducer/Context';
+import { makeStyles } from '@mui/styles';
 import IssueEditForm from './IssueEditForm';
 import jwtdecode from 'jwt-decode';
-import { useGlobalContext } from '../../contextReducer/Context';
 import moment from 'moment';
-import CircularProgress from '@mui/material/CircularProgress';
+import {
+  Divider,
+  Grid,
+  Card,
+  CardContent,
+  Typography,
+  CircularProgress,
+} from '@mui/material';
 
+// function that handles styling for this components
 const useStyles = makeStyles((theme) => ({
   container: {
     backgroundColor: '#ff8a80',
@@ -17,7 +21,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const IssueInfo = ({ issue, id, isLoading, setIsLoading }) => {
+  // defining a classes constant to use with styling of components
   const classes = useStyles();
+  // using state and jwtdecode package to decode and use user data stored in the jwt token, stored in the local storage
   const { state } = useGlobalContext();
   const { currentUser } = state;
   const { token } = currentUser;

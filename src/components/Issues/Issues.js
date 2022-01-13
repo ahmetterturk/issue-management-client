@@ -1,20 +1,23 @@
 import React, { useEffect } from 'react';
 import { useGlobalContext } from '../../contextReducer/Context';
-import IssueForm from './IssueForm/IssueForm';
-import Alert from '@mui/material/Alert';
-import Stack from '@mui/material/Stack';
-import { Grid, Typography } from '@mui/material';
 import IssuesTable from './IssuesTable/IssuesTable';
-import useStyles from './styles';
-import Errors from '../ErrorPages/Errors';
+import { Grid, Typography } from '@mui/material';
 import loginImage from '../../images/login.jpg';
 import { useLocation, useNavigate } from 'react-router-dom';
-import API from '../../apiServices/api';
 import jwtDecode from 'jwt-decode';
+import IssueForm from './IssueForm/IssueForm';
+import Errors from '../ErrorPages/Errors';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
+import API from '../../apiServices/api';
+import useStyles from './styles';
+
 
 export const IssuesView = ({ API }) => {
   const { state, dispatch } = useGlobalContext();
-  // destructure the serach property to get the query string from it
+  // defining a classes constant to use with styling of components
+  const classes = useStyles();
+  // destructuring the search property to get the query string from it
   const { search } = useLocation();
   const navigate = useNavigate();
   const {
@@ -22,11 +25,12 @@ export const IssuesView = ({ API }) => {
   } = state;
   const decodedToken = jwtDecode(token);
 
-  // Fetching all issues again with useLocation search, if the query string exist issues will get reassing to the global state with only qery search otherwise it always fetch all existing issues
+  // Fetching all issues again with useLocation search, if the query string
+  // exists, issues will get reassigned to the global state with only the query
+  // search parameter, otherwise it always fetch all existing issues.
   useEffect(() => {
     const fetchIssues = async () => {
       dispatch({ type: 'SET_ISSUESISLOADING', data: true });
-
       try {
         const response = await API.get('/issues' + search);
         dispatch({ type: 'GET_ISSUES', data: response.data });
@@ -37,7 +41,8 @@ export const IssuesView = ({ API }) => {
     };
     fetchIssues();
   }, [search, dispatch]);
-  const classes = useStyles();
+
+  // If there is no current user existing in local storage, the application will display an error page
   if (!state.currentUser) {
     return (
       <Errors
@@ -49,6 +54,8 @@ export const IssuesView = ({ API }) => {
       />
     );
   }
+
+  // we are creating a constant and assigning it the value of the global state issues value, to pass on to child components
   const issuesList = state.issues;
 
   return (

@@ -1,3 +1,4 @@
+// styling page that is used to style entities in the IssuesTable component
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles((theme) => ({
