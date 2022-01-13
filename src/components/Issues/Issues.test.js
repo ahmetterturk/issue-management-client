@@ -39,18 +39,7 @@ describe('Issues', () => {
 
     expect(consoleLogSpy).toHaveBeenCalledWith(expectedError);
   });
-  it('should show an error if the user is not logged in', () => {
-    const IssuesWithNoUser = WithProviders(IssuesView, {
-      currentUser: null,
-    });
-    render(<IssuesWithNoUser {...defaultProps} />);
 
-    expect(
-      screen.getByText(
-        'You cannot access the application unless you login first'
-      )
-    ).toBeInTheDocument();
-  });
   it('should show an alert when logged in successfully', () => {
     const IssuesWithNoUser = WithProviders(IssuesView, {
       state: {
