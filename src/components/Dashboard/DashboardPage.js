@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Container, Grid } from '@mui/material';
-import TotalTickets from './TotalTickets';
-import TotalEmployees from './TotalEmployees';
-import NewTickets from './NewTickets';
-import ResolvedTickets from './ResolvedTickets';
+import DashboardCard from './DashboardCard';
 import ChartBar from './ChartBar';
-import PendingTickets from './PendingTickets';
 import { useGlobalContext } from '../../contextReducer/Context';
 import { useLocation } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useStyles } from './Styles';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 
 export const DashboardPageView = ({ useLocation }) => {
   const { state, dispatch } = useGlobalContext();
@@ -56,7 +53,7 @@ export const DashboardPageView = ({ useLocation }) => {
   return (
     <>
       <Box
-        component="main"
+        component='main'
         sx={{
           flexGrow: 1,
           py: 8,
@@ -66,8 +63,8 @@ export const DashboardPageView = ({ useLocation }) => {
         <Container maxWidth={false}>
           <Grid container spacing={3}>
             <Grid item lg={4} sm={6} xl={4} xs={12}>
-              <TotalTickets
-                title="Issues"
+              <DashboardCard
+                title='Issues'
                 total={
                   issuesCount !== 0 ? (
                     issuesCount
@@ -75,13 +72,16 @@ export const DashboardPageView = ({ useLocation }) => {
                     <CircularProgress sx={{ color: '#1c79fc' }} />
                   )
                 }
-                subtitle="Check Tickets"
-                to="/issues"
+                subtitle='Check Tickets'
+                to='/issues'
+                icon={<AppRegistrationIcon />}
+                cardColor='rgba(28, 121, 252, 0.5)'
+                iconBgColor='#1c79fc'
               />
             </Grid>
             <Grid item xl={4} lg={4} sm={6} xs={12}>
-              <TotalEmployees
-                title="Employees"
+              <DashboardCard
+                title='Employees'
                 total={
                   userCount !== 1 ? (
                     userCount
@@ -89,13 +89,15 @@ export const DashboardPageView = ({ useLocation }) => {
                     <CircularProgress sx={{ color: '#00ffbb' }} />
                   )
                 }
-                subtitle="Check Employees Page"
-                to="/employee"
+                subtitle='Check Employees Page'
+                to='/employee'
+                cardColor='rgba(0, 255, 187, 0.5)'
+                iconBgColor='#00ffbb'
               />
             </Grid>
             <Grid item xl={4} lg={4} sm={6} xs={12}>
-              <NewTickets
-                title="New Tickets"
+              <DashboardCard
+                title='New Tickets'
                 total={
                   newIssuesCount !== 0 ? (
                     newIssuesCount
@@ -105,13 +107,15 @@ export const DashboardPageView = ({ useLocation }) => {
                     newIssuesCount
                   )
                 }
-                subtitle="Check Tickets"
-                to="/issues?status=New"
+                subtitle='Check Tickets'
+                to='/issues?status=New'
+                cardColor='rgba(252, 157, 23, 0.5)'
+                iconBgColor='#fc9d17'
               />
             </Grid>
             <Grid item xl={4} lg={4} sm={6} xs={12}>
-              <ResolvedTickets
-                title="Resolved"
+              <DashboardCard
+                title='Resolved'
                 total={
                   resolvedIssuesCount !== 0 ? (
                     resolvedIssuesCount
@@ -121,13 +125,15 @@ export const DashboardPageView = ({ useLocation }) => {
                     resolvedIssuesCount
                   )
                 }
-                subtitle="Check Tickets"
-                to="/issues?status=Resolved"
+                subtitle='Check Tickets'
+                to='/issues?status=Resolved'
+                cardColor='rgba(76, 0, 217, 0.5)'
+                iconBgColor='#4c00d9'
               />
             </Grid>
             <Grid item xl={4} lg={4} sm={6} xs={12}>
-              <PendingTickets
-                title="Pending"
+              <DashboardCard
+                title='Pending'
                 total={
                   pendingIssuesCount !== 0 ? (
                     pendingIssuesCount
@@ -137,8 +143,10 @@ export const DashboardPageView = ({ useLocation }) => {
                     pendingIssuesCount
                   )
                 }
-                subtitle="Check Tickets"
-                to="/issues?status=Pending"
+                subtitle='Check Tickets'
+                to='/issues?status=Pending'
+                cardColor='rgba(255, 0, 89, 0.5)'
+                iconBgColor='#ff0059'
               />
             </Grid>
             <Grid

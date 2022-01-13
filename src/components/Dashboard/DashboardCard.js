@@ -7,14 +7,22 @@ import {
   Grid,
   Typography,
 } from '@mui/material';
-import FiberNewIcon from '@mui/icons-material/FiberNew';
-
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import { Link } from 'react-router-dom';
 import { useStyles } from './Styles';
 
-const NewTickets = ({ title, total, subtitle, to }) => {
+const DashboardCard = ({
+  title,
+  total,
+  subtitle,
+  to,
+  icon,
+  cardColor,
+  iconBgColor,
+}) => {
   const styleProps = {
-    borderColor: 'rgba(252, 157, 23, 0.5)',
+    borderColor: cardColor,
+    // borderColor: 'rgba(28, 121, 252, 0.5)',
     height: '100%',
     cursor: 'pointer',
   };
@@ -25,22 +33,24 @@ const NewTickets = ({ title, total, subtitle, to }) => {
         <CardContent>
           <Grid container spacing={3} sx={{ justifyContent: 'space-between' }}>
             <Grid item>
-              <Typography color="textSecondary" gutterBottom variant="h4">
+              <Typography color='textSecondary' gutterBottom variant='h4'>
                 {title}
               </Typography>
-              <Typography color="textPrimary" variant="h5">
+              <Typography color='textPrimary' variant='h5'>
                 Total: {total}
               </Typography>
             </Grid>
             <Grid item>
               <Avatar
                 sx={{
-                  backgroundColor: '#fc9d17',
+                  backgroundColor: iconBgColor,
+                  // backgroundColor: '#1c79fc',
                   height: 56,
                   width: 56,
                 }}
               >
-                <FiberNewIcon />
+                {icon}
+                {/* <AppRegistrationIcon /> */}
               </Avatar>
             </Grid>
           </Grid>
@@ -51,7 +61,7 @@ const NewTickets = ({ title, total, subtitle, to }) => {
               alignItems: 'center',
             }}
           >
-            <Typography color="textSecondary" variant="caption">
+            <Typography color='textSecondary' variant='caption'>
               {subtitle}
             </Typography>
           </Box>
@@ -61,4 +71,4 @@ const NewTickets = ({ title, total, subtitle, to }) => {
   );
 };
 
-export default NewTickets;
+export default DashboardCard;
