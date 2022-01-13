@@ -21,10 +21,6 @@ export const IssuesView = ({ API }) => {
     currentUser: { token },
   } = state;
   const decodedToken = jwtDecode(token);
-  const { isAdmin } = decodedToken;
-  if (isAdmin) {
-    navigate('/dashboard');
-  }
 
   // Fetching all issues again with useLocation search, if the query string exist issues will get reassing to the global state with only qery search otherwise it always fetch all existing issues
   useEffect(() => {
