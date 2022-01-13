@@ -20,12 +20,12 @@ import NotFoundPage from './components/ErrorPages/NotFoundPage';
 import LoginForm from './components/Login/LoginForm';
 import ProfilePage from './components/UserProfile/ProfilePage';
 import DashboardPage from './components/Dashboard/DashboardPage';
-
+import jwtDecode from 'jwt-decode';
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [state, dispatch] = useReducer(reducer, initialState);
   const classes = useStyles({ isLoggedIn: !!state.currentUser });
-
+  let admin;
   // get all issues
   useEffect(() => {
     dispatch({ type: 'SET_ISSUESISLOADING', data: true });
@@ -64,7 +64,10 @@ const App = () => {
                 <Navbar onMenuClick={() => setIsSidebarOpen(true)} />
               )}
               <Routes>
-                <Route path='/' element={<LoginForm />} />
+                <Route
+                  path='/'
+                  element={state.currentUser ? <Issues /> : <LoginForm />}
+                />
                 <Route path='/login' element={<LoginForm />} />
                 <Route path='/dashboard' element={<DashboardPage />} />
                 <Route path='/issues' element={<Issues />} />
