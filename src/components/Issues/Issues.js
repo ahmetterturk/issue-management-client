@@ -3,7 +3,8 @@ import { useGlobalContext } from '../../contextReducer/Context';
 import IssuesTable from './IssuesTable/IssuesTable';
 import { Grid, Typography } from '@mui/material';
 import loginImage from '../../images/login.jpg';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
 import IssueForm from './IssueForm/IssueForm';
 import Errors from '../ErrorPages/Errors';
 import Alert from '@mui/material/Alert';
@@ -11,12 +12,18 @@ import Stack from '@mui/material/Stack';
 import API from '../../apiServices/api';
 import useStyles from './styles';
 
+
 export const IssuesView = ({ API }) => {
   const { state, dispatch } = useGlobalContext();
   // defining a classes constant to use with styling of components
   const classes = useStyles();
   // destructuring the search property to get the query string from it
   const { search } = useLocation();
+  const navigate = useNavigate();
+  const {
+    currentUser: { token },
+  } = state;
+  const decodedToken = jwtDecode(token);
 
   // Fetching all issues again with useLocation search, if the query string
   // exists, issues will get reassigned to the global state with only the query
@@ -39,11 +46,11 @@ export const IssuesView = ({ API }) => {
   if (!state.currentUser) {
     return (
       <Errors
-        title="You need to login first"
-        errorMessage="You cannot access the application unless you login first"
-        route="/login"
+        title='You need to login first'
+        errorMessage='You cannot access the application unless you login first'
+        route='/login'
         imageSrc={loginImage}
-        btnMessage="Back to login page"
+        btnMessage='Back to login page'
       />
     );
   }
@@ -55,17 +62,17 @@ export const IssuesView = ({ API }) => {
     <Grid container className={classes.issuesGrid}>
       {state.isLoggedIn && (
         <Stack sx={{ width: '100%' }} spacing={2}>
-          <Alert severity="success">You have logged in successfully</Alert>
+          <Alert severity='success'>You have logged in successfully</Alert>
         </Stack>
       )}
       {state.isUpdated && (
         <Stack sx={{ width: '100%' }} spacing={2}>
-          <Alert severity="success">
+          <Alert severity='success'>
             You have updated your profile successfully
           </Alert>
         </Stack>
       )}
-      <Typography variant="h3" sx={{ color: '#1c79fc', ml: 2 }}>
+      <Typography variant='h3' sx={{ color: '#1c79fc', ml: 2 }}>
         Issues
       </Typography>
 

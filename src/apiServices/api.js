@@ -2,6 +2,7 @@ import axios from 'axios';
 
 // Creating a bse url to use on all the request
 const API = axios.create({
+  // baseURL: 'http://localhost:5000',
   baseURL: 'https://issue-management-backend.herokuapp.com',
 });
 
@@ -15,7 +16,7 @@ export const apiRequestInterceptor = (req) => {
 
   return req;
 };
-// usign interceptors on each request to assing the bearer token 
+// usign interceptors on each request to assing the bearer token
 API.interceptors.request.use(apiRequestInterceptor);
 
 export default API;
