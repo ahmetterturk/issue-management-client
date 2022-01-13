@@ -99,12 +99,6 @@ const Sidebar = (props) => {
               icon={GridViewIcon}
               onClick={onClose}
             />
-            <SidebarLink
-              text='Your Tickets'
-              href={`/issues?userId=${decodedToken.id}`}
-              icon={ReceiptLongRoundedIcon}
-              onClick={onClose}
-            />
 
             <SidebarLink
               text='Issues'
