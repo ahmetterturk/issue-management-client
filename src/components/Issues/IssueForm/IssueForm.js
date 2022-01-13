@@ -1,45 +1,53 @@
 import React, { useState } from 'react';
-import { Box, Container } from '@mui/material';
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
-import TextField from '@mui/material/TextField';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { useGlobalContext } from '../../../contextReducer/Context';
+import { createIssue } from '../../../apiServices/IssueApi';
+import { useForm } from 'react-hook-form/dist/index.cjs';
 import TypeDropdown from './TypeDropdown';
 import PriorityDropdown from './PriorityDropdown';
 import StatusDropdown from './StatusDropdown';
 import MembersDropdown from './MembersDropdown';
-import { useGlobalContext } from '../../../contextReducer/Context';
-import { createIssue } from '../../../apiServices/IssueApi';
-import { useForm } from 'react-hook-form/dist/index.cjs';
 import jwtdecode from 'jwt-decode';
-import { Typography, Grid } from '@mui/material';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import useStyles from './styles';
+import {
+  Box,
+  Container,
+  Button,
+  Modal,
+  TextField,
+  Typography,
+  Grid,
+} from '@mui/material';
 
 export const IssueFormView = ({ createIssue }) => {
+  // destructuring state and dispatch function from context provider
   const { state, dispatch } = useGlobalContext();
+  // using state and jwtdecode package to decode and use user data stored in the jwt token, stored in the local storage
   const { currentUser } = state;
   const { token } = currentUser;
   const decodedToken = jwtdecode(token);
+  // defining a classes constant to use with styling of components
   const classes = useStyles();
 
+  // destructured react-hook-forms functions to help with the form
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  // mui specific modal functions
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  // onSubmit function is used to create issues when the form is submitted. It uses the createIssue function to make a post request to the server with axios. That function is defined in the api functions
   const onSubmit = (data) => {
     data.userId = currentUser && decodedToken.id;
     data.userName =
       currentUser &&
       `${currentUser.userDetails.firstName} ${currentUser.userDetails.lastName}`;
     data.members = state.issueMembers !== [] && state.issueMembers;
-
-    console.log(data);
 
     createIssue(data)
       .then(() => {
@@ -56,7 +64,7 @@ export const IssueFormView = ({ createIssue }) => {
       <Container>
         {currentUser.userDetails.image === null ? (
           <>
-            <Typography variant='h5' sx={{ p: 2, color: '#666' }}>
+            <Typography variant="h5" sx={{ p: 2, color: '#666' }}>
               In order to publish ticket you need to create a profile first
             </Typography>
           </>
@@ -66,13 +74,13 @@ export const IssueFormView = ({ createIssue }) => {
               container
               rowSpacing={1}
               columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-              justify='flex-end'
+              justify="flex-end"
             >
               <Grid item xs={12} lg={12} xl={12}></Grid>
               <Grid item xs={12} lg={12} xl={12} sx={{ mt: 1 }}>
                 <Button
-                  variant='contained'
-                  color='primary'
+                  variant="contained"
+                  color="primary"
                   onClick={handleOpen}
                   xs={{ height: 40 }}
                   startIcon={<AddCircleOutlineIcon />}
@@ -87,17 +95,17 @@ export const IssueFormView = ({ createIssue }) => {
         <Modal
           open={open}
           onClose={handleClose}
-          aria-labelledby='modal-modal-title'
-          aria-describedby='modal-modal-description'
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
         >
           <Box className={classes.boxContainer}>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className={classes.titleDiv}>
                 <TextField
                   {...register('title', { required: true })}
-                  id='outlined-basic'
-                  label='Title'
-                  variant='outlined'
+                  id="outlined-basic"
+                  label="Title"
+                  variant="outlined"
                   fullWidth
                 />
                 {errors.title && (
@@ -109,14 +117,14 @@ export const IssueFormView = ({ createIssue }) => {
                   {...register('description', { required: true })}
                   multiline
                   rows={5}
-                  label='Description'
+                  label="Description"
                   fullWidth
                 />
                 {errors.description && (
                   <p style={{ color: 'red' }}>Description can't be blank!</p>
                 )}
               </div>
-              <MembersDropdown name='members' className={classes.members} />
+              <MembersDropdown name="members" className={classes.members} />
 
               <Grid container className={classes.dropdownContainer}>
                 <Grid item className={classes.gridItem}>
@@ -130,11 +138,11 @@ export const IssueFormView = ({ createIssue }) => {
                 </Grid>
               </Grid>
               <Button
-                type='submit'
-                variant='contained'
+                type="submit"
+                variant="contained"
                 fullWidth
                 disableElevation
-                size='large'
+                size="large"
               >
                 Create Issue
               </Button>

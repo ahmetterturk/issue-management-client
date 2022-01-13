@@ -1,10 +1,17 @@
 import React from 'react';
 import Message from './Message';
 import MessageForm from './MessageForm';
-import { Grid, Card, CardContent, Typography, Divider } from '@mui/material';
-import CircularProgress from '@mui/material/CircularProgress';
+import {
+  Grid,
+  Card,
+  CardContent,
+  Typography,
+  Divider,
+  CircularProgress,
+} from '@mui/material';
 
 const Messages = ({ messages, issueId, userName, userId, isLoading }) => {
+  // defining a constant to filter the messages that belong to the specific issue being viewed.
   const filteredMessages = messages.filter(
     (message) => message.issueId === issueId
   );

@@ -1,15 +1,19 @@
 import React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
 import { useGlobalContext } from '../../contextReducer/Context';
-import { Divider, Grid } from '@mui/material';
 import AddMembersForm from './AddMembersForm';
 import jwtdecode from 'jwt-decode';
-import CircularProgress from '@mui/material/CircularProgress';
 import IssueMembersTable from './IssueMembersTable';
+import {
+  Divider,
+  Grid,
+  Typography,
+  Card,
+  CardContent,
+  CircularProgress,
+} from '@mui/material';
 
 const Members = ({ issue, id, isLoading, issueMembers }) => {
+  // using state and jwtdecode package to decode and use user data stored in the jwt token, stored in the local storage
   const { state } = useGlobalContext();
   const { currentUser } = state;
   const { token } = currentUser;

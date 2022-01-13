@@ -1,13 +1,16 @@
 import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 import { useGlobalContext } from '../../contextReducer/Context';
 import useStyles from './styles';
+import {
+  OutlinedInput,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+} from '@mui/material';
 
+// custom mui configurations
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -19,6 +22,7 @@ const MenuProps = {
   },
 };
 
+// custom mui configurations
 function getStyles(name, personName, theme) {
   return {
     fontWeight:
@@ -30,15 +34,20 @@ function getStyles(name, personName, theme) {
 
 const MembersUpdateDropdown = ({ issueData, name }) => {
   const theme = useTheme();
+  // getting state and dispatch functions from context provider
   const { state, dispatch } = useGlobalContext();
+  // state value to set names for form
   const [personName, setPersonName] = React.useState(issueData.members);
+  // defining a classes constant to use with styling of components
   const classes = useStyles();
 
+  // defining a users constant that has all the user's name and id information
   const users = state.users.allUsers.map((user) => [
     `${user.firstName} ${user.lastName}`,
     user._id,
   ]);
 
+  // onchange handler method to set issue members to form input
   const handleChange = (event) => {
     setPersonName(
       typeof event.target.value === 'string'

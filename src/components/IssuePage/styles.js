@@ -97,7 +97,6 @@ const useStyles = makeStyles((theme) => ({
   mutualContainer: {
     backgroundColor: '#F6F6F6',
     borderRadius: '25px',
-    // margin: '50px 0',
     padding: '15px',
   },
   sendIcon: {
