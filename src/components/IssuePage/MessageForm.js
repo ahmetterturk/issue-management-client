@@ -1,31 +1,40 @@
-import { Button, TextField, Grid } from '@mui/material';
 import React, { useState } from 'react';
 import useStyles from './styles';
 import SendIcon from '@mui/icons-material/Send';
 import { createMessage } from '../../apiServices/MessageApi';
 import { useGlobalContext } from '../../contextReducer/Context';
+import { Button, TextField, Grid } from '@mui/material';
 
-export const MessageFormView = ({ issueId, userName, userId, createMessage }) => {
+export const MessageFormView = ({
+  issueId,
+  userName,
+  userId,
+  createMessage,
+}) => {
+  // getting dispatch function from context provider
   const { dispatch } = useGlobalContext();
+  // defining a classes constant to use with styling of components
+  const classes = useStyles();
+  // initial form data state values
   const data = {
     messageBody: '',
     issueId: issueId,
     userName: userName,
     userId: userId,
   };
-  const classes = useStyles();
+  // formData state that is used to send through to the server
   const [formData, setFormData] = useState(data);
 
+  // 'createMessage()' function is defined in the api services and uses axios make the post request
   const handleSubmit = (event) => {
     event.preventDefault();
-
     createMessage(formData)
       .then(dispatch({ type: 'INCREASE_COUNTER' }))
       .catch((error) => console.log(error));
-
     setFormData({ ...formData, messageBody: '' });
   };
 
+  // handle change method
   const handleChange = (event) => {
     setFormData({
       ...formData,
@@ -63,5 +72,7 @@ export const MessageFormView = ({ issueId, userName, userId, createMessage }) =>
   );
 };
 
-const MessageForm = (props) => <MessageFormView createMessage={createMessage} {...props}></MessageFormView>
+const MessageForm = (props) => (
+  <MessageFormView createMessage={createMessage} {...props}></MessageFormView>
+);
 export default MessageForm;

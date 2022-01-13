@@ -1,4 +1,3 @@
-import { Typography } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import Messages from './Messages';
 import IssueInfo from './IssueInfo';
@@ -9,23 +8,29 @@ import { useGlobalContext } from '../../contextReducer/Context';
 import jwtdecode from 'jwt-decode';
 import { getAllMessages } from '../../apiServices/MessageApi';
 import Members from './Members';
-import { Grid } from '@mui/material';
+import { Typography, Grid } from '@mui/material';
 import notFoundImage from '../../images/notFound2.jpg';
 import Errors from '../ErrorPages/Errors';
 
 export const IssuePageView = ({ getAllMessages, getIssue, useParams }) => {
+  // defining a classes constant to use with styling of components
   const classes = useStyles();
+  // Getting the MongoDB id of the issue from params
   const { id } = useParams();
+  // using state and jwtdecode package to decode and use user data stored in the jwt token, stored in the local storage
   const { state, dispatch } = useGlobalContext();
   const { currentUser, assignedIssues } = state;
   const { token } = currentUser;
   const decodedToken = jwtdecode(token);
+  // defining necessary state values
   const [hasError, setHasError] = useState(false);
   const [issue, setIssue] = useState([]);
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [issueMembers, setIssueMembers] = useState([]);
 
+  // Fetching issue by id from the MongoDB database, using the id param retreived from params
+  // 'getIssue()' function is defined in the api services and uses axios make the get request
   useEffect(() => {
     setIsLoading(true);
     getIssue(id)
@@ -41,6 +46,8 @@ export const IssuePageView = ({ getAllMessages, getIssue, useParams }) => {
       .catch((error) => console.log(error));
   }, [id, state.counter]);
 
+  // Fetching all messages from MongoDB database with the 'getAllMessages()' function that is
+  // defined in the api services and uses axios make the get request
   useEffect(() => {
     getAllMessages()
       .then((response) => {
@@ -56,6 +63,7 @@ export const IssuePageView = ({ getAllMessages, getIssue, useParams }) => {
     dispatch({ type: 'SET_ASSIGNED_ISSUES', data: currentAssignedIssues });
   }, [id, dispatch]);
 
+  // finding users that are included in the issue as members
   useEffect(() => {
     if (issue.members && state.users.allUsers) {
       const members = state.users.allUsers.filter((user) =>
@@ -65,15 +73,16 @@ export const IssuePageView = ({ getAllMessages, getIssue, useParams }) => {
     }
   }, [issue, state.users.allUsers]);
 
+  // rendering the error page if there is an error
   if (hasError) {
     return (
       <Errors
-        status='404'
-        title='There is no issue with current id in our server'
-        errorMessage='Please make sure issue exist'
-        route='/issues'
+        status="404"
+        title="There is no issue with current id in our server"
+        errorMessage="Please make sure issue exist"
+        route="/issues"
         imageSrc={notFoundImage}
-        btnMessage='Back to main page'
+        btnMessage="Back to main page"
       />
     );
   }
@@ -81,9 +90,9 @@ export const IssuePageView = ({ getAllMessages, getIssue, useParams }) => {
   return (
     <Grid sx={{ marginTop: 14 }}>
       <Typography
-        data-testid='issue-title'
+        data-testid="issue-title"
         className={classes.header}
-        variant='h4'
+        variant="h4"
       >
         {issue.title}
       </Typography>

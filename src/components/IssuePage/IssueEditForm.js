@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
 import { updateIssue } from '../../apiServices/IssueApi';
 import { useGlobalContext } from '../../contextReducer/Context';
+import useStyles from './styles';
 import {
   MenuItem,
   Select,
@@ -11,20 +9,27 @@ import {
   FormControl,
   TextField,
   Grid,
+  Modal,
+  Button,
+  Box,
 } from '@mui/material';
-import useStyles from './styles';
 
 export const IssueEditFormView = ({ issue, id, updateIssue }) => {
-  const [open, setOpen] = React.useState(false);
+  // state values necessary for the component
   const [hasError, setHasError] = useState(false);
   const [errorMessageTitle, setErrorMessageTitle] = useState('');
   const [errorMessageDesc, setErrorMessageDesc] = useState('');
+  // modal open and close handler methods
+  const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  // getting the dispatch function from context provider
   const { dispatch } = useGlobalContext();
+  // defining a classes constant to use with styling of components
   const classes = useStyles();
 
+  // constant defined to initially store the values of the current issue being viewed
   const data = {
     title: issue.title,
     description: issue.description,
@@ -33,15 +38,17 @@ export const IssueEditFormView = ({ issue, id, updateIssue }) => {
     type: issue.type,
     userId: issue.userId,
     userName: issue.userName,
-    // members: issue.members,
   };
 
+  // state that is set to issue values
   const [issueData, setIssueData] = useState(data);
 
+  // useEffect hook used to update the issueData state, as the issue being passed on from the parent component has a value of null on first render
   useEffect(() => {
     setIssueData(data);
   }, [issue]);
 
+  // handlechange method
   const handleChange = (event) => {
     setIssueData({
       ...issueData,
@@ -49,8 +56,10 @@ export const IssueEditFormView = ({ issue, id, updateIssue }) => {
     });
   };
 
+  // handleSubmit function
   const handleSubmit = (event) => {
     event.preventDefault();
+    // validations
     if (event.target.elements.title.value === '') {
       setHasError(true);
       setErrorMessageTitle("Title can't be blank");
@@ -60,6 +69,7 @@ export const IssueEditFormView = ({ issue, id, updateIssue }) => {
       setErrorMessageDesc("Description can't be blank");
     } else {
       setHasError(false);
+      // 'updateIssue()' function is defined in the api services and uses axios make a patch request
       updateIssue(id, { ...issueData })
         .then(() => {
           dispatch({ type: 'INCREASE_COUNTER' });

@@ -1,12 +1,13 @@
-import { Divider, Typography, Card, CardContent, Grid } from '@mui/material';
 import React from 'react';
-import DeleteIcon from '@mui/icons-material/Delete';
 import { deleteMessage } from '../../apiServices/MessageApi';
 import { useGlobalContext } from '../../contextReducer/Context';
 import jwtdecode from 'jwt-decode';
 import { makeStyles } from '@mui/styles';
 import moment from 'moment';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Divider, Typography, Card, CardContent, Grid } from '@mui/material';
 
+// function that handles styling of this component
 const useStyles = makeStyles((theme) => ({
   deleteMsgIcon: {
     color: '#ED5500',
@@ -19,14 +20,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const MessageView = ({ message, index, deleteMessage }) => {
+  // getting state data from global context provider
   const {
     state: {
       currentUser: { token },
     },
     dispatch,
   } = useGlobalContext();
+  // decoding jwt token stored in local storage
   const decodedToken = jwtdecode(token);
+  // defining a classes constant to use with styling of components
   const classes = useStyles();
+
+  // 'deleteMessage()' function is defined in the api services and uses axios make a delete request
   const handleDelete = (id) => {
     deleteMessage(id)
       .then((data) => {
@@ -36,11 +42,9 @@ export const MessageView = ({ message, index, deleteMessage }) => {
       .catch((err) => console.log(err));
   };
 
-  // console.log(message);
   return (
     <Card
       elevation={3}
-      // key={index}
       className={classes.mutualContainer}
       sx={{ marginBottom: 2 }}
     >
