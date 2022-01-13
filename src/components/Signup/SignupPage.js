@@ -7,7 +7,9 @@ import Errors from '../ErrorPages/Errors';
 import unauthorizedImage from '../../images/unauthorized.jpg';
 import loginImage from '../../images/login.jpg';
 const SignupPage = () => {
+  // getting state from globalcontext
   const { state } = useGlobalContext();
+  // protecting routes and check if the user is not logged in to show them error page, if try to reach pages without logging in and navigate them to login page
   if (!state.currentUser) {
     return (
       <Errors
@@ -19,12 +21,15 @@ const SignupPage = () => {
       />
     );
   }
+  // destructuring token from currentUser through state
   const {
     currentUser: { token },
   } = state;
-  const decodedJWT = jwtDecode(token);
-  const { isAdmin } = decodedJWT;
-
+  // decoding the token with jwtDecode
+  const decodedToken = jwtDecode(token);
+  // destructuring isAdmin from decodedToken
+  const { isAdmin } = decodedToken;
+  // protecting routes and chekc if the user is not admin to show them error page if user try to access any page which not has perission to
   if (!isAdmin) {
     return (
       <Errors
