@@ -17,6 +17,8 @@ import { Drawer, useMediaQuery, Avatar } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 
+// Component used to render individual links in the Sidebar
+// They receive an href for redirection and a callback to close the sidebar
 const SidebarLink = (props) => {
   const classes = useStyles();
 
@@ -57,6 +59,8 @@ const SidebarLink = (props) => {
   );
 };
 
+// The main sidebar component. Its rendered within a drawer to provide an
+// expanded / collapsed state on certain resolutions
 const Sidebar = (props) => {
   const { isOpen, onClose } = props;
   const navigate = useNavigate();
@@ -64,18 +68,22 @@ const Sidebar = (props) => {
   const classes = useStyles();
   const { token } = state.currentUser && state.currentUser;
   const decodedToken = jwtDecode(token);
+  // We use useMediaQuery to identify which breakpoint the user resolution lands in.
+  // We'll use this value to know if the Drawer will need the collapse functionality or not
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'), {
     defaultMatches: true,
     noSsr: false,
   });
 
-  // logout function
+  // logout function, it removes the session from the user through a dispatched action
+  // and we redirect the user to the login
   const handleLogout = () => {
     localStorage.removeItem('user');
     dispatch({ type: 'LOGOUT' });
     navigate('/login');
   };
 
+  // The content of the drawer stays the same regardless of the resolution
   const drawerContent = (
     <Box className={classes.sidebar}>
       <Box className={classes.sidebarButtons}>
@@ -168,6 +176,7 @@ const Sidebar = (props) => {
     </Box>
   );
 
+  // If the user is in a large screen we'll hardcode the drawer to always be open
   if (lgUp) {
     return (
       <Drawer
@@ -187,6 +196,8 @@ const Sidebar = (props) => {
     );
   }
 
+  // If the screen resolution is not large we'll configure the drawer to open / close depending
+  // on the props passed down to the sidebar from the App component.
   return (
     <Drawer
       anchor="left"
