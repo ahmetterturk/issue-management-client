@@ -6,8 +6,7 @@ describe('App', () => {
   it('renders with no errors', () => {
     act(() => {
       render(<App />);
-    })
-    expect(screen.getByText('Lock Security')).toBeInTheDocument();
+    });
+    expect(screen.getByText('Remember me')).toBeInTheDocument();
   });
 });
-

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Container, Typography } from '@mui/material';
 import ProfileDetails from './ProfileDetails';
+// ProfilePage components is just for rendering the profileDetails component with some extra styles
 const ProfilePage = () => {
   return (
     <>

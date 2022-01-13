@@ -16,7 +16,7 @@ export const useStyles = makeStyles((theme) => ({
   tableContainer: {
     // borderRadius: 15,
     maxWidth: '100%',
-    ['@media (max-width:780px)']: {
+    '@media (max-width:780px)': {
       maxWidth: 950,
     },
   },

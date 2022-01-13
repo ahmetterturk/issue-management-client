@@ -22,7 +22,7 @@ import {
 } from '@mui/material';
 
 // IssuesTable function is the main component that will be rendered
-const IssuesTable = ({ issuesList }) => {
+export const IssuesTableView = ({ issuesList, deleteIssue }) => {
   // destructuring state and dispatch function from context provider
   const { state, dispatch } = useGlobalContext();
   // defining a classes constant to use with styling of components
@@ -218,4 +218,7 @@ const IssuesTable = ({ issuesList }) => {
   );
 };
 
+const IssuesTable = (props) => (
+  <IssuesTableView deleteIssue={deleteIssue} {...props}></IssuesTableView>
+);
 export default IssuesTable;
