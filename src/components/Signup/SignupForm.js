@@ -13,6 +13,8 @@ import {
   Alert,
   AlertTitle,
 } from '@mui/material';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import PasswordIcon from '@mui/icons-material/Password';
 import EmailIcon from '@mui/icons-material/Email';
 import { useNavigate } from 'react-router';
@@ -32,6 +34,7 @@ export const SignupFormView = ({ signupUser }) => {
   const [hasError, setHasError] = useState(false);
   // useState hook for error object, to assign error object if there is any error on request
   const [errorObject, setErrorObject] = useState(null);
+  const [passVisible, setPassVisible] = useState(false);
   // using useNavigate to redirect to different router after submit
   const navigate = useNavigate();
   const {
@@ -76,6 +79,10 @@ export const SignupFormView = ({ signupUser }) => {
       setHasError(false);
       setIsFetching(false);
     }, 5000);
+  };
+  // this function will handle the visiblity of the password input, if passVisible it's true it pass field type will be text if not true type will be password
+  const handleVisiblity = () => {
+    setPassVisible(!passVisible);
   };
   return (
     <>
@@ -147,7 +154,7 @@ export const SignupFormView = ({ signupUser }) => {
                   register={register}
                   label='Password'
                   name='password'
-                  type='password'
+                  type={passVisible ? 'text' : 'password'}
                   required={true}
                   xs={12}
                   md={12}
@@ -156,6 +163,19 @@ export const SignupFormView = ({ signupUser }) => {
                   errors={errors.password}
                   errorMessage="Password can't be blank, minimum of 6 chracters."
                   className={classes.error}
+                  visibleIcon={
+                    passVisible ? (
+                      <VisibilityIcon
+                        onClick={handleVisiblity}
+                        sx={{ cursor: 'pointer' }}
+                      />
+                    ) : (
+                      <VisibilityOffIcon
+                        onClick={handleVisiblity}
+                        sx={{ cursor: 'pointer' }}
+                      />
+                    )
+                  }
                 />
                 <Grid item xs={12} md={12}>
                   <FormControlLabel
