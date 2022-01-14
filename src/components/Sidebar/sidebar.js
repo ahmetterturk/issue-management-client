@@ -17,6 +17,8 @@ import { Drawer, useMediaQuery, Avatar } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 
+// Component used to render individual links in the Sidebar
+// They receive an href for redirection and a callback to close the sidebar
 const SidebarLink = (props) => {
   const classes = useStyles();
 
@@ -57,6 +59,8 @@ const SidebarLink = (props) => {
   );
 };
 
+// The main sidebar component. Its rendered within a drawer to provide an
+// expanded / collapsed state on certain resolutions
 const Sidebar = (props) => {
   const { isOpen, onClose } = props;
   const navigate = useNavigate();
@@ -64,19 +68,23 @@ const Sidebar = (props) => {
   const classes = useStyles();
   const { token } = state.currentUser && state.currentUser;
   const decodedToken = jwtDecode(token);
+  // We use useMediaQuery to identify which breakpoint the user resolution lands in.
+  // We'll use this value to know if the Drawer will need the collapse functionality or not
   console.log(decodedToken.id);
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'), {
     defaultMatches: true,
     noSsr: false,
   });
 
-  // logout function
+  // logout function, it removes the session from the user through a dispatched action
+  // and we redirect the user to the login
   const handleLogout = () => {
     localStorage.removeItem('user');
     dispatch({ type: 'LOGOUT' });
     navigate('/login');
   };
 
+  // The content of the drawer stays the same regardless of the resolution
   const drawerContent = (
     <Box className={classes.sidebar}>
       <Box className={classes.sidebarButtons}>
@@ -88,53 +96,53 @@ const Sidebar = (props) => {
             padding: '20px',
           }}
         >
-          <LockOutlinedIcon fontSize='large' />
+          <LockOutlinedIcon fontSize="large" />
         </Avatar>
-        <hr className='rounded' />
+        <hr className="rounded" />
         {decodedToken.isAdmin ? (
           <>
             <SidebarLink
-              text='Dashboard'
-              href='/dashboard'
+              text="Dashboard"
+              href="/dashboard"
               icon={GridViewIcon}
               onClick={onClose}
             />
 
             <SidebarLink
-              text='Issues'
-              href='/issues'
+              text="Issues"
+              href="/issues"
               icon={ReceiptLongRoundedIcon}
               onClick={onClose}
             />
             <SidebarLink
-              text='Graphs'
-              href='/graphs'
+              text="Graphs"
+              href="/graphs"
               icon={AssessmentOutlinedIcon}
               onClick={onClose}
             />
             <SidebarLink
-              text='Employees'
-              href='/employee'
+              text="Employees"
+              href="/employee"
               icon={PeopleOutlineIcon}
               onClick={onClose}
             />
             <SidebarLink
-              text='Create Employee'
-              href='/employeeSignup'
+              text="Create Employee"
+              href="/employeeSignup"
               icon={ManageAccountsIcon}
               onClick={onClose}
             />
             {state.currentUser && (
               <SidebarLink
-                text='Profile'
+                text="Profile"
                 href={`/userProfile/${decodedToken.id}`}
                 icon={ManageAccountsOutlinedIcon}
                 onClick={onClose}
               />
             )}
             <SidebarLink
-              text='Log out'
-              href='/login'
+              text="Log out"
+              href="/login"
               onClick={handleLogout}
               icon={MeetingRoomOutlinedIcon}
             />
@@ -142,44 +150,45 @@ const Sidebar = (props) => {
         ) : (
           <>
             <SidebarLink
-              text='Issues'
-              href='/issues'
+              text="Issues"
+              href="/issues"
               icon={ReceiptLongRoundedIcon}
               onClick={onClose}
             />
             <SidebarLink
-              text='Your Tickets'
+              text="Your Tickets"
               href={`/issues?userId=${decodedToken.id}`}
               icon={ReceiptLongRoundedIcon}
               onClick={onClose}
             />
             {state.currentUser && (
               <SidebarLink
-                text='Profile'
+                text="Profile"
                 href={`/userProfile/${decodedToken.id}`}
                 icon={ManageAccountsOutlinedIcon}
                 onClick={onClose}
               />
             )}
             <SidebarLink
-              text='Log out'
-              href='/login'
+              text="Log out"
+              href="/login"
               onClick={handleLogout}
               icon={MeetingRoomOutlinedIcon}
             />
           </>
         )}
       </Box>
-      <Box className='footer' sx={{ textAlign: 'center', padding: '15px' }}>
+      <Box className="footer" sx={{ textAlign: 'center', padding: '15px' }}>
         <span>© Lock Security</span>
       </Box>
     </Box>
   );
 
+  // If the user is in a large screen we'll hardcode the drawer to always be open
   if (lgUp) {
     return (
       <Drawer
-        anchor='left'
+        anchor="left"
         open
         PaperProps={{
           sx: {
@@ -188,16 +197,18 @@ const Sidebar = (props) => {
             width: 226,
           },
         }}
-        variant='persistent'
+        variant="persistent"
       >
         {drawerContent}
       </Drawer>
     );
   }
 
+  // If the screen resolution is not large we'll configure the drawer to open / close depending
+  // on the props passed down to the sidebar from the App component.
   return (
     <Drawer
-      anchor='left'
+      anchor="left"
       onClose={onClose}
       open={isOpen}
       PaperProps={{
@@ -208,7 +219,7 @@ const Sidebar = (props) => {
         },
       }}
       sx={{ zIndex: (theme) => theme.zIndex.appBar + 100 }}
-      variant='temporary'
+      variant="temporary"
     >
       {drawerContent}
     </Drawer>
