@@ -7,10 +7,10 @@ import {
   Grid,
   Typography,
 } from '@mui/material';
-import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import { Link } from 'react-router-dom';
 import { useStyles } from './Styles';
 
+// Dashboard component is a reusable components with different props that can be used to show the data in dashboar page
 const DashboardCard = ({
   title,
   total,
@@ -20,12 +20,13 @@ const DashboardCard = ({
   cardColor,
   iconBgColor,
 }) => {
+  // style props object is for adding value to the useStyle props for custom css, we can pass this as an arguments to our useStyles
   const styleProps = {
     borderColor: cardColor,
-    // borderColor: 'rgba(28, 121, 252, 0.5)',
     height: '100%',
     cursor: 'pointer',
   };
+  // declare the classes var to assign the useStyles which has all custom css
   const classes = useStyles(styleProps);
   return (
     <Link to={to} className={classes.link}>
@@ -44,13 +45,11 @@ const DashboardCard = ({
               <Avatar
                 sx={{
                   backgroundColor: iconBgColor,
-                  // backgroundColor: '#1c79fc',
                   height: 56,
                   width: 56,
                 }}
               >
                 {icon}
-                {/* <AppRegistrationIcon /> */}
               </Avatar>
             </Grid>
           </Grid>
