@@ -129,58 +129,6 @@ export const EmployeeView = ({ deleteUser, singleUser }) => {
   }
 
   return (
-    // <Container>
-    //   <Card
-    //     sx={{
-    //       display: 'flex',
-    //       flexDirection: 'column',
-    //       marginTop: theme.spacing(30),
-    //       marginRight: theme.spacing(10),
-    //       marginLeft: theme.spacing(10),
-    //     }}
-    //   >
-    //     <CardMedia
-    //       component="img"
-    //       sx={{ width: 300 }}
-    //       image={user.imageUrl}
-    //       alt="Live from space album cover"
-    //     />
-    //     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-    //       <CardContent sx={{ flex: '1 0 auto' }}>
-    //         <Typography component="div" variant="h5">
-    //           Live From Space
-    //         </Typography>
-    //         <Typography
-    //           variant="subtitle1"
-    //           color="text.secondary"
-    //           component="div"
-    //         >
-    //           Mac Miller
-    //         </Typography>
-    //       </CardContent>
-    //       <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-    //         <IconButton aria-label="previous">
-    //           {theme.direction === 'rtl' ? (
-    //             <SkipNextIcon />
-    //           ) : (
-    //             <SkipPreviousIcon />
-    //           )}
-    //         </IconButton>
-    //         <IconButton aria-label="play/pause">
-    //           <PlayArrowIcon sx={{ height: 38, width: 38 }} />
-    //         </IconButton>
-    //         <IconButton aria-label="next">
-    //           {theme.direction === 'rtl' ? (
-    //             <SkipPreviousIcon />
-    //           ) : (
-    //             <SkipNextIcon />
-    //           )}
-    //         </IconButton>
-    //       </Box>
-    //     </Box>
-    //   </Card>
-    // </Container>
-
     <Box
       component="main"
       sx={{
@@ -209,14 +157,14 @@ export const EmployeeView = ({ deleteUser, singleUser }) => {
         ) : (
           <Grid container spacing={3}>
             <Grid item xs={12}>
-              <Typography sx={{ mb: 5 }} variant="h4" textAlign={'center'}>
+              <Typography sx={{ mb: 5 }} variant="h3" textAlign={'center'}>
                 {`${user.firstName} ${user.lastName}`}
               </Typography>
             </Grid>
-            <Grid item lg={4} md={6} xs={12}>
+            <Grid item lg={6} md={6} xs={12}>
               <EmployeeAvatar image={user.imageUrl} />
             </Grid>
-            <Grid item lg={8} md={6} xs={12}>
+            <Grid item lg={6} md={6} xs={12}>
               <Card className={classes.employeeDetails} elevation={5}>
                 <CardHeader title="Employee Details" />
                 <Divider />
@@ -224,32 +172,89 @@ export const EmployeeView = ({ deleteUser, singleUser }) => {
                   <Grid container spacing={3}>
                     <Grid item md={12} xs={12}>
                       <Typography
-                        variant="h5"
-                        sx={{ mb: 3 }}
-                        className={classes.employeeTypo}
+                        gutterBottom
+                        variant="caption"
+                        component="div"
+                        color="text.secondary"
+                        fontSize={15}
+                        sx={{
+                          display: 'inline-block',
+                          borderBottom: '1px solid #c4c4c4',
+                        }}
                       >
-                        Name: {`${user.firstName} ${user.lastName}`}
+                        Name
                       </Typography>
                       <Typography
-                        variant="h5"
-                        sx={{ mb: 3 }}
-                        className={classes.employeeTypo}
+                        gutterBottom
+                        variant="body1"
+                        component="div"
+                        fontSize={18}
                       >
-                        Email: {user.email}
+                        {`${user.firstName} ${user.lastName}`}
                       </Typography>
                       <Typography
-                        variant="h5"
-                        sx={{ mb: 3 }}
-                        className={classes.employeeTypo}
+                        gutterBottom
+                        variant="caption"
+                        component="div"
+                        color="text.secondary"
+                        fontSize={15}
+                        sx={{
+                          display: 'inline-block',
+                          borderBottom: '1px solid #c4c4c4',
+                        }}
                       >
-                        Role: {user.isAdmin ? 'Admin' : 'Employee'}
+                        Email
                       </Typography>
                       <Typography
-                        variant="h5"
-                        sx={{ mb: 3 }}
-                        className={classes.employeeTypo}
+                        gutterBottom
+                        variant="body1"
+                        component="div"
+                        fontSize={18}
                       >
-                        Hire Date: {moment(user.createdAt).format('LL')}
+                        {user.email}
+                      </Typography>
+
+                      <Typography
+                        gutterBottom
+                        variant="caption"
+                        component="div"
+                        color="text.secondary"
+                        fontSize={15}
+                        sx={{
+                          display: 'inline-block',
+                          borderBottom: '1px solid #c4c4c4',
+                        }}
+                      >
+                        Role
+                      </Typography>
+                      <Typography
+                        gutterBottom
+                        variant="body1"
+                        component="div"
+                        fontSize={18}
+                      >
+                        {user.isAdmin ? 'Admin' : 'Employee'}
+                      </Typography>
+                      <Typography
+                        gutterBottom
+                        variant="caption"
+                        component="div"
+                        color="text.secondary"
+                        fontSize={15}
+                        sx={{
+                          display: 'inline-block',
+                          borderBottom: '1px solid #c4c4c4',
+                        }}
+                      >
+                        Hire Date
+                      </Typography>
+                      <Typography
+                        gutterBottom
+                        variant="body1"
+                        component="div"
+                        fontSize={18}
+                      >
+                        {moment(user.createdAt).format('LL')}
                       </Typography>
                     </Grid>
                   </Grid>
