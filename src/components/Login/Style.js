@@ -20,4 +20,9 @@ export const useStyles = makeStyles(() => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
+  loginTitle: {
+    color: '#fff',
+    textAlign: 'center',
+    paddingBottom: '50px',
+  },
 }));

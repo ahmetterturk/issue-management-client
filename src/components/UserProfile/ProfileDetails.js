@@ -9,6 +9,8 @@ import {
   Grid,
   FormControlLabel,
 } from '@mui/material';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import ProfileAvatar from './ProfileAvatar';
 import { useStyles } from './UserProfileFormStyle';
 import FormInput from './FormInput';
@@ -44,6 +46,8 @@ export const ProfileDetailsView = ({ updateUser, ...props }) => {
   const navigate = useNavigate();
   // destructuring the id from useParams to get the current id from url
   const { id } = useParams();
+  // set state for password field to be visible if it's true
+  const [passVisible, setPassVisible] = useState(false);
   // using register, handleSubmit and forState errors from useFrom and assign a defaultValues with userDetails
   const {
     register,
@@ -79,6 +83,11 @@ export const ProfileDetailsView = ({ updateUser, ...props }) => {
         }, 8000);
       })
       .catch((err) => console.log(err));
+  };
+
+  // this function will handle the visiblity of the password input, if passVisible it's true it pass field type will be text if not true type will be password
+  const handleVisiblity = () => {
+    setPassVisible(!passVisible);
   };
 
   return (
@@ -150,13 +159,26 @@ export const ProfileDetailsView = ({ updateUser, ...props }) => {
                     label='Password'
                     name='password'
                     required={true}
-                    type='password'
+                    type={passVisible ? 'text' : 'password'}
                     xs={12}
                     md={12}
                     size={5}
                     errors={errors.password}
                     errorMessage="Password can't be blank, minimum of 5 charactes"
                     className={classes.error}
+                    visibleIcon={
+                      passVisible ? (
+                        <VisibilityIcon
+                          onClick={handleVisiblity}
+                          sx={{ cursor: 'pointer' }}
+                        />
+                      ) : (
+                        <VisibilityOffIcon
+                          onClick={handleVisiblity}
+                          sx={{ cursor: 'pointer' }}
+                        />
+                      )
+                    }
                   />
                   {/* if current user is Admin form will show the checkbox for admin, by default is checked and set to true */}
                   {isAdmin && (

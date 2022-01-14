@@ -8,7 +8,9 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Alert from '@mui/material/Alert';
+import { Alert, InputAdornment } from '@mui/material';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useStyles } from './Style';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -23,9 +25,9 @@ function Copyright(props) {
   return (
     <Grid item>
       <Typography
-        variant="body2"
-        color="text.secondary"
-        align="center"
+        variant='body2'
+        color='text.secondary'
+        align='center'
         {...props}
       >
         {'Copyright © '}
@@ -49,6 +51,13 @@ export const LoginFormView = (props) => {
   const [errorObject, setErrorObject] = useState(null);
   // useState set state on fetching, if its true show the spinner on button
   const [isFetching, setIsFetching] = useState(false);
+  // set state for password field to be visible if it's true
+  const [passVisible, setPassVisible] = useState(false);
+  // this function will handle the visiblity of the password input, if passVisible it's true it pass field type will be text if not true type will be password
+  const handleVisible = () => {
+    setPassVisible(!passVisible);
+  };
+
   // using register, handleSubmit and formState errors form react hook form to handle all th changes and on inputs and errors if there is any
   const {
     register,
@@ -116,60 +125,80 @@ export const LoginFormView = (props) => {
 
   return (
     <Box className={classes.bg}>
-      <Container component="main" maxWidth="xs" className={classes.container}>
+      <Typography variant='h3' className={classes.loginTitle}>
+        Lock Security
+      </Typography>
+      <Container component='main' maxWidth='xs' className={classes.container}>
         <Box className={classes.cardBox}>
           <Avatar sx={{ m: 1, bgcolor: '#1c79fc' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component='h1' variant='h5'>
             Sign In
           </Typography>
           {hasError && errorObject ? (
-            <Alert severity="error">{errorObject.data.message}</Alert>
+            <Alert severity='error'>{errorObject.data.message}</Alert>
           ) : null}
           <Box
-            component="form"
+            component='form'
             onSubmit={handleSubmit(onSubmit)}
             noValidate
             sx={{ mt: 2 }}
           >
             <TextField
-              margin="normal"
+              margin='normal'
               fullWidth
-              id="email"
-              label="Email Address"
-              autoComplete="email"
+              id='email'
+              label='Email Address'
+              autoComplete='email'
               {...register('email', { required: true })}
               autoFocus
             />
             {errors.email && (
-              <Typography variant="span" style={{ color: 'red' }}>
+              <Typography variant='span' style={{ color: 'red' }}>
                 Email cannot be blank!
               </Typography>
             )}
             <TextField
-              margin="normal"
+              margin='normal'
               fullWidth
               {...register('password', { required: true })}
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
+              label='Password'
+              type={passVisible ? 'text' : 'password'}
+              id='password'
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position='end'>
+                    {passVisible ? (
+                      <VisibilityIcon
+                        onClick={handleVisible}
+                        sx={{ cursor: 'pointer' }}
+                      />
+                    ) : (
+                      <VisibilityOffIcon
+                        onClick={handleVisible}
+                        sx={{ cursor: 'pointer' }}
+                      />
+                    )}
+                  </InputAdornment>
+                ),
+              }}
+              autoComplete='current-password'
             />
             {errors.password && (
-              <Typography variant="span" style={{ color: 'red' }}>
+              <Typography variant='span' style={{ color: 'red' }}>
                 Password cannot be blank!
               </Typography>
             )}
             <br></br>
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              control={<Checkbox value='remember' color='primary' />}
+              label='Remember me'
             />
             <Button
-              type="submit"
+              type='submit'
               fullWidth
-              variant="contained"
+              variant='contained'
               sx={{ mt: 3, mb: 2 }}
             >
               {isFetching ? (
