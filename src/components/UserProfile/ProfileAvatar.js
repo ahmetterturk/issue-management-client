@@ -75,20 +75,22 @@ export const ProfileAvatarView = ({ uploadProfileImage, ...props }) => {
       <CardActions>
         <form onSubmit={handleSubmit(onSubmit)}>
           <input
-            type="file"
-            id="file"
-            accept="image/*"
-            onChange={(e) => setProfileImageInput(e.target.files[0])}
+            type='file'
+            id='file'
+            accept='image/*'
+            onChange={(e) => {
+              setProfileImageInput(e.target.files[0]);
+            }}
             style={{ display: 'none' }}
           />
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 2 }}>
             <Button
-              variant="contained"
+              variant='contained'
               startIcon={<AddCircleOutlineOutlinedIcon />}
             >
-              <label htmlFor="file">Upload Image</label>
+              <label htmlFor='file'>Upload Image</label>
             </Button>
-            <Button variant="contained" type="submit" sx={{ ml: 5 }}>
+            <Button variant='contained' type='submit' sx={{ ml: 5 }}>
               {isFetching ? (
                 <CircularProgress style={{ color: 'white' }} />
               ) : (

@@ -7,6 +7,10 @@ import { useLocation } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useStyles } from './Styles';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import GroupIcon from '@mui/icons-material/Group';
+import CloudDoneIcon from '@mui/icons-material/CloudDone';
+import PendingActionsIcon from '@mui/icons-material/PendingActions';
+import FiberNewIcon from '@mui/icons-material/FiberNew';
 
 export const DashboardPageView = ({ useLocation }) => {
   // getting state and dispatch from globalContext
@@ -114,6 +118,7 @@ export const DashboardPageView = ({ useLocation }) => {
                 }
                 subtitle='Check Employees Page'
                 to='/employee'
+                icon={<GroupIcon />}
                 cardColor='rgba(0, 255, 187, 0.5)'
                 iconBgColor='#00ffbb'
               />
@@ -132,6 +137,7 @@ export const DashboardPageView = ({ useLocation }) => {
                 }
                 subtitle='Check Tickets'
                 to='/issues?status=New'
+                icon={<FiberNewIcon />}
                 cardColor='rgba(252, 157, 23, 0.5)'
                 iconBgColor='#fc9d17'
               />
@@ -150,6 +156,7 @@ export const DashboardPageView = ({ useLocation }) => {
                 }
                 subtitle='Check Tickets'
                 to='/issues?status=Resolved'
+                icon={<CloudDoneIcon />}
                 cardColor='rgba(76, 0, 217, 0.5)'
                 iconBgColor='#4c00d9'
               />
@@ -168,6 +175,7 @@ export const DashboardPageView = ({ useLocation }) => {
                 }
                 subtitle='Check Tickets'
                 to='/issues?status=Pending'
+                icon={<PendingActionsIcon />}
                 cardColor='rgba(255, 0, 89, 0.5)'
                 iconBgColor='#ff0059'
               />
