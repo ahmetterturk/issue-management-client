@@ -11,7 +11,6 @@ import unauthorizedImage from '../../../images/unauthorized.jpg';
 import notFoundImage from '../../../images/notFound2.jpg';
 import EmployeeAvatar from './EmployeeAvatar';
 import DeleteConfirmation from '../../DeleteConfirmation/DeleteConfirmation';
-import CircularProgress from '@mui/material/CircularProgress';
 import {
   Card,
   CardContent,
@@ -22,9 +21,20 @@ import {
   Grid,
   Box,
   Container,
+  CircularProgress,
 } from '@mui/material';
 
+import { useTheme } from '@mui/material/styles';
+
+import IconButton from '@mui/material/IconButton';
+import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import SkipNextIcon from '@mui/icons-material/SkipNext';
+import CardMedia from '@mui/material/CardMedia';
+
 export const EmployeeView = ({ deleteUser, singleUser }) => {
+  const theme = useTheme();
+
   // declaring classes to assign useStyles to use custom css
   const classes = useStyles();
   // destructuring token from currentUser state, also getting dispatch from globalContext
@@ -94,13 +104,13 @@ export const EmployeeView = ({ deleteUser, singleUser }) => {
   if (!isAdmin) {
     return (
       <Errors
-        status='401'
-        title='You are not authorized to access this page'
-        errorMessage='You either tried to access the unauthorized route or you came here by mistake.
-      Whichever it is, try using the navigation'
-        route='/issues'
+        status="401"
+        title="You are not authorized to access this page"
+        errorMessage="You either tried to access the unauthorized route or you came here by mistake.
+      Whichever it is, try using the navigation"
+        route="/issues"
         imageSrc={unauthorizedImage}
-        btnMessage='Back to main page'
+        btnMessage="Back to main page"
       />
     );
   }
@@ -108,33 +118,33 @@ export const EmployeeView = ({ deleteUser, singleUser }) => {
   if (hasError) {
     return (
       <Errors
-        status='404'
-        title='There is no user with current id in our server'
-        errorMessage='Please make sure the user exist'
-        route='/issues'
+        status="404"
+        title="There is no user with current id in our server"
+        errorMessage="Please make sure the user exist"
+        route="/issues"
         imageSrc={notFoundImage}
-        btnMessage='Back to main page'
+        btnMessage="Back to main page"
       />
     );
   }
 
   return (
     <Box
-      component='main'
+      component="main"
       sx={{
         flexGrow: 1,
         py: 8,
         mt: 10,
       }}
     >
-      <Container maxWidth='lg'>
-        <Typography sx={{ mb: 3 }} variant='h4' textAlign={'center'}>
-          Employee
-        </Typography>
+      <Container maxWidth="lg">
+        {/* <Typography sx={{ mb: 10 }} variant="h4" textAlign={'center'}>
+          {`${user.firstName} ${user.lastName}`}
+        </Typography> */}
 
         {isFetching ? (
           <Box
-            component='main'
+            component="main"
             sx={{
               display: 'flex',
               justifyContent: 'center',
@@ -146,60 +156,122 @@ export const EmployeeView = ({ deleteUser, singleUser }) => {
           </Box>
         ) : (
           <Grid container spacing={3}>
-            <Grid item lg={4} md={6} xs={12}>
+            <Grid item xs={12}>
+              <Typography sx={{ mb: 5 }} variant="h3" textAlign={'center'}>
+                {`${user.firstName} ${user.lastName}`}
+              </Typography>
+            </Grid>
+            <Grid item lg={6} md={6} xs={12}>
               <EmployeeAvatar image={user.imageUrl} />
             </Grid>
-            <Grid item lg={8} md={6} xs={12}>
+            <Grid item lg={6} md={6} xs={12}>
               <Card className={classes.employeeDetails} elevation={5}>
-                <CardHeader subheader='Details' title='User' />
+                <CardHeader title="Employee Details" />
                 <Divider />
                 <CardContent>
                   <Grid container spacing={3}>
                     <Grid item md={12} xs={12}>
                       <Typography
-                        variant='h5'
-                        sx={{ mb: 3 }}
-                        className={classes.employeeTypo}
+                        gutterBottom
+                        variant="caption"
+                        component="div"
+                        color="text.secondary"
+                        fontSize={15}
+                        sx={{
+                          display: 'inline-block',
+                          borderBottom: '1px solid #c4c4c4',
+                        }}
                       >
-                        Name: {`${user.firstName} ${user.lastName}`}
+                        Name
                       </Typography>
                       <Typography
-                        variant='h5'
-                        sx={{ mb: 3 }}
-                        className={classes.employeeTypo}
+                        gutterBottom
+                        variant="body1"
+                        component="div"
+                        fontSize={18}
                       >
-                        Email: {user.email}
+                        {`${user.firstName} ${user.lastName}`}
                       </Typography>
                       <Typography
-                        variant='h5'
-                        sx={{ mb: 3 }}
-                        className={classes.employeeTypo}
+                        gutterBottom
+                        variant="caption"
+                        component="div"
+                        color="text.secondary"
+                        fontSize={15}
+                        sx={{
+                          display: 'inline-block',
+                          borderBottom: '1px solid #c4c4c4',
+                        }}
                       >
-                        Role: {user.isAdmin ? 'Admin' : 'Employee'}
+                        Email
                       </Typography>
                       <Typography
-                        variant='h5'
-                        sx={{ mb: 3 }}
-                        className={classes.employeeTypo}
+                        gutterBottom
+                        variant="body1"
+                        component="div"
+                        fontSize={18}
                       >
-                        Hire Date: {moment(user.createdAt).format('LL')}
+                        {user.email}
+                      </Typography>
+
+                      <Typography
+                        gutterBottom
+                        variant="caption"
+                        component="div"
+                        color="text.secondary"
+                        fontSize={15}
+                        sx={{
+                          display: 'inline-block',
+                          borderBottom: '1px solid #c4c4c4',
+                        }}
+                      >
+                        Role
+                      </Typography>
+                      <Typography
+                        gutterBottom
+                        variant="body1"
+                        component="div"
+                        fontSize={18}
+                      >
+                        {user.isAdmin ? 'Admin' : 'Employee'}
+                      </Typography>
+                      <Typography
+                        gutterBottom
+                        variant="caption"
+                        component="div"
+                        color="text.secondary"
+                        fontSize={15}
+                        sx={{
+                          display: 'inline-block',
+                          borderBottom: '1px solid #c4c4c4',
+                        }}
+                      >
+                        Hire Date
+                      </Typography>
+                      <Typography
+                        gutterBottom
+                        variant="body1"
+                        component="div"
+                        fontSize={18}
+                      >
+                        {moment(user.createdAt).format('LL')}
                       </Typography>
                     </Grid>
                   </Grid>
                 </CardContent>
                 <Divider />
-                <CardActions>
+                {/* <CardActions>
                   <Box
                     sx={{ display: 'flex', justifyContent: 'flex-end', p: 2 }}
                   >
                     {isAdmin && (
                       <DeleteConfirmation
                         handleDelete={() => handleDelete(id)}
-                        entity='employee'
+                        entity="employee"
                       />
                     )}
                   </Box>
-                </CardActions>
+                </CardActions> */}
               </Card>
             </Grid>
           </Grid>

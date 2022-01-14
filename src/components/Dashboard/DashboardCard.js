@@ -34,10 +34,10 @@ const DashboardCard = ({
         <CardContent>
           <Grid container spacing={3} sx={{ justifyContent: 'space-between' }}>
             <Grid item>
-              <Typography color='textSecondary' gutterBottom variant='h4'>
+              <Typography color="textSecondary" gutterBottom variant="h4">
                 {title}
               </Typography>
-              <Typography color='textPrimary' variant='h5'>
+              <Typography color="textPrimary" variant="h5">
                 Total: {total}
               </Typography>
             </Grid>
@@ -60,7 +60,7 @@ const DashboardCard = ({
               alignItems: 'center',
             }}
           >
-            <Typography color='textSecondary' variant='caption'>
+            <Typography color="textSecondary" variant="caption">
               {subtitle}
             </Typography>
           </Box>

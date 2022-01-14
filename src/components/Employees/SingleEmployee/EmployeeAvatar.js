@@ -6,28 +6,28 @@ const EmployeeAvatar = ({ image }) => {
   // declaring classes to assign useStyles to use Costomize css
   const classes = useStyles();
   return (
-    <Card className={classes.avatarBorder} elevation={5}>
-      <CardContent>
-        <Box
+    // <Card className={classes.avatarBorder}>
+    <CardContent>
+      <Box
+        sx={{
+          alignItems: 'center',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        <Avatar
+          src={image}
           sx={{
-            alignItems: 'center',
-            display: 'flex',
-            flexDirection: 'column',
+            height: 300,
+            mb: 2,
+            width: 300,
+            // borderRadius: '50%',
           }}
-        >
-          <Avatar
-            src={image}
-            sx={{
-              height: 200,
-              mb: 2,
-              width: 200,
-              borderRadius: '50%',
-            }}
-          />
-        </Box>
-      </CardContent>
-      <Divider />
-    </Card>
+        />
+      </Box>
+    </CardContent>
+    // <Divider />
+    // </Card>
   );
 };
 
