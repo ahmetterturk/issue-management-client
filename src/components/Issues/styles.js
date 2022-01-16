@@ -7,9 +7,9 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(3),
     },
     [theme.breakpoints.down('sm')]: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'center',
+      // display: 'flex',
+      // flexWrap: 'wrap',
+      // justifyContent: 'center',
     },
   },
 }));

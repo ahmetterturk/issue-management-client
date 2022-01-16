@@ -12,7 +12,6 @@ import Stack from '@mui/material/Stack';
 import API from '../../apiServices/api';
 import useStyles from './styles';
 
-
 export const IssuesView = ({ API }) => {
   const { state, dispatch } = useGlobalContext();
   // defining a classes constant to use with styling of components
@@ -72,9 +71,6 @@ export const IssuesView = ({ API }) => {
           </Alert>
         </Stack>
       )}
-      <Typography variant='h3' sx={{ color: '#1c79fc', ml: 2 }}>
-        Issues
-      </Typography>
 
       <IssueForm />
 
