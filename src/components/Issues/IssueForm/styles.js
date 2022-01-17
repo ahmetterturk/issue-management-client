@@ -6,8 +6,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'space-between',
     backgroundColor: 'white',
-    border: '4px solid',
-    borderColor: 'rgba(28, 121, 252, 0.5)',
     position: 'absolute',
     width: 500,
     height: 600,

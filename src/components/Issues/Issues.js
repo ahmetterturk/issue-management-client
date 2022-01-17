@@ -45,11 +45,11 @@ export const IssuesView = ({ API }) => {
   if (!state.currentUser) {
     return (
       <Errors
-        title='You need to login first'
-        errorMessage='You cannot access the application unless you login first'
-        route='/login'
+        title="You need to login first"
+        errorMessage="You cannot access the application unless you login first"
+        route="/login"
         imageSrc={loginImage}
-        btnMessage='Back to login page'
+        btnMessage="Back to login page"
       />
     );
   }
@@ -58,15 +58,15 @@ export const IssuesView = ({ API }) => {
   const issuesList = state.issues;
 
   return (
-    <Grid container className={classes.issuesGrid}>
+    <Grid container className={classes.issuesGrid} justifyContent="center">
       {state.isLoggedIn && (
         <Stack sx={{ width: '100%' }} spacing={2}>
-          <Alert severity='success'>You have logged in successfully</Alert>
+          <Alert severity="success">You have logged in successfully</Alert>
         </Stack>
       )}
       {state.isUpdated && (
         <Stack sx={{ width: '100%' }} spacing={2}>
-          <Alert severity='success'>
+          <Alert severity="success">
             You have updated your profile successfully
           </Alert>
         </Stack>
