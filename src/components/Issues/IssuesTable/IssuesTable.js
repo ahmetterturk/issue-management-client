@@ -40,7 +40,7 @@ export const IssuesTableView = ({ issuesList, deleteIssue }) => {
 
   // states used in table
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(100);
   // state used to activate circular loading component
   const [isFetching, setIsFetching] = useState(false);
 
