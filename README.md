@@ -15,12 +15,10 @@
 #### Part A
 
 - [ Description of your website](#description-of-website)
-
   - [Purpose](#purpose)
   - [Functionality and Features](#functionality-and-features)
   - [Target Audience](#target-audience)
   - [Tech Stack](#tech-stack)
-
 - [Dataflow Diagram](#dataflow-diagram)
 - [Application Architecture Diagram](#application-architecture-diagram)
 - [User Stories](#user-stories)
@@ -35,6 +33,7 @@
 - [Management Methodology](#management-methodology)
 - [Testing](#user-testing)
 - [Installation](#installation)
+- [Login Details](#login-details)
 - [Acknowledgement](#acknowledgement)
 
 ---
@@ -901,10 +900,26 @@ npm run dev
 
 <br>
 
-### **Acknowledgement**
+# **Login Details**
 
-- Ahmet Erturk
-- Arturo Caceres
-- Mohammad Reza Fayazi
+To test the live application, follow the log in details below:
+
+**URL** - https://locksecurity.net/
+
+### Admin
+
+username: admin@admin.com <br>
+password: admin
+
+### Employee
+
+username: dominicmerritt@ls.com <br>
+password: password
+
+# **Acknowledgement**
+
+- [Ahmet Erturk](https://github.com/ahmetterturk)
+- [Arturo Caceres](https://github.com/arturo-caceres)
+- [Mohammad Reza Fayazi](https://github.com/saman-zdf)
 
 ---

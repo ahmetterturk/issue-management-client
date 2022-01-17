@@ -9,15 +9,7 @@ import StatusDropdown from './StatusDropdown';
 import MembersDropdown from './MembersDropdown';
 import jwtdecode from 'jwt-decode';
 import useStyles from './styles';
-import {
-  Box,
-  Container,
-  Button,
-  Modal,
-  TextField,
-  Typography,
-  Grid,
-} from '@mui/material';
+import { Box, Button, Modal, TextField, Typography, Grid } from '@mui/material';
 
 export const IssueFormView = ({ createIssue }) => {
   // destructuring state and dispatch function from context provider
@@ -64,7 +56,7 @@ export const IssueFormView = ({ createIssue }) => {
       <Box>
         {currentUser.userDetails.image === null ? (
           <>
-            <Typography variant='h5' sx={{ p: 2, color: '#666' }}>
+            <Typography variant="h5" sx={{ p: 2, color: '#666' }}>
               In order to publish ticket you need to create a profile first
             </Typography>
           </>
@@ -74,7 +66,7 @@ export const IssueFormView = ({ createIssue }) => {
               container
               rowSpacing={1}
               columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-              justify='flex-end'
+              justify="flex-end"
             >
               <Grid
                 item
@@ -84,8 +76,8 @@ export const IssueFormView = ({ createIssue }) => {
                 sx={{ mt: 2, display: 'flex' }}
               >
                 <Button
-                  variant='contained'
-                  color='primary'
+                  variant="contained"
+                  color="primary"
                   onClick={handleOpen}
                   xs={{ height: 40 }}
                   startIcon={<AddCircleOutlineIcon />}
@@ -100,17 +92,17 @@ export const IssueFormView = ({ createIssue }) => {
         <Modal
           open={open}
           onClose={handleClose}
-          aria-labelledby='modal-modal-title'
-          aria-describedby='modal-modal-description'
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
         >
           <Box className={classes.boxContainer}>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className={classes.titleDiv}>
                 <TextField
                   {...register('title', { required: true })}
-                  id='outlined-basic'
-                  label='Title'
-                  variant='outlined'
+                  id="outlined-basic"
+                  label="Title"
+                  variant="outlined"
                   fullWidth
                 />
                 {errors.title && (
@@ -122,14 +114,14 @@ export const IssueFormView = ({ createIssue }) => {
                   {...register('description', { required: true })}
                   multiline
                   rows={5}
-                  label='Description'
+                  label="Description"
                   fullWidth
                 />
                 {errors.description && (
                   <p style={{ color: 'red' }}>Description can't be blank!</p>
                 )}
               </div>
-              <MembersDropdown name='members' className={classes.members} />
+              <MembersDropdown name="members" className={classes.members} />
 
               <Grid container className={classes.dropdownContainer}>
                 <Grid item className={classes.gridItem}>
@@ -143,11 +135,11 @@ export const IssueFormView = ({ createIssue }) => {
                 </Grid>
               </Grid>
               <Button
-                type='submit'
-                variant='contained'
+                type="submit"
+                variant="contained"
                 fullWidth
                 disableElevation
-                size='large'
+                size="large"
               >
                 Create Issue
               </Button>
