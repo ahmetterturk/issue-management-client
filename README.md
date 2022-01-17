@@ -29,10 +29,10 @@
 
 #### Part B
 
-- [Install](#install)
 - [Libraries](#libraries)
 - [Management Methodology](#management-methodology)
 - [Testing](#user-testing)
+- [Installation](#installation)
 - [Acknowledgement](#acknowledgement)
 
 ---
@@ -365,79 +365,6 @@ This is a link to the project management tool [Trello](https://trello.com/b/OiNy
 ### Day #7
 
 ![alt text](docs/images/trello-imgs/Day7.png)
-
-<br>
-
-# **Install**
-
-Installation to check the Development environment
-
-First you need to fork or clone the repository and run in your command line
-
-```
-git clone git@github.com:saman-zdf/issue-management-client.git
-```
-
-Navigate to the root directory nad you can either run
-
-```
-npm install
-```
-
-or
-
-```
-yarn install
-```
-
-to install all dependencies in order to run the application.
-
-Next you need to run either:
-
-```
-npm start
-```
-
-or
-
-```
-yarn start
-```
-
-to run the server for the client side.
-
-if you need to see the server Development environment, first you need to fork or clone the server repository and run in your command line
-
-```
-git clone git@github.com:ahmetterturk/issue-management-backend.git
-```
-
-To install all dependencies you need to navigate to root directory and run:
-
-```
-npm install
-```
-
-There some different API sush as database key, cloudinary(image upload), jwt secret key and etc. You need to provide your own key in order the run the server and see the result. Keys are:
-
-```
-<!-- mongoDB uri needed -->
-DATABASE_URI
-<!-- Cloudinary api key and name -->
-CLOUD_NAME
-CLOUD_API_KEY
-CLOUD_API_SECRET
-<!-- JWT secret key wich you create your own string -->
-JWT_SECRET
-```
-
-Once you have all keys you can create .env file on the root directory and place all your keys in that file.
-
-You can run to run the server
-
-```
-npm run dev
-```
 
 <br>
 
@@ -904,6 +831,63 @@ Link to [Lock Security](https://docs.google.com/spreadsheets/d/1Fw4zb-6sjoZg3VTr
 <br>
 
 ---
+
+# **Installation**
+
+## For the installation of the client-side, clone the repository and run the following command in your command line
+
+```
+git clone git@github.com:saman-zdf/issue-management-client.git
+```
+
+Navigate to the root directory and run the following command to install application dependencies
+
+```
+yarn install
+```
+
+To start the application, run the following command in the command line
+
+```
+yarn start
+```
+
+---
+
+## For the installation of the backend, clone the repository and run the following command in your command line
+
+```
+git clone git@github.com:ahmetterturk/issue-management-backend.git
+```
+
+To install all dependencies, navigate to root directory and run;
+
+```
+npm install
+```
+
+There are some API configurations that need to be added to the `.env` file. These are the MongoDB Atlas database URI, Cloudinary API keys, and a unique string for the JWT_SECRET.
+
+```
+<!-- mongoDB URI -->
+DATABASE_URI = 'string'
+
+<!-- Cloudinary api key and name -->
+CLOUD_NAME = 'string'
+CLOUD_API_KEY = 'string'
+CLOUD_API_SECRET = 'string'
+
+<!-- JWT secret key, could be any string -->
+JWT_SECRET = 'string'
+```
+
+Once the configuration of `.env` file done, the program can be run with the command;
+
+```
+npm run dev
+```
+
+<br>
 
 ### **Acknowledgement**
 
