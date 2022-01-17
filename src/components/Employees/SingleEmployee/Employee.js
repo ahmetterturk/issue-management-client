@@ -4,20 +4,17 @@ import { useGlobalContext } from '../../../contextReducer/Context';
 import { useStyles } from './EmployeeStyles';
 import { deleteUser, singleUser } from '../../../apiServices/UserApi';
 import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 import Errors from '../../ErrorPages/Errors';
 import moment from 'moment';
 import unauthorizedImage from '../../../images/unauthorized.jpg';
 import notFoundImage from '../../../images/notFound2.jpg';
 import EmployeeAvatar from './EmployeeAvatar';
-import DeleteConfirmation from '../../DeleteConfirmation/DeleteConfirmation';
 import {
   Card,
   CardContent,
   Divider,
   CardHeader,
   Typography,
-  CardActions,
   Grid,
   Box,
   Container,
@@ -25,12 +22,6 @@ import {
 } from '@mui/material';
 
 import { useTheme } from '@mui/material/styles';
-
-import IconButton from '@mui/material/IconButton';
-import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
-import CardMedia from '@mui/material/CardMedia';
 
 export const EmployeeView = ({ deleteUser, singleUser }) => {
   const theme = useTheme();
