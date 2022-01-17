@@ -29,6 +29,8 @@
 
 #### Part B
 
+- [Updated Dataflow Diagram](#updated-dataflow-diagram)
+- [Updated Application Architecture Diagram](#updated-application-architecture-diagram)
 - [Libraries](#libraries)
 - [Management Methodology](#management-methodology)
 - [Testing](#user-testing)
@@ -141,10 +143,6 @@ The target audience of this application is the collective group of employees and
 
 ![alt text](docs/images/DFD.png)
 
-### Fianl Version
-
-![alt text](docs/images/DFD-final.png)
-
 ---
 
 # Application Architecture Diagram
@@ -152,10 +150,6 @@ The target audience of this application is the collective group of employees and
 ### Initial Version
 
 ![alt text](docs/images/AAD.png)
-
-### Final Version
-
-![alt text](docs/images/AAD-final-version.png)
 
 <hr/>
 
@@ -366,7 +360,23 @@ This is a link to the project management tool [Trello](https://trello.com/b/OiNy
 
 ![alt text](docs/images/trello-imgs/Day7.png)
 
-<br>
+## <br>
+
+# Updated Dataflow Diagram
+
+In our initial planning, we had Firebase as our Authentication method. We planned on creating users in Firebase with emails and passwords. To store profile information of users, we planned to create a Profile model in our database and link each profile with its corresponding Firebase user, and store both information in local storage.
+
+In the development process, we had trouble trying to handle users with information that was coming from two different places, one from Firebase and the other from our database. This created problems with updating any user information, and also linking both users and their profiles to issues. After countless efforts, we decided that the optimal solution would be to create and handle all user information from a single model in our database, and send them to the client-side as JWTs.
+
+![alt text](docs/images/DFD-final.png)
+
+---
+
+# Updated Application Architecture Diagram
+
+![alt text](docs/images/AAD-final-version.png)
+
+---
 
 # **Libraries**
 
