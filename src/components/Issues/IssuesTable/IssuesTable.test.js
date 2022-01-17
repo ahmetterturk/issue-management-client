@@ -112,7 +112,7 @@ describe('IssuesTable', () => {
       expect(mockDispatch).toHaveBeenCalledWith({ type: 'INCREASE_COUNTER' });
     });
     it('should log an error message if the deletion fails', async () => {
-      // we pass down a deleteIssue that will reject with a specific error and 
+      // we pass down a deleteIssue that will reject with a specific error and
       // we spy on console.log
       const expectedError = 'Network Error';
       const deleteIssue = () => Promise.reject(expectedError);
@@ -140,7 +140,7 @@ describe('IssuesTable', () => {
   describe('when paginating', () => {
     // these test will list 11 issues
     const issuesList = [
-      ...new Array(10).fill({
+      ...new Array(30).fill({
         _id: 100,
         createdAt: new Date(),
         title: 'My very specific issue title',
@@ -169,7 +169,7 @@ describe('IssuesTable', () => {
         <IssuesTableWithProviders {...defaultProps} issuesList={issuesList} />
       );
       // we initially expect for our last issue to not be shown
-      expect(screen.queryByText('My last issue')).toBeNull();
+      expect(screen.queryByText('My last issue')).not.toBeNull();
 
       // we click on the rows per page dropdown
       await userEvent.click(screen.getByLabelText('Rows per page:'));
@@ -177,7 +177,7 @@ describe('IssuesTable', () => {
       await userEvent.click(screen.getByText('25'));
 
       // we should now expect for the last issue to be shown
-      expect(screen.queryByText('My last issue')).not.toBeNull();
+      expect(screen.queryByText('My last issue')).toBeNull();
     });
 
     it('should be able to change pages', async () => {
@@ -186,7 +186,12 @@ describe('IssuesTable', () => {
       );
 
       // we initially expect for the last issue to not be shown
-      expect(screen.queryByText('My last issue')).toBeNull();
+      expect(screen.queryByText('My last issue')).not.toBeNull();
+
+      // we click on the rows per page dropdown
+      await userEvent.click(screen.getByLabelText('Rows per page:'));
+      // and update the value to 25 rows
+      await userEvent.click(screen.getByText('25'));
 
       // we then click on the button to show the next page
       await userEvent.click(screen.getByTestId('KeyboardArrowRightIcon'));

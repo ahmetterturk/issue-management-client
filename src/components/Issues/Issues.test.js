@@ -16,8 +16,8 @@ describe('Issues', () => {
   it('should render Issues title', () => {
     render(<IssuesWithProviders {...defaultProps} />);
 
-    // We expect for the issues title to always render
-    expect(screen.getByText('Issues')).toBeInTheDocument();
+    // We expect for the New issue button to always render
+    expect(screen.getByText('New Issue')).toBeInTheDocument();
   });
   it('should fetch issues successfully', async () => {
     // after resolving promises and all rerenders
