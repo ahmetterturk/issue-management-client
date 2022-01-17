@@ -49,7 +49,7 @@ describe('MessageForm', () => {
     );
 
     // we type an expected message in the body of the message
-    await userEvent.type(screen.getByLabelText('messageBody'), message);
+    await userEvent.type(screen.getByLabelText('Message'), message);
     // We click on the send message button
     await userEvent.click(screen.getByText('Send Message'));
 
