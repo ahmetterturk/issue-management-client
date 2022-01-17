@@ -88,7 +88,10 @@ export const ProfileAvatarView = ({ uploadProfileImage, ...props }) => {
               variant='contained'
               startIcon={<AddCircleOutlineOutlinedIcon />}
             >
-              <label htmlFor='file'>Upload Image</label>
+              <label htmlFor='file'>
+                {' '}
+                {profileImageInput ? 'Image uploaded' : 'Upload Image'}
+              </label>
             </Button>
             <Button variant='contained' type='submit' sx={{ ml: 5 }}>
               {isFetching ? (

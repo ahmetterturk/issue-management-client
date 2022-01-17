@@ -72,10 +72,6 @@ export const IssuesView = ({ API }) => {
         </Stack>
       )}
 
-      <Typography variant="h3" sx={{ color: '#1c79fc' }}>
-        Issues
-      </Typography>
-
       <IssueForm />
 
       <IssuesTable issuesList={issuesList} />
