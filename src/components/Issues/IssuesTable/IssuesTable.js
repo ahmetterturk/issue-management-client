@@ -68,21 +68,21 @@ export const IssuesTableView = ({ issuesList, deleteIssue }) => {
   return (
     <>
       {state.issuesIsLoading ? (
-        <Grid container justifyContent="center" sx={{ marginTop: 10 }}>
+        <Grid container justifyContent='center' sx={{ marginTop: 10 }}>
           <CircularProgress />
         </Grid>
       ) : (
         <>
           <Paper elevation={5} className={classes.paper}>
             <TableContainer>
-              <Table stickyHeader aria-label="sticky table">
+              <Table stickyHeader aria-label='sticky table'>
                 <TableHead>
                   <TableRow>
                     <TableCell
                       className={classes.tableHeaderCell}
                       sx={{ backgroundColor: '#E8E8E8' }}
                     >
-                      <Typography fontWeight="bold" fontSize={18}>
+                      <Typography fontWeight='bold' fontSize={18}>
                         Issue
                       </Typography>
                     </TableCell>
@@ -90,7 +90,7 @@ export const IssuesTableView = ({ issuesList, deleteIssue }) => {
                       className={classes.tableHeaderCell}
                       sx={{ backgroundColor: '#E8E8E8' }}
                     >
-                      <Typography fontWeight="bold" fontSize={18}>
+                      <Typography fontWeight='bold' fontSize={18}>
                         Status
                       </Typography>
                     </TableCell>
@@ -98,7 +98,7 @@ export const IssuesTableView = ({ issuesList, deleteIssue }) => {
                       className={classes.tableHeaderCell}
                       sx={{ backgroundColor: '#E8E8E8' }}
                     >
-                      <Typography fontWeight="bold" fontSize={18}>
+                      <Typography fontWeight='bold' fontSize={18}>
                         Type
                       </Typography>
                     </TableCell>
@@ -106,7 +106,7 @@ export const IssuesTableView = ({ issuesList, deleteIssue }) => {
                       className={classes.tableHeaderCell}
                       sx={{ backgroundColor: '#E8E8E8' }}
                     >
-                      <Typography fontWeight="bold" fontSize={18}>
+                      <Typography fontWeight='bold' fontSize={18}>
                         Date
                       </Typography>
                     </TableCell>
@@ -114,7 +114,7 @@ export const IssuesTableView = ({ issuesList, deleteIssue }) => {
                       className={classes.tableHeaderCell}
                       sx={{ backgroundColor: '#E8E8E8' }}
                     >
-                      <Typography fontWeight="bold" fontSize={18}>
+                      <Typography fontWeight='bold' fontSize={18}>
                         Created By
                       </Typography>
                     </TableCell>
@@ -122,7 +122,7 @@ export const IssuesTableView = ({ issuesList, deleteIssue }) => {
                       className={classes.tableHeaderCell}
                       sx={{ backgroundColor: '#E8E8E8' }}
                     >
-                      <Typography fontWeight="bold" fontSize={18}>
+                      <Typography fontWeight='bold' fontSize={18}>
                         Actions
                       </Typography>
                     </TableCell>
@@ -142,7 +142,7 @@ export const IssuesTableView = ({ issuesList, deleteIssue }) => {
                             className={classes.tableRow}
                             key={issue._id}
                             hover
-                            role="checkbox"
+                            role='checkbox'
                             tabIndex={-1}
                           >
                             <TableCell className={classes.tableCell}>
@@ -188,7 +188,7 @@ export const IssuesTableView = ({ issuesList, deleteIssue }) => {
                                 {(decodedToken.id === issue.userId ||
                                   decodedToken.isAdmin) && (
                                   <DeleteConfirmation
-                                    entity="issue"
+                                    entity='issue'
                                     handleDelete={() => handleDelete(issue._id)}
                                     isFetching={isFetching}
                                   />
@@ -203,7 +203,7 @@ export const IssuesTableView = ({ issuesList, deleteIssue }) => {
             </TableContainer>
             <TablePagination
               rowsPerPageOptions={[10, 25, 100]}
-              component="div"
+              component='div'
               count={issuesList.length}
               rowsPerPage={rowsPerPage}
               page={page}
