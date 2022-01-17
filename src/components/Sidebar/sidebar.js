@@ -70,7 +70,7 @@ const Sidebar = (props) => {
   const decodedToken = jwtDecode(token);
   // We use useMediaQuery to identify which breakpoint the user resolution lands in.
   // We'll use this value to know if the Drawer will need the collapse functionality or not
-  console.log(decodedToken.id);
+  // console.log(decodedToken.id);
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'), {
     defaultMatches: true,
     noSsr: false,
