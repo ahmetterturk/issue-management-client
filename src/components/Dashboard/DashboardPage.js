@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Container, Grid } from '@mui/material';
+import { Box, Container, Grid, Stack, Alert } from '@mui/material';
 import DashboardCard from './DashboardCard';
 import ChartBar from './ChartBar';
 import { useGlobalContext } from '../../contextReducer/Context';
@@ -11,7 +11,8 @@ import GroupIcon from '@mui/icons-material/Group';
 import CloudDoneIcon from '@mui/icons-material/CloudDone';
 import PendingActionsIcon from '@mui/icons-material/PendingActions';
 import FiberNewIcon from '@mui/icons-material/FiberNew';
-
+import Errors from '../ErrorPages/Errors';
+import loginImage from '../../images/login.jpg';
 export const DashboardPageView = ({ useLocation }) => {
   // getting state and dispatch from globalContext
   const { state, dispatch } = useGlobalContext();
@@ -36,6 +37,7 @@ export const DashboardPageView = ({ useLocation }) => {
   const [pendingIssuesCount, setPendingIssuesCount] = useState(0);
   // creating state for resolvedIssuesCount to have a length of all resolved issues from database
   const [resolvedIssuesCount, setResolvedIssuesCount] = useState();
+
   // with useEffect we declare some new vars to set our states
   useEffect(() => {
     // declaring newIssues var and filtering all issues where single issues status is new, it will assigne a new array with all issues that has a new status
@@ -76,13 +78,31 @@ export const DashboardPageView = ({ useLocation }) => {
     // using location pathname and dispatch as a dependencies to rerender upon any changes regard them
   }, [location.pathname, dispatch]);
 
+  // If there is no current user existing in local storage, the application will display an error page
+  if (!state.currentUser) {
+    return (
+      <Errors
+        title='You need to login first'
+        errorMessage='You cannot access the application unless you login first'
+        route='/login'
+        imageSrc={loginImage}
+        btnMessage='Back to login page'
+      />
+    );
+  }
+
   return (
     <>
+      {state.isLoggedIn && (
+        <Stack sx={{ width: '100%', mt: 10 }} spacing={2}>
+          <Alert severity='success'>You have logged in successfully</Alert>
+        </Stack>
+      )}
       <Box
         component='main'
         sx={{
           flexGrow: 1,
-          py: 8,
+          pt: state.isLoggedIn ? 2 : 5,
           marginTop: '50px',
         }}
       >

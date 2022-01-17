@@ -47,25 +47,25 @@ export const MessageFormView = ({
       <form onSubmit={handleSubmit}>
         <TextField
           fullWidth={true}
-          placeholder="Enter Message"
+          placeholder='Enter Message'
           multiline
           rows={1}
-          name="messageBody"
-          label="messageBody"
+          name='messageBody'
+          label='Message'
           hiddenLabel
           value={formData.messageBody}
           onChange={handleChange}
         ></TextField>
         <Button
-          size="medium"
+          size='medium'
           className={classes.sendButton}
-          variant="contained"
-          type="submit"
+          variant='contained'
+          type='submit'
           fullWidth
           sx={{ marginTop: 1 }}
         >
           Send Message
-          <SendIcon fontSize="small" className={classes.sendIcon} />
+          <SendIcon fontSize='small' className={classes.sendIcon} />
         </Button>
       </form>
     </Grid>
