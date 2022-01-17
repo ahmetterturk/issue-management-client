@@ -374,6 +374,8 @@ In the development process, we had trouble trying to handle users with informati
 
 # Updated Application Architecture Diagram
 
+In our initial planning, we had Firebase and Amazon S3 as our external service providers. We decided to handle Authentication with JWT's, therefore, our application architecture no longer contains Firebase as an external service. For image upload and storage, we decided to use Cloudinary instead of Amazon S3, beacuse of the efficient and zero cost service it provided.
+
 ![alt text](docs/images/AAD-final-version.png)
 
 ---
