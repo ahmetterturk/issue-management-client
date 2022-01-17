@@ -5,6 +5,7 @@ import { WithProviders } from '../../testUtils/WithProviders';
 
 const SignupPageWithProviders = WithProviders(SignupPage);
 
+// Tests for SignupPage component
 describe('SignupPage', () => {
   const defaultProps = {
     signupUser: () => Promise.resolve({ status: 200 }),
@@ -12,6 +13,7 @@ describe('SignupPage', () => {
   it('should render form title', () => {
     render(<SignupPageWithProviders {...defaultProps} />);
 
+    // we expect for the create employee account to always render
     expect(screen.getByText('Create Employee Account')).toBeInTheDocument();
   });
   it('should show an error if the user is logged out', () => {
@@ -20,6 +22,7 @@ describe('SignupPage', () => {
     });
     render(<SignupPageWithNoUser {...defaultProps} />);
 
+    // we expect for an error message to render regarding login
     expect(
       screen.getByText(
         'You cannot access the application unless you login first'
@@ -28,6 +31,7 @@ describe('SignupPage', () => {
   });
 
   it('should show an error if the user is not an admin', () => {
+    // we initialise the test with a token with isAdmin = false
     const SignupPageNotAdmin = WithProviders(SignupPage, {
       currentUser: {
         token:
@@ -36,6 +40,7 @@ describe('SignupPage', () => {
     });
     render(<SignupPageNotAdmin {...defaultProps} />);
 
+    // we expect for a 401 message to render
     expect(
       screen.getByText('401 You are not authorized to access this page')
     ).toBeInTheDocument();

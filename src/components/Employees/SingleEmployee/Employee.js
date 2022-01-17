@@ -59,7 +59,7 @@ export const EmployeeView = ({ deleteUser, singleUser }) => {
   // set state for user to set user when make a request on single user
   const [user, setUser] = useState([]);
   // using useNavigate to redirect to different rotuer after deleting employee/user
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     // set isFetching to true
@@ -88,18 +88,18 @@ export const EmployeeView = ({ deleteUser, singleUser }) => {
   }, [id]);
 
   // handleDelete function will delete user
-  const handleDelete = (id) => {
-    // makign a delete request by calling deleteUser form userApi services and passing current id
-    deleteUser(id)
-      .then((data) => {
-        console.log(data);
-        // dispathch to increase the counter state, which has been used as a dependency on useEffect to fetch all users in App comp
-        dispatch({ type: 'INCREASE_COUNTER' });
-        // after deleting redirect to the eomployees page
-        navigate('/employee');
-      })
-      .catch((err) => console.log(err));
-  };
+  // const handleDelete = (id) => {
+  //   // makign a delete request by calling deleteUser form userApi services and passing current id
+  //   deleteUser(id)
+  //     .then((data) => {
+  //       console.log(data);
+  //       // dispathch to increase the counter state, which has been used as a dependency on useEffect to fetch all users in App comp
+  //       dispatch({ type: 'INCREASE_COUNTER' });
+  //       // after deleting redirect to the eomployees page
+  //       navigate('/employee');
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
   // chekc if current user is not admin render the Errors cmponents with unauthorized error message with instruction to navigate back
   if (!isAdmin) {
     return (

@@ -6,6 +6,7 @@ import userEvent from '@testing-library/user-event';
 
 const SingleDropdownIssueWithProviders = WithProviders(SingleDropdownIssue);
 
+// Tests for SingleDropdownIssue component
 describe('SingleDropdownIssue', () => {
   const defaultProps = {
     issue: {
@@ -16,9 +17,11 @@ describe('SingleDropdownIssue', () => {
   it('should render the issue title', () => {
     render(<SingleDropdownIssueWithProviders {...defaultProps} />);
 
+    // we expect to always render the issue title
     expect(screen.getByText('issue-title')).toBeInTheDocument();
   });
   it('should call handleClose when clicking on the menu item', async () => {
+    // we create a handleClose stub to validate if it's ever called
     const handleClose = jest.fn();
     render(
       <SingleDropdownIssueWithProviders
@@ -26,7 +29,10 @@ describe('SingleDropdownIssue', () => {
         handleClose={handleClose}
       />
     );
+    // we click on the bell menu item
     await userEvent.click(screen.getByRole('menuitem'));
+
+    // we expect our handleClose callback to have been called.
     expect(handleClose).toHaveBeenCalled();
   });
 });
