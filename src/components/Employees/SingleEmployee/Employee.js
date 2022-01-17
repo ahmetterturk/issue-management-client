@@ -21,11 +21,7 @@ import {
   CircularProgress,
 } from '@mui/material';
 
-import { useTheme } from '@mui/material/styles';
-
 export const EmployeeView = ({ deleteUser, singleUser }) => {
-  const theme = useTheme();
-
   // declaring classes to assign useStyles to use custom css
   const classes = useStyles();
   // destructuring token from currentUser state, also getting dispatch from globalContext
@@ -33,7 +29,6 @@ export const EmployeeView = ({ deleteUser, singleUser }) => {
     state: {
       currentUser: { token },
     },
-    dispatch,
   } = useGlobalContext();
   // decoding the token with jwtDeocde to get token properties
   const decodedToken = jwtdecode(token);
@@ -45,8 +40,6 @@ export const EmployeeView = ({ deleteUser, singleUser }) => {
   const { id } = useParams();
   // set state for has error, if any request or action has error will show the error page or message
   const [hasError, setHasError] = useState(false);
-  // initiate errorObject state to null, if there is any error return on request we can assing
-  const [errorObject, setErrorObject] = useState(null);
   // set state for user to set user when make a request on single user
   const [user, setUser] = useState([]);
   // using useNavigate to redirect to different rotuer after deleting employee/user
@@ -63,7 +56,6 @@ export const EmployeeView = ({ deleteUser, singleUser }) => {
           // set hasError to true and and set isFethcing to false and also pass the current data to the errorObject
           setHasError(true);
           setIsFetching(false);
-          setErrorObject(data);
           // if status not 500, means its successfull
         } else {
           // set state of user by passing the return data from reuqest
@@ -76,32 +68,19 @@ export const EmployeeView = ({ deleteUser, singleUser }) => {
       })
       .catch((err) => console.log(err));
     // using id as a dependency to rerender every time id gets change
-  }, [id]);
+  }, [id, singleUser]);
 
-  // handleDelete function will delete user
-  // const handleDelete = (id) => {
-  //   // makign a delete request by calling deleteUser form userApi services and passing current id
-  //   deleteUser(id)
-  //     .then((data) => {
-  //       console.log(data);
-  //       // dispathch to increase the counter state, which has been used as a dependency on useEffect to fetch all users in App comp
-  //       dispatch({ type: 'INCREASE_COUNTER' });
-  //       // after deleting redirect to the eomployees page
-  //       navigate('/employee');
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
   // chekc if current user is not admin render the Errors cmponents with unauthorized error message with instruction to navigate back
   if (!isAdmin) {
     return (
       <Errors
-        status="401"
-        title="You are not authorized to access this page"
-        errorMessage="You either tried to access the unauthorized route or you came here by mistake.
-      Whichever it is, try using the navigation"
-        route="/issues"
+        status='401'
+        title='You are not authorized to access this page'
+        errorMessage='You either tried to access the unauthorized route or you came here by mistake.
+      Whichever it is, try using the navigation'
+        route='/issues'
         imageSrc={unauthorizedImage}
-        btnMessage="Back to main page"
+        btnMessage='Back to main page'
       />
     );
   }
@@ -109,33 +88,33 @@ export const EmployeeView = ({ deleteUser, singleUser }) => {
   if (hasError) {
     return (
       <Errors
-        status="404"
-        title="There is no user with current id in our server"
-        errorMessage="Please make sure the user exist"
-        route="/issues"
+        status='404'
+        title='There is no user with current id in our server'
+        errorMessage='Please make sure the user exist'
+        route='/issues'
         imageSrc={notFoundImage}
-        btnMessage="Back to main page"
+        btnMessage='Back to main page'
       />
     );
   }
 
   return (
     <Box
-      component="main"
+      component='main'
       sx={{
         flexGrow: 1,
         py: 8,
         mt: 10,
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth='lg'>
         {/* <Typography sx={{ mb: 10 }} variant="h4" textAlign={'center'}>
           {`${user.firstName} ${user.lastName}`}
         </Typography> */}
 
         {isFetching ? (
           <Box
-            component="main"
+            component='main'
             sx={{
               display: 'flex',
               justifyContent: 'center',
@@ -148,7 +127,7 @@ export const EmployeeView = ({ deleteUser, singleUser }) => {
         ) : (
           <Grid container spacing={3}>
             <Grid item xs={12}>
-              <Typography sx={{ mb: 5 }} variant="h3" textAlign={'center'}>
+              <Typography sx={{ mb: 5 }} variant='h3' textAlign={'center'}>
                 {`${user.firstName} ${user.lastName}`}
               </Typography>
             </Grid>
@@ -157,16 +136,16 @@ export const EmployeeView = ({ deleteUser, singleUser }) => {
             </Grid>
             <Grid item lg={6} md={6} xs={12}>
               <Card className={classes.employeeDetails} elevation={5}>
-                <CardHeader title="Employee Details" />
+                <CardHeader title='Employee Details' />
                 <Divider />
                 <CardContent>
                   <Grid container spacing={3}>
                     <Grid item md={12} xs={12}>
                       <Typography
                         gutterBottom
-                        variant="caption"
-                        component="div"
-                        color="text.secondary"
+                        variant='caption'
+                        component='div'
+                        color='text.secondary'
                         fontSize={15}
                         sx={{
                           display: 'inline-block',
@@ -177,17 +156,17 @@ export const EmployeeView = ({ deleteUser, singleUser }) => {
                       </Typography>
                       <Typography
                         gutterBottom
-                        variant="body1"
-                        component="div"
+                        variant='body1'
+                        component='div'
                         fontSize={18}
                       >
                         {`${user.firstName} ${user.lastName}`}
                       </Typography>
                       <Typography
                         gutterBottom
-                        variant="caption"
-                        component="div"
-                        color="text.secondary"
+                        variant='caption'
+                        component='div'
+                        color='text.secondary'
                         fontSize={15}
                         sx={{
                           display: 'inline-block',
@@ -198,8 +177,8 @@ export const EmployeeView = ({ deleteUser, singleUser }) => {
                       </Typography>
                       <Typography
                         gutterBottom
-                        variant="body1"
-                        component="div"
+                        variant='body1'
+                        component='div'
                         fontSize={18}
                       >
                         {user.email}
@@ -207,9 +186,9 @@ export const EmployeeView = ({ deleteUser, singleUser }) => {
 
                       <Typography
                         gutterBottom
-                        variant="caption"
-                        component="div"
-                        color="text.secondary"
+                        variant='caption'
+                        component='div'
+                        color='text.secondary'
                         fontSize={15}
                         sx={{
                           display: 'inline-block',
@@ -220,17 +199,17 @@ export const EmployeeView = ({ deleteUser, singleUser }) => {
                       </Typography>
                       <Typography
                         gutterBottom
-                        variant="body1"
-                        component="div"
+                        variant='body1'
+                        component='div'
                         fontSize={18}
                       >
                         {user.isAdmin ? 'Admin' : 'Employee'}
                       </Typography>
                       <Typography
                         gutterBottom
-                        variant="caption"
-                        component="div"
-                        color="text.secondary"
+                        variant='caption'
+                        component='div'
+                        color='text.secondary'
                         fontSize={15}
                         sx={{
                           display: 'inline-block',
@@ -241,8 +220,8 @@ export const EmployeeView = ({ deleteUser, singleUser }) => {
                       </Typography>
                       <Typography
                         gutterBottom
-                        variant="body1"
-                        component="div"
+                        variant='body1'
+                        component='div'
                         fontSize={18}
                       >
                         {moment(user.createdAt).format('LL')}

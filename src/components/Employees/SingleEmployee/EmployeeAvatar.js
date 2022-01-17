@@ -1,12 +1,7 @@
 import React from 'react';
-import { Card, CardContent, Box, Avatar, Divider } from '@mui/material';
-import { useStyles } from './EmployeeStyles';
-// EmployeeAvatar component is for rendring current user image
+import { CardContent, Box, Avatar } from '@mui/material';
 const EmployeeAvatar = ({ image }) => {
-  // declaring classes to assign useStyles to use Costomize css
-  const classes = useStyles();
   return (
-    // <Card className={classes.avatarBorder}>
     <CardContent>
       <Box
         sx={{
@@ -26,8 +21,6 @@ const EmployeeAvatar = ({ image }) => {
         />
       </Box>
     </CardContent>
-    // <Divider />
-    // </Card>
   );
 };
 
