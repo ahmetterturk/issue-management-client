@@ -833,9 +833,15 @@ Link to [Lock Security](https://docs.google.com/spreadsheets/d/1Fw4zb-6sjoZg3VTr
 <details>
   <summary>Tests</summary>
  
+ Jest Testing
+
 ![Terminal - Tests](docs/images/tests/all-components-test.png)
 
 ![Chrome - Tests](docs/images/tests/index-all-tests.png)
+
+Supertest Testing
+
+![Terminal Ubuntu - Tests](docs/images/tests/backend-testing.png)
 
 </details>
 

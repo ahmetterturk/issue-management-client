@@ -5,6 +5,7 @@ import { Card, Box, CardHeader, CardContent, Divider } from '@mui/material';
 const LineChart = ({ dates, issuesAtDateCount }, props) => {
   const classes = useStyles();
 
+  // data provided to the line chart
   const data = {
     labels: dates,
     datasets: [
@@ -19,6 +20,7 @@ const LineChart = ({ dates, issuesAtDateCount }, props) => {
     ],
   };
 
+  // graph options provided to the chart
   const options = {
     scales: {
       yAxes: [
@@ -44,41 +46,7 @@ const LineChart = ({ dates, issuesAtDateCount }, props) => {
             position: 'relative',
           }}
         >
-          <Line
-            data={
-              data
-              // {
-              // labels: dates,
-              // datasets: [
-              //   {
-              //     label: 'Issues By Day',
-              //     data: issuesAtDateCount,
-              //     //   backgroundColor: 'red',
-              //     borderColor: 'rgb(75, 192, 192)',
-              //     fill: false,
-              //     borderWidth: 4,
-              //   },
-              // ],
-              // }
-            }
-            options={
-              options
-              // {
-              // scales: {
-              //   yAxes: [
-              //     {
-              //       ticks: {
-              //         beginAtZero: true,
-              //         stepSize: 1,
-              //       },
-              //     },
-              //   ],
-              // },
-              // // responsive: false,
-              // maintainAspectRatio: false,
-              // }
-            }
-          />
+          <Line data={data} options={options} />
         </Box>
       </CardContent>
     </Card>

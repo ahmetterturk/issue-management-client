@@ -6,13 +6,14 @@ import { Grid, Container } from '@mui/material';
 import moment from 'moment';
 import { useStyles } from './GraphPageStyles';
 import jwtDecode from 'jwt-decode';
-
 import Errors from '../ErrorPages/Errors';
 import unauthorizedImage from '../../images/unauthorized.jpg';
 import loginImage from '../../images/login.jpg';
 
 const GraphsPage = () => {
+  // calling global state from the global context provider
   const { state } = useGlobalContext();
+  // classes constant is defined to help style the graphs page
   const classes = useStyles();
   if (!state.currentUser) {
     return (
@@ -25,6 +26,7 @@ const GraphsPage = () => {
       />
     );
   }
+  // getting jwt and current user information from global state
   const {
     issues,
     currentUser: { token },
@@ -32,6 +34,7 @@ const GraphsPage = () => {
   const decodedToken = jwtDecode(token);
   const { isAdmin } = decodedToken;
 
+  // error to show to user if they try to access this page without being an admin
   if (!isAdmin) {
     return (
       <Errors
@@ -76,7 +79,7 @@ const GraphsPage = () => {
   const issuesAtDateCount = datesSet.map(
     (date) => dates.filter((x) => x === date).length
   );
-  //
+
   return (
     <>
       <Container maxWidth={false} className={classes.graphsPageContainerGrid}>
@@ -138,8 +141,6 @@ const GraphsPage = () => {
           </Grid>
         </Grid>
       </Container>
-
-      {/* <LineChart dates={datesSetNew} issuesAtDateCount={issuesAtDateCount} /> */}
     </>
   );
 };

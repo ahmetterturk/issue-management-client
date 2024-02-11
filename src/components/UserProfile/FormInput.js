@@ -1,8 +1,6 @@
 import React from 'react';
 import FormError from './FormError';
 import { InputAdornment, Grid, TextField } from '@mui/material';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 // FormInput component is for TextFeild(input), with dozen props on different attribute
 const FormInput = ({
   className,
